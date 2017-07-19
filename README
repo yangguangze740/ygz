@@ -1,0 +1,8 @@
+#Manual
+
+### MySQL Config
+```
+CREATE SCHEMA `ygz_infer` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'ygzinfer'@'localhost' IDENTIFIED BY 'ygzinfer';
+GRANT ALL PRIVILEGES ON ygz_infer.* TO 'ygzinfer'@'localhost' WITH GRANT OPTION;
+```
