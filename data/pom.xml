@@ -21,6 +21,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>luju</groupId>
+            <artifactId>twopsix</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

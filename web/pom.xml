@@ -26,11 +26,6 @@
             <artifactId>about</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>luju</groupId>
-            <artifactId>twopsix</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 
     <build>
