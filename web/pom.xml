@@ -16,6 +16,7 @@
     <url>http://maven.apache.org</url>
 
     <dependencies>
+
         <dependency>
             <groupId>luju</groupId>
             <artifactId>data</artifactId>
