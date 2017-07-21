@@ -16,20 +16,18 @@ import java.util.List;
 
 public class Jdbc4Oracle {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Jdbc4Oracle.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public List<PlaceDistinct> select4List() {
+    public void select4List() {
         String sql = "SELECT NODE_FOUR_WAY FROM V_CZD_DJH";
         Object[] args = {};
 
         try {
-            return jdbcTemplate.query(sql, args, new Select4ListRowMapper());
+            System.out.println(jdbcTemplate.query(sql, args, new Select4ListRowMapper()));
         } catch (Exception e) {
-            LOG.error("[PlaceDistinct] query4List error with info {}.", e.getMessage());
 
-            return new ArrayList<>();
+            System.out.println("error");
         }
     }
 
@@ -46,4 +44,9 @@ public class Jdbc4Oracle {
         }
     }
 
+    public static void main(String args[]) {
+        Jdbc4Oracle jdbc4Oracle = new Jdbc4Oracle();
+//        Jdbc4OracleTest jdbc4OracleTest = new Jdbc4OracleTest();
+        jdbc4Oracle.select4List();
+    }
 }
