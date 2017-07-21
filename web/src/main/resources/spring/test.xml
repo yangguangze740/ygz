@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xsi:schemaLocation="http://www.springframework.org/schema/mvc
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context.xsd ">
+
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:db/dbora.properties"/>
+
+    <beans:bean id="oraDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <beans:property name="driverClassName" value="${jdbc.driverClassName}" />
+        <beans:property name="url" value="${jdbc.url}" />
+        <beans:property name="username" value="${jdbc.username}" />
+        <beans:property name="password" value="${jdbc.password}" />
+        <beans:property name="filters" value="${jdbc.filters}" />
+        <beans:property name="initialSize" value="${jdbc.initialSize}" />
+        <beans:property name="maxActive" value="${jdbc.maxActive}" />
+        <beans:property name="maxWait" value="${jdbc.maxWait}" />
+        <beans:property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
+        <beans:property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
+        <beans:property name="validationQuery" value="${jdbc.validationQuery}" />
+        <beans:property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
+        <beans:property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
+        <beans:property name="testOnReturn" value="${jdbc.testOnReturn}" />
+        <beans:property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}" />
+        <beans:property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.maxPoolPreparedStatementPerConnectionSize}" />
+    </beans:bean>
+
+    <beans:bean id="oraJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <beans:property name="dataSource" ref="oraDataSource"/>
+    </beans:bean>
+</beans:beans>

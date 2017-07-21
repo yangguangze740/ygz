@@ -1,0 +1,10 @@
+14:08:54.367 [main] INFO  o.s.c.s.ClassPathXmlApplicationContext [AbstractApplicationContext.java:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@7b65c301: startup date [Fri Jul 21 14:08:54 CST 2017]; root of context hierarchy
+14:08:54.591 [main] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+14:16:50.560 [main] INFO  o.s.c.s.ClassPathXmlApplicationContext [AbstractApplicationContext.java:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@6ada37aa: startup date [Fri Jul 21 14:16:50 CST 2017]; root of context hierarchy
+14:16:50.699 [main] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/test.xml]
+14:17:08.552 [main] INFO  o.s.c.s.ClassPathXmlApplicationContext [AbstractApplicationContext.java:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@529d1dd7: startup date [Fri Jul 21 14:17:08 CST 2017]; root of context hierarchy
+14:17:08.722 [main] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/test.xml]
+14:17:09.381 [main] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/dbora.properties]
+14:17:48.074 [main] INFO  o.s.c.s.ClassPathXmlApplicationContext [AbstractApplicationContext.java:510] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@3e350808: startup date [Fri Jul 21 14:17:48 CST 2017]; root of context hierarchy
+14:17:48.246 [main] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/test.xml]
+14:17:48.763 [main] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/dbora.properties]
