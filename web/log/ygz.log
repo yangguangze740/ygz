@@ -1,18 +1,40 @@
-21:20:06.834 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
-21:20:06.965 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Wed Jul 19 21:20:06 CST 2017]; root of context hierarchy
-21:20:07.027 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from ServletContext resource [/WEB-INF/applicationContext.xml]
-21:20:07.033 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader [ContextLoader.java:331] Context initialization failed
-org.springframework.beans.factory.BeanDefinitionStoreException: IOException parsing XML document from ServletContext resource [/WEB-INF/applicationContext.xml]; nested exception is java.io.FileNotFoundException: Could not open ServletContext resource [/WEB-INF/applicationContext.xml]
-	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:344)
-	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
-	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
-	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
-	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
-	at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:125)
-	at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:94)
-	at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:129)
-	at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:537)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:452)
+23:09:08.159 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+23:09:08.262 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Fri Jul 21 23:09:08 GMT+08:00 2017]; root of context hierarchy
+23:09:08.297 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:09:08.869 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:09:08.888 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/dbora.properties]
+23:09:08.894 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+23:09:09.361 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.test.controller.TestController.test()
+23:09:09.362 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
+23:09:09.929 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:09:08 GMT+08:00 2017]; root of context hierarchy
+23:09:09.973 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:09:08 GMT+08:00 2017]; root of context hierarchy
+23:09:10.052 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+23:09:10.091 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:09:08 GMT+08:00 2017]; root of context hierarchy
+23:09:10.121 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 1955 ms
+23:09:10.155 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+23:09:10.159 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:09:10 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:09:10.159 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:09:10.236 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:09:10.250 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/dbora.properties]
+23:09:10.254 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+23:09:10.286 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.test.controller.TestController.test()
+23:09:10.290 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
+23:09:10.331 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:09:10 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:09:10.356 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:09:10 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:09:10.394 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+23:09:10.412 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:09:10 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:09:10.456 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 300 ms
+23:13:50.782 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+23:13:50.882 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Fri Jul 21 23:13:50 GMT+08:00 2017]; root of context hierarchy
+23:13:50.925 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:13:51.496 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:13:51.500 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:487] Exception encountered during context initialization - cancelling refresh attempt
+org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: class path resource [db/db.properties] cannot be opened because it does not exist
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:606)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:462)
 	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
 	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
 	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
@@ -24,156 +46,173 @@ org.springframework.beans.factory.BeanDefinitionStoreException: IOException pars
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.io.FileNotFoundException: Could not open ServletContext resource [/WEB-INF/applicationContext.xml]
-	at org.springframework.web.context.support.ServletContextResource.getInputStream(ServletContextResource.java:141)
-	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:330)
-	... 21 common frames omitted
-21:20:07.040 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:862] Closing Root WebApplicationContext: startup date [Wed Jul 19 21:20:06 CST 2017]; root of context hierarchy
-21:20:07.043 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:872] Exception thrown from ApplicationListener handling ContextClosedEvent
-java.lang.IllegalStateException: ApplicationEventMulticaster not initialized - call 'refresh' before multicasting events via the context: Root WebApplicationContext: startup date [Wed Jul 19 21:20:06 CST 2017]; root of context hierarchy
-	at org.springframework.context.support.AbstractApplicationContext.getApplicationEventMulticaster(AbstractApplicationContext.java:344)
-	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:331)
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:869)
-	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:836)
-	at org.springframework.web.context.ContextLoader.closeWebApplicationContext(ContextLoader.java:579)
-	at org.springframework.web.context.ContextLoaderListener.contextDestroyed(ContextLoaderListener.java:115)
-	at org.apache.catalina.core.StandardContext.listenerStop(StandardContext.java:4831)
-	at org.apache.catalina.core.StandardContext.stopInternal(StandardContext.java:5478)
-	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:232)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:160)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-21:20:07.044 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:880] Exception thrown from LifecycleProcessor on context close
-java.lang.IllegalStateException: LifecycleProcessor not initialized - call 'refresh' before invoking lifecycle methods via the context: Root WebApplicationContext: startup date [Wed Jul 19 21:20:06 CST 2017]; root of context hierarchy
-	at org.springframework.context.support.AbstractApplicationContext.getLifecycleProcessor(AbstractApplicationContext.java:357)
-	at org.springframework.context.support.AbstractApplicationContext.doClose(AbstractApplicationContext.java:877)
-	at org.springframework.context.support.AbstractApplicationContext.close(AbstractApplicationContext.java:836)
-	at org.springframework.web.context.ContextLoader.closeWebApplicationContext(ContextLoader.java:579)
-	at org.springframework.web.context.ContextLoaderListener.contextDestroyed(ContextLoaderListener.java:115)
-	at org.apache.catalina.core.StandardContext.listenerStop(StandardContext.java:4831)
-	at org.apache.catalina.core.StandardContext.stopInternal(StandardContext.java:5478)
-	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:232)
-	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:160)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
-	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
-	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
-	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
-	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-21:22:08.338 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
-21:22:08.431 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Wed Jul 19 21:22:08 CST 2017]; root of context hierarchy
-21:22:08.475 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
-21:22:09.214 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
-21:22:09.230 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-21:22:10.431 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:22:08 CST 2017]; root of context hierarchy
-21:22:10.494 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:22:08 CST 2017]; root of context hierarchy
-21:22:10.617 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-21:22:10.715 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:22:08 CST 2017]; root of context hierarchy
-21:22:10.779 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 2437 ms
-21:22:10.818 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
-21:22:10.822 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:22:10 CST 2017]; parent: Root WebApplicationContext
-21:22:10.823 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from ServletContext resource [/WEB-INF/springServlet-servlet.xml]
-21:22:10.828 [localhost-startStop-1] ERROR o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:497] Context initialization failed
-org.springframework.beans.factory.BeanDefinitionStoreException: IOException parsing XML document from ServletContext resource [/WEB-INF/springServlet-servlet.xml]; nested exception is java.io.FileNotFoundException: Could not open ServletContext resource [/WEB-INF/springServlet-servlet.xml]
-	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:344)
-	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:304)
-	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:181)
-	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:217)
-	at org.springframework.beans.factory.support.AbstractBeanDefinitionReader.loadBeanDefinitions(AbstractBeanDefinitionReader.java:188)
-	at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:125)
-	at org.springframework.web.context.support.XmlWebApplicationContext.loadBeanDefinitions(XmlWebApplicationContext.java:94)
-	at org.springframework.context.support.AbstractRefreshableApplicationContext.refreshBeanFactory(AbstractRefreshableApplicationContext.java:129)
-	at org.springframework.context.support.AbstractApplicationContext.obtainFreshBeanFactory(AbstractApplicationContext.java:537)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:452)
-	at org.springframework.web.servlet.FrameworkServlet.configureAndRefreshWebApplicationContext(FrameworkServlet.java:663)
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:629)
-	at org.springframework.web.servlet.FrameworkServlet.createWebApplicationContext(FrameworkServlet.java:677)
-	at org.springframework.web.servlet.FrameworkServlet.initWebApplicationContext(FrameworkServlet.java:548)
-	at org.springframework.web.servlet.FrameworkServlet.initServletBean(FrameworkServlet.java:489)
-	at org.springframework.web.servlet.HttpServletBean.init(HttpServletBean.java:136)
-	at javax.servlet.GenericServlet.init(GenericServlet.java:160)
-	at org.apache.catalina.core.StandardWrapper.initServlet(StandardWrapper.java:1266)
-	at org.apache.catalina.core.StandardWrapper.loadServlet(StandardWrapper.java:1185)
-	at org.apache.catalina.core.StandardWrapper.load(StandardWrapper.java:1080)
-	at org.apache.catalina.core.StandardContext.loadOnStartup(StandardContext.java:5027)
-	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5314)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.io.FileNotFoundException: class path resource [db/db.properties] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:172)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:150)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142)
+	... 16 common frames omitted
+23:13:51.501 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader [ContextLoader.java:331] Context initialization failed
+org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: class path resource [db/db.properties] cannot be opened because it does not exist
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:606)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:462)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
 	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
 	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
-	at java.lang.Thread.run(Thread.java:745)
-Caused by: java.io.FileNotFoundException: Could not open ServletContext resource [/WEB-INF/springServlet-servlet.xml]
-	at org.springframework.web.context.support.ServletContextResource.getInputStream(ServletContextResource.java:141)
-	at org.springframework.beans.factory.xml.XmlBeanDefinitionReader.loadBeanDefinitions(XmlBeanDefinitionReader.java:330)
-	... 28 common frames omitted
-21:23:16.610 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
-21:23:16.715 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Wed Jul 19 21:23:16 CST 2017]; root of context hierarchy
-21:23:16.834 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
-21:23:17.470 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
-21:23:17.489 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-21:23:18.769 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:23:16 CST 2017]; root of context hierarchy
-21:23:18.836 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:23:16 CST 2017]; root of context hierarchy
-21:23:18.928 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-21:23:18.967 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:23:16 CST 2017]; root of context hierarchy
-21:23:19.018 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 2403 ms
-21:23:19.065 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
-21:23:19.072 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:23:19 CST 2017]; parent: Root WebApplicationContext
-21:23:19.073 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
-21:23:19.175 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
-21:23:19.185 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-21:23:19.272 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:23:19 CST 2017]; parent: Root WebApplicationContext
-21:23:19.324 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:23:19 CST 2017]; parent: Root WebApplicationContext
-21:23:19.361 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-21:23:19.375 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:23:19 CST 2017]; parent: Root WebApplicationContext
-21:23:19.404 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 336 ms
-21:24:26.339 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
-21:24:26.576 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Wed Jul 19 21:24:26 CST 2017]; root of context hierarchy
-21:24:26.653 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
-21:24:27.718 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
-21:24:27.740 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-21:24:28.514 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
-21:24:29.208 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:24:26 CST 2017]; root of context hierarchy
-21:24:29.274 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:24:26 CST 2017]; root of context hierarchy
-21:24:29.381 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-21:24:29.458 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:24:26 CST 2017]; root of context hierarchy
-21:24:29.532 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 3185 ms
-21:24:29.598 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
-21:24:29.613 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:24:29 CST 2017]; parent: Root WebApplicationContext
-21:24:29.614 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
-21:24:29.809 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
-21:24:29.819 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-21:24:29.861 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
-21:24:29.913 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:24:29 CST 2017]; parent: Root WebApplicationContext
-21:24:29.947 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:24:29 CST 2017]; parent: Root WebApplicationContext
-21:24:30.004 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-21:24:30.058 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:24:29 CST 2017]; parent: Root WebApplicationContext
-21:24:30.179 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 580 ms
-21:27:13.830 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
-21:27:13.958 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Wed Jul 19 21:27:13 CST 2017]; root of context hierarchy
-21:27:14.045 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
-21:27:14.767 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
-21:27:14.793 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-21:27:15.259 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
-21:27:15.835 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:27:13 CST 2017]; root of context hierarchy
-21:27:15.901 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:27:13 CST 2017]; root of context hierarchy
-21:27:16.012 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-21:27:16.063 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Wed Jul 19 21:27:13 CST 2017]; root of context hierarchy
-21:27:16.106 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 2270 ms
-21:27:16.147 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
-21:27:16.149 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:27:16 CST 2017]; parent: Root WebApplicationContext
-21:27:16.150 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
-21:27:16.324 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
-21:27:16.347 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
-21:27:16.409 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
-21:27:16.487 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:27:16 CST 2017]; parent: Root WebApplicationContext
-21:27:16.542 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:27:16 CST 2017]; parent: Root WebApplicationContext
-21:27:16.620 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
-21:27:16.652 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Wed Jul 19 21:27:16 CST 2017]; parent: Root WebApplicationContext
-21:27:16.714 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 567 ms
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.io.FileNotFoundException: class path resource [db/db.properties] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:172)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:150)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142)
+	... 16 common frames omitted
+23:15:17.442 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+23:15:17.529 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Fri Jul 21 23:15:17 GMT+08:00 2017]; root of context hierarchy
+23:15:17.572 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:15:18.224 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:15:18.229 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:487] Exception encountered during context initialization - cancelling refresh attempt
+org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: class path resource [db/db.properties] cannot be opened because it does not exist
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:606)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:462)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.io.FileNotFoundException: class path resource [db/db.properties] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:172)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:150)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142)
+	... 16 common frames omitted
+23:15:18.230 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader [ContextLoader.java:331] Context initialization failed
+org.springframework.beans.factory.BeanInitializationException: Could not load properties; nested exception is java.io.FileNotFoundException: class path resource [db/db.properties] cannot be opened because it does not exist
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:151)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:265)
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:162)
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:606)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:462)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.io.FileNotFoundException: class path resource [db/db.properties] cannot be opened because it does not exist
+	at org.springframework.core.io.ClassPathResource.getInputStream(ClassPathResource.java:172)
+	at org.springframework.core.io.support.EncodedResource.getInputStream(EncodedResource.java:150)
+	at org.springframework.core.io.support.PropertiesLoaderUtils.fillProperties(PropertiesLoaderUtils.java:98)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.loadProperties(PropertiesLoaderSupport.java:175)
+	at org.springframework.core.io.support.PropertiesLoaderSupport.mergeProperties(PropertiesLoaderSupport.java:156)
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.postProcessBeanFactory(PropertySourcesPlaceholderConfigurer.java:142)
+	... 16 common frames omitted
+23:19:34.222 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+23:19:34.321 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Fri Jul 21 23:19:34 GMT+08:00 2017]; root of context hierarchy
+23:19:34.365 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:19:34.921 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:19:34.932 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:19:34.935 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+23:19:35.432 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.test.controller.TestController.test()
+23:19:35.437 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
+23:19:35.839 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:19:34 GMT+08:00 2017]; root of context hierarchy
+23:19:35.885 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:19:34 GMT+08:00 2017]; root of context hierarchy
+23:19:35.958 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+23:19:35.999 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:19:34 GMT+08:00 2017]; root of context hierarchy
+23:19:36.031 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 1803 ms
+23:19:36.069 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+23:19:36.072 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:19:36 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:19:36.078 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:19:36.168 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:19:36.185 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:19:36.189 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+23:19:36.221 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.test.controller.TestController.test()
+23:19:36.222 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
+23:19:36.247 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:19:36 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:19:36.270 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:19:36 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:19:36.309 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+23:19:36.327 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:19:36 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:19:36.373 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 304 ms
+23:21:41.769 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+23:21:41.872 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Fri Jul 21 23:21:41 GMT+08:00 2017]; root of context hierarchy
+23:21:41.921 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:21:42.585 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:21:42.599 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:21:42.604 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+23:21:43.145 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.test.controller.TestController.test()
+23:21:43.154 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
+23:21:43.609 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:21:41 GMT+08:00 2017]; root of context hierarchy
+23:21:43.678 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:21:41 GMT+08:00 2017]; root of context hierarchy
+23:21:43.794 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+23:21:43.860 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:21:41 GMT+08:00 2017]; root of context hierarchy
+23:21:43.935 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 2163 ms
+23:21:43.988 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+23:21:43.991 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:21:43 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:21:44.002 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:21:44.093 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:21:44.104 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:21:44.110 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+23:21:44.135 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.test.controller.TestController.test()
+23:21:44.135 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
+23:21:44.175 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:21:43 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:21:44.206 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:21:43 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:21:44.255 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+23:21:44.272 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:21:43 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:21:44.326 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 338 ms
+23:32:56.524 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+23:32:56.627 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Fri Jul 21 23:32:56 GMT+08:00 2017]; root of context hierarchy
+23:32:56.663 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:32:57.159 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:32:57.171 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+23:32:57.594 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.test.controller.TestController.test()
+23:32:57.595 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
+23:32:57.952 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:32:56 GMT+08:00 2017]; root of context hierarchy
+23:32:58.003 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:32:56 GMT+08:00 2017]; root of context hierarchy
+23:32:58.075 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+23:32:58.124 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Fri Jul 21 23:32:56 GMT+08:00 2017]; root of context hierarchy
+23:32:58.171 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 1639 ms
+23:32:58.214 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+23:32:58.217 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:32:58 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:32:58.218 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+23:32:58.292 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+23:32:58.298 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+23:32:58.321 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.test.controller.TestController.test()
+23:32:58.322 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String luju.ygz.about.controller.AboutUsController.aboutUs()
+23:32:58.355 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:32:58 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:32:58.377 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:32:58 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:32:58.423 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+23:32:58.443 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Fri Jul 21 23:32:58 GMT+08:00 2017]; parent: Root WebApplicationContext
+23:32:58.499 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 285 ms

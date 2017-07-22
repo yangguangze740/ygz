@@ -12,28 +12,22 @@ import java.util.List;
 
 public class Test {
 
-    ApplicationContext context = new ClassPathXmlApplicationContext("spring/test.xml");
-
-    JdbcTemplate oraJdbcTemplate = (JdbcTemplate) context.getBean("oraJdbcTemplate");
-
     public static void main(String[] args) {
 
-        Test test = new Test();
-        System.out.println(test.select4Worker());
+        ApplicationContext context = new ClassPathXmlApplicationContext("spring/test.xml");
 
-    }
+        JdbcTemplate oraJdbcTemplate = (JdbcTemplate) context.getBean("oraJdbcTemplate");
 
-    public List<TestInfo> select4Worker() {
-        String sql = "select NODE_FOUR_WAY from V_CZD_DJH";
+        String sql = "SELECT 'NODE_FOUR_WAY' FROM 'V_CZD_DJH'";
 
         try {
-            return oraJdbcTemplate.query(sql, new WorkerListRowMapper());
+            System.out.println(oraJdbcTemplate.query(sql, new WorkerListRowMapper()));
         } catch (Exception e) {
-            return null;
+            e.printStackTrace();
         }
     }
 
-    private class WorkerListRowMapper implements RowMapper<TestInfo> {
+    private static class WorkerListRowMapper implements RowMapper<TestInfo> {
         public TestInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             TestInfo userInfo = new TestInfo();
 
