@@ -15,53 +15,41 @@
 
     <context:property-placeholder ignore-unresolvable="true" location="classpath:db/db.properties"/>
 
-    <beans:bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
-        <beans:property name="driverClassName" value="${jdbc.driverClassName}" />
-        <beans:property name="url" value="${jdbc.url}" />
-        <beans:property name="username" value="${jdbc.username}" />
-        <beans:property name="password" value="${jdbc.password}" />
-        <beans:property name="filters" value="${jdbc.filters}" />
-        <beans:property name="initialSize" value="${jdbc.initialSize}" />
-        <beans:property name="maxActive" value="${jdbc.maxActive}" />
-        <beans:property name="maxWait" value="${jdbc.maxWait}" />
-        <beans:property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />
-        <beans:property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />
-        <beans:property name="validationQuery" value="${jdbc.validationQuery}" />
-        <beans:property name="testWhileIdle" value="${jdbc.testWhileIdle}" />
-        <beans:property name="testOnBorrow" value="${jdbc.testOnBorrow}" />
-        <beans:property name="testOnReturn" value="${jdbc.testOnReturn}" />
-        <beans:property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}" />
-        <beans:property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.maxPoolPreparedStatementPerConnectionSize}" />
+    <beans:bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource">
+        <beans:property name="dataSourceName" value="ds"/>
+        <beans:property name="URL" value="${jdbc.url}"/>
+        <beans:property name="user" value="${jdbc.username}"/>
+        <beans:property name="password" value="${jdbc.password}"/>
     </beans:bean>
 
     <beans:bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <beans:property name="dataSource" ref="dataSource"/>
     </beans:bean>
 
-    <!--<context:property-placeholder ignore-unresolvable="true" location="classpath:db/db.properties"/>-->
+    <context:property-placeholder ignore-unresolvable="true" location="classpath:db/db.properties"/>
 
-    <!--<beans:bean id="oraDataSource" class="com.alibaba.druid.pool.DruidDataSource">-->
-        <!--<beans:property name="driverClassName" value="${jdbc.driverClassName}" />-->
-        <!--<beans:property name="url" value="${jdbc.url}" />-->
-        <!--<beans:property name="username" value="${jdbc.username}" />-->
-        <!--<beans:property name="password" value="${jdbc.password}" />-->
-        <!--<beans:property name="filters" value="${jdbc.filters}" />-->
-        <!--<beans:property name="initialSize" value="${jdbc.initialSize}" />-->
-        <!--<beans:property name="maxActive" value="${jdbc.maxActive}" />-->
-        <!--<beans:property name="maxWait" value="${jdbc.maxWait}" />-->
-        <!--<beans:property name="timeBetweenEvictionRunsMillis" value="${jdbc.timeBetweenEvictionRunsMillis}" />-->
-        <!--<beans:property name="minEvictableIdleTimeMillis" value="${jdbc.minEvictableIdleTimeMillis}" />-->
-        <!--<beans:property name="validationQuery" value="${jdbc.validationQuery}" />-->
-        <!--<beans:property name="testWhileIdle" value="${jdbc.testWhileIdle}" />-->
-        <!--<beans:property name="testOnBorrow" value="${jdbc.testOnBorrow}" />-->
-        <!--<beans:property name="testOnReturn" value="${jdbc.testOnReturn}" />-->
-        <!--<beans:property name="poolPreparedStatements" value="${jdbc.poolPreparedStatements}" />-->
-        <!--<beans:property name="maxPoolPreparedStatementPerConnectionSize" value="${jdbc.maxPoolPreparedStatementPerConnectionSize}" />-->
-    <!--</beans:bean>-->
+    <beans:bean id="mysqlDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <beans:property name="driverClassName" value="${myJdbc.driverClassName}" />
+        <beans:property name="url" value="${myJdbc.url}" />
+        <beans:property name="username" value="${myJdbc.username}" />
+        <beans:property name="password" value="${myJdbc.password}" />
+        <beans:property name="filters" value="${myJdbc.filters}" />
+        <beans:property name="initialSize" value="${myJdbc.initialSize}" />
+        <beans:property name="maxActive" value="${myJdbc.maxActive}" />
+        <beans:property name="maxWait" value="${myJdbc.maxWait}" />
+        <beans:property name="timeBetweenEvictionRunsMillis" value="${myJdbc.timeBetweenEvictionRunsMillis}" />
+        <beans:property name="minEvictableIdleTimeMillis" value="${myJdbc.minEvictableIdleTimeMillis}" />
+        <beans:property name="validationQuery" value="${myJdbc.validationQuery}" />
+        <beans:property name="testWhileIdle" value="${myJdbc.testWhileIdle}" />
+        <beans:property name="testOnBorrow" value="${myJdbc.testOnBorrow}" />
+        <beans:property name="testOnReturn" value="${myJdbc.testOnReturn}" />
+        <beans:property name="poolPreparedStatements" value="${myJdbc.poolPreparedStatements}" />
+        <beans:property name="maxPoolPreparedStatementPerConnectionSize" value="${myJdbc.maxPoolPreparedStatementPerConnectionSize}" />
+    </beans:bean>
 
-    <!--<beans:bean id="oraJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-        <!--<beans:property name="dataSource" ref="oraDataSource"/>-->
-    <!--</beans:bean>-->
+    <beans:bean id="mysqlJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <beans:property name="dataSource" ref="mysqlDataSource"/>
+    </beans:bean>
 
     <context:component-scan base-package="luju.ygz" />
 
