@@ -1,4 +1,4 @@
-package luju.ygz.test.repository;
+package com.luju.ygz.test.repository;
 
 
 import com.luju.pojo.JcPlanInfo;

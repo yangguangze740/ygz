@@ -1,4 +1,4 @@
-package luju.ygz.test.service;
+package com.luju.ygz.test.service;
 
 
 import com.luju.pojo.JcPlanInfo;

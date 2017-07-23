@@ -1,8 +1,8 @@
-package luju.ygz.test.repository.impl;
+package com.luju.ygz.test.repository.impl;
 
 import com.luju.pojo.JcPlanInfo;
+import com.luju.ygz.test.repository.TestRepository;
 import luju.common.util.PrimaryKeyUtil;
-import luju.ygz.test.repository.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,21 +23,21 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public List<JcPlanInfo> selectJcPlan() {
-        String sql = "SELECT TRAIN_NUM ,'TIME' ,NODE_FOUR_WAY ,RACK_NUM FROM V_CZD_DJH";
+        String sql = "SELECT TRAIN_NUM ,TIME ,NODE_FOUR_WAY ,TRACK_NUM FROM V_CZD_DJH";
         Object[] args = {};
 
         try {
             return jdbcTemplate.query(sql, args, new JcPlanRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
-
+            System.out.println("error");
             return null;
         }
     }
 
     @Override
     public List<JcPlanInfo> selectJcZW() {
-        String sql = "SELECT TRAIN_NUM ,'TIME' ,NODE_FOUR_WAY ,RACK_NUM FROM V_CZD_DJH";
+        String sql = "SELECT TRAIN_NUM ,TIME ,NODE_FOUR_WAY ,RACK_NUM FROM V_CZD_DJH";
         Object[] args = {};
 
         try {
@@ -99,8 +99,13 @@ public class TestRepositoryImpl implements TestRepository {
             userInfo.setTRACK_NUM(resultSet.getString("TRACK_NUM"));
             userInfo.setTRAIN_NUM(resultSet.getString("TRAIN_NUM"));
             userInfo.setTIME(resultSet.getTimestamp("TIME"));
-            userInfo.setJcQBID(resultSet.getString("JcQBID"));
-            userInfo.setJcSumHc(resultSet.getFloat("HC"));
+//            userInfo.setJcQBID(resultSet.getString("JcQBID"));
+//            userInfo.setJcSumHc(resultSet.getFloat("HC"));
+
+            System.out.println(resultSet.getString("NODE_FOUR_WAY"));
+            System.out.println(resultSet.getString("TRAIN_NUM"));
+            System.out.println(resultSet.getTimestamp("TIME"));
+            System.out.println(resultSet.getString("TRACK_NUM"));
 
             return userInfo;
         }

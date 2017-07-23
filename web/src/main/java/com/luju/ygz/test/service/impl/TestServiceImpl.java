@@ -1,15 +1,15 @@
-package luju.ygz.test.service.impl;
+package com.luju.ygz.test.service.impl;
 
 import com.luju.pojo.JcPlanInfo;
-import luju.ygz.test.repository.impl.TestRepositoryImpl;
-import luju.ygz.test.service.TestService;
+import com.luju.ygz.test.service.TestService;
+import com.luju.ygz.test.repository.impl.TestRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class TestServiceImpl implements TestService{
+public class TestServiceImpl implements TestService {
 
     @Autowired
     private TestRepositoryImpl testRepository;
