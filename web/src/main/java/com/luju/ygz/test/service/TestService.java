@@ -9,11 +9,7 @@ public interface TestService {
     
     public List<JcPlanInfo> selectPlanDataFromOra();
 
-    public List<JcPlanInfo> selectZWDataFromOra();
+    public List<JcPlanInfo> selectPlanDataFromMysql();
 
-    /**
-     *  将从Ora查询的数据全部录入mysql
-     * @return boolean
-     */
     public boolean insertDataToMysql(JcPlanInfo info);
 }

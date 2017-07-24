@@ -10,12 +10,12 @@ public class JcPlanInfo {
     private String TRACK_NUM;//source
     private Timestamp TIME;//time
     private Timestamp jcStartTime;
-    private String jcType;
-    private float jcSumHc;
+    private String jcQBID;
     private float jcHc;
+    private int jcIsCC;
     private String jcJSL;
     private String jcImportant;
-    private String jcQBID;
+    private String jcType;
     private String jcQBIDN;
 
     public String getCopyId() {
@@ -58,28 +58,12 @@ public class JcPlanInfo {
         this.TIME = TIME;
     }
 
-    public Timestamp getJcStartTime() {
-        return jcStartTime;
+    public String getJcQBID() {
+        return jcQBID;
     }
 
-    public void setJcStartTime(Timestamp jcStartTime) {
-        this.jcStartTime = jcStartTime;
-    }
-
-    public String getJcType() {
-        return jcType;
-    }
-
-    public void setJcType(String jcType) {
-        this.jcType = jcType;
-    }
-
-    public float getJcSumHc() {
-        return jcSumHc;
-    }
-
-    public void setJcSumHc(float jcSumHc) {
-        this.jcSumHc = jcSumHc;
+    public void setJcQBID(String jcQBID) {
+        this.jcQBID = jcQBID;
     }
 
     public float getJcHc() {
@@ -106,19 +90,35 @@ public class JcPlanInfo {
         this.jcImportant = jcImportant;
     }
 
-    public String getJcQBID() {
-        return jcQBID;
-    }
-
-    public void setJcQBID(String jcQBID) {
-        this.jcQBID = jcQBID;
-    }
-
     public String getJcQBIDN() {
         return jcQBIDN;
     }
 
     public void setJcQBIDN(String jcQBIDN) {
         this.jcQBIDN = jcQBIDN;
+    }
+
+    public Timestamp getJcStartTime() {
+        return jcStartTime;
+    }
+
+    public void setJcStartTime(Timestamp jcStartTime) {
+        this.jcStartTime = jcStartTime;
+    }
+
+    public String getJcType() {
+        return jcType;
+    }
+
+    public void setJcType(String jcType) {
+        this.jcType = jcType;
+    }
+
+    public int getJcIsCC() {
+        return jcIsCC;
+    }
+
+    public void setJcIsCC(int jcIsCC) {
+        this.jcIsCC = jcIsCC;
     }
 }
