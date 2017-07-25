@@ -19,6 +19,9 @@ public interface TestService {
     /* select all processed data from jc_plan */
     public List<JcPlanInfo> selectPlanAll();
 
+    /* select jc_path */
+    public List<JcPlanInfo> selectPath();
+
     /* data insert from ora to mysql*/
     public boolean insertDataToMysql(JcPlanInfo info);
 }

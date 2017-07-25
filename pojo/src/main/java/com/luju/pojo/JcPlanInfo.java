@@ -20,14 +20,23 @@ public class JcPlanInfo {
     private String jcQBIDN;
     private String jcXD;
     private String jcDH;
-    private String jcCX;
+    private String jcPath;
+    private String jcDCH;
 
-    public String getJcCX() {
-        return jcCX;
+    public String getJcDCH() {
+        return jcDCH;
     }
 
-    public void setJcCX(String jcCX) {
-        this.jcCX = jcCX;
+    public void setJcDCH(String jcDCH) {
+        this.jcDCH = jcDCH;
+    }
+
+    public String getJcPath() {
+        return jcPath;
+    }
+
+    public void setJcPath(String jcPath) {
+        this.jcPath = jcPath;
     }
 
     public float getJcSumHc() {
