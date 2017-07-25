@@ -32,6 +32,7 @@ public class TestController {
     public ModelAndView allJcData(JcPlanInfo info) {
         ModelAndView mav = new ModelAndView("/luju/jcPlan");
         List<JcPlanInfo> list = service.selectPlanAll();
+        service.selectPath();
         mav.addObject("list",list);
         return mav;
     }

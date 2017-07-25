@@ -32,6 +32,11 @@ public class ConstantFields {
     public static final String JF = "禁峰";
     public static final String CC = "超长";
 
+    /* 记事栏内容*/
+
+    public static final String J = "J";
+
+
     /**
      * 默认邮件配置项
      */
