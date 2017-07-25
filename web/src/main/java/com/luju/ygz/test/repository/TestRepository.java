@@ -28,9 +28,6 @@ public interface TestRepository {
     /* select all processed data */
     public List<JcPlanInfo> selectJcPlanALL();
 
-    /* select all processed data fro jcPath */
-    public List<JcPlanInfo> selectJcPath();
-
     /* data insert from ora to mysql*/
     public boolean insertToPlanCopy(JcPlanInfo info);
     /* insert processed data from mysql copy data to jc_plan */

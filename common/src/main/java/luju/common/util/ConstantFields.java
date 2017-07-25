@@ -25,14 +25,19 @@ public class ConstantFields {
     public static long JC_TIME = 480000;
 
     /* 作业类别*/
-    public static final String typeJc = "接车";
+    public static final String TYPE_JC = "接车";
 
     /* 记事栏内容*/
     public static final String CX = "超限";
     public static final String JF = "禁峰";
     public static final String CC = "超长";
 
-    /* 记事栏内容*/
+    /* 重点事项内容*/
+    public static final String IMPORTANT_CX = "2、5道接车";
+    public static final String IMPORTANT_JF = "优先2、3、4道接车";
+    public static final String IMPORTANT_CC = "4、5道接车";
+
+    /* 作业类别缩写*/
 
     public static final String J = "J";
 

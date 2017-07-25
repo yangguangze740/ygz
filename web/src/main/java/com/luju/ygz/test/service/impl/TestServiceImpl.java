@@ -48,7 +48,7 @@ public class TestServiceImpl implements TestService {
                 }
             }
             list.get(k).setJcStartTime(ts);
-            list.get(k).setJcType(ConstantFields.typeJc);
+            list.get(k).setJcType(ConstantFields.TYPE_JC);
 
             testRepository.insertToPlanCopy(list.get(k));
         }
@@ -111,11 +111,6 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<JcPlanInfo> selectPlanAll() {
         return testRepository.selectJcPlanALL();
-    }
-
-    @Override
-    public List<JcPlanInfo> selectPath() {
-        return testRepository.selectJcPath();
     }
 
     @Override

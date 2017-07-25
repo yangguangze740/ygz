@@ -25,24 +25,6 @@
     </tr>
     </thread>
     <tbody
-    <c:if test="${list.jcJSL == '超限'}">
-        <c:forEach items="${list}" var="list" varStatus="status">
-            <tr>
-                <td style="color: blue ">${status.index + 1}</td>
-                <td>${list.TRAIN_NUM}</td>
-                <td>${list.jcType}</td>
-                <td>${list.jcStartTime}</td>
-                <td>${list.TIME}</td>
-                <td>${list.NODE_FOUR_WAY}</td>
-                <td>${list.TRACK_NUM}</td>
-                <td></td>
-                <td></td>
-                <td>${list.jcJSL}</td>
-            </tr>
-        </c:forEach>
-        </tr>
-    </c:if>
-    <c:otherwise>
         <c:forEach items="${list}" var="list" varStatus="status">
             <tr>
                 <td >${status.index + 1}</td>
@@ -57,7 +39,6 @@
                 <td>${list.jcJSL}</td>
             </tr>
         </c:forEach>
-    </c:otherwise>
         </tr>
     </tbody>
     </table>
