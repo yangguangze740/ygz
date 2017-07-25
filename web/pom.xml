@@ -32,6 +32,11 @@
             <artifactId>about</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>luju</groupId>
+            <artifactId>common</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
     </dependencies>
 
