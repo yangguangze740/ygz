@@ -108,11 +108,25 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public List<JcPlanInfo> selectJcPlanALL() {
-        String sql = "SELECT D.jcNumber,jcType,jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcJSL FROM ygz_show.jc_plan P left join (SELECT distinct jcNumber,jcJSL FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber";
+        String sql = "SELECT P.jcNumber,jcType,jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcJSL FROM ygz_show.jc_plan P left join (SELECT distinct jcNumber,jcJSL FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber order by jcStartTime";
         Object[] args = {};
 
         try {
             return mysqlJdbcTemplate.query(sql, args, new JcPlanALLRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectJcPath() {
+        String sql = "SELECT jcNumber,I.jcPath, jcDCH, jcType, jcDestination FROM ygz_show.jc_path_info I left join (SELECT jcNumber,jcType,jcDestination,jcPath FROM ygz_show.jc_plan) P on P.jcPath=CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci WHERE jcType = '接车';";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPathRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("error");
@@ -147,7 +161,7 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public boolean insertToPlan4One(JcPlanInfo info) {
-        String sql = "INSERT INTO jc_plan (jcNumber, jcSource, jcEndTime, jcStartTime, jcDestination, jcType, jcSumHc, jcXD, jcDH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO jc_plan (jcNumber, jcSource, jcEndTime, jcStartTime, jcDestination, jcType, jcSumHc, jcXD, jcDH, jcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
 
                 info.getTRAIN_NUM(),
@@ -158,7 +172,8 @@ public class TestRepositoryImpl implements TestRepository {
                 info.getJcType(),
                 info.getJcSumHc(),
                 info.getJcXD(),
-                info.getJcDH()
+                info.getJcDH(),
+                ConstantFields.J+info.getTRACK_NUM()
         };
 
         try {
@@ -328,6 +343,21 @@ public class TestRepositoryImpl implements TestRepository {
             userInfo.setJcXD(resultSet.getString("jcXD"));
             userInfo.setJcDH(resultSet.getString("jcDH"));
             userInfo.setJcJSL(resultSet.getString("jcJSL"));
+
+            return userInfo;
+        }
+
+    }
+
+    private class JcPathRowMapper implements RowMapper<JcPlanInfo> {
+        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
+            userInfo.setJcPath(resultSet.getString("jcPath"));
+            userInfo.setJcType(resultSet.getString("jcType"));
+            userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
+            userInfo.setJcDCH(resultSet.getString("jcDCH"));
 
             return userInfo;
         }
