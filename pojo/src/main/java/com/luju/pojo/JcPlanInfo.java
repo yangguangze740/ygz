@@ -5,18 +5,38 @@ import java.sql.Timestamp;
 public class JcPlanInfo {
 
     private String copyId;
-    private String NODE_FOUR_WAY;//number
-    private String TRAIN_NUM;//destination
-    private String TRACK_NUM;//source
+    private String NODE_FOUR_WAY;//source
+    private String TRAIN_NUM;//number
+    private String TRACK_NUM;//destination
     private Timestamp TIME;//time
     private Timestamp jcStartTime;
     private String jcQBID;
     private float jcHc;
+    private float jcSumHc;
     private int jcIsCC;
     private String jcJSL;
     private String jcImportant;
     private String jcType;
     private String jcQBIDN;
+    private String jcXD;
+    private String jcDH;
+    private String jcCX;
+
+    public String getJcCX() {
+        return jcCX;
+    }
+
+    public void setJcCX(String jcCX) {
+        this.jcCX = jcCX;
+    }
+
+    public float getJcSumHc() {
+        return jcSumHc;
+    }
+
+    public void setJcSumHc(float jcSumHc) {
+        this.jcSumHc = jcSumHc;
+    }
 
     public String getCopyId() {
         return copyId;
@@ -120,5 +140,21 @@ public class JcPlanInfo {
 
     public void setJcIsCC(int jcIsCC) {
         this.jcIsCC = jcIsCC;
+    }
+
+    public String getJcXD() {
+        return jcXD;
+    }
+
+    public void setJcXD(String jcXD) {
+        this.jcXD = jcXD;
+    }
+
+    public String getJcDH() {
+        return jcDH;
+    }
+
+    public void setJcDH(String jcDH) {
+        this.jcDH = jcDH;
     }
 }

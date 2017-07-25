@@ -21,6 +21,17 @@ public class ConstantFields {
     /* 删除失败消息*/
     public static final String DELETE_FAILURE_MESSAGE = "删除失败";
 
+    /* 接车推演时间*/
+    public static long JC_TIME = 480000;
+
+    /* 作业类别*/
+    public static final String typeJc = "接车";
+
+    /* 记事栏内容*/
+    public static final String CX = "超限";
+    public static final String JF = "禁峰";
+    public static final String CC = "超长";
+
     /**
      * 默认邮件配置项
      */

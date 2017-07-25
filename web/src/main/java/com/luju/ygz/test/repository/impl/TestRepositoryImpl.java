@@ -2,6 +2,7 @@ package com.luju.ygz.test.repository.impl;
 
 import com.luju.pojo.JcPlanInfo;
 import com.luju.ygz.test.repository.TestRepository;
+import luju.common.util.ConstantFields;
 import luju.common.util.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,12 +37,82 @@ public class TestRepositoryImpl implements TestRepository {
     }
 
     @Override
-    public List<JcPlanInfo> selectJcPlan() {
-        String sql = "SELECT jcNumber, jcSource, jcEndTime, jcStartTime, jcType, jcHc, jcQBID, jcQBIDN, jcJSL, jcDestination FROM ygz_show.jc_plan_copy ";
+    public List<JcPlanInfo> selectJcPlan4One() {
+        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM ygz_show.jc_plan_copy group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
         Object[] args = {};
 
         try {
-            return jdbcTemplate.query(sql, args, new JcPlanRowMapper());
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanOneRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectJcPlan4HC() {
+        String sql = "SELECT distinct jcNumber, jcHc FROM ygz_show.jc_plan_copy where jcHc >= 2.4";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanHCRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectJcPlan4JF() {
+        String sql = "SELECT jcNumber,jcJSL FROM ygz_show.jc_plan_copy where jcJSL like '%禁峰%' OR jcJSL like '%工程车%' OR jcJSL like '%客体车%' OR jcJSL like '%地铁%'";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanJSLRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectJcPlan4CX() {
+        String sql = "SELECT distinct jcNumber FROM ygz_show.jc_plan_copy where jcJSL like '%超限%'";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanCXRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectJcPlan4CC() {
+        String sql = "SELECT jcNumber,jcSumHc FROM ygz_show.jc_plan where jcSumHc > 84;";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanCCRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectJcPlanALL() {
+        String sql = "SELECT D.jcNumber,jcType,jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcJSL FROM ygz_show.jc_plan P left join (SELECT distinct jcNumber,jcJSL FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanALLRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("error");
@@ -67,9 +138,100 @@ public class TestRepositoryImpl implements TestRepository {
         };
 
         try {
-            System.out.println(info.getJcStartTime());
-            System.out.println(info.getJcType());
-            System.out.println(info.getJcJSL());
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertToPlan4One(JcPlanInfo info) {
+        String sql = "INSERT INTO jc_plan (jcNumber, jcSource, jcEndTime, jcStartTime, jcDestination, jcType, jcSumHc, jcXD, jcDH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+
+                info.getTRAIN_NUM(),
+                info.getNODE_FOUR_WAY(),
+                info.getTIME(),
+                info.getJcStartTime(),
+                info.getTRACK_NUM(),
+                info.getJcType(),
+                info.getJcSumHc(),
+                info.getJcXD(),
+                info.getJcDH()
+        };
+
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertToPlan4HC(JcPlanInfo info) {
+        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL) VALUES (?, ?, ?)";
+        Object[] args = {
+
+                uuid.uuidPrimaryKey(),
+                info.getTRAIN_NUM(),
+                ConstantFields.JF
+        };
+
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertToPlan4JF(JcPlanInfo info) {
+        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL) VALUES (?, ?, ?)";
+        Object[] args = {
+
+                uuid.uuidPrimaryKey(),
+                info.getTRAIN_NUM(),
+                ConstantFields.JF
+        };
+
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertToPlan4CX(JcPlanInfo info) {
+        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL) VALUES (?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getTRAIN_NUM(),
+                ConstantFields.CX
+        };
+
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertToPlan4CC(JcPlanInfo info) {
+        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL) VALUES (?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getTRAIN_NUM(),
+                ConstantFields.CC
+        };
+
+        try {
             return mysqlJdbcTemplate.update(sql, args) == 1;
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,7 +256,7 @@ public class TestRepositoryImpl implements TestRepository {
         }
     }
 
-    private class JcPlanRowMapper implements RowMapper<JcPlanInfo> {
+    private class JcPlanOneRowMapper implements RowMapper<JcPlanInfo> {
         public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             JcPlanInfo userInfo = new JcPlanInfo();
 
@@ -102,14 +264,73 @@ public class TestRepositoryImpl implements TestRepository {
             userInfo.setNODE_FOUR_WAY(resultSet.getString("jcSource"));
             userInfo.setTIME(resultSet.getTimestamp("jcEndTime"));
             userInfo.setJcStartTime(resultSet.getTimestamp("jcStartTime"));
-            userInfo.setJcType(resultSet.getString("jcType"));
-            userInfo.setJcHc(resultSet.getFloat("jcHc"));
-            userInfo.setJcQBID(resultSet.getString("jcQBID"));
-            userInfo.setJcQBIDN(resultSet.getString("jcQBIDN"));
             userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
+            userInfo.setJcType(resultSet.getString("jcType"));
+            userInfo.setJcSumHc(resultSet.getFloat("S"));
+
+            return userInfo;
+        }
+    }
+
+    private class JcPlanHCRowMapper implements RowMapper<JcPlanInfo> {
+        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
+            userInfo.setJcHc(resultSet.getFloat("jcHc"));
+
+            return userInfo;
+        }
+    }
+
+    private class JcPlanJSLRowMapper implements RowMapper<JcPlanInfo> {
+        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
             userInfo.setJcJSL(resultSet.getString("jcJSL"));
 
             return userInfo;
         }
+    }
+
+    private class JcPlanCXRowMapper implements RowMapper<JcPlanInfo> {
+        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
+
+            return userInfo;
+        }
+    }
+
+    private class JcPlanCCRowMapper implements RowMapper<JcPlanInfo> {
+        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
+            userInfo.setJcSumHc(resultSet.getFloat("jcSumHc"));
+
+            return userInfo;
+        }
+    }
+
+    private class JcPlanALLRowMapper implements RowMapper<JcPlanInfo> {
+        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
+            userInfo.setJcType(resultSet.getString("jcType"));
+            userInfo.setJcStartTime(resultSet.getTimestamp("jcStartTime"));
+            userInfo.setTIME(resultSet.getTimestamp("jcEndTime"));
+            userInfo.setNODE_FOUR_WAY(resultSet.getString("jcSource"));
+            userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
+            userInfo.setJcXD(resultSet.getString("jcXD"));
+            userInfo.setJcDH(resultSet.getString("jcDH"));
+            userInfo.setJcJSL(resultSet.getString("jcJSL"));
+
+            return userInfo;
+        }
+
     }
 }
