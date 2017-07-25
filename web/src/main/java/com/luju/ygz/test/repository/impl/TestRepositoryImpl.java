@@ -108,7 +108,7 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public List<JcPlanInfo> selectJcPlanALL() {
-        String sql = "SELECT D.jcNumber,jcType,jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcJSL FROM ygz_show.jc_plan P left join (SELECT distinct jcNumber,jcJSL FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber";
+        String sql = "SELECT P.jcNumber,jcType,jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcJSL FROM ygz_show.jc_plan P left join (SELECT distinct jcNumber,jcJSL FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber order by jcStartTime";
         Object[] args = {};
 
         try {

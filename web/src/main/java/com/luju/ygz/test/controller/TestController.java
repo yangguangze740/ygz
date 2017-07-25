@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/luju")
 public class TestController {
     @Autowired
     private TestServiceImpl service;
@@ -28,8 +30,9 @@ public class TestController {
 
     @RequestMapping("/jcPlan")
     public ModelAndView allJcData(JcPlanInfo info) {
-        ModelAndView mav = new ModelAndView();
-        service.selectPlanAll();
+        ModelAndView mav = new ModelAndView("/luju/jcPlan");
+        List<JcPlanInfo> list = service.selectPlanAll();
+        mav.addObject("list",list);
         return mav;
     }
 }
