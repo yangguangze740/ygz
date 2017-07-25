@@ -108,14 +108,7 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public List<JcPlanInfo> selectJcPlanALL() {
-        String sql = "SELECT P.jcNumber, jcType, jcStartTime, jcEndTime, jcSource, jcDestination, I.jcPath, group_concat(jcDCH), group_concat(jcJSL)\n" +
-                "FROM ygz_show.jc_plan P\n" +
-                "left join (select jcPath, jcDCH FROM ygz_show.jc_path_info) I \n" +
-                "on P.jcPath = CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci\n" +
-                "left join (select distinct jcNumber, jcJSL, jcImportant FROM ygz_show.jc_plan_detals) D \n" +
-                "on P.jcNumber = D.jcNumber\n" +
-                "WHERE jcType = '接车'\n" +
-                "group by jcNumber,jcPath,jcDestination,jcType order by jcStartTime ";
+        String sql = "SELECT P.jcNumber, jcType, jcStartTime, jcEndTime, jcSource, jcDestination, jcXD, jcDH, I.jcPath,  group_concat(jcDCH) H, group_concat(jcJSL) J FROM ygz_show.jc_plan P left join (select jcPath, jcDCH FROM ygz_show.jc_path_info) I on P.jcPath = CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci left join (select distinct jcNumber, jcJSL, jcImportant FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber WHERE jcType = '接车' group by jcNumber,jcPath,jcDestination,jcType order by jcStartTime";
         Object[] args = {};
 
         try {
@@ -338,7 +331,9 @@ public class TestRepositoryImpl implements TestRepository {
             userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
             userInfo.setJcXD(resultSet.getString("jcXD"));
             userInfo.setJcDH(resultSet.getString("jcDH"));
-            userInfo.setJcJSL(resultSet.getString("jcJSL"));
+            userInfo.setJcPath(resultSet.getString("jcPath"));
+            userInfo.setJcDCH(resultSet.getString("H"));
+            userInfo.setJcJSL(resultSet.getString("J"));
 
             return userInfo;
         }
