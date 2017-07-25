@@ -108,25 +108,18 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public List<JcPlanInfo> selectJcPlanALL() {
-        String sql = "SELECT P.jcNumber,jcType,jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcJSL FROM ygz_show.jc_plan P left join (SELECT distinct jcNumber,jcJSL FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber order by jcStartTime";
+        String sql = "SELECT P.jcNumber, jcType, jcStartTime, jcEndTime, jcSource, jcDestination, I.jcPath, group_concat(jcDCH), group_concat(jcJSL)\n" +
+                "FROM ygz_show.jc_plan P\n" +
+                "left join (select jcPath, jcDCH FROM ygz_show.jc_path_info) I \n" +
+                "on P.jcPath = CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci\n" +
+                "left join (select distinct jcNumber, jcJSL, jcImportant FROM ygz_show.jc_plan_detals) D \n" +
+                "on P.jcNumber = D.jcNumber\n" +
+                "WHERE jcType = '接车'\n" +
+                "group by jcNumber,jcPath,jcDestination,jcType order by jcStartTime ";
         Object[] args = {};
 
         try {
             return mysqlJdbcTemplate.query(sql, args, new JcPlanALLRowMapper());
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error");
-            return null;
-        }
-    }
-
-    @Override
-    public List<JcPlanInfo> selectJcPath() {
-        String sql = "SELECT jcNumber,I.jcPath, jcDCH, jcType, jcDestination FROM ygz_show.jc_path_info I left join (SELECT jcNumber,jcType,jcDestination,jcPath FROM ygz_show.jc_plan) P on P.jcPath=CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci WHERE jcType = '接车';";
-        Object[] args = {};
-
-        try {
-            return mysqlJdbcTemplate.query(sql, args, new JcPathRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("error");
@@ -204,12 +197,13 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public boolean insertToPlan4JF(JcPlanInfo info) {
-        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL, jcImportant) VALUES (?, ?, ?, ?)";
         Object[] args = {
 
                 uuid.uuidPrimaryKey(),
                 info.getTRAIN_NUM(),
-                ConstantFields.JF
+                ConstantFields.JF,
+                ConstantFields.IMPORTANT_JF
         };
 
         try {
@@ -222,11 +216,12 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public boolean insertToPlan4CX(JcPlanInfo info) {
-        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL, jcImportant) VALUES (?, ?, ?, ?)";
         Object[] args = {
                 uuid.uuidPrimaryKey(),
                 info.getTRAIN_NUM(),
-                ConstantFields.CX
+                ConstantFields.CX,
+                ConstantFields.IMPORTANT_CX
         };
 
         try {
@@ -239,11 +234,12 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public boolean insertToPlan4CC(JcPlanInfo info) {
-        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL, jcImportant) VALUES (?, ?, ?, ?)";
         Object[] args = {
                 uuid.uuidPrimaryKey(),
                 info.getTRAIN_NUM(),
-                ConstantFields.CC
+                ConstantFields.CC,
+                ConstantFields.IMPORTANT_CC
         };
 
         try {
