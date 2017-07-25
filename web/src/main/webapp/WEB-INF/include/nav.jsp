@@ -9,7 +9,7 @@
         <a href="${contextPath}" class="logo" style="padding-left: 0; padding-right: 0;">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini">
-                <b>沈</b>
+                <b>裕</b>
             </span>
             <!-- logo for regular state and mobile devices -->
             <span class="logo" style="padding-left: 0; padding-right: 0;">
@@ -21,12 +21,14 @@
         <!-- 头部内容 -->
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
+            <!--
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" id="closeNav">
                 <span class="sr-only">切换</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
+            -->
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
@@ -55,12 +57,14 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- sidebar menu: : style can be found in sidebar.less -->
+            <!--
             <ul class="sidebar-menu">
                 <li class="header">命令解读</li>
                 <li><a href="${contextPath}/command/record/entering/index.action"><i class="fa fa-file-code-o" aria-hidden="true"></i> <span>命令解读</span></a></li>
                 <li class="header">系统设置</li>
                 <li><a href="${contextPath}/admin/station/route.action"><i class="fa fa-university" aria-hidden="true"></i> <span>车站管理</span></a></li>
             </ul>
+            -->
         </section>
     </aside>
 

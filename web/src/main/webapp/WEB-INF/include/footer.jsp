@@ -5,7 +5,7 @@
     <!-- 底部栏 -->
     <footer class="main-footer">
         <div class="pull-right hidden-xs">
-            <b>Version</b> 0.2.1
+            <b>Version</b> 0.0.1
         </div>
         <strong><a href="${contextPath}/about/index.action">版本历史</a></strong>
     </footer>
