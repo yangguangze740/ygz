@@ -35,8 +35,9 @@
                 <td>${list.NODE_FOUR_WAY}</td>
                 <td>${list.TRACK_NUM}</td>
                 <td></td>
-                <td></td>
+                <td>${list.jcImportant}</td>
                 <td>${list.jcJSL}</td>
+                <td>${list.jcDCH}</td>
             </tr>
         </c:forEach>
         </tr>
