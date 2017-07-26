@@ -21,7 +21,7 @@
         <td>调机</td>
         <td>重点事项</td>
         <td>记事</td>
-        <td>进路</td>
+        <%--<td>进路</td>--%>
     </tr>
     </thread>
     <tbody
@@ -37,7 +37,7 @@
                 <td></td>
                 <td>${list.jcImportant}</td>
                 <td>${list.jcJSL}</td>
-                <td>${list.jcDCH}</td>
+                <%--<td>${list.jcDCH}</td>--%>
             </tr>
         </c:forEach>
         </tr>
