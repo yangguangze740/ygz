@@ -22,6 +22,15 @@ public class JcPlanInfo {
     private String jcDH;
     private String jcPath;
     private String jcDCH;
+    private int color;// 0白 1黄 2红
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
+    }
 
     public String getJcDCH() {
         return jcDCH;

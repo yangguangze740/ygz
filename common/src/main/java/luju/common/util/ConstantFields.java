@@ -31,6 +31,7 @@ public class ConstantFields {
     public static final String CX = "超限";
     public static final String JF = "禁峰";
     public static final String CC = "超长";
+    public static final String XD = "XD";
 
     /* 重点事项内容*/
     public static final String IMPORTANT_CX = "2、5道接车";

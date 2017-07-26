@@ -108,7 +108,7 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public List<JcPlanInfo> selectJcPlanALL() {
-        String sql = "SELECT P.jcNumber, jcType, jcStartTime, jcEndTime, jcSource, jcDestination, jcXD, jcDH, I.jcPath,  group_concat(jcDCH) H, group_concat(jcJSL) J FROM ygz_show.jc_plan P left join (select jcPath, jcDCH FROM ygz_show.jc_path_info) I on P.jcPath = CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci left join (select distinct jcNumber, jcJSL, jcImportant FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber WHERE jcType = '接车' group by jcNumber,jcPath,jcDestination,jcType order by jcStartTime";
+        String sql = "SELECT P.jcNumber, jcType, jcStartTime, jcEndTime, jcSource, jcDestination, jcXD, jcDH, I.jcPath,  group_concat(jcDCH) H, group_concat(jcImportant) T, group_concat(jcJSL) J FROM ygz_show.jc_plan P left join (select jcPath, jcDCH FROM ygz_show.jc_path_info) I on P.jcPath = CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci left join (select distinct jcNumber, jcJSL, jcImportant FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber WHERE jcType = '接车' group by jcNumber,jcPath,jcDestination,jcType order by jcStartTime";
         Object[] args = {};
 
         try {
@@ -172,12 +172,13 @@ public class TestRepositoryImpl implements TestRepository {
 
     @Override
     public boolean insertToPlan4HC(JcPlanInfo info) {
-        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO jc_plan_detals (delalsId, jcNumber, jcJSL, jcImportant) VALUES (?, ?, ?, ?)";
         Object[] args = {
 
                 uuid.uuidPrimaryKey(),
                 info.getTRAIN_NUM(),
-                ConstantFields.JF
+                ConstantFields.JF,
+                ConstantFields.IMPORTANT_JF
         };
 
         try {
@@ -333,8 +334,34 @@ public class TestRepositoryImpl implements TestRepository {
             userInfo.setJcDH(resultSet.getString("jcDH"));
             userInfo.setJcPath(resultSet.getString("jcPath"));
             userInfo.setJcDCH(resultSet.getString("H"));
+            userInfo.setJcImportant(resultSet.getString("T"));
             userInfo.setJcJSL(resultSet.getString("J"));
 
+            String jsl = resultSet.getString("J");
+            int dh = Integer.parseInt(resultSet.getString("jcDH"));
+            String xd = resultSet.getString("jcXD");
+
+            System.out.println(resultSet.getString("J"));
+            if (jsl!= null || xd == ConstantFields.XD) {
+                if (jsl.indexOf(ConstantFields.CC)!=-1) {
+                    if(dh !=4 && dh !=5) {
+                        userInfo.setColor(2);
+                    }
+                }
+                else if (jsl.indexOf(ConstantFields.CX)!=-1) {
+                    if(dh !=2 && dh !=5){
+                        userInfo.setColor(2);
+                    }
+                }
+                else if (jsl.indexOf(ConstantFields.JF)!=-1) {
+                    if(dh !=2 && dh !=3 && dh !=4 ) {
+                        userInfo.setColor(1);
+                    }
+                }
+                else {
+                    userInfo.setColor(0);
+                }
+            }
             return userInfo;
         }
 
