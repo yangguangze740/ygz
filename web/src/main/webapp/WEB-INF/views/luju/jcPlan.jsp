@@ -7,7 +7,7 @@
     <section class="content" >
     <div class="row">
     <%-- 需要审验的命令数据 --%>
-    <div class="col-md-9">
+    <div class="col-md-10">
     <table class="table">
     <thread>
     <tr>
