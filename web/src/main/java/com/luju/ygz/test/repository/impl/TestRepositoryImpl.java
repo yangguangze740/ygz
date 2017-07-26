@@ -121,6 +121,20 @@ public class TestRepositoryImpl implements TestRepository {
     }
 
     @Override
+    public List<JcPlanInfo> selectJcPath() {
+        String sql = "";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanPathRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
     public boolean insertToPlanCopy(JcPlanInfo info) {
         String sql = "INSERT INTO jc_plan_copy (copyId, jcSource, jcNumber, jcEndTime, jcStartTime, jcDestination, jcHc, jcQBID, jcQBIDN, jcJSL, jcType ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
@@ -344,17 +358,17 @@ public class TestRepositoryImpl implements TestRepository {
             System.out.println(resultSet.getString("J"));
             if (jsl!= null || xd == ConstantFields.XD) {
                 if (jsl.indexOf(ConstantFields.CC)!=-1) {
-                    if(dh !=4 && dh !=5) {
+                    if(dh !=4 || dh !=5) {
                         userInfo.setColor(2);
                     }
                 }
                 else if (jsl.indexOf(ConstantFields.CX)!=-1) {
-                    if(dh !=2 && dh !=5){
+                    if(dh !=2 || dh !=5){
                         userInfo.setColor(2);
                     }
                 }
                 else if (jsl.indexOf(ConstantFields.JF)!=-1) {
-                    if(dh !=2 && dh !=3 && dh !=4 ) {
+                    if(dh !=2 || dh !=3 && dh !=4 ) {
                         userInfo.setColor(1);
                     }
                 }
@@ -379,6 +393,16 @@ public class TestRepositoryImpl implements TestRepository {
 
             return userInfo;
         }
+    }
 
+    private class JcPlanPathRowMapper implements RowMapper<JcPlanInfo> {
+        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
+            userInfo.setJcPath(resultSet.getString("jcPath"));
+
+            return userInfo;
+        }
     }
 }
