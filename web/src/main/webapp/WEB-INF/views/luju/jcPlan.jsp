@@ -37,6 +37,7 @@
                 <td></td>
                 <td>${list.jcImportant}</td>
                 <td>${list.jcJSL}</td>
+                <td>${list.color}</td>
                 <%--<td>${list.jcDCH}</td>--%>
             </tr>
         </c:forEach>
