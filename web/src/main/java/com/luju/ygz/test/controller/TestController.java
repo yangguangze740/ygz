@@ -31,8 +31,10 @@ public class TestController {
     @RequestMapping("/jcPlan")
     public ModelAndView allJcData(JcPlanInfo info) {
         ModelAndView mav = new ModelAndView("/luju/jcPlan");
+
         List<JcPlanInfo> list = service.selectPlanAll();
         mav.addObject("list",list);
+
         return mav;
     }
 }
