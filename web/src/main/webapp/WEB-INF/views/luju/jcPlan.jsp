@@ -140,7 +140,7 @@
                contentType: 'application/x-www-form-urlencoded',
                data: postData,
                dateType: 'json',
-               url: "${contextPath}/",
+               url: "${contextPath}",
                success: function(result) {
                    clearOldColor();
 

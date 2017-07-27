@@ -6,7 +6,7 @@
 <div class="wrapper">
     <header class="main-header">
         <!-- 左上角标题 -->
-        <a href="${contextPath}" class="logo" style="padding-left: 0; padding-right: 0;">
+        <a href="" class="logo" style="padding-left: 0; padding-right: 0;">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini">
                 <b>裕</b>

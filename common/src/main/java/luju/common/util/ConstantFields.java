@@ -56,7 +56,7 @@ public class ConstantFields {
     /* shiro登录状态Key */
     public static final String LOGIN_KEY = "shiroLogin";
     /* 用户登录后信息 */
-    public static final String SESSION_LOGIN_KEY = "userLoginInfo";
+    public static final String SESSION_LOGIN_KEY = "loginName";
     /* 工人登录后信息 */
     public static final String SESSION_WORKER_LOGIN_KEY = "workerInfo";
 
