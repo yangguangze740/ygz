@@ -2,8 +2,8 @@
 
 <%@ include file="/WEB-INF/include/header.jsp"%>
 
-<body class="hold-transition login-page">
-<div class="login-box">
+<body class="hold-transition login-page" style="background-image:url(${contextPath}/static/images/bg.jpg)">
+<div class="login-box" style="filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.8;">
     <div class="login-logo">
         <%--<a href="http://www.com.com.sytlj.com"><b>沈阳铁路局</b></a>--%>
     </div>

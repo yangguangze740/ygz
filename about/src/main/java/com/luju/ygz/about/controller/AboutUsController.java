@@ -1,4 +1,4 @@
-package luju.ygz.about.controller;
+package com.luju.ygz.about.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
