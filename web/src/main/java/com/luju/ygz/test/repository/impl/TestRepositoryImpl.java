@@ -355,7 +355,6 @@ public class TestRepositoryImpl implements TestRepository {
             int dh = Integer.parseInt(resultSet.getString("jcDH"));
             String xd = resultSet.getString("jcXD");
 
-            System.out.println(resultSet.getString("J"));
             if (jsl!= null || xd == ConstantFields.XD) {
                 if (jsl.indexOf(ConstantFields.CC)!=-1) {
                     if(dh !=4 || dh !=5) {
