@@ -114,6 +114,11 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
+    public List<JcPlanInfo> selectPath() {
+        return testRepository.selectJcPath();
+    }
+
+    @Override
     public boolean insertDataToMysql(JcPlanInfo info) {
         return testRepository.insertToPlanCopy(info);
     }

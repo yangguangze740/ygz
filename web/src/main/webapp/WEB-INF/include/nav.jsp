@@ -8,7 +8,7 @@
         <!-- 左上角标题 -->
         <a href="" class="logo" style="padding-left: 0; padding-right: 0;">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini">
+            <span class="logo">
                 <b>裕</b>
             </span>
             <!-- logo for regular state and mobile devices -->
@@ -18,36 +18,31 @@
             </span>
         </a>
 
+
         <!-- 头部内容 -->
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
-            <!--
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button" id="closeNav">
-                <span class="sr-only">切换</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            -->
+            <ul class="nav navbar-nav">
+                <li><a href="#">下到</a></li>
+                <li><a href="#">下直</a></li>
+                <li><a href="#">下发</a></li>
+                <li><a href="#">下行</a></li>
+                <li><a href="#">上到</a></li>
+                <li><a href="#">上直</a></li>
+                <li><a href="#">上发</a></li>
+                <li><a href="#">上行</a></li>
+                <li><a href="#">全站</a></li>
+            </ul>
+
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown tasks-menu">
-                        <a href="#" class="dropdown-toggle" id="nowDay">
-
-                        </a>
+                        <a href="#" class="dropdown-toggle" id="nowDay"></a>
                     </li>
-                        <script>
-                            document.getElementById("nowDay").innerHTML = new Date().toLocaleDateString();
-                        </script>
-                    <!-- User Account: style can be found in dropdown.less -->
-                    <li class="dropdown user user-menu">
-
-                    </li>
-                    <!-- Control Sidebar Toggle Button -->
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"></a>
-                    </li>
+                    <script>
+                        document.getElementById("nowDay").innerHTML = new Date().toLocaleDateString();
+                    </script>
                 </ul>
             </div>
         </nav>

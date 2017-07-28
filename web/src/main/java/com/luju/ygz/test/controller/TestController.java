@@ -2,11 +2,14 @@ package com.luju.ygz.test.controller;
 
 import com.luju.pojo.JcPlanInfo;
 import com.luju.ygz.test.service.impl.TestServiceImpl;
+import luju.common.util.ConstantFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -14,6 +17,25 @@ import java.util.List;
 public class TestController {
     @Autowired
     private TestServiceImpl service;
+
+    @RequestMapping("/route")
+    public String routeLogin() {
+        return "luju/index";
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String test(HttpServletRequest request) {
+        String username = request.getParameter(ConstantFields.REQUEST_NAME_KEY);
+        String password = request.getParameter(ConstantFields.REQUEST_PSWD_KEY);
+
+        String admin = "admin";
+
+        if (username.equals(admin) && password.equals(admin)) {
+            return "redirect:/luju/jcPlan.action";
+        } else {
+            return "redirect:/luju/route.action";
+        }
+    }
 
     @RequestMapping("/hello")
     public String test(JcPlanInfo info) {
@@ -33,6 +55,7 @@ public class TestController {
         ModelAndView mav = new ModelAndView("/luju/jcPlan");
 
         List<JcPlanInfo> list = service.selectPlanAll();
+        List<JcPlanInfo> path = service.selectPath();
         mav.addObject("list",list);
 
         return mav;
