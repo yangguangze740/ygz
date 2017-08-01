@@ -40,7 +40,7 @@
                 <%-- 设定作业计划box背景色--%>
                 <div class="box box-success" style="background-color: #F5F5F5;">
                     <div class="box-header with-border">
-                        <h3 class="box-title">作业计划</h3>
+                        <h3 class="box-title">裕国站下行到达场作业计划推演</h3>
                     </div>
                     <div class="box-body no-padding">
                         <table class="table" id="zuoyejihuaTable">
@@ -119,7 +119,7 @@
             <div class="col-md-4">
                 <div class="box box-danger" style="background-color: #F5F5F5;">
                     <div class="box-header with-border">
-                        <h3 class="box-title">超长、超限 错办冲突</h3>
+                        <h3 class="box-title">超长、超限 错办进路</h3>
                     </div>
                     <div class="box-body">
                         <table class="table" id="conflict4ErrorTable">
@@ -157,7 +157,7 @@
                 <div class="col-md-4">
                     <div class="box box-warning" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
-                            <h3 class="box-title">禁峰 错版冲突</h3>
+                            <h3 class="box-title">禁峰 交叉进路</h3>
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4CCCXTable">
@@ -184,7 +184,7 @@
             <div class="col-md-4">
                 <div class="box box-warning" style="background-color: #F5F5F5;">
                     <div class="box-header with-border">
-                        <h3 class="box-title">分区冲突</h3>
+                        <h3 class="box-title">分区交叉进路</h3>
                     </div>
                     <div class="box-body">
                         <table class="table" id="conflict4TwoTable">
@@ -222,13 +222,13 @@
             <div class="col-md-4">
                 <div class="box box-warning" style="background-color: #F5F5F5;">
                     <div class="box-header with-border">
-                        <h3 class="box-title">进路冲突</h3>
+                        <h3 class="box-title">计划交叉进路</h3>
                     </div>
                     <div class="box-body">
                         <table class="table" id="conflictTable">
                             <tr>
                                 <td>
-                                    2、5&nbsp;行进路冲突
+                                    2、5&nbsp;行进路交叉
                                 </td>
                                 <td>
                                     <div style="text-align:right;">
@@ -239,7 +239,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    3、9&nbsp;行进路冲突
+                                    3、9&nbsp;行进路交叉
                                 </td>
                                 <td>
                                     <div style="text-align:right;">

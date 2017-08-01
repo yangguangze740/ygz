@@ -8,7 +8,7 @@
         <%--<a href="http://www.com.com.sytlj.com"><b>沈阳铁路局</b></a>--%>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg" style="font-size: 20px;">裕国站计划推演系统</p>
+        <p class="login-box-msg" style="font-size: 20px;">裕国站作业计划推演平台</p>
         <form action="${contextPath}/luju/login.action" method="post" id="loginForm">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" name="loginName" placeholder="用户名">
