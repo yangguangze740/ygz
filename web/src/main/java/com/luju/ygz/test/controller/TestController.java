@@ -1,7 +1,7 @@
 package com.luju.ygz.test.controller;
 
 import com.luju.pojo.JcPlanInfo;
-import com.luju.ygz.test.service.impl.TestServiceImpl;
+import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.ConstantFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/luju")
 public class TestController {
     @Autowired
-    private TestServiceImpl service;
+    private TestServiceI service;
 
     @RequestMapping("/route")
     public String routeLogin() {
@@ -42,6 +42,11 @@ public class TestController {
         service.selectPlanDataFromOra();
         return "hello";
     }
+    @RequestMapping("/bwj")
+    public String bwjtest(JcPlanInfo info){
+        service.selectBwjData();
+        return "bwj";
+    }
 
     @RequestMapping("/world")
     public String dataFromCopyToOne(JcPlanInfo info) {
@@ -59,5 +64,15 @@ public class TestController {
         mav.addObject("list",list);
 
         return mav;
+    }
+    @RequestMapping("/bwPlan")
+    public ModelAndView allBwData(JcPlanInfo info){
+        ModelAndView mav = new ModelAndView("/luju/bwPlan");
+
+        List<JcPlanInfo> lists = service.selectBwPlanAll();
+
+        mav.addObject("lists",lists);
+        return mav;
+
     }
 }

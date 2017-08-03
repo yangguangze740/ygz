@@ -2,7 +2,7 @@ package com.luju.pojo;
 
 import java.sql.Timestamp;
 
-public class JcPlanInfo {
+public class JcPlanInfo  {
 
     private String copyId;
     private String NODE_FOUR_WAY;//source

@@ -1,8 +1,8 @@
 package com.luju.ygz.test.service.impl;
 
 import com.luju.pojo.JcPlanInfo;
-import com.luju.ygz.test.service.TestService;
-import com.luju.ygz.test.repository.impl.TestRepositoryImpl;
+import com.luju.ygz.test.repository.TestRepositoryI;
+import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.ConstantFields;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +14,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Service
-public class TestServiceImpl implements TestService {
+public class TestServiceImpl implements TestServiceI {
 
     @Autowired
-    private TestRepositoryImpl testRepository;
+    private TestRepositoryI testRepository;
 
     @Override
     public void selectPlanDataFromOra() {
@@ -121,5 +121,50 @@ public class TestServiceImpl implements TestService {
     @Override
     public boolean insertDataToMysql(JcPlanInfo info) {
         return testRepository.insertToPlanCopy(info);
+    }
+
+    @Override
+    public List<JcPlanInfo> selectBwPlanAll() {
+        return testRepository.selectBwPlan();
+    }
+
+    @Override
+    public void selectBwjData() {
+        List<JcPlanInfo> list = testRepository.selectBwjData();
+        Timestamp ts = null;
+        Timestamp ts1 = null;
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("TIME")){
+                        fields[j].get(oi).toString();
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        long time = date.getMillis()+ConstantFields.BWJ1_TIME;
+                        long time1 = date.getMillis()+ConstantFields.BWJ2_TIME;
+//                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss:S");
+//                        simpleDateFormat.format(timestamp);
+                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        ts = Timestamp.valueOf(simpleDateFormat1.format(time));
+                        ts1 = Timestamp.valueOf(simpleDateFormat1.format(time1));
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setJcStartTime(ts);
+            list.get(k).setTIME(ts);
+            list.get(k).setJcType(ConstantFields.TYPE_BWJ);
+
+            testRepository.insertToBwjPlan4S(list.get(k));
+            testRepository.insertToBwjPlan4N(list.get(k));
+        }
     }
 }

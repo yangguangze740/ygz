@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/include/header.jsp"%>
 
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+
 <div class="wrapper">
     <header class="main-header">
         <!-- 左上角标题 -->
@@ -18,23 +19,8 @@
             </span>
         </a>
 
-
         <!-- 头部内容 -->
         <nav class="navbar navbar-static-top">
-            <!-- Sidebar toggle button-->
-            <ul class="nav navbar-nav">
-                <li><a href="#">下到</a></li>
-                <li><a href="#">下直</a></li>
-                <li><a href="#">下发</a></li>
-                <li><a href="#">下行</a></li>
-                <li><a href="#">上到</a></li>
-                <li><a href="#">上直</a></li>
-                <li><a href="#">上发</a></li>
-                <li><a href="#">上行</a></li>
-                <li><a href="#">全站</a></li>
-            </ul>
-
-
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown tasks-menu">
@@ -52,14 +38,9 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- sidebar menu: : style can be found in sidebar.less -->
-            <!--
             <ul class="sidebar-menu">
-                <li class="header">命令解读</li>
-                <li><a href="${contextPath}/command/record/entering/index.action"><i class="fa fa-file-code-o" aria-hidden="true"></i> <span>命令解读</span></a></li>
-                <li class="header">系统设置</li>
-                <li><a href="${contextPath}/admin/station/route.action"><i class="fa fa-university" aria-hidden="true"></i> <span>车站管理</span></a></li>
+                <li><a href="${contextPath}/luju/jcPlan.action"><i class="fa fa-file-code-o" aria-hidden="true"></i><span>接车计划</span></a></li>
             </ul>
-            -->
         </section>
     </aside>
 

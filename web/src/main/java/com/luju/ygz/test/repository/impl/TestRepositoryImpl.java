@@ -1,7 +1,7 @@
 package com.luju.ygz.test.repository.impl;
 
 import com.luju.pojo.JcPlanInfo;
-import com.luju.ygz.test.repository.TestRepository;
+import com.luju.ygz.test.repository.TestRepositoryI;
 import luju.common.util.ConstantFields;
 import luju.common.util.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class TestRepositoryImpl implements TestRepository {
+public class TestRepositoryImpl implements TestRepositoryI {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
@@ -117,6 +117,79 @@ public class TestRepositoryImpl implements TestRepository {
             e.printStackTrace();
             System.out.println("error");
             return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectBwPlan() {
+       String sql = "";
+        Object[] args = {};
+
+        try{
+            return mysqlJdbcTemplate.query(sql,args,new BwPlanAllRowMapper());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectBwjData() {
+        String sql = "SELECT jcNumber,jcType,jcEndTime,jcDestination FROM ygz_show.jc_plan";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new BwPlanCopyRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public boolean insertToBwjPlan4S(JcPlanInfo info) {
+        String sql = "INSERT INTO bwj_plan (planId, bwjNumber, bwjSource, bwjStartTime, bwjEndTime, bwjDestination, bwjType, bwjPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+
+                uuid.uuidPrimaryKey(),
+                info.getTRAIN_NUM(),
+                info.getTRACK_NUM(),
+                info.getJcStartTime(),
+                info.getTIME(),
+                ConstantFields.BWJDS,
+                info.getJcType(),
+                ConstantFields.S+info.getTRACK_NUM()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertToBwjPlan4N(JcPlanInfo info) {
+        String sql = "INSERT INTO bwj_plan (planId, bwjNumber, bwjSource, bwjStartTime, bwjEndTime, bwjDestination, bwjType, bwjPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+
+                uuid.uuidPrimaryKey(),
+                info.getTRAIN_NUM(),
+                info.getTRACK_NUM(),
+                info.getJcStartTime(),
+                info.getTIME(),
+                ConstantFields.BWJDN,
+                info.getJcType(),
+                ConstantFields.N+info.getTRACK_NUM()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -274,7 +347,17 @@ public class TestRepositoryImpl implements TestRepository {
             return userInfo;
         }
     }
+    private class BwPlanCopyRowMapper implements RowMapper<JcPlanInfo>{
+        public JcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
+            JcPlanInfo userInfo = new JcPlanInfo();
 
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
+            userInfo.setJcType(resultSet.getString("jcType"));
+            userInfo.setTIME(resultSet.getTimestamp("jcEndTime"));
+            userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
+            return userInfo;
+        }
+    }
     private class JcPlanOneRowMapper implements RowMapper<JcPlanInfo> {
         public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             JcPlanInfo userInfo = new JcPlanInfo();
@@ -333,7 +416,13 @@ public class TestRepositoryImpl implements TestRepository {
             return userInfo;
         }
     }
+    private class BwPlanAllRowMapper implements RowMapper<JcPlanInfo>{
+        public JcPlanInfo mapRow(ResultSet resultSet, int i)throws SQLException{
+            JcPlanInfo userInfo = new JcPlanInfo();
 
+            return userInfo;
+        }
+    }
     private class JcPlanALLRowMapper implements RowMapper<JcPlanInfo> {
         public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             JcPlanInfo userInfo = new JcPlanInfo();

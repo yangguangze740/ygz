@@ -1,10 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ include file="/WEB-INF/include/nav.jsp"%>
+<%@ include file="/WEB-INF/include/header.jsp"%>
+
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
+<div class="wrapper">
+
+<header class="main-header">
+    <!-- 头部内容 -->
+    <nav class="navbar" style="margin-left: 0px;">
+        <div class="navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="#">下到</a></li>
+                <li><a href="#">下直</a></li>
+                <li><a href="#">下发</a></li>
+                <li><a href="#">下行</a></li>
+                <li><a href="#">上到</a></li>
+                <li><a href="#">上直</a></li>
+                <li><a href="#">上发</a></li>
+                <li><a href="#">上行</a></li>
+                <li><a href="#">全站</a></li>
+                <li style="float: right;">
+                    <a href="#" class="dropdown-toggle" id="nowDay">
+                    </a>
+                </li>
+                <script>
+                    document.getElementById("nowDay").innerHTML = new Date().toLocaleDateString();
+                </script>
+            </ul>
+        </div>
+    </nav>
+</header>
 
 <!-- 中心内容 -->
-<div class="content-wrapper">
-    <section class="content" >
+<div class="content-wrapper" style="margin-left: 0px !important;">
+    <section class="content">
         <div class="row">
             <%-- 需要审验的命令数据 --%>
             <div class="col-md-8">
@@ -13,9 +42,9 @@
                     <div class="box-header with-border">
                         <h3 class="box-title">作业计划</h3>
                     </div>
-                    <div class="box-body">
-                        <table class="table" id="zuoyejihuaTable" border-bottom-color="#000000">
-                            <thread>
+                    <div class="box-body no-padding">
+                        <table class="table" id="zuoyejihuaTable">
+                            <thead>
                                 <tr style="text-align: center;">
                                     <th>序号</th>
                                     <th>车次</th>
@@ -29,11 +58,11 @@
                                     <th>记事</th>
                                     <th>进路</th>
                                 </tr>
-                            </thread>
+                            </thead>
                             <tbody>
                             <c:forEach items="${list}" var="record" varStatus="status">
                                 <c:if test="${record.color == 1}">
-                                    <tr style="background-color: #FFFF00; text-align: center;" id="${record.TRAIN_NUM}">
+                                    <tr style="background-color: #FFFF00; text-align: center; border-bottom: 2px solid #D3D3D3;" id="${record.TRAIN_NUM}">
                                         <td>${status.index + 1}</td>
                                         <td>${record.TRAIN_NUM}</td>
                                         <td>${record.jcType}</td>
@@ -44,11 +73,12 @@
                                         <td></td>
                                         <td>${record.jcImportant}</td>
                                         <td>${record.jcJSL}</td>
-                                        <td>${record.jcDCH}</td>
+                                        <%--<td>${record.jcDCH}</td>--%>
+                                        <td></td>
                                     </tr>
                                 </c:if>
                                 <c:if test="${record.color == 2}">
-                                    <tr style="background-color: #ff2222; text-align: center;" id="${record.TRAIN_NUM}">
+                                    <tr style="background-color: #ff2222; text-align: center; border-bottom: 2px solid #D3D3D3;" id="${record.TRAIN_NUM}">
                                         <td>${status.index + 1}</td>
                                         <td>${record.TRAIN_NUM}</td>
                                         <td>${record.jcType}</td>
@@ -59,11 +89,12 @@
                                         <td></td>
                                         <td>${record.jcImportant}</td>
                                         <td>${record.jcJSL}</td>
-                                        <td>${record.jcDCH}</td>
+                                        <%--<td>${record.jcDCH}</td>--%>
+                                        <td></td>
                                     </tr>
                                 </c:if>
                                 <c:if test="${record.color == 0}">
-                                    <tr style="text-align: center;" id="${record.TRAIN_NUM}">
+                                    <tr style="text-align: center; border-bottom: 2px solid #D3D3D3;" id="${record.TRAIN_NUM}">
                                         <td>${status.index + 1}</td>
                                         <td>${record.TRAIN_NUM}</td>
                                         <td>${record.jcType}</td>
@@ -74,7 +105,8 @@
                                         <td></td>
                                         <td>${record.jcImportant}</td>
                                         <td>${record.jcJSL}</td>
-                                            <%--<td>${list.jcDCH}</td>--%>
+                                        <%--<td>${record.jcDCH}</td>--%>
+                                        <td></td>
                                     </tr>
                                 </c:if>
                             </c:forEach>
@@ -102,8 +134,8 @@
                                 </td>
                                 <td>
                                     <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning" >撤销</button>
-                                        <button type="button" class="btn btn-danger" >调整</button>
+                                        <button type="button" class="btn btn-warning">撤销</button>
+                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
                                     </div>
                                 </td>
                             </tr>
@@ -113,8 +145,8 @@
                                 </td>
                                 <td>
                                     <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning" >撤销</button>
-                                        <button type="button" class="btn btn-danger" >调整</button>
+                                        <button type="button" class="btn btn-warning">撤销</button>
+                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
                                     </div>
                                 </td>
                             </tr>
@@ -140,8 +172,8 @@
                                     </td>
                                     <td>
                                         <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning" >撤销</button>
-                                            <button type="button" class="btn btn-danger" >调整</button>
+                                            <button type="button" class="btn btn-warning">撤销</button>
+                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -163,23 +195,23 @@
                             <%--</c:forEach>--%>
                             <tr>
                                 <td>
-                                    2&nbsp行分区错误
+                                    2&nbsp;行分区错误
                                 </td>
                                 <td>
                                     <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning" >撤销</button>
-                                        <button type="button" class="btn btn-danger" >调整</button>
+                                        <button type="button" class="btn btn-warning">撤销</button>
+                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    11&nbsp行分区错误
+                                    11&nbsp;行分区错误
                                 </td>
                                 <td>
                                     <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning" >撤销</button>
-                                        <button type="button" class="btn btn-danger" >调整</button>
+                                        <button type="button" class="btn btn-warning">撤销</button>
+                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
                                     </div>
                                 </td>
                             </tr>
@@ -196,27 +228,50 @@
                         <table class="table" id="conflictTable">
                             <tr>
                                 <td>
-                                    2、5&nbsp行进路冲突
+                                    2、5&nbsp;行进路冲突
                                 </td>
                                 <td>
                                     <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning" >撤销</button>
-                                        <button type="button" class="btn btn-danger" >调整</button>
+                                        <button type="button" class="btn btn-warning">撤销</button>
+                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    3、9&nbsp行进路冲突
+                                    3、9&nbsp;行进路冲突
                                 </td>
                                 <td>
                                     <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning" >撤销</button>
-                                        <button type="button" class="btn btn-danger" >调整</button>
+                                        <button type="button" class="btn btn-warning">撤销</button>
+                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
                                     </div>
                                 </td>
                             </tr>
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <%-- 弹出modal --%>
+        <div class="modal fade" id="noteModal">
+            <div class="modal-dialog" role="dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">修改意见</h4>
+                    </div>
+                    <div class="modal-body" id="noteModalContent">
+                        <div class="form-group">
+                            <label>请填写意见</label>
+                            <textarea class="form-control" rows="3" placeholder="请输入意见......"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">提交至场调</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal">提交至站调</button>
                     </div>
                 </div>
             </div>
@@ -270,7 +325,28 @@
                 }
             });
         });
+
+        // 调整按钮modal打开
+        $("button[value='cd']").click(function () {
+            $("#noteModal").modal();
+        });
     });
 </script>
 
-<%@ include file="/WEB-INF/include/footer.jsp"%>
+    <!-- 底部栏 -->
+    <footer class="main-footer" style="margin-left: 0px !important;">
+        <div class="pull-right hidden-xs">
+            <b>版本</b> 0.1.2
+        </div>
+        <strong><a href="${contextPath}/about/index.action">版本历史</a></strong>
+    </footer>
+</div>
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="${contextPath}/static/other/html5shiv.min.js"></script>
+<script src="${contextPath}/static/other/respond.min.js"></script>
+<![endif]-->
+</body>
+</html>

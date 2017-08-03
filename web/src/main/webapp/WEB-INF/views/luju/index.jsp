@@ -2,13 +2,13 @@
 
 <%@ include file="/WEB-INF/include/header.jsp"%>
 
-<body class="hold-transition login-page">
-<div class="login-box">
+<body class="hold-transition login-page" style="background-image:url(${contextPath}/static/images/bg.jpg)">
+<div class="login-box" style="filter:alpha(Opacity=80);-moz-opacity:0.5;opacity: 0.8;">
     <div class="login-logo">
         <%--<a href="http://www.com.com.sytlj.com"><b>沈阳铁路局</b></a>--%>
     </div>
     <div class="login-box-body">
-        <p class="login-box-msg"8>裕国站计划推演系统</p>
+        <p class="login-box-msg" style="font-size: 20px;">裕国站计划推演系统</p>
         <form action="${contextPath}/luju/login.action" method="post" id="loginForm">
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" name="loginName" placeholder="用户名">
