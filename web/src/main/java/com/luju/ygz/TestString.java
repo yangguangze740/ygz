@@ -1,33 +1,74 @@
 package com.luju.ygz;
 
-
-
-import java.util.Date;
-import java.text.DateFormat;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class TestString {
     public static void main(String[] args) {
 
         String time = "14:00";
 
-        Date date;
-        Long st;
+        Timestamp ts = new Timestamp(Calendar.getInstance().getTime().getTime());
+        Timestamp ts1;
+        System.out.println(ts);
 
-        DateFormat sdf = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        try {
-            System.out.println(sdf.parse(time));
-            date = sdf.parse(time);
-            st = date.getTime();
-            st = st + 600000;
-            date.setTime(st);
-            System.out.println(date);
-            System.out.println(sdf.format(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        StringBuffer buffer = new StringBuffer(sdf.format(ts));
+        buffer.append(" "+time+":00");
+        System.out.println("buffer: "+buffer);
+        String t = buffer.toString();
+
+        ts1 = Timestamp.valueOf(t);
+        System.out.println(ts1);
+
+//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+//
+//        try {
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        String text = "2011-10-02 18:48:05";
+//        ts = Timestamp.valueOf(text);
+//        System.out.println("-----");
+//        System.out.println(ts);
+
+//        Date currentDate = new Date(System.currentTimeMillis());
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");
+//        System.out.println(sdf.format(currentDate));
+//
+//        StringBuffer buffer = new StringBuffer(sdf.format(currentDate).toString());
+//        buffer.append(" "+time+":00");
+//        System.out.println("buffer: "+ buffer);
+//
+//        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        System.out.println(sdf1.format(buffer));
+
+
+//        String time = "14:00";
+//
+//        Date date;
+//        Long st;
+//
+//        DateFormat sdf = new SimpleDateFormat("HH:mm");
+//
+//        try {
+//            System.out.println(sdf.parse(time));
+//            date = sdf.parse(time);
+//            st = date.getTime();
+//            st = st + 600000;
+//            date.setTime(st);
+//            System.out.println(date);
+//            System.out.println(sdf.format(date));
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 
 
 

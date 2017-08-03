@@ -36,10 +36,9 @@ public class TestServiceImpl implements TestServiceI {
                         Timestamp timestamp = (Timestamp)fields[j].get(oi);
                         DateTime date = new DateTime(timestamp.getTime());
                         long time = date.getMillis()-ConstantFields.JC_TIME;
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss:S");
-                        simpleDateFormat.format(timestamp);
-                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
-                        ts = Timestamp.valueOf(simpleDateFormat1.format(time));
+
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        ts = Timestamp.valueOf(simpleDateFormat.format(time));
                     }
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();

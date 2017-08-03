@@ -1,10 +1,14 @@
 package com.luju.pojo;
 
+import java.sql.Timestamp;
+
 public class DcPlanInfo {
 
     private String dcNumber;
-    private String dcStartTime;
-    private String dcEndTime;
+    private String dcStartTimeS;
+    private String dcEndTimeS;
+    private Timestamp dcStartTime;
+    private Timestamp dcEndTime;
     private String dcType;
     private String dcSource;
     private int dcDj;
@@ -21,19 +25,35 @@ public class DcPlanInfo {
         this.dcNumber = dcNumber;
     }
 
-    public String getDcStartTime() {
+    public String getDcStartTimeS() {
+        return dcStartTimeS;
+    }
+
+    public void setDcStartTimeS(String dcStartTimeS) {
+        this.dcStartTimeS = dcStartTimeS;
+    }
+
+    public String getDcEndTimeS() {
+        return dcEndTimeS;
+    }
+
+    public void setDcEndTimeS(String dcEndTimeS) {
+        this.dcEndTimeS = dcEndTimeS;
+    }
+
+    public Timestamp getDcStartTime() {
         return dcStartTime;
     }
 
-    public void setDcStartTime(String dcStartTime) {
+    public void setDcStartTime(Timestamp dcStartTime) {
         this.dcStartTime = dcStartTime;
     }
 
-    public String getDcEndTime() {
+    public Timestamp getDcEndTime() {
         return dcEndTime;
     }
 
-    public void setDcEndTime(String dcEndTime) {
+    public void setDcEndTime(Timestamp dcEndTime) {
         this.dcEndTime = dcEndTime;
     }
 

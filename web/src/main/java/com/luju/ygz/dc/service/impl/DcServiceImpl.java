@@ -4,14 +4,14 @@ import com.luju.pojo.DcPlanInfo;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import com.luju.ygz.dc.service.DcServiceI;
 import luju.common.util.ConstantFields;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -23,7 +23,9 @@ public class DcServiceImpl implements DcServiceI {
     @Override
     public void selectPlanDataFromOra() {
         List<DcPlanInfo> list = dcRepository.selectDcPlanFromOra();
-        String st = null;
+        Timestamp st1 = null;
+        Timestamp st2 = null;
+
         for(int k=0;k<list.size();k++){
             Field[] fields = list.get(k).getClass().getDeclaredFields();
             Object oi = list.get(k);
@@ -32,26 +34,48 @@ public class DcServiceImpl implements DcServiceI {
                     fields[j].setAccessible(true);
                 }
                 try {
-                    if(fields[j].getName().equals("JHKSSJ")){
-                        fields[j].get(oi).toString();
-                        DateFormat sdf = new SimpleDateFormat("HH:mm");
-                        Date date = sdf.parse(fields[j].get(oi).toString());
+                    if(fields[j].getName().equals("dcStartTimeS")){
 
-                        System.out.println(date);
-                        long time = date.getTime()+ConstantFields.DC_TIME;
+                        String time = fields[j].get(oi).toString();
+                        Timestamp ts = new Timestamp(Calendar.getInstance().getTime().getTime());
 
-                        date.setTime(time);
-                        st = sdf.format(date);
-                        list.get(k).setDcStartTime(st);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        StringBuffer buffer = new StringBuffer(sdf.format(ts));
+                        buffer.append(" "+time+":00");
+                        time = buffer.toString();
+                        st1 = Timestamp.valueOf(time);
+                        DateTime date = new DateTime(st1.getTime());
+                        long t = date.getMillis()+ ConstantFields.DC_TIME;
+
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        st1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                    }
+                    if(fields[j].getName().equals("dcEndTimeS")){
+
+                        String time = fields[j].get(oi).toString();
+                        Timestamp ts = new Timestamp(Calendar.getInstance().getTime().getTime());
+
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                        StringBuffer buffer = new StringBuffer(sdf.format(ts));
+                        buffer.append(" "+time+":00");
+                        time = buffer.toString();
+
+                        st2 = Timestamp.valueOf(time);
+                        DateTime date = new DateTime(st2.getTime());
+                        long t = date.getMillis();
+
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        st2 = Timestamp.valueOf(simpleDateFormat.format(t));
                     }
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
-                } catch (ParseException e) {
-                    e.printStackTrace();
                 }
             }
+            list.get(k).setDcStartTime(st1);
+            list.get(k).setDcEndTime(st2);
+
             dcRepository.insertToPlanCopy(list.get(k));
         }
     }

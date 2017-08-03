@@ -66,8 +66,8 @@ public class DcRepositoryImpl implements DcRepositoryI {
             DcPlanInfo userInfo = new DcPlanInfo();
 
             userInfo.setDcNumber(resultSet.getString("CC"));
-            userInfo.setDcStartTime(resultSet.getString("JHKSSJ"));
-            userInfo.setDcEndTime(resultSet.getString("JHJSSJ"));
+            userInfo.setDcStartTimeS(resultSet.getString("JHKSSJ"));
+            userInfo.setDcEndTimeS(resultSet.getString("JHJSSJ"));
             userInfo.setDcType(resultSet.getString("ZYXM"));
             userInfo.setDcSource(resultSet.getString("ZYGD"));
             userInfo.setDcDj(resultSet.getInt("DJ"));
