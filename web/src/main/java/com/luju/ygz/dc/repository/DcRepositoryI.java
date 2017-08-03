@@ -4,7 +4,7 @@ import com.luju.pojo.DcPlanInfo;
 
 import java.util.List;
 
-public interface DcRepository {
+public interface DcRepositoryI {
 
     /* data select from ora to mysql*/
     public List<DcPlanInfo> selectDcPlanFromOra();

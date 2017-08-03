@@ -1,11 +1,9 @@
 package com.luju.ygz.test.repository;
 
-
 import com.luju.pojo.JcPlanInfo;
-
 import java.util.List;
 
-public interface TestRepository {
+public interface TestRepositoryI {
 
     /* data select from ora to mysql*/
     public List<JcPlanInfo> selectJcPlanFromOra();
@@ -31,6 +29,11 @@ public interface TestRepository {
     /* select path data to determine the conflict */
     public List<JcPlanInfo> selectJcPath();
 
+    /*获取本务机数据*/
+    public List<JcPlanInfo> selectBwPlan();
+
+    public List<JcPlanInfo> selectBwjData();
+
     /* data insert from ora to mysql*/
     public boolean insertToPlanCopy(JcPlanInfo info);
     /* insert processed data from mysql copy data to jc_plan */
@@ -48,5 +51,7 @@ public interface TestRepository {
     /* insert processed data from mysql copy data to jc_plan_detals for CC*/
     public boolean insertToPlan4CC(JcPlanInfo info);
 
+    public boolean insertToBwjPlan4N(JcPlanInfo info);
 
+    public boolean insertToBwjPlan4S(JcPlanInfo info);
 }

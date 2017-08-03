@@ -1,8 +1,5 @@
 package com.luju.pojo;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-
 public class DcPlanInfo {
 
     private String dcNumber;

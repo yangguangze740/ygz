@@ -1,11 +1,9 @@
 package com.luju.ygz.test.service;
 
-
 import com.luju.pojo.JcPlanInfo;
-
 import java.util.List;
 
-public interface TestService {
+public interface TestServiceI {
 
     /* data select from ora to mysql*/
     public void selectPlanDataFromOra();
@@ -24,4 +22,10 @@ public interface TestService {
 
     /* data insert from ora to mysql*/
     public boolean insertDataToMysql(JcPlanInfo info);
+
+    /* 处理本务机数据 */
+    public void selectBwjData();
+
+    /* 获取本务机车辆*/
+    public List<JcPlanInfo> selectBwPlanAll();
 }

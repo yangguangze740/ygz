@@ -1,7 +1,7 @@
 package com.luju.ygz.dc.repository.impl;
 
 import com.luju.pojo.DcPlanInfo;
-import com.luju.ygz.dc.repository.DcRepository;
+import com.luju.ygz.dc.repository.DcRepositoryI;
 import luju.common.util.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Repository
-public class DcRepositoryImpl implements DcRepository {
+public class DcRepositoryImpl implements DcRepositoryI {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -21,6 +21,7 @@ public class DcRepositoryImpl implements DcRepository {
     private JdbcTemplate mysqlJdbcTemplate;
 
     PrimaryKeyUtil uuid = new PrimaryKeyUtil();
+
     @Override
     public List<DcPlanInfo> selectDcPlanFromOra() {
         String sql = "SELECT CC, JHKSSJ, JHJSSJ, ZYXM, ZYGD, DJ, M.GJHID, ZGBZ, CS, JSL FROM CQZ_GJHML M LEFT JOIN CQZ_GJHZW Z ON M.GJHID = Z.GJHID WHERE M.CC IS NOT NULL";

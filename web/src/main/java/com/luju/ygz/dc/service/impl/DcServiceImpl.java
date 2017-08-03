@@ -1,18 +1,13 @@
 package com.luju.ygz.dc.service.impl;
 
 import com.luju.pojo.DcPlanInfo;
-import com.luju.pojo.JcPlanInfo;
-import com.luju.ygz.dc.repository.impl.DcRepositoryImpl;
-import com.luju.ygz.dc.service.DcService;
-import com.luju.ygz.test.repository.impl.TestRepositoryImpl;
+import com.luju.ygz.dc.repository.DcRepositoryI;
+import com.luju.ygz.dc.service.DcServiceI;
 import luju.common.util.ConstantFields;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Field;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,10 +15,10 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class DcServiceImpl implements DcService {
+public class DcServiceImpl implements DcServiceI {
 
     @Autowired
-    private DcRepositoryImpl dcRepository;
+    private DcRepositoryI dcRepository;
 
     @Override
     public void selectPlanDataFromOra() {
