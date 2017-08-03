@@ -24,6 +24,9 @@ public class ConstantFields {
     /* 接车推演时间*/
     public static long JC_TIME = 480000;
 
+    /* 调车推演时间*/
+    public static long DC_TIME = 600000;
+
     /* 作业类别*/
     public static final String TYPE_JC = "接车";
 
