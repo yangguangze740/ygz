@@ -43,7 +43,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
         Object[] args = {};
 
         try {
-            return  jdbcTemplate.query(sql, args, new DcJtPlanRowMapper());
+            return mysqlJdbcTemplate.query(sql, args, new DcJtPlanRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select error");
@@ -79,7 +79,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public boolean insertJtPlan4QC(DcPlanInfo info) {
-        String sql = "INSERT INTO dc_jt_copy (jtId, dcNumber, dcStartTime, dcMidTime, dcEndTime, dcType, dcSource, dcDestination, dcEnd, dcDj, dcTFX, dcTF, dcXD, dcDH, dcPath1, dcPath2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO dc_jt_plan (jtId, dcNumber, dcStartTime, dcMidTime, dcEndTime, dcType, dcSource, dcDestination, dcEnd, dcDj, dcTFX, dcTF, dcXD, dcDH, dcPath1, dcPath2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
                 uuid.uuidPrimaryKey(),
                 info.getDcNumber(),
@@ -109,7 +109,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public boolean insertJtPlan4JD(DcPlanInfo info) {
-        String sql = "INSERT INTO dc_jt_copy (jtId, dcNumber, dcStartTime, dcMidTime, dcEndTime, dcType, dcSource, dcDestination, dcEnd, dcDj, dcTFX, dcTF, dcXD, dcDH, dcPath1, dcPath2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO dc_jt_plan (jtId, dcNumber, dcStartTime, dcMidTime, dcEndTime, dcType, dcSource, dcDestination, dcEnd, dcDj, dcTFX, dcTF, dcXD, dcDH, dcPath1, dcPath2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
                 uuid.uuidPrimaryKey(),
                 info.getDcNumber(),
@@ -142,7 +142,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
         String sql = "TRUNCATE TABLE dc_plan_copy";
 
         try {
-            return jdbcTemplate.update(sql);
+            return mysqlJdbcTemplate.update(sql);
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("delete error");
@@ -175,8 +175,8 @@ public class DcRepositoryImpl implements DcRepositoryI {
             DcPlanInfo userInfo = new DcPlanInfo();
 
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcStartTimeS(resultSet.getString("dcStartTime"));
-            userInfo.setDcEndTimeS(resultSet.getString("dcEndTime"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcSource(resultSet.getString("dcSource"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));

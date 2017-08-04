@@ -14,7 +14,7 @@ public class DataProcess {
 
     Timestamp ts1 = null;
     Timestamp ts2 = null;
-    DataProcess tp = new DataProcess();
+
     String XD = "";
     String DH = "";
     String TF = "";
@@ -51,6 +51,7 @@ public class DataProcess {
     }
 
     public List<DcPlanInfo> dcTimeList(List<DcPlanInfo> list) {
+        DataProcess tp = new DataProcess();
         for (int k = 0; k < list.size(); k++) {
             Field[] fields = list.get(k).getClass().getDeclaredFields();
             Object oi = list.get(k);
@@ -88,7 +89,7 @@ public class DataProcess {
                     fields[j].setAccessible(true);
                 }
                 try {
-                    if (fields[j].getName().equals("dcStartTimeS")) {
+                    if (fields[j].getName().equals("dcStartTime")) {
 
                         Timestamp timestamp = (Timestamp)fields[j].get(oi);
                         DateTime date = new DateTime(timestamp.getTime());
