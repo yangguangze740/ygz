@@ -125,7 +125,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 info.getDcTF(),
                 info.getDcXD(),
                 info.getDcDH(),
-                ConstantFields.QC+info.getDcSource(),
+                ConstantFields.JD+info.getDcSource(),
                 info.getDcSource()+info.getDcEnd()
         };
         try {
