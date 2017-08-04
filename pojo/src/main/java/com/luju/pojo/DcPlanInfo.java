@@ -4,18 +4,100 @@ import java.sql.Timestamp;
 
 public class DcPlanInfo {
 
+    private String jtId;
     private String dcNumber;
     private String dcStartTimeS;
     private String dcEndTimeS;
     private Timestamp dcStartTime;
+    private Timestamp dcMidTime;
     private Timestamp dcEndTime;
     private String dcType;
     private String dcSource;
+    private String dcEnd;
+    private String dcDestination;
     private int dcDj;
     private String dcGJHID;
     private String dcZGBZ;
     private int dcCS;
     private String dcJSL;
+    private String dcTFX;
+    private String dcTF;
+    private String dcXD;
+    private String dcDH;
+
+    public String getDcEnd() {
+        return dcEnd;
+    }
+
+    public void setDcEnd(String dcEnd) {
+        this.dcEnd = dcEnd;
+    }
+
+    public String getJtId() {
+        return jtId;
+    }
+
+    public void setJtId(String jtId) {
+        this.jtId = jtId;
+    }
+
+    public Timestamp getDcMidTime() {
+        return dcMidTime;
+    }
+
+    public void setDcMidTime(Timestamp dcMidTime) {
+        this.dcMidTime = dcMidTime;
+    }
+
+    public String getDcDestination() {
+        return dcDestination;
+    }
+
+    public void setDcDestination(String dcDestination) {
+        this.dcDestination = dcDestination;
+    }
+
+    public String getDcTF() {
+        return dcTF;
+    }
+
+    public void setDcTF(String dcTF) {
+        this.dcTF = dcTF;
+    }
+
+    public String getDcXD() {
+        return dcXD;
+    }
+
+    public void setDcXD(String dcXD) {
+        this.dcXD = dcXD;
+    }
+
+    public String getDcDH() {
+        return dcDH;
+    }
+
+    public void setDcDH(String dcDH) {
+        this.dcDH = dcDH;
+    }
+
+    public String getDcPath() {
+        return dcPath;
+    }
+
+    public void setDcPath(String dcPath) {
+        this.dcPath = dcPath;
+    }
+
+    private String dcPath;
+
+    public String getDcTFX() {
+        return dcTFX;
+    }
+
+    public void setDcTFX(String dcTFX) {
+        this.dcTFX = dcTFX;
+    }
 
     public String getDcNumber() {
         return dcNumber;

@@ -24,8 +24,9 @@ public class ConstantFields {
     /* 接车推演时间*/
     public static long JC_TIME = 480000;
 
-    /* 调车推演时间*/
-    public static long DC_TIME = 600000;
+    /* 解体推演时间*/
+    public static long JT1_TIME = 600000;
+    public static long JT2_TIME = 960000;
 
     /* 本务机推演时间*/
     public static long BWJ1_TIME = 240000;
@@ -34,6 +35,8 @@ public class ConstantFields {
     /* 作业类别*/
     public static final String TYPE_JC = "接车";
     public static final String TYPE_BWJ = "本务机";
+    public static final String TYPE_QCX = "牵出线";
+    public static final String TYPE_JDX = "机待线";
 
     /* 作业类别*/
     public static final String BWJDS = "南入库（立折）";
@@ -55,6 +58,8 @@ public class ConstantFields {
     public static final String J = "J";
     public static final String N = "N";
     public static final String S = "S";
+    public static final String QC = "QC";
+    public static final String JD = "JD";
 
 
     /**

@@ -9,21 +9,36 @@ import java.util.Calendar;
 public class TestString {
     public static void main(String[] args) {
 
-        String time = "14:00";
+        TestString testString = new TestString();
 
-        Timestamp ts = new Timestamp(Calendar.getInstance().getTime().getTime());
-        Timestamp ts1;
-        System.out.println(ts);
+        System.out.println(testString.test());
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        StringBuffer buffer = new StringBuffer(sdf.format(ts));
-        buffer.append(" "+time+":00");
-        System.out.println("buffer: "+buffer);
-        String t = buffer.toString();
+    }
 
-        ts1 = Timestamp.valueOf(t);
-        System.out.println(ts1);
+    public int test () {
+        for (int k = 0;k<10; k++) {
+            System.out.println("k");
+            return k;
+        }
+        return 0;
+    }
+
+//        String time = "14:00";
+//
+//        Timestamp ts = new Timestamp(Calendar.getInstance().getTime().getTime());
+//        Timestamp ts1;
+//        System.out.println(ts);
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//
+//        StringBuffer buffer = new StringBuffer(sdf.format(ts));
+//        buffer.append(" "+time+":00");
+//        System.out.println("buffer: "+buffer);
+//        String t = buffer.toString();
+//
+//        ts1 = Timestamp.valueOf(t);
+//        System.out.println(ts1);
 
 //        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
 //
@@ -95,5 +110,5 @@ public class TestString {
 //
 //        String s1 = "02";
 //        System.out.println(Integer.parseInt(s1));
-    }
+
 }
