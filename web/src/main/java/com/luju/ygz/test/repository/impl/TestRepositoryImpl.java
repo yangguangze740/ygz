@@ -136,7 +136,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectBwjData() {
-        String sql = "SELECT jcNumber,jcType,jcEndTime,jcDestination FROM ygz_show.jc_plan";
+        String sql = "SELECT jcNumber,jcType,jcEndTime,jcDestination FROM jc_plan";
         Object[] args = {};
 
         try {
