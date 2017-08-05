@@ -15,13 +15,10 @@ public interface TestServiceI {
     public void selectPlanData4HCJSL();
 
     /* select all processed data from jc_plan */
-    public List<JcPlanInfo> selectPlanAll();
+    public List<JcPlanInfo> selectPlan4XD();
 
     /* select path to determine the conflict */
     public List<JcPlanInfo> selectPath();
-
-    /* data insert from ora to mysql*/
-    public boolean insertDataToMysql(JcPlanInfo info);
 
     /* 处理本务机数据 */
     public void selectBwjData();

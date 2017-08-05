@@ -54,7 +54,7 @@ public class TestController {
     public ModelAndView allJcData(JcPlanInfo info) {
         ModelAndView mav = new ModelAndView("/luju/jcPlan");
 
-        List<JcPlanInfo> list = service.selectPlanAll();
+        List<JcPlanInfo> list = service.selectPlan4XD();
         List<JcPlanInfo> path = service.selectPath();
         mav.addObject("list",list);
 
@@ -62,7 +62,7 @@ public class TestController {
     }
 
     @RequestMapping("/bwj")
-    public String bwjtest(JcPlanInfo info){
+    public String bwjtest(){
         service.selectBwjData();
         return "bwj";
     }

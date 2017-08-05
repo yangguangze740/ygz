@@ -24,7 +24,7 @@ public interface TestRepositoryI {
     public List<JcPlanInfo> selectJcPlan4CC();
 
     /* select all processed data */
-    public List<JcPlanInfo> selectJcPlanALL();
+    public List<JcPlanInfo> selectJcPlan4XD();
 
     /* select path data to determine the conflict */
     public List<JcPlanInfo> selectJcPath();
@@ -54,4 +54,6 @@ public interface TestRepositoryI {
     public boolean insertToBwjPlan4N(JcPlanInfo info);
 
     public boolean insertToBwjPlan4S(JcPlanInfo info);
+
+    public int deletePlanCopy();
 }

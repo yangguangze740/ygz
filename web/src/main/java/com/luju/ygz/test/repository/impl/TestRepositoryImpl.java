@@ -107,8 +107,8 @@ public class TestRepositoryImpl implements TestRepositoryI {
     }
 
     @Override
-    public List<JcPlanInfo> selectJcPlanALL() {
-        String sql = "SELECT P.jcNumber, jcType, jcStartTime, jcEndTime, jcSource, jcDestination, jcXD, jcDH, I.jcPath,  group_concat(jcDCH) H, group_concat(jcImportant) T, group_concat(jcJSL) J FROM ygz_show.jc_plan P left join (select jcPath, jcDCH FROM ygz_show.jc_path_info) I on P.jcPath = CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci left join (select distinct jcNumber, jcJSL, jcImportant FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber WHERE jcType = '接车' group by jcNumber,jcPath,jcDestination,jcType order by jcStartTime";
+    public List<JcPlanInfo> selectJcPlan4XD() {
+        String sql = "SELECT P.jcNumber, jcType, jcStartTime, jcEndTime, jcSource, jcDestination, jcXD, jcDH, I.jcPath,  group_concat(jcDCH) H, group_concat(jcImportant) T, group_concat(jcJSL) J FROM ygz_show.jc_plan P left join (select jcPath, jcDCH FROM ygz_show.jc_path_info) I on P.jcPath = CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci left join (select distinct jcNumber, jcJSL, jcImportant FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber WHERE jcType = '接车' AND jcXD = 'XD' group by jcNumber,jcPath,jcDestination,jcType order by jcStartTime";
         Object[] args = {};
 
         try {
@@ -153,7 +153,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectBwPlan() {
-        String sql = "";
+        String sql = "SELECT bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjDestination,bwjPath,GROUP_CONCAT(jcDCH) D FROM bwj_plan P LEFT JOIN jc_path_info I ON P.bwjPath = I.jcPath GROUP BY bwjNumber , bwjType , bwjStartTime , bwjEndTime , bwjDestination , bwjPath ORDER BY bwjStartTime";
         Object[] args = {};
 
         try{
@@ -334,6 +334,19 @@ public class TestRepositoryImpl implements TestRepositoryI {
         }
     }
 
+    @Override
+    public int deletePlanCopy() {
+        String sql = "TRUNCATE TABLE jc_plan_copy";
+
+        try {
+            return mysqlJdbcTemplate.update(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("delete jc error");
+            return 0;
+        }
+    }
+
     private class JcPlanCopyRowMapper implements RowMapper<JcPlanInfo> {
         public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             JcPlanInfo userInfo = new JcPlanInfo();
@@ -439,7 +452,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
             int dh = Integer.parseInt(resultSet.getString("jcDH"));
             String xd = resultSet.getString("jcXD");
 
-            if (jsl!= null || xd == ConstantFields.XD) {
+            if (jsl!= null && xd == ConstantFields.XD) {
                 if (jsl.indexOf(ConstantFields.CC)!=-1) {
                     if(dh !=4 || dh !=5) {
                         userInfo.setColor(2);
