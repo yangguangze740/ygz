@@ -36,4 +36,9 @@ public class DcServiceImpl implements DcServiceI {
             dcRepository.insertJtPlan4JD(list.get(k));
         }
     }
+
+    @Override
+    public List<DcPlanInfo> selectJtData() {
+        return dcRepository.selectJtPlan4XD();
+    }
 }

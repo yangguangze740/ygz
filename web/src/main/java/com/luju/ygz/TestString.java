@@ -9,19 +9,25 @@ import java.util.Calendar;
 public class TestString {
     public static void main(String[] args) {
 
-        TestString testString = new TestString();
+        int a = -1;
+        int b = -2;
 
-        System.out.println(testString.test());
+        int c = a + b;
+        System.out.println(c);
 
-
-    }
-
-    public int test () {
-        for (int k = 0;k<10; k++) {
-            System.out.println("k");
-            return k;
-        }
-        return 0;
+//        TestString testString = new TestString();
+//
+//        System.out.println(testString.test());
+//
+//
+//    }
+//
+//    public int test () {
+//        for (int k = 0;k<10; k++) {
+//            System.out.println("k");
+//            return k;
+//        }
+//        return 0;
     }
 
 //        String time = "14:00";

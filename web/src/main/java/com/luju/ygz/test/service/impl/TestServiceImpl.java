@@ -22,43 +22,22 @@ public class TestServiceImpl implements TestServiceI {
 
     @Override
     public void selectPlanDataFromOra() {
+        testRepository.deletePlanCopy();
         List<JcPlanInfo> list = testRepository.selectJcPlanFromOra();
         DataProcess timeProcess = new DataProcess();
         list = timeProcess.jcTimeList(list);
 
         for (int k = 0; k< list.size(); k++){
-            list.get(k).setJcType(ConstantFields.TYPE_JC);
             testRepository.insertToPlanCopy(list.get(k));
         }
     }
 
     @Override
     public void selectPlanData4One() {
-        String XD = "";
-        String DH = "";
         List<JcPlanInfo> list = testRepository.selectJcPlan4One();
-
-        for(int k=0;k<list.size();k++){
-            Field[] fields = list.get(k).getClass().getDeclaredFields();
-            Object oi = list.get(k);
-            for (int j = 1; j < fields.length; j++) {
-                if(!fields[j].isAccessible()){
-                    fields[j].setAccessible(true);
-                }
-                try {
-                    if(fields[j].getName().equals("TRACK_NUM")){
-                        String des = fields[j].get(oi).toString();
-                        XD = des.substring(0,2);
-                        DH = des.substring(2,4);
-                    }
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-            list.get(k).setJcXD(XD);
-            list.get(k).setJcDH(DH);
+        DataProcess dataProcess = new DataProcess();
+        list = dataProcess.jcXDList(list);
+        for (int k = 0; k < list.size();k++){
             testRepository.insertToPlan4One(list.get(k));
         }
     }
@@ -87,8 +66,8 @@ public class TestServiceImpl implements TestServiceI {
     }
 
     @Override
-    public List<JcPlanInfo> selectPlanAll() {
-        return testRepository.selectJcPlanALL();
+    public List<JcPlanInfo> selectPlan4XD() {
+        return testRepository.selectJcPlan4XD();
     }
 
     @Override
@@ -97,45 +76,11 @@ public class TestServiceImpl implements TestServiceI {
     }
 
     @Override
-    public boolean insertDataToMysql(JcPlanInfo info) {
-        return testRepository.insertToPlanCopy(info);
-    }
-
-    @Override
     public void selectBwjData() {
         List<JcPlanInfo> list = testRepository.selectBwjData();
-        Timestamp ts = null;
-        Timestamp ts1 = null;
-        for(int k=0;k<list.size();k++){
-            Field[] fields = list.get(k).getClass().getDeclaredFields();
-            Object oi = list.get(k);
-            for (int j = 1; j < fields.length; j++) {
-                if(!fields[j].isAccessible()){
-                    fields[j].setAccessible(true);
-                }
-                try {
-                    if(fields[j].getName().equals("TIME")){
-                        fields[j].get(oi).toString();
-                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
-                        DateTime date = new DateTime(timestamp.getTime());
-                        long time = date.getMillis()+ConstantFields.BWJ1_TIME;
-                        long time1 = date.getMillis()+ConstantFields.BWJ2_TIME;
-//                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss:S");
-//                        simpleDateFormat.format(timestamp);
-                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
-                        ts = Timestamp.valueOf(simpleDateFormat1.format(time));
-                        ts1 = Timestamp.valueOf(simpleDateFormat1.format(time1));
-                    }
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-            list.get(k).setJcStartTime(ts);
-            list.get(k).setTIME(ts);
-            list.get(k).setJcType(ConstantFields.TYPE_BWJ);
-
+        DataProcess timeProcess = new DataProcess();
+        list = timeProcess.bwjTimeList(list);
+        for (int k = 0; k < list.size(); k++){
             testRepository.insertToBwjPlan4S(list.get(k));
             testRepository.insertToBwjPlan4N(list.get(k));
         }

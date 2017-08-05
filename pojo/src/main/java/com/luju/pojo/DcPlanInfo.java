@@ -24,6 +24,15 @@ public class DcPlanInfo {
     private String dcTF;
     private String dcXD;
     private String dcDH;
+    private int dcSWH;
+
+    public int getDcSWH() {
+        return dcSWH;
+    }
+
+    public void setDcSWH(int dcSWH) {
+        this.dcSWH = dcSWH;
+    }
 
     public String getDcEnd() {
         return dcEnd;

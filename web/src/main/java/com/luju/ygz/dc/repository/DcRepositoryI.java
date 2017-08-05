@@ -12,6 +12,9 @@ public interface DcRepositoryI {
     /* data select from ora to mysql*/
     public List<DcPlanInfo> selectJtPlan();
 
+    /* select jt data*/
+    public List<DcPlanInfo> selectJtPlan4XD();
+
     /* data insert from ora to mysql*/
     public boolean insertToPlanCopy(DcPlanInfo info);
 
