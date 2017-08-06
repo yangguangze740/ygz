@@ -122,11 +122,14 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectJcPath() {
-        String sql = "";
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjDestination,bwjPath, GROUP_CONCAT(jcDCH)");
+        sql.append(" D FROM bwj_plan P LEFT JOIN jc_path_info I ON P.bwjPath = I.jcPath GROUP BY bwjNumber , bwjType , bwjStartTime , bwjEndTime , bwjDestination , bwjPath ORDER BY bwjStartTime");
+
         Object[] args = {};
 
         try {
-            return mysqlJdbcTemplate.query(sql, args, new JcPlanPathRowMapper());
+            return mysqlJdbcTemplate.query(sql.toString(), args, new JcPlanPathRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("error");
@@ -150,7 +153,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectBwPlan() {
-        String sql = "";
+        String sql = "SELECT bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjDestination,bwjPath,GROUP_CONCAT(jcDCH) D FROM bwj_plan P LEFT JOIN jc_path_info I ON P.bwjPath = I.jcPath GROUP BY bwjNumber , bwjType , bwjStartTime , bwjEndTime , bwjDestination , bwjPath ORDER BY bwjStartTime";
         Object[] args = {};
 
         try{

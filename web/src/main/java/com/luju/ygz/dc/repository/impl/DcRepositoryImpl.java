@@ -25,7 +25,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcPlanFromOra() {
-        String sql = "SELECT CC, JHKSSJ, JHJSSJ, ZYXM, ZYGD,TFX, DJ, M.GJHID, SWH, ZGBZ, CS, JSL FROM CQZ_GJHML M LEFT JOIN CQZ_GJHZW Z ON M.GJHID = Z.GJHID WHERE M.CC IS NOT NULL";
+        String sql = "SELECT CC, JHKSSJ, JHJSSJ, ZYXM, ZYGD,TFX, DJ, M.GJHID, SWH, ZGBZ, CS, JSL FROM CQZ_GJHML M LEFT JOIN CQZ_GJHZW Z ON M.GJHID = Z.GJHID";
         Object[] args = {};
 
         try {
@@ -52,12 +52,40 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> selectJtPlan4XD() {
-        String sql = "SELECT dcNumber, dcStartTime, dcMidTime, dcType, dcSource, dcDestination, dcDj,dcXD FROM dc_jt_plan WHERE dcSource = '牵出线' AND dcXD = 'XD' order by dcStartTime;";
+    public List<DcPlanInfo> selectJtPlan4XD1() {
+        String sql = "SELECT dcNumber, dcStartTime, dcMidTime, dcType, dcDestination, dcDj, dcXD FROM dc_jt_plan WHERE dcXD = 'XD' group by dcNumber, dcStartTime, dcMidTime, dcType, dcDestination, dcDj, dcXD order by dcStartTime";
         Object[] args = {};
 
         try {
-            return mysqlJdbcTemplate.query(sql, args, new DcJtDataRowMapper());
+            return mysqlJdbcTemplate.query(sql, args, new DcJtData1RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJtPlan4XD2() {
+        String sql = "SELECT dcNumber, dcMidTime, dcEndTime, dcType, dcDestination,dcEnd, dcDj, dcXD FROM dc_jt_plan WHERE dcXD = 'XD' group by dcNumber, dcMidTime, dcEndTime, dcType, dcDestination, dcEnd, dcDj, dcXD order by dcMidTime";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcJtData2RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectTcPlan() {
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj,dcGJHID,dcSWH,dcZGBZ,dcCS FROM dc_plan_copy where dcType='挑车' order by dcSource,dcSWH";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcTcPlanRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select error");
@@ -153,6 +181,64 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public boolean insertTcPlan4XT1(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_tc_plan (tcId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDestination, dcDj, dcTFX, dcTF, dcXD, dcDH, dcSWH, dcCS, dcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getDcNumber(),
+                info.getDcStartTime(),
+                info.getDcEndTime(),
+                info.getDcType(),
+                ConstantFields.XT1,//北
+                info.getDcDestination(),
+                info.getDcDj(),
+                info.getDcTFX(),
+                info.getDcTF(),
+                info.getDcXD(),
+                info.getDcDH(),
+                info.getDcSWH(),
+                info.getDcCS(),
+                ConstantFields.XT1+info.getDcDestination()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert tc4xt1 error");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertTcPlan4XT2(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_tc_plan (tcId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDestination, dcDj, dcTFX, dcTF, dcXD, dcDH, dcSWH, dcCS, dcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getDcNumber(),
+                info.getDcStartTime(),
+                info.getDcEndTime(),
+                info.getDcType(),
+                ConstantFields.XT2,//南
+                info.getDcDestination(),
+                info.getDcDj(),
+                info.getDcTFX(),
+                info.getDcTF(),
+                info.getDcXD(),
+                info.getDcDH(),
+                info.getDcSWH(),
+                info.getDcCS(),
+                ConstantFields.XT2+info.getDcDestination()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert tc4xt2 error");
+            return false;
+        }
+    }
+
+    @Override
     public int deletePlanCopy() {
         String sql = "TRUNCATE TABLE dc_plan_copy";
 
@@ -202,7 +288,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
-    private class DcJtDataRowMapper implements RowMapper<DcPlanInfo> {
+    private class DcJtData1RowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
 
@@ -210,10 +296,46 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
             userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
-            userInfo.setDcSource(resultSet.getString("dcSource"));
             userInfo.setDcDestination(resultSet.getString("dcDestination"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
             userInfo.setDcXD(resultSet.getString("dcXD"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcJtData2RowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcEnd(resultSet.getString("dcEnd"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcTcPlanRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcSource"));
+            userInfo.setDcTFX(resultSet.getString("dcTFX"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcGJHID(resultSet.getString("dcGJHID"));
+            userInfo.setDcSWH(resultSet.getInt("dcSWH"));
+            userInfo.setDcZGBZ(resultSet.getString("dcZGBZ"));
+            userInfo.setDcCS(resultSet.getInt("dcCS"));
 
             return userInfo;
         }

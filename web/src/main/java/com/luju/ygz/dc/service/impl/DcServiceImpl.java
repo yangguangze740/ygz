@@ -38,7 +38,22 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public List<DcPlanInfo> selectJtData() {
-        return dcRepository.selectJtPlan4XD();
+    public void selectTcPlanData(DataProcess dataProcess) {
+        List<DcPlanInfo> list = dcRepository.selectTcPlan();
+        list = dataProcess.tcTimeList(list);
+        for (int k =0; k < list.size(); k++) {
+            dcRepository.insertTcPlan4XT1(list.get(k));
+            dcRepository.insertTcPlan4XT2(list.get(k));
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJtData1() {
+        return dcRepository.selectJtPlan4XD1();
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJtData2() {
+        return dcRepository.selectJtPlan4XD2();
     }
 }

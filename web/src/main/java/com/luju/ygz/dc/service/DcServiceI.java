@@ -10,9 +10,15 @@ public interface DcServiceI {
     /* data select from ora to mysql*/
     public void selectPlanDataFromOra(DataProcess dataProcess);
 
-    /* data select from ora to mysql*/
+    /* select jt data and process*/
     public void selectJtPlanData(DataProcess dataProcess);
 
+    /* select tc data and process*/
+    public void selectTcPlanData(DataProcess dataProcess);
+
     /* data select from ora to mysql*/
-    public List<DcPlanInfo> selectJtData();
+    public List<DcPlanInfo> selectJtData1();
+
+    /* data select from ora to mysql*/
+    public List<DcPlanInfo> selectJtData2();
 }
