@@ -16,6 +16,9 @@ public interface DcServiceI {
     /* select tc data and process*/
     public void selectTcPlanData(DataProcess dataProcess);
 
+    /* select zc data and process*/
+    public void selectZcPlanData(DataProcess dataProcess);
+
     /* data select from ora to mysql*/
     public List<DcPlanInfo> selectJtData1();
 

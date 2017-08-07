@@ -27,9 +27,9 @@ public class DcController {
 
     @RequestMapping("/world")
     public String selectJtData() {
-       // service.selectJtPlanData(dataProcess);
-        service.selectTcPlanData(dataProcess);
-        //list = service.selectJtData();
+//        service.selectJtPlanData(dataProcess);
+//        service.selectTcPlanData(dataProcess);
+        service.selectZcPlanData(dataProcess);
         return "world";
     }
 }
