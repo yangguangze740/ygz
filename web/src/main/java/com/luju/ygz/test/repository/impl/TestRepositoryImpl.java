@@ -193,9 +193,10 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public boolean insertToPlan4One(JcPlanInfo info) {
-        String sql = "INSERT INTO jc_plan (jcNumber, jcSource, jcEndTime, jcStartTime, jcDestination, jcType, jcSumHc, jcXD, jcDH, jcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO jc_plan (jcId, jcNumber, jcSource, jcEndTime, jcStartTime, jcDestination, jcType, jcSumHc, jcXD, jcDH, jcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
 
+                uuid.uuidPrimaryKey(),
                 info.getTRAIN_NUM(),
                 info.getNODE_FOUR_WAY(),
                 info.getTIME(),
