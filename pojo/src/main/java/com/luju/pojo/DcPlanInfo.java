@@ -10,6 +10,7 @@ public class DcPlanInfo {
     private String dcEndTimeS;
     private Timestamp dcStartTime;
     private Timestamp dcMidTime;
+    private Timestamp dcMidTime1;
     private Timestamp dcEndTime;
     private String dcType;
     private String dcSource;
@@ -25,6 +26,14 @@ public class DcPlanInfo {
     private String dcXD;
     private String dcDH;
     private int dcSWH;
+
+    public Timestamp getDcMidTime1() {
+        return dcMidTime1;
+    }
+
+    public void setDcMidTime1(Timestamp dcMidTime1) {
+        this.dcMidTime1 = dcMidTime1;
+    }
 
     public int getDcSWH() {
         return dcSWH;

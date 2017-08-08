@@ -80,6 +80,20 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public List<DcPlanInfo> selectZmPlan() {
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '摘帽' group by dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj order by dcStartTime";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcZmPlanRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zm error");
+            return null;
+        }
+    }
+
+    @Override
     public List<DcPlanInfo> selectTcPlan() {
         String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj,dcGJHID,dcSWH,dcZGBZ,dcCS FROM dc_plan_copy where dcType='挑车' order by dcSource,dcSWH";
         Object[] args = {};
@@ -190,6 +204,68 @@ public class DcRepositoryImpl implements DcRepositoryI {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("insert JD error");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertZmPlan4XT1(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_zm_plan (zmId, dcNumber, dcStartTime, dcMidTime, dcMidTime1, dcEndTime, dcType, dcSource, dcDestination, dcEnd, dcDj, dcTFX, dcTF, dcXD, dcDH, dcPath1, dcPath2) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getDcNumber(),
+                info.getDcStartTime(),
+                info.getDcMidTime(),
+                info.getDcMidTime1(),
+                info.getDcEndTime(),
+                info.getDcType(),
+                ConstantFields.XT1,
+                info.getDcSource(),
+                info.getDcEnd(),
+                info.getDcDj(),
+                info.getDcTFX(),
+                info.getDcTF(),
+                info.getDcXD(),
+                info.getDcDH(),
+                ConstantFields.ZM+ConstantFields.XT1+info.getDcSource(),
+                ConstantFields.ZM+info.getDcSource()+info.getDcEnd()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert ZM XT1 error");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean insertZmPlan4XT2(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_zm_plan (zmId, dcNumber, dcStartTime, dcMidTime, dcMidTime1, dcEndTime, dcType, dcSource, dcDestination, dcEnd, dcDj, dcTFX, dcTF, dcXD, dcDH, dcPath1, dcPath2) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getDcNumber(),
+                info.getDcStartTime(),
+                info.getDcMidTime(),
+                info.getDcMidTime1(),
+                info.getDcEndTime(),
+                info.getDcType(),
+                ConstantFields.XT2,
+                info.getDcSource(),
+                info.getDcEnd(),
+                info.getDcDj(),
+                info.getDcTFX(),
+                info.getDcTF(),
+                info.getDcXD(),
+                info.getDcDH(),
+                ConstantFields.ZM+ConstantFields.XT2+info.getDcSource(),
+                ConstantFields.ZM+info.getDcSource()+info.getDcEnd()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert ZM XT2 error");
             return false;
         }
     }
@@ -357,6 +433,22 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcEnd(resultSet.getString("dcEnd"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
             userInfo.setDcXD(resultSet.getString("dcXD"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcZmPlanRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcSource(resultSet.getString("dcSource"));
+            userInfo.setDcTFX(resultSet.getString("dcTFX"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
 
             return userInfo;
         }

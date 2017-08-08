@@ -18,6 +18,20 @@ public class TestController {
     @Autowired
     private TestServiceI service;
 
+    @RequestMapping("/hello")
+    public String test(JcPlanInfo info) {
+        service.selectPlanDataFromOra();
+        return "hello";
+    }
+
+    @RequestMapping("/world")
+    public String dataFromCopyToOne(JcPlanInfo info) {
+        service.selectPlanData4One();
+        service.selectPlanData4HCJSL();
+        service.selectBwjData();
+        return "world";
+    }
+
     @RequestMapping("/route")
     public String routeLogin() {
         return "luju/index";
@@ -37,19 +51,6 @@ public class TestController {
         }
     }
 
-    @RequestMapping("/hello")
-    public String test(JcPlanInfo info) {
-        service.selectPlanDataFromOra();
-        return "hello";
-    }
-
-    @RequestMapping("/world")
-    public String dataFromCopyToOne(JcPlanInfo info) {
-        service.selectPlanData4One();
-        service.selectPlanData4HCJSL();
-        return "world";
-    }
-
     @RequestMapping("/jcPlan")
     public ModelAndView allJcData(JcPlanInfo info) {
         ModelAndView mav = new ModelAndView("/luju/jcPlan");
@@ -59,12 +60,6 @@ public class TestController {
         mav.addObject("list",list);
 
         return mav;
-    }
-
-    @RequestMapping("/bwj")
-    public String bwjtest(){
-        service.selectBwjData();
-        return "bwj";
     }
 
     @RequestMapping("/bwPlan")

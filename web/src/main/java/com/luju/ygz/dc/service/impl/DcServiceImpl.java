@@ -38,6 +38,16 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
+    public void selectZmPlanData(DataProcess dataProcess) {
+        List<DcPlanInfo> list = dcRepository.selectZmPlan();
+        list = dataProcess.zmTimeList(list);
+        for (int k =0; k < list.size(); k++) {
+            dcRepository.insertZmPlan4XT1(list.get(k));
+            dcRepository.insertZmPlan4XT2(list.get(k));
+        }
+    }
+
+    @Override
     public void selectTcPlanData(DataProcess dataProcess) {
         List<DcPlanInfo> list = dcRepository.selectTcPlan();
         list = dataProcess.tcTimeList(list);

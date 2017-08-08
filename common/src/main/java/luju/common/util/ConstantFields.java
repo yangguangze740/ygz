@@ -28,6 +28,13 @@ public class ConstantFields {
     public static long JT1_TIME = 600000;
     public static long JT2_TIME = 960000;
 
+    /* 解体推演时间*/
+    public static long ZM1_TIME = 600000;
+    public static long ZM2_TIME = 1200000;
+    public static long ZM3_TIME = 600000;
+    public static long ZM4_TIME = 900000;
+    public static long ZM5_TIME = 1500000;
+
     /* 本务机推演时间*/
     public static long BWJ1_TIME = 240000;
     public static long BWJ2_TIME = 540000;
@@ -71,6 +78,7 @@ public class ConstantFields {
     public static final String XT1 = "XT1";//南
     public static final String XT2 = "XT2";//北
     public static final String ZC = "ZC";
+    public static final String ZM = "ZM";
 
 
     /**
