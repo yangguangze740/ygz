@@ -29,10 +29,14 @@ public interface TestRepositoryI {
     /* select path data to determine the conflict */
     public List<JcPlanInfo> selectJcPath();
 
-    /*获取本务机数据*/
-    public List<JcPlanInfo> selectBwPlan();
+    /* process bwj data*/
+    public List<JcPlanInfo> selectBwjPlan();
 
+    /* select bwj data*/
     public List<JcPlanInfo> selectBwjData();
+
+    /* select bwj data path*/
+    public List<JcPlanInfo> selectBwjDataInPath();
 
     /* data insert from ora to mysql*/
     public boolean insertToPlanCopy(JcPlanInfo info);

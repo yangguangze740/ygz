@@ -25,4 +25,6 @@ public interface TestServiceI {
 
     /* 获取本务机车辆*/
     public List<JcPlanInfo> selectBwPlanAll();
+
+    public List<JcPlanInfo> selectBwPlanInPath();
 }

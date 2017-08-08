@@ -138,12 +138,12 @@ public class TestRepositoryImpl implements TestRepositoryI {
     }
 
     @Override
-    public List<JcPlanInfo> selectBwjData() {
+    public List<JcPlanInfo> selectBwjPlan() {
         String sql = "SELECT jcNumber,jcType,jcEndTime,jcDestination FROM jc_plan";
         Object[] args = {};
 
         try {
-            return mysqlJdbcTemplate.query(sql, args, new BwPlanCopyRowMapper());
+            return mysqlJdbcTemplate.query(sql, args, new BwjPlanCopyRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("error");
@@ -152,12 +152,27 @@ public class TestRepositoryImpl implements TestRepositoryI {
     }
 
     @Override
-    public List<JcPlanInfo> selectBwPlan() {
-        String sql = "SELECT bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjDestination,bwjPath,GROUP_CONCAT(jcDCH) D FROM bwj_plan P LEFT JOIN jc_path_info I ON P.bwjPath = I.jcPath GROUP BY bwjNumber , bwjType , bwjStartTime , bwjEndTime , bwjDestination , bwjPath ORDER BY bwjStartTime";
+    public List<JcPlanInfo> selectBwjData() {
+        String sql = "SELECT bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjSource FROM bwj_plan group by bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjSource order by bwjStartTime";
         Object[] args = {};
 
         try{
             return mysqlJdbcTemplate.query(sql,args,new BwPlanAllRowMapper());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<JcPlanInfo> selectBwjDataInPath() {
+        String sql = "SELECT bwjNumber,bwjDestination,bwjPath FROM bwj_plan where bwjNumber = ? and bwjDestination = ?";
+        Object[] args = {};
+
+        try{
+            return mysqlJdbcTemplate.query(sql,args,new BwjPlanInPathRowMapper());
         }
         catch (Exception e){
             e.printStackTrace();
@@ -424,14 +439,6 @@ public class TestRepositoryImpl implements TestRepositoryI {
         }
     }
 
-    private class BwPlanAllRowMapper implements RowMapper<JcPlanInfo>{
-        public JcPlanInfo mapRow(ResultSet resultSet, int i)throws SQLException{
-            JcPlanInfo userInfo = new JcPlanInfo();
-
-            return userInfo;
-        }
-    }
-
     private class JcPlanALLRowMapper implements RowMapper<JcPlanInfo> {
         public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             JcPlanInfo userInfo = new JcPlanInfo();
@@ -489,7 +496,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
         }
     }
 
-    private class BwPlanCopyRowMapper implements RowMapper<JcPlanInfo>{
+    private class BwjPlanCopyRowMapper implements RowMapper<JcPlanInfo>{
         public JcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
             JcPlanInfo userInfo = new JcPlanInfo();
 
@@ -497,6 +504,33 @@ public class TestRepositoryImpl implements TestRepositoryI {
             userInfo.setJcType(resultSet.getString("jcType"));
             userInfo.setTIME(resultSet.getTimestamp("jcEndTime"));
             userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
+
+            return userInfo;
+        }
+    }
+
+    private class BwPlanAllRowMapper implements RowMapper<JcPlanInfo>{
+        public JcPlanInfo mapRow(ResultSet resultSet, int i)throws SQLException{
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("bwjNumber"));
+            userInfo.setJcType(resultSet.getString("bwjType"));
+            userInfo.setJcStartTime(resultSet.getTimestamp("bwjStartTime"));
+            userInfo.setTIME(resultSet.getTimestamp("bwjEndTime"));
+            userInfo.setNODE_FOUR_WAY(resultSet.getString("bwjSource"));
+
+            return userInfo;
+        }
+    }
+
+    private class BwjPlanInPathRowMapper implements RowMapper<JcPlanInfo>{
+        public JcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
+            JcPlanInfo userInfo = new JcPlanInfo();
+
+            userInfo.setTRAIN_NUM(resultSet.getString("bwjNumber"));
+            userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
+            userInfo.setJcPath(resultSet.getString("bwjPath"));
+
             return userInfo;
         }
     }

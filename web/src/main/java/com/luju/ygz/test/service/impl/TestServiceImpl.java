@@ -77,7 +77,7 @@ public class TestServiceImpl implements TestServiceI {
 
     @Override
     public void selectBwjData() {
-        List<JcPlanInfo> list = testRepository.selectBwjData();
+        List<JcPlanInfo> list = testRepository.selectBwjPlan();
         DataProcess timeProcess = new DataProcess();
         list = timeProcess.bwjTimeList(list);
         for (int k = 0; k < list.size(); k++){
@@ -88,6 +88,11 @@ public class TestServiceImpl implements TestServiceI {
 
     @Override
     public List<JcPlanInfo> selectBwPlanAll() {
-        return testRepository.selectBwPlan();
+        return testRepository.selectBwjData();
+    }
+
+    @Override
+    public List<JcPlanInfo> selectBwPlanInPath() {
+        return testRepository.selectBwjDataInPath();
     }
 }

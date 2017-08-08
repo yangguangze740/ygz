@@ -68,11 +68,36 @@ public class DcServiceImpl implements DcServiceI {
 
     @Override
     public List<DcPlanInfo> selectJtData1() {
-        return dcRepository.selectJtPlan4XD1();
+        return dcRepository.selectJtData4XD1();
     }
 
     @Override
     public List<DcPlanInfo> selectJtData2() {
-        return dcRepository.selectJtPlan4XD2();
+        return dcRepository.selectJtData4XD2();
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJtDataInPath1() {
+        return dcRepository.selectJtDataInPath1();
+    }
+
+    @Override
+    public List<DcPlanInfo> selectZmData1() {
+        return dcRepository.selectZmData4XD1();
+    }
+
+    @Override
+    public List<DcPlanInfo> selectZmData2() {
+        return dcRepository.selectZmData4XD2();
+    }
+
+    @Override
+    public List<DcPlanInfo> selectZmDataInPath1() {
+        return dcRepository.selectZmDataInPath1();
+    }
+
+    @Override
+    public List<DcPlanInfo> selectZcData() {
+        return dcRepository.selectZcData();
     }
 }

@@ -26,6 +26,24 @@ public class DcPlanInfo {
     private String dcXD;
     private String dcDH;
     private int dcSWH;
+    private String dcPath1;
+    private String dcPath2;
+
+    public String getDcPath1() {
+        return dcPath1;
+    }
+
+    public void setDcPath1(String dcPath1) {
+        this.dcPath1 = dcPath1;
+    }
+
+    public String getDcPath2() {
+        return dcPath2;
+    }
+
+    public void setDcPath2(String dcPath2) {
+        this.dcPath2 = dcPath2;
+    }
 
     public Timestamp getDcMidTime1() {
         return dcMidTime1;
@@ -98,16 +116,6 @@ public class DcPlanInfo {
     public void setDcDH(String dcDH) {
         this.dcDH = dcDH;
     }
-
-    public String getDcPath() {
-        return dcPath;
-    }
-
-    public void setDcPath(String dcPath) {
-        this.dcPath = dcPath;
-    }
-
-    private String dcPath;
 
     public String getDcTFX() {
         return dcTFX;

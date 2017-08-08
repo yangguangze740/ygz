@@ -66,9 +66,10 @@ public class TestController {
     public ModelAndView allBwData(JcPlanInfo info){
         ModelAndView mav = new ModelAndView("/luju/bwPlan");
 
-        List<JcPlanInfo> lists = service.selectBwPlanAll();
+        List<JcPlanInfo> list4Bwj = service.selectBwPlanAll();
+        List<JcPlanInfo> list4BwjPath = service.selectBwPlanInPath();
 
-        mav.addObject("lists",lists);
+        mav.addObject("lists",list4Bwj);
         return mav;
 
     }

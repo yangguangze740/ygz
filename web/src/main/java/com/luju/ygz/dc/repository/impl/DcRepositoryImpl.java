@@ -52,34 +52,6 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> selectJtPlan4XD1() {
-        String sql = "SELECT dcNumber, dcStartTime, dcMidTime, dcType, dcDestination, dcDj, dcXD FROM dc_jt_plan WHERE dcXD = 'XD' group by dcNumber, dcStartTime, dcMidTime, dcType, dcDestination, dcDj, dcXD order by dcStartTime";
-        Object[] args = {};
-
-        try {
-            return mysqlJdbcTemplate.query(sql, args, new DcJtData1RowMapper());
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("select error");
-            return null;
-        }
-    }
-
-    @Override
-    public List<DcPlanInfo> selectJtPlan4XD2() {
-        String sql = "SELECT dcNumber, dcMidTime, dcEndTime, dcType, dcDestination,dcEnd, dcDj, dcXD FROM dc_jt_plan WHERE dcXD = 'XD' group by dcNumber, dcMidTime, dcEndTime, dcType, dcDestination, dcEnd, dcDj, dcXD order by dcMidTime";
-        Object[] args = {};
-
-        try {
-            return mysqlJdbcTemplate.query(sql, args, new DcJtData2RowMapper());
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("select error");
-            return null;
-        }
-    }
-
-    @Override
     public List<DcPlanInfo> selectZmPlan() {
         String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '摘帽' group by dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj order by dcStartTime";
         Object[] args = {};
@@ -117,6 +89,104 @@ public class DcRepositoryImpl implements DcRepositoryI {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJtData4XD1() {
+        String sql = "SELECT dcNumber, dcStartTime, dcMidTime, dcType, dcDestination, dcDj, dcXD FROM dc_jt_plan WHERE dcXD = 'XD' group by dcNumber, dcStartTime, dcMidTime, dcType, dcDestination, dcDj, dcXD order by dcStartTime";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcJtData1RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJtData4XD2() {
+        String sql = "SELECT dcNumber, dcMidTime, dcEndTime, dcType, dcDestination,dcEnd, dcDj, dcXD,dcPath2 FROM dc_jt_plan WHERE dcXD = 'XD' group by dcNumber, dcMidTime, dcEndTime, dcType, dcDestination, dcEnd, dcDj, dcXD,dcPath2 order by dcMidTime";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcJtData2RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectZmData4XD1() {
+        String sql = "SELECT dcNumber,dcStartTime,dcMidTime,dcType,dcDestination,dcDj,dcXD FROM dc_zm_plan where dcXD = 'XD' group by dcNumber,dcStartTime,dcMidTime,dcType,dcDestination,dcDj,dcXD";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcZmData1RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zm data1 error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectZmData4XD2() {
+        String sql = "SELECT dcNumber,dcMidTime1,dcEndTime,dcType,dcDestination,dcEnd,dcDj,dcXD,dcPath2 FROM dc_zm_plan where dcXD = 'XD' group by dcNumber,dcMidTime1,dcEndTime,dcType,dcDestination,dcEnd,dcDj,dcXD,dcPath2 order by dcMidTime1";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcZmData2RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zm data2 error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectZcData() {
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj,dcXD,dcPath FROM dc_zc_plan group by dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj,dcXD,dcPath";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcZcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zm data2 error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJtDataInPath1() {
+        String sql = "SELECT dcNumber,dcSource,dcPath1 FROM dc_jt_plan where dcNumber = ? and dcSource = ?;";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcJtDataInPath1RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select jt path1 error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectZmDataInPath1() {
+        String sql = "SELECT dcNumber,dcSource,dcPath1 FROM dc_zm_plan where dcNumber = ? and dcSource = ?";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcZmDataInPath1RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select jt path1 error");
             return null;
         }
     }
@@ -405,39 +475,6 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
-    private class DcJtData1RowMapper implements RowMapper<DcPlanInfo> {
-        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
-            DcPlanInfo userInfo = new DcPlanInfo();
-
-            userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
-            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
-            userInfo.setDcType(resultSet.getString("dcType"));
-            userInfo.setDcDestination(resultSet.getString("dcDestination"));
-            userInfo.setDcDj(resultSet.getInt("dcDj"));
-            userInfo.setDcXD(resultSet.getString("dcXD"));
-
-            return userInfo;
-        }
-    }
-
-    private class DcJtData2RowMapper implements RowMapper<DcPlanInfo> {
-        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
-            DcPlanInfo userInfo = new DcPlanInfo();
-
-            userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
-            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
-            userInfo.setDcType(resultSet.getString("dcType"));
-            userInfo.setDcDestination(resultSet.getString("dcDestination"));
-            userInfo.setDcEnd(resultSet.getString("dcEnd"));
-            userInfo.setDcDj(resultSet.getInt("dcDj"));
-            userInfo.setDcXD(resultSet.getString("dcXD"));
-
-            return userInfo;
-        }
-    }
-
     private class DcZmPlanRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
@@ -489,4 +526,114 @@ public class DcRepositoryImpl implements DcRepositoryI {
             return userInfo;
         }
     }
+
+    private class DcJtData1RowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcJtData2RowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcEnd(resultSet.getString("dcEnd"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+            userInfo.setDcPath2(resultSet.getString("dcPath2"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcZmData1RowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcZmData2RowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcMidTime1(resultSet.getTimestamp("dcMidTime1"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+            userInfo.setDcPath2(resultSet.getString("dcPath2"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcZcDataRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcMidTime1(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcSource(resultSet.getString("dcSource"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+            userInfo.setDcPath1(resultSet.getString("dcPath"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcJtDataInPath1RowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcSource(resultSet.getString("dcSource"));
+            userInfo.setDcPath1(resultSet.getString("dcPath1"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcZmDataInPath1RowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcSource(resultSet.getString("dcSource"));
+            userInfo.setDcPath1(resultSet.getString("dcPath1"));
+
+            return userInfo;
+        }
+    }
+
 }

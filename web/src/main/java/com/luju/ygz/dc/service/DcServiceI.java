@@ -22,9 +22,17 @@ public interface DcServiceI {
     /* select zc data and process*/
     public void selectZcPlanData(DataProcess dataProcess);
 
-    /* data select from ora to mysql*/
+    /* select jt data*/
     public List<DcPlanInfo> selectJtData1();
-
-    /* data select from ora to mysql*/
     public List<DcPlanInfo> selectJtData2();
+    public List<DcPlanInfo> selectJtDataInPath1();
+
+    /* select zm data*/
+    public List<DcPlanInfo> selectZmData1();
+    public List<DcPlanInfo> selectZmData2();
+    public List<DcPlanInfo> selectZmDataInPath1();
+
+    /* select zc data*/
+    public List<DcPlanInfo> selectZcData();
+
 }

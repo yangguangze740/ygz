@@ -12,20 +12,37 @@ public interface DcRepositoryI {
     /* data select from ora to mysql*/
     public List<DcPlanInfo> selectJtPlan();
 
-    /* select jt data*/
-    public List<DcPlanInfo> selectJtPlan4XD1();
-
-    /* select jt data*/
-    public List<DcPlanInfo> selectJtPlan4XD2();
-
-    /* select zm data*/
+    /* process zm data*/
     public List<DcPlanInfo> selectZmPlan();
 
-    /* select tc data*/
+    /* process tc data*/
     public List<DcPlanInfo> selectTcPlan();
 
-    /* select zc data*/
+    /* process zc data*/
     public List<DcPlanInfo> selectZcPlan();
+
+    /* select jt data1*/
+    public List<DcPlanInfo> selectJtData4XD1();
+
+    /* select jt data2*/
+    public List<DcPlanInfo> selectJtData4XD2();
+
+    /* select zm data1*/
+    public List<DcPlanInfo> selectZmData4XD1();
+
+    /* select zm data2*/
+    public List<DcPlanInfo> selectZmData4XD2();
+
+    /* select zc data*/
+    public List<DcPlanInfo> selectZcData();
+
+
+
+    /* select jt data for ajax in path1*/
+    public List<DcPlanInfo> selectJtDataInPath1();
+
+    /* select zm data for ajax in path1*/
+    public List<DcPlanInfo> selectZmDataInPath1();
 
     /* data insert from ora to mysql*/
     public boolean insertToPlanCopy(DcPlanInfo info);
