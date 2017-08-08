@@ -18,6 +18,9 @@ public interface DcRepositoryI {
     /* select jt data*/
     public List<DcPlanInfo> selectJtPlan4XD2();
 
+    /* select zm data*/
+    public List<DcPlanInfo> selectZmPlan();
+
     /* select tc data*/
     public List<DcPlanInfo> selectTcPlan();
 
@@ -30,6 +33,10 @@ public interface DcRepositoryI {
     /* jt data insert to mysql*/
     public boolean insertJtPlan4QC(DcPlanInfo info);
     public boolean insertJtPlan4JD(DcPlanInfo info);
+
+    /* zm data insert to mysql*/
+    public boolean insertZmPlan4XT1(DcPlanInfo info);
+    public boolean insertZmPlan4XT2(DcPlanInfo info);
 
     /* tc data insert to mysql*/
     public boolean insertTcPlan4XT1(DcPlanInfo info);

@@ -14,6 +14,7 @@ public class DataProcess {
 
     Timestamp ts1 = null;
     Timestamp ts2 = null;
+    Timestamp ts3 = null;
 
     String XD = "";
     String DH = "";
@@ -196,6 +197,66 @@ public class DataProcess {
         return list;
     }
 
+    public List<DcPlanInfo> zmTimeList(List<DcPlanInfo> list) {
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if (fields[j].getName().equals("dcStartTime")) {
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        if (list.get(k).getDcDj() == 1 || list.get(k).getDcDj() == 3) {
+                            long t = date.getMillis()+ConstantFields.ZM1_TIME;
+                            long t1 = date.getMillis()+ConstantFields.ZM2_TIME;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                            ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                            ts2 = Timestamp.valueOf(simpleDateFormat.format(t1));
+                            ts3 = timestamp;
+                        } else {
+                            long t = date.getMillis()+ConstantFields.ZM4_TIME;
+                            long t1 = date.getMillis()+ConstantFields.ZM5_TIME;
+                            long t2 = date.getMillis()+ConstantFields.ZM3_TIME;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                            ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                            ts2 = Timestamp.valueOf(simpleDateFormat.format(t1));
+                            ts3 = Timestamp.valueOf(simpleDateFormat.format(t2));
+                        }
+                    }
+                    if(fields[j].getName().equals("dcSource")){
+                        String des = fields[j].get(oi).toString();
+                        XD = des.substring(0,2);
+                        DH = des.substring(2,4);
+                        if(Integer.parseInt(DH) == 3 || Integer.parseInt(DH) == 2 || Integer.parseInt(DH) == 4){
+                            end = ConstantFields.XT2;//2、3、4南
+                        } else {
+                            end = ConstantFields.XT1;//5、6、7北
+                        }
+                    }
+                    if(fields[j].getName().equals("dcTFX")){
+                        String des = fields[j].get(oi).toString();
+                        TF = des.substring(0,2);
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcMidTime(ts1);
+            list.get(k).setDcMidTime1(ts2);
+            list.get(k).setDcStartTime(ts3);
+            list.get(k).setDcTF(TF);
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcEnd(end);
+        }
+        return list;
+    }
+
     public List<DcPlanInfo> tcTimeList(List<DcPlanInfo> list) {
         for (int k = 0; k < list.size(); k++) {
             Field[] fields = list.get(k).getClass().getDeclaredFields();
@@ -235,13 +296,9 @@ public class DataProcess {
                     if(fields[j].getName().equals("dcCS")){
                         if (destination.equals("+")) {
                             cs = Integer.parseInt(fields[j].get(oi).toString());
-                            System.out.println(cs);
-                            System.out.println("------");
                         }
                         if (destination.equals("-")) {
                             cs = Integer.parseInt("-"+fields[j].get(oi).toString());
-                            System.out.println(cs);
-                            System.out.println("------");
                         }
                     }
                 } catch (IllegalArgumentException e) {
@@ -256,7 +313,6 @@ public class DataProcess {
             list.get(k).setDcDH(DH);
             list.get(k).setDcTF(TF);
             list.get(k).setDcCS(cs);
-            System.out.println("end");
         }
         return list;
     }

@@ -13,6 +13,9 @@ public interface DcServiceI {
     /* select jt data and process*/
     public void selectJtPlanData(DataProcess dataProcess);
 
+    /* select zm data and process*/
+    public void selectZmPlanData(DataProcess dataProcess);
+
     /* select tc data and process*/
     public void selectTcPlanData(DataProcess dataProcess);
 
