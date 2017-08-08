@@ -261,6 +261,51 @@ public class DataProcess {
         return list;
     }
 
+    public List<DcPlanInfo> zcTimeList(List<DcPlanInfo> list) {
+
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if (fields[j].getName().equals("dcStartTime")) {
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        long t = date.getMillis()-ConstantFields.ZC_TIME;
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                    }
+                    if(fields[j].getName().equals("dcDestination") && fields[j].get(oi) !=null){
+                        String des = fields[j].get(oi).toString();
+                        XD = des.substring(0,2);
+                        DH = des.substring(2,4);
+                    }
+                    if(fields[j].getName().equals("dcTFX")){
+                        if (fields[j].get(oi) == null) {
+                            TF = null;
+                        } else {
+                            String des = fields[j].get(oi).toString();
+                            TF = des.substring(0,2);
+                            System.out.println();
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcStartTime(ts1);
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcTF(TF);
+        }
+        return list;
+    }
+
     public Timestamp time(String time) {
 
         Timestamp ts = new Timestamp(Calendar.getInstance().getTime().getTime());

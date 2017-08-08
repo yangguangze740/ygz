@@ -94,6 +94,20 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public List<DcPlanInfo> selectZcPlan() {
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '转场' order by dcNumber";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcZcPlanRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
     public boolean insertToPlanCopy(DcPlanInfo info) {
         String sql = "INSERT INTO dc_plan_copy (copyId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj, dcGJHID, dcZGBZ, dcCS, dcJSL, dcTFX, dcSWH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
@@ -239,6 +253,33 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public boolean insertZcPlan(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_zc_plan (zcId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDestination, dcDj, dcTFX, dcTF, dcXD, dcDH, dcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getDcNumber(),
+                info.getDcStartTime(),
+                info.getDcEndTime(),
+                info.getDcType(),
+                ConstantFields.TYPE_ZC,
+                info.getDcDestination(),
+                info.getDcDj(),
+                info.getDcTFX(),
+                info.getDcTF(),
+                info.getDcXD(),
+                info.getDcDH(),
+                ConstantFields.ZC+info.getDcDestination()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert zc error");
+            return false;
+        }
+    }
+
+    @Override
     public int deletePlanCopy() {
         String sql = "TRUNCATE TABLE dc_plan_copy";
 
@@ -336,6 +377,22 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcSWH(resultSet.getInt("dcSWH"));
             userInfo.setDcZGBZ(resultSet.getString("dcZGBZ"));
             userInfo.setDcCS(resultSet.getInt("dcCS"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcZcPlanRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcSource"));
+            userInfo.setDcTFX(resultSet.getString("dcTFX"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
 
             return userInfo;
         }

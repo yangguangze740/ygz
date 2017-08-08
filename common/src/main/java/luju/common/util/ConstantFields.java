@@ -35,12 +35,16 @@ public class ConstantFields {
     /* 挑车推演时间*/
     public static long TC_TIME = 600000;
 
+    /* 转场推演时间*/
+    public static long ZC_TIME = 600000;
+
     /* 作业类别*/
     public static final String TYPE_JC = "接车";
     public static final String TYPE_TC = "挑车";
     public static final String TYPE_BWJ = "本务机";
     public static final String TYPE_QCX = "牵出线";
     public static final String TYPE_JDX = "机待线";
+    public static final String TYPE_ZC = "上行编发场";
 
     /* 作业类别*/
     public static final String BWJDS = "南入库（立折）";
@@ -66,6 +70,7 @@ public class ConstantFields {
     public static final String JD = "JD";
     public static final String XT1 = "XT1";//南
     public static final String XT2 = "XT2";//北
+    public static final String ZC = "ZC";
 
 
     /**

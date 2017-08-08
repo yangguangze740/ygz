@@ -21,6 +21,9 @@ public interface DcRepositoryI {
     /* select tc data*/
     public List<DcPlanInfo> selectTcPlan();
 
+    /* select zc data*/
+    public List<DcPlanInfo> selectZcPlan();
+
     /* data insert from ora to mysql*/
     public boolean insertToPlanCopy(DcPlanInfo info);
 
@@ -33,6 +36,9 @@ public interface DcRepositoryI {
 
     /* tc data insert to mysql*/
     public boolean insertTcPlan4XT2(DcPlanInfo info);
+
+    /* zc data insert to mysql*/
+    public boolean insertZcPlan(DcPlanInfo info);
 
     /* delete data from mysql before inserting new data */
     public int deletePlanCopy();
