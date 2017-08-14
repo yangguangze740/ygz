@@ -18,6 +18,12 @@ public interface DcRepositoryI {
     /* process tc data*/
     public List<DcPlanInfo> selectTcPlan();
 
+    /* process tc2 data*/
+    public List<DcPlanInfo> processTcPlan();
+
+    /* process tc data*/
+    public List<DcPlanInfo> selectTcData();
+
     /* process zc data*/
     public List<DcPlanInfo> selectZcPlan();
 
@@ -35,7 +41,6 @@ public interface DcRepositoryI {
 
     /* select zc data*/
     public List<DcPlanInfo> selectZcData();
-
 
 
     /* select jt data for ajax in path1*/
@@ -60,6 +65,9 @@ public interface DcRepositoryI {
 
     /* tc data insert to mysql*/
     public boolean insertTcPlan4XT2(DcPlanInfo info);
+
+    /* tc 6 data insert to mysql*/
+    public boolean insertTcPlan4Six(DcPlanInfo info);
 
     /* zc data insert to mysql*/
     public boolean insertZcPlan(DcPlanInfo info);

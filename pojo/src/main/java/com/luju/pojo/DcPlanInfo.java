@@ -28,6 +28,15 @@ public class DcPlanInfo {
     private int dcSWH;
     private String dcPath1;
     private String dcPath2;
+    private int dcCS6;
+
+    public int getDcCS6() {
+        return dcCS6;
+    }
+
+    public void setDcCS6(int dcCS6) {
+        this.dcCS6 = dcCS6;
+    }
 
     public String getDcPath1() {
         return dcPath1;

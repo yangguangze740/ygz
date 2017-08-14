@@ -22,9 +22,12 @@ public class DataProcess {
     String TC = "";
     String end = "";
     String destination;
+    String dcd; // use for tc > 6
 
     int cs;
-
+    int cs1;
+    int cs6; // whether > 6
+    boolean b6;
 
     public List<JcPlanInfo> jcTimeList(List<JcPlanInfo> list) {
 
@@ -313,6 +316,48 @@ public class DataProcess {
             list.get(k).setDcDH(DH);
             list.get(k).setDcTF(TF);
             list.get(k).setDcCS(cs);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> tcDataList(List<DcPlanInfo> list) {
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcDestination") && fields[j].get(oi) !=null){
+                        if (k == 0) {
+                            dcd = fields[j].get(oi).toString();
+                        }
+                        if (fields[j].get(oi).toString().equals(dcd)) {
+                            b6 = true;
+                            dcd = fields[j].get(oi).toString();
+                        } else {
+                            b6 = false;
+                            cs1 = 0;
+                        }
+                    }
+                    if(fields[j].getName().equals("dcCS")){
+
+                        cs1 += Integer.parseInt(fields[j].get(oi).toString());
+                        if (cs1 > 6) {
+                            cs6 = 1;
+                        } else {
+                            cs6 = 0;
+                        }
+
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcCS6(cs6);
         }
         return list;
     }

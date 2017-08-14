@@ -3,11 +3,13 @@ package com.luju.ygz.dc.service.impl;
 import com.luju.pojo.DcPlanInfo;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import com.luju.ygz.dc.service.DcServiceI;
+import luju.common.util.ComparatorSet;
 import luju.common.util.DataProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class DcServiceImpl implements DcServiceI {
@@ -58,6 +60,15 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
+    public void processTcPlanData(DataProcess dataProcess) {
+        List<DcPlanInfo> list = dcRepository.processTcPlan();
+        list = dataProcess.tcDataList(list);
+        for (int k =0; k < list.size(); k++) {
+            dcRepository.insertTcPlan4Six(list.get(k));
+        }
+    }
+
+    @Override
     public void selectZcPlanData(DataProcess dataProcess) {
         List<DcPlanInfo> list = dcRepository.selectZcPlan();
         list = dataProcess.zcTimeList(list);
@@ -65,6 +76,21 @@ public class DcServiceImpl implements DcServiceI {
             dcRepository.insertZcPlan(list.get(k));
         }
     }
+
+
+    @Override
+    public List<DcPlanInfo> processAllData(ComparatorSet comparatorSet) {
+        List<DcPlanInfo> list4jt1 = dcRepository.selectJtData4XD1();
+        List<DcPlanInfo> list4jt2 = dcRepository.selectJtData4XD2();
+        List<DcPlanInfo> list4zm1 = dcRepository.selectZmData4XD1();
+        List<DcPlanInfo> list4zm2 = dcRepository.selectZmData4XD2();
+        List<DcPlanInfo> list4zc = dcRepository.selectZcData();
+        List<DcPlanInfo> list4tc = dcRepository.selectTcData();
+//        Set<DcPlanInfo> set = comparatorSet.comparatorSet(list4jt1,list4jt2,list4zm1,list4zm2,list4zc,list4tc);
+
+        return null;
+    }
+
 
     @Override
     public List<DcPlanInfo> selectJtData1() {

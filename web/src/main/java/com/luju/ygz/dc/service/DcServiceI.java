@@ -1,6 +1,7 @@
 package com.luju.ygz.dc.service;
 
 import com.luju.pojo.DcPlanInfo;
+import luju.common.util.ComparatorSet;
 import luju.common.util.DataProcess;
 
 import java.util.List;
@@ -18,9 +19,14 @@ public interface DcServiceI {
 
     /* select tc data and process*/
     public void selectTcPlanData(DataProcess dataProcess);
+    public void processTcPlanData(DataProcess dataProcess);
 
     /* select zc data and process*/
     public void selectZcPlanData(DataProcess dataProcess);
+
+    /* select all data and process */
+    public List<DcPlanInfo> processAllData(ComparatorSet comparatorSet);
+
 
     /* select jt data*/
     public List<DcPlanInfo> selectJtData1();

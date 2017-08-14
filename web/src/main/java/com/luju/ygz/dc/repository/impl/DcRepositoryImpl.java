@@ -80,6 +80,34 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public List<DcPlanInfo> processTcPlan() {
+        String sql = "SELECT distinct dcNumber,dcType,dcDestination,dcSWH,dcCS FROM dc_tc_plan group by dcNumber,dcType,dcDestination,dcSWH,dcCS order by dcDestination,dcSWH";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcProcessTcPlanRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select tc2 error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectTcData() {
+        String sql = "SELECT distinct dcDj,dcNumber,dcStartTime,dcEndTime,dcType,dcDestination FROM ygz_show.dc_tc_plan order by dcDestination;";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcTcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select tc data error");
+            return null;
+        }
+    }
+
+    @Override
     public List<DcPlanInfo> selectZcPlan() {
         String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '转场' order by dcNumber";
         Object[] args = {};
@@ -399,6 +427,27 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public boolean insertTcPlan4Six(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_tc_six (tcId, dcNumber, dcType, dcDestination, dcSWH, dcCS, dcCS6) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getDcNumber(),
+                info.getDcType(),
+                info.getDcDestination(),
+                info.getDcSWH(),
+                info.getDcCS(),
+                info.getDcCS6()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert tc 4 six error");
+            return false;
+        }
+    }
+
+    @Override
     public boolean insertZcPlan(DcPlanInfo info) {
         String sql = "INSERT INTO dc_zc_plan (zcId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDestination, dcDj, dcTFX, dcTF, dcXD, dcDH, dcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
@@ -506,6 +555,35 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcSWH(resultSet.getInt("dcSWH"));
             userInfo.setDcZGBZ(resultSet.getString("dcZGBZ"));
             userInfo.setDcCS(resultSet.getInt("dcCS"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcProcessTcPlanRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcSWH(resultSet.getInt("dcSWH"));
+            userInfo.setDcCS(resultSet.getInt("dcCS"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcTcDataRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
 
             return userInfo;
         }

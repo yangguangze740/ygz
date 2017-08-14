@@ -1,20 +1,59 @@
 package com.luju.ygz;
 
-import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
 
 public class TestString {
-    public static void main(String[] args) {
 
-        String fu = "-";
-        String cs = "1";
-        int a = Integer.parseInt(fu+cs);
-        System.out.println(a);
-        int b = 2;
-        System.out.println(a+b);
+    public static void main(String[] args) {
+        Set<Person> set = new TreeSet<Person>(new PersonComparator());
+
+        Person p1 =  new Person(10);
+        Person p2 =  new Person(20);
+        Person p3 =  new Person(30);
+        Person p4 =  new Person(40);
+
+        set.add(p1);
+        set.add(p2);
+        set.add(p3);
+        set.add(p4);
+
+        for(Iterator<Person> iterator = set.iterator();iterator.hasNext();){
+            System.out.print(iterator.next().score+" ");
+        }
+    }
+}
+
+class Person{
+    int score;
+
+    public Person(int score){
+        this.score = score;
+    }
+
+    public String toString(){
+        return String.valueOf(this.score);
+    }
+}
+
+class PersonComparator implements Comparator<Person>{
+
+    @Override
+    public int compare(Person o1, Person o2) {
+
+        return o1.score - o2.score;
+    }
+
+}
+
+//        String fu = "-";
+//        String cs = "1";
+//        int a = Integer.parseInt(fu+cs);
+//        System.out.println(a);
+//        int b = 2;
+//        System.out.println(a+b);
 
 //        int a = -1;
 //        int b = -2;
@@ -35,7 +74,6 @@ public class TestString {
 //            return k;
 //        }
 //        return 0;
-    }
 
 //        String time = "14:00";
 //
@@ -124,4 +162,3 @@ public class TestString {
 //        String s1 = "02";
 //        System.out.println(Integer.parseInt(s1));
 
-}

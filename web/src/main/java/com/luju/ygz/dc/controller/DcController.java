@@ -28,10 +28,11 @@ public class DcController {
 
     @RequestMapping("/world")
     public String processDcData() {
-        service.selectJtPlanData(dataProcess);
-        service.selectTcPlanData(dataProcess);
-        service.selectZcPlanData(dataProcess);
-        service.selectZmPlanData(dataProcess);
+//        service.selectJtPlanData(dataProcess);
+//        service.selectTcPlanData(dataProcess);
+//        service.selectZcPlanData(dataProcess);
+//        service.selectZmPlanData(dataProcess);
+        service.processTcPlanData(dataProcess);
         return "world";
     }
 
@@ -43,6 +44,8 @@ public class DcController {
         List<DcPlanInfo> list4Zm1 = service.selectZmData1();
         List<DcPlanInfo> list4Zm2 = service.selectZmData2();
         List<DcPlanInfo> list4Zc2 = service.selectZcData();
+        //
+        //
 
         List<DcPlanInfo> list4JtP1 = service.selectJtDataInPath1();
         List<DcPlanInfo> list4ZmP1 = service.selectZmDataInPath1();
