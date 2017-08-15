@@ -1,25 +1,29 @@
 package com.luju.ygz.test.service;
 
 import com.luju.pojo.JcPlanInfo;
+import com.luju.pojo.ResultInfo;
+
 import java.util.List;
 import java.util.Set;
 
 public interface TestServiceI {
 
     /* data select from ora to mysql*/
-    public void selectPlanDataFromOra();
+    void selectPlanDataFromOra();
 
     /* data processing from mysql copy data to jc_plan */
-    public void selectPlanData4One();
+    void selectPlanData4One();
 
     /* data processing from mysql copy data to jc_plan_detals */
-    public void selectPlanData4HCJSL();
+    void selectPlanData4HCJSL();
 
     /* select all processed data from jc_plan */
-    public Set<JcPlanInfo> selectAllData();
+    List<ResultInfo> processJcData();
+
+    List<ResultInfo> processBwjData();
 
     /* process bwj data */
-    public void selectBwjData();
+    void selectBwjData();
 
-    public List<JcPlanInfo> selectBwPlanInPath(JcPlanInfo jcPlanInfo);
+    List<JcPlanInfo> selectBwPlanInPath(JcPlanInfo jcPlanInfo);
 }

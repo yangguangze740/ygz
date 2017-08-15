@@ -1,80 +1,81 @@
 package com.luju.ygz.dc.repository;
 
 import com.luju.pojo.DcPlanInfo;
+import com.luju.pojo.ResultInfo;
 
 import java.util.List;
 
 public interface DcRepositoryI {
 
     /* data select from ora to mysql*/
-    public List<DcPlanInfo> selectDcPlanFromOra();
+    List<DcPlanInfo> selectDcPlanFromOra();
 
     /* data select from ora to mysql*/
-    public List<DcPlanInfo> selectJtPlan();
+    List<DcPlanInfo> selectJtPlan();
 
     /* process zm data*/
-    public List<DcPlanInfo> selectZmPlan();
+    List<DcPlanInfo> selectZmPlan();
 
     /* process tc data*/
-    public List<DcPlanInfo> selectTcPlan();
+    List<DcPlanInfo> selectTcPlan();
 
     /* process tc2 data*/
-    public List<DcPlanInfo> processTcPlan();
-
-    /* process tc data*/
-    public List<DcPlanInfo> selectTcData();
+    List<DcPlanInfo> processTcPlan();
 
     /* process zc data*/
-    public List<DcPlanInfo> selectZcPlan();
+    List<DcPlanInfo> selectZcPlan();
 
     /* select jt data1*/
-    public List<DcPlanInfo> selectJtData4XD1();
+    List<ResultInfo> selectJtData4XD1();
 
     /* select jt data2*/
-    public List<DcPlanInfo> selectJtData4XD2();
+    List<ResultInfo> selectJtData4XD2();
 
     /* select zm data1*/
-    public List<DcPlanInfo> selectZmData4XD1();
+    List<ResultInfo> selectZmData4XD1();
 
     /* select zm data2*/
-    public List<DcPlanInfo> selectZmData4XD2();
+    List<ResultInfo> selectZmData4XD2();
 
     /* select zc data*/
-    public List<DcPlanInfo> selectZcData();
+    List<ResultInfo> selectZcData();
+
+    /* process tc data*/
+    List<ResultInfo> selectTcData();
 
 
     /* select jt data for ajax in path1*/
-    public List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
+    List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* select zm data for ajax in path1*/
-    public List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
+    List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* select tc data for ajax in path1*/
-    public List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
+    List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* data insert from ora to mysql*/
-    public boolean insertToPlanCopy(DcPlanInfo info);
+    boolean insertToPlanCopy(DcPlanInfo info);
 
     /* jt data insert to mysql*/
-    public boolean insertJtPlan4QC(DcPlanInfo info);
-    public boolean insertJtPlan4JD(DcPlanInfo info);
+    boolean insertJtPlan4QC(DcPlanInfo info);
+    boolean insertJtPlan4JD(DcPlanInfo info);
 
     /* zm data insert to mysql*/
-    public boolean insertZmPlan4XT1(DcPlanInfo info);
-    public boolean insertZmPlan4XT2(DcPlanInfo info);
+    boolean insertZmPlan4XT1(DcPlanInfo info);
+    boolean insertZmPlan4XT2(DcPlanInfo info);
 
     /* tc data insert to mysql*/
-    public boolean insertTcPlan4XT1(DcPlanInfo info);
+    boolean insertTcPlan4XT1(DcPlanInfo info);
 
     /* tc data insert to mysql*/
-    public boolean insertTcPlan4XT2(DcPlanInfo info);
+    boolean insertTcPlan4XT2(DcPlanInfo info);
 
     /* tc 6 data insert to mysql*/
-    public boolean insertTcPlan4Six(DcPlanInfo info);
+    boolean insertTcPlan4Six(DcPlanInfo info);
 
     /* zc data insert to mysql*/
-    public boolean insertZcPlan(DcPlanInfo info);
+    boolean insertZcPlan(DcPlanInfo info);
 
     /* delete data from mysql before inserting new data */
-    public int deletePlanCopy();
+    int deletePlanCopy();
 }

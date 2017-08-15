@@ -1,6 +1,7 @@
 package com.luju.ygz.dc.service;
 
 import com.luju.pojo.DcPlanInfo;
+import com.luju.pojo.ResultInfo;
 import luju.common.util.DataProcess;
 import luju.common.util.ListToSet;
 
@@ -10,30 +11,45 @@ import java.util.Set;
 public interface DcServiceI {
     
     /* data select from ora to mysql*/
-    public void selectPlanDataFromOra(DataProcess dataProcess);
+    void selectPlanDataFromOra(DataProcess dataProcess);
 
     /* select jt data and process*/
-    public void selectJtPlanData(DataProcess dataProcess);
+    void selectJtPlanData(DataProcess dataProcess);
 
     /* select zm data and process*/
-    public void selectZmPlanData(DataProcess dataProcess);
+    void selectZmPlanData(DataProcess dataProcess);
 
     /* select tc data and process*/
-    public void selectTcPlanData(DataProcess dataProcess);
-    public void processTcPlanData(DataProcess dataProcess);
+    void selectTcPlanData(DataProcess dataProcess);
+    void processTcPlanData(DataProcess dataProcess);
 
     /* select zc data and process*/
-    public void selectZcPlanData(DataProcess dataProcess);
+    void selectZcPlanData(DataProcess dataProcess);
 
-    /* select all data and process */
-    public Set<DcPlanInfo> processAllData(ListToSet comparatorSet);
+    /* select jt1 data */
+    List<ResultInfo> processJt1Data();
 
-    /* select jt data*/
-    public List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
+    /* select jt2 data */
+    List<ResultInfo> processJt2Data();
 
-    /* select zm data*/
-    public List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
+    /* select zm1 data */
+    List<ResultInfo> processZm1Data();
 
-    /* select tc data*/
-    public List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
+    /* select zm2 data */
+    List<ResultInfo> processZm2Data();
+
+    /* select zc data */
+    List<ResultInfo> processZcData();
+
+    /* select tc data */
+    List<ResultInfo> processTcData();
+
+    /* select jt data in path*/
+    List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
+
+    /* select zm data in path*/
+    List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
+
+    /* select tc data in path*/
+    List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
 }

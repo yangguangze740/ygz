@@ -1,6 +1,7 @@
 package com.luju.ygz.test.repository.impl;
 
 import com.luju.pojo.JcPlanInfo;
+import com.luju.pojo.ResultInfo;
 import com.luju.ygz.test.repository.TestRepositoryI;
 import luju.common.util.ConstantFields;
 import luju.common.util.PrimaryKeyUtil;
@@ -107,7 +108,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
     }
 
     @Override
-    public List<JcPlanInfo> selectJcPlan4XD() {
+    public List<ResultInfo> selectJcPlan4XD() {
         String sql = "SELECT P.jcNumber,jcType,jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcPath,GROUP_CONCAT(jcImportant) T,GROUP_CONCAT(jcJSL) J FROM jc_plan P LEFT JOIN (SELECT DISTINCT jcNumber, jcJSL, jcImportant FROM jc_plan_detals) D ON P.jcNumber = D.jcNumber WHERE jcType = '接车' AND jcXD = 'XD' GROUP BY jcNumber , jcType, jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcPath ORDER BY jcStartTime";
         Object[] args = {};
 
@@ -135,7 +136,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
     }
 
     @Override
-    public List<JcPlanInfo> selectBwjData() {
+    public List<ResultInfo> selectBwjData() {
         String sql = "SELECT jcNumber,jcType,jcStartTime,jcEndTime,jcSource FROM bwj_plan group by jcNumber,jcType,jcStartTime,jcEndTime,jcSource order by jcStartTime";
         Object[] args = {};
 
@@ -425,21 +426,21 @@ public class TestRepositoryImpl implements TestRepositoryI {
         }
     }
 
-    private class JcPlanALLRowMapper implements RowMapper<JcPlanInfo> {
-        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
-            JcPlanInfo userInfo = new JcPlanInfo();
+    private class JcPlanALLRowMapper implements RowMapper<ResultInfo> {
+        public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            ResultInfo userInfo = new ResultInfo();
 
-            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
-            userInfo.setJcType(resultSet.getString("jcType"));
-            userInfo.setJcStartTime(resultSet.getTimestamp("jcStartTime"));
-            userInfo.setTIME(resultSet.getTimestamp("jcEndTime"));
-            userInfo.setNODE_FOUR_WAY(resultSet.getString("jcSource"));
-            userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
-            userInfo.setJcXD(resultSet.getString("jcXD"));
-            userInfo.setJcDH(resultSet.getString("jcDH"));
-            userInfo.setJcPath(resultSet.getString("jcPath"));
-            userInfo.setJcImportant(resultSet.getString("T"));
-            userInfo.setJcJSL(resultSet.getString("J"));
+            userInfo.setNumber(resultSet.getString("jcNumber"));
+            userInfo.setType(resultSet.getString("jcType"));
+            userInfo.setStartTime(resultSet.getTimestamp("jcStartTime"));
+            userInfo.setEndTime(resultSet.getTimestamp("jcEndTime"));
+            userInfo.setSource(resultSet.getString("jcSource"));
+            userInfo.setDestination(resultSet.getString("jcDestination"));
+            userInfo.setXd(resultSet.getString("jcXD"));
+            userInfo.setDh(resultSet.getString("jcDH"));
+            userInfo.setPath(resultSet.getString("jcPath"));
+            userInfo.setImportant(resultSet.getString("T"));
+            userInfo.setJsl(resultSet.getString("J"));
 
             String jsl = resultSet.getString("J");
             int dh = Integer.parseInt(resultSet.getString("jcDH"));
@@ -483,15 +484,15 @@ public class TestRepositoryImpl implements TestRepositoryI {
         }
     }
 
-    private class BwPlanAllRowMapper implements RowMapper<JcPlanInfo>{
-        public JcPlanInfo mapRow(ResultSet resultSet, int i)throws SQLException{
-            JcPlanInfo userInfo = new JcPlanInfo();
+    private class BwPlanAllRowMapper implements RowMapper<ResultInfo>{
+        public ResultInfo mapRow(ResultSet resultSet, int i)throws SQLException{
+            ResultInfo userInfo = new ResultInfo();
 
-            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
-            userInfo.setJcType(resultSet.getString("jcType"));
-            userInfo.setJcStartTime(resultSet.getTimestamp("jcStartTime"));
-            userInfo.setTIME(resultSet.getTimestamp("jcEndTime"));
-            userInfo.setNODE_FOUR_WAY(resultSet.getString("jcSource"));
+            userInfo.setNumber(resultSet.getString("jcNumber"));
+            userInfo.setType(resultSet.getString("jcType"));
+            userInfo.setStartTime(resultSet.getTimestamp("jcStartTime"));
+            userInfo.setEndTime(resultSet.getTimestamp("jcEndTime"));
+            userInfo.setSource(resultSet.getString("jcSource"));
 
             return userInfo;
         }

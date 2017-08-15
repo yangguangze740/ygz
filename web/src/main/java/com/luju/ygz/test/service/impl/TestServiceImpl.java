@@ -1,6 +1,7 @@
 package com.luju.ygz.test.service.impl;
 
 import com.luju.pojo.JcPlanInfo;
+import com.luju.pojo.ResultInfo;
 import com.luju.ygz.test.repository.TestRepositoryI;
 import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.ConstantFields;
@@ -67,11 +68,14 @@ public class TestServiceImpl implements TestServiceI {
     }
 
     @Override
-    public Set<JcPlanInfo> selectAllData() {
-        List<JcPlanInfo> list4jc = testRepository.selectJcPlan4XD();
-        List<JcPlanInfo> list4bwj = testRepository.selectBwjData();
+    public List<ResultInfo> processJcData() {
+        return testRepository.selectJcPlan4XD();
 
-        return null;
+    }
+
+    @Override
+    public List<ResultInfo> processBwjData() {
+        return testRepository.selectBwjData();
     }
 
     @Override
