@@ -35,7 +35,7 @@ public interface TestRepositoryI {
     List<ResultInfo> selectBwjData();
 
     /* select bwj data path*/
-    List<JcPlanInfo> selectBwjDataInPath(JcPlanInfo jcPlanInfo);
+    List<ResultInfo> selectBwjDataInPath(JcPlanInfo jcPlanInfo);
 
     /* data insert from ora to mysql*/
     boolean insertToPlanCopy(JcPlanInfo info);

@@ -193,7 +193,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo) {
+    public List<ResultInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo) {
         String sql = "SELECT dcNumber,dcSource,dcPath1 FROM dc_jt_plan where dcNumber = ? and dcSource = ?;";
         Object[] args = {
                 dcPlanInfo.getDcNumber(),
@@ -210,7 +210,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo) {
+    public List<ResultInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo) {
         String sql = "SELECT dcNumber,dcSource,dcPath1 FROM dc_zm_plan where dcNumber = ? and dcSource = ?";
         Object[] args = {
                 dcPlanInfo.getDcNumber(),
@@ -227,7 +227,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo) {
+    public List<ResultInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo) {
         String sql = "SELECT distinct dcNumber,dcSource,dcDestination,dcPath FROM dc_tc_plan where dcNumber = ? and dcSource = ? and dcDestination = ?";
         Object[] args = {
                 dcPlanInfo.getDcNumber(),
@@ -716,38 +716,38 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
-    private class DcJtDataInPath1RowMapper implements RowMapper<DcPlanInfo> {
-        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
-            DcPlanInfo userInfo = new DcPlanInfo();
+    private class DcJtDataInPath1RowMapper implements RowMapper<ResultInfo> {
+        public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            ResultInfo userInfo = new ResultInfo();
 
-            userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcSource(resultSet.getString("dcSource"));
-            userInfo.setDcPath1(resultSet.getString("dcPath1"));
-
-            return userInfo;
-        }
-    }
-
-    private class DcZmDataInPath1RowMapper implements RowMapper<DcPlanInfo> {
-        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
-            DcPlanInfo userInfo = new DcPlanInfo();
-
-            userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcSource(resultSet.getString("dcSource"));
-            userInfo.setDcPath1(resultSet.getString("dcPath1"));
+            userInfo.setNumber(resultSet.getString("dcNumber"));
+            userInfo.setSource(resultSet.getString("dcSource"));
+            userInfo.setPath(resultSet.getString("dcPath1"));
 
             return userInfo;
         }
     }
 
-    private class DcTcDataInPath1RowMapper implements RowMapper<DcPlanInfo> {
-        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
-            DcPlanInfo userInfo = new DcPlanInfo();
+    private class DcZmDataInPath1RowMapper implements RowMapper<ResultInfo> {
+        public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            ResultInfo userInfo = new ResultInfo();
 
-            userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcSource(resultSet.getString("dcSource"));
-            userInfo.setDcDestination(resultSet.getString("dcDestination"));
-            userInfo.setDcPath1(resultSet.getString("dcPath"));
+            userInfo.setNumber(resultSet.getString("dcNumber"));
+            userInfo.setSource(resultSet.getString("dcSource"));
+            userInfo.setPath(resultSet.getString("dcPath1"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcTcDataInPath1RowMapper implements RowMapper<ResultInfo> {
+        public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            ResultInfo userInfo = new ResultInfo();
+
+            userInfo.setNumber(resultSet.getString("dcNumber"));
+            userInfo.setSource(resultSet.getString("dcSource"));
+            userInfo.setDestination(resultSet.getString("dcDestination"));
+            userInfo.setPath(resultSet.getString("dcPath"));
 
             return userInfo;
         }

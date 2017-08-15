@@ -45,40 +45,36 @@
                         <div class="box-body no-padding">
                             <table class="table" id="zuoyejihuaTable">
                                 <thead>
-                                <tr style="text-align: center;">
-                                    <th>序号</th>
-                                    <th>车次</th>
-                                    <th>作业类别</th>
-                                    <th>开始时间</th>
-                                    <th>结束时间</th>
-                                    <th>源</th>
-                                    <th>目的</th>
-                                    <th>调机</th>
-                                    <th>重点事项</th>
-                                    <th>记事</th>
-                                    <th>进路</th>
-                                </tr>
+                                    <tr style="text-align: center;">
+                                        <th>序号</th>
+                                        <th>车次</th>
+                                        <th>作业类别</th>
+                                        <th>开始时间</th>
+                                        <th>结束时间</th>
+                                        <th>源</th>
+                                        <th>目的</th>
+                                        <th>调机</th>
+                                        <th>重点事项</th>
+                                        <th>记事</th>
+                                        <%--<th>进路</th>--%>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${allDataSet}" var="record" varStatus="status">
-                                        <tr>
+                                    <c:forEach items="${allDataSet}" var="record" varStatus="status">
+                                        <tr style="text-align: center;">
                                             <td>${status.index + 1}</td>
                                             <td>${record.number}</td>
                                             <td>${record.type}</td>
                                             <td>${record.startTime}</td>
                                             <td>${record.endTime}</td>
-                                            <td></td>
+                                            <td>${record.source}</td>
                                             <td>${record.destination}</td>
-                                            <td></td>
-                                            <td><select class="form-control" name="zyPlan" id = "zyId">
-                                                <option value="0">请选择状态</option>
-                                                <option value="6">已完成</option>
-                                            </select></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>${record.dj}</td>
+                                            <td>${record.important}</td>
+                                            <td>${record.jsl}</td>
+                                            <%--<td>${record.dj}</td>--%>
                                         </tr>
-                                </c:forEach>
-                                </tr>
+                                    </c:forEach>
                                 </tbody>
                             </table>
                         </div>
