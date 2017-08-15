@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/zuoye")
 public class DcController {
 
     @Autowired
@@ -32,6 +32,7 @@ public class DcController {
 
     @RequestMapping("/world")
     public String processDcData() {
+
         service.selectJtPlanData(dataProcess);
         service.selectTcPlanData(dataProcess);
         service.selectZcPlanData(dataProcess);
@@ -41,13 +42,15 @@ public class DcController {
         return "world";
     }
 
-    @RequestMapping("/dcPlan")
+    @RequestMapping("/zyPlan")
     public ModelAndView selectDcData() {
         ModelAndView mav = new ModelAndView();
         Set<DcPlanInfo> dcSet = service.processAllData(comparatorSet);
 
         List<DcPlanInfo> list4JtP1 = service.selectJtDataInPath1();
         List<DcPlanInfo> list4ZmP1 = service.selectZmDataInPath1();
+
+        mav.addObject("dcSet",dcSet);
 
         return mav;
     }

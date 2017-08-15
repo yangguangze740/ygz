@@ -708,3 +708,485 @@ java.lang.NullPointerException: null
 10:58:04.575 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
 10:58:04.589 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 10:58:04 GMT+08:00 2017]; parent: Root WebApplicationContext
 10:58:04.614 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 306 ms
+11:20:50.486 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+11:20:50.608 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Tue Aug 15 11:20:50 CST 2017]; root of context hierarchy
+11:20:50.683 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+11:20:56.029 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:20:56.070 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:20:56.076 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+11:20:57.485 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+11:20:57.485 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+11:20:57.486 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+11:20:57.487 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+11:20:57.487 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+11:20:57.488 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+11:20:57.488 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+11:20:57.488 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+11:20:57.488 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+11:20:57.489 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+11:21:01.047 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 11:20:50 CST 2017]; root of context hierarchy
+11:21:01.112 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 11:20:50 CST 2017]; root of context hierarchy
+11:21:01.205 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+11:21:01.238 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 11:20:50 CST 2017]; root of context hierarchy
+11:21:01.270 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 10781 ms
+11:21:01.299 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+11:21:01.301 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 11:21:01 CST 2017]; parent: Root WebApplicationContext
+11:21:01.302 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+11:21:01.416 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:21:01.423 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:21:01.429 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+11:21:01.485 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+11:21:01.486 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+11:21:01.486 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/test/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+11:21:01.487 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+11:21:01.488 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+11:21:01.488 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+11:21:01.488 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+11:21:01.489 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+11:21:01.489 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+11:21:01.490 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+11:21:01.534 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 11:21:01 CST 2017]; parent: Root WebApplicationContext
+11:21:01.568 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 11:21:01 CST 2017]; parent: Root WebApplicationContext
+11:21:01.614 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+11:21:01.631 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 11:21:01 CST 2017]; parent: Root WebApplicationContext
+11:21:01.662 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 363 ms
+11:21:43.671 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+11:21:43.743 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Tue Aug 15 11:21:43 CST 2017]; root of context hierarchy
+11:21:43.774 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+11:21:44.313 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:21:44.324 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:21:44.330 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+11:21:44.766 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+11:21:44.767 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+11:21:44.767 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+11:21:44.769 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+11:21:44.771 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:487] Exception encountered during context initialization - cancelling refresh attempt
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping#0': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:212)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:184)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:144)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:123)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:126)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 21 common frames omitted
+11:21:44.778 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader [ContextLoader.java:331] Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping#0': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:212)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:184)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:144)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:123)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:126)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 21 common frames omitted
+11:43:12.955 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+11:43:13.041 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Tue Aug 15 11:43:13 CST 2017]; root of context hierarchy
+11:43:13.074 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+11:43:13.638 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:43:13.651 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:43:13.658 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+11:43:14.109 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+11:43:14.110 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+11:43:14.110 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+11:43:14.112 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+11:43:14.114 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:487] Exception encountered during context initialization - cancelling refresh attempt
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping#0': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:212)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:184)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:144)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:123)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:126)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 21 common frames omitted
+11:43:14.118 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader [ContextLoader.java:331] Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping#0': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:212)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:184)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:144)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:123)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:126)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 21 common frames omitted
+11:43:36.112 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+11:43:36.191 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Tue Aug 15 11:43:36 CST 2017]; root of context hierarchy
+11:43:36.229 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+11:43:36.849 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:43:36.861 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:43:36.869 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+11:43:37.377 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+11:43:37.378 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+11:43:37.378 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+11:43:37.380 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+11:43:37.383 [localhost-startStop-1] WARN  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:487] Exception encountered during context initialization - cancelling refresh attempt
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping#0': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:212)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:184)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:144)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:123)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:126)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 21 common frames omitted
+11:43:37.388 [localhost-startStop-1] ERROR o.s.web.context.ContextLoader [ContextLoader.java:331] Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping#0': Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1574)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:539)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:476)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:303)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:299)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:194)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:755)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:757)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:480)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:403)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:306)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:106)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:4791)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5285)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:150)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1559)
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1549)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'testController' bean method 
+public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+to {[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}: There is already 'dcController' bean method
+public java.lang.String com.luju.ygz.dc.controller.DcController.test() mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:212)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:184)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:144)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:123)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:126)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1633)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1570)
+	... 21 common frames omitted
+11:48:55.064 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+11:48:55.169 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Tue Aug 15 11:48:55 CST 2017]; root of context hierarchy
+11:48:55.212 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+11:48:55.960 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:48:55.973 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:48:55.989 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+11:48:56.662 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+11:48:56.663 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+11:48:56.663 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+11:48:56.664 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+11:48:56.664 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+11:48:56.665 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+11:48:56.665 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+11:48:56.665 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+11:48:56.665 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+11:48:56.666 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+11:48:57.278 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 11:48:55 CST 2017]; root of context hierarchy
+11:48:57.363 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 11:48:55 CST 2017]; root of context hierarchy
+11:48:57.525 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+11:48:57.565 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 11:48:55 CST 2017]; root of context hierarchy
+11:48:57.593 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 2524 ms
+11:48:57.620 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+11:48:57.624 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 11:48:57 CST 2017]; parent: Root WebApplicationContext
+11:48:57.625 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+11:48:57.876 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:48:57.882 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+11:48:57.888 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+11:48:57.947 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+11:48:57.948 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+11:48:57.949 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+11:48:57.972 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+11:48:57.972 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+11:48:57.973 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+11:48:57.976 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+11:48:57.976 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+11:48:57.977 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+11:48:57.978 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+11:48:58.046 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 11:48:57 CST 2017]; parent: Root WebApplicationContext
+11:48:58.076 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 11:48:57 CST 2017]; parent: Root WebApplicationContext
+11:48:58.144 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+11:48:58.187 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 11:48:57 CST 2017]; parent: Root WebApplicationContext
+11:48:58.243 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 622 ms
+11:49:26.223 [http-bio-8080-exec-3] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+11:49:26.400 [http-bio-8080-exec-3] INFO  o.s.j.support.SQLErrorCodesFactory [SQLErrorCodesFactory.java:126] SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+12:14:53.352 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+12:14:53.431 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Tue Aug 15 12:14:53 CST 2017]; root of context hierarchy
+12:14:53.464 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+12:14:54.112 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+12:14:54.124 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+12:14:54.130 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+12:14:54.555 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+12:14:54.555 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+12:14:54.556 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+12:14:54.558 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+12:14:54.558 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+12:14:54.558 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+12:14:54.559 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+12:14:54.559 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+12:14:54.559 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+12:14:54.560 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+12:14:54.950 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 12:14:53 CST 2017]; root of context hierarchy
+12:14:55.004 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 12:14:53 CST 2017]; root of context hierarchy
+12:14:55.103 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+12:14:55.146 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 12:14:53 CST 2017]; root of context hierarchy
+12:14:55.195 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 1840 ms
+12:14:55.223 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+12:14:55.226 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 12:14:55 CST 2017]; parent: Root WebApplicationContext
+12:14:55.227 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+12:14:55.429 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+12:14:55.438 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+12:14:55.442 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+12:14:55.494 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+12:14:55.494 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+12:14:55.495 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+12:14:55.496 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+12:14:55.496 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+12:14:55.497 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+12:14:55.497 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+12:14:55.497 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+12:14:55.497 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+12:14:55.498 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+12:14:55.526 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 12:14:55 CST 2017]; parent: Root WebApplicationContext
+12:14:55.567 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 12:14:55 CST 2017]; parent: Root WebApplicationContext
+12:14:55.607 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+12:14:55.620 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 12:14:55 CST 2017]; parent: Root WebApplicationContext
+12:14:55.656 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 432 ms
+12:15:38.700 [http-bio-8080-exec-4] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+12:15:38.725 [http-bio-8080-exec-4] INFO  o.s.j.support.SQLErrorCodesFactory [SQLErrorCodesFactory.java:126] SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+12:44:09.997 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+12:44:10.088 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Tue Aug 15 12:44:10 CST 2017]; root of context hierarchy
+12:44:10.127 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+12:44:10.819 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+12:44:10.831 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+12:44:10.838 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+12:44:12.645 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+12:44:12.646 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+12:44:12.646 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+12:44:12.648 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+12:44:12.649 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+12:44:12.649 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+12:44:12.649 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+12:44:12.650 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+12:44:12.650 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+12:44:12.651 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+12:44:13.283 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 12:44:10 CST 2017]; root of context hierarchy
+12:44:13.349 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 12:44:10 CST 2017]; root of context hierarchy
+12:44:13.449 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+12:44:13.498 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 12:44:10 CST 2017]; root of context hierarchy
+12:44:13.556 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 3553 ms
+12:44:13.610 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+12:44:13.614 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 12:44:13 CST 2017]; parent: Root WebApplicationContext
+12:44:13.616 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+12:44:13.753 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+12:44:13.759 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+12:44:13.764 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+12:44:13.821 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+12:44:13.821 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+12:44:13.821 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+12:44:13.822 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+12:44:13.823 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+12:44:13.823 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+12:44:13.823 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+12:44:13.823 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+12:44:13.823 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+12:44:13.824 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+12:44:13.859 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 12:44:13 CST 2017]; parent: Root WebApplicationContext
+12:44:13.893 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 12:44:13 CST 2017]; parent: Root WebApplicationContext
+12:44:13.937 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+12:44:13.954 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 12:44:13 CST 2017]; parent: Root WebApplicationContext
+12:44:14.000 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 389 ms
+12:47:09.564 [http-bio-8080-exec-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+12:47:09.732 [http-bio-8080-exec-1] INFO  o.s.j.support.SQLErrorCodesFactory [SQLErrorCodesFactory.java:126] SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
+13:08:25.329 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:285] Root WebApplicationContext: initialization started
+13:08:25.503 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing Root WebApplicationContext: startup date [Tue Aug 15 13:08:25 CST 2017]; root of context hierarchy
+13:08:25.548 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+13:08:26.182 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+13:08:26.198 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+13:08:26.205 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+13:08:26.846 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+13:08:26.846 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+13:08:26.847 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+13:08:26.848 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+13:08:26.849 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+13:08:26.849 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+13:08:26.850 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+13:08:26.850 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+13:08:26.851 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+13:08:26.851 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+13:08:27.561 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 13:08:25 CST 2017]; root of context hierarchy
+13:08:27.613 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 13:08:25 CST 2017]; root of context hierarchy
+13:08:27.695 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+13:08:27.736 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: Root WebApplicationContext: startup date [Tue Aug 15 13:08:25 CST 2017]; root of context hierarchy
+13:08:27.790 [localhost-startStop-1] INFO  o.s.web.context.ContextLoader [ContextLoader.java:325] Root WebApplicationContext: initialization completed in 2458 ms
+13:08:27.822 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:484] FrameworkServlet 'springServlet': initialization started
+13:08:27.825 [localhost-startStop-1] INFO  o.s.w.c.s.XmlWebApplicationContext [AbstractApplicationContext.java:510] Refreshing WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 13:08:27 CST 2017]; parent: Root WebApplicationContext
+13:08:27.826 [localhost-startStop-1] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [spring/servlet-context.xml]
+13:08:27.934 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+13:08:27.942 [localhost-startStop-1] INFO  o.s.c.s.PropertySourcesPlaceholderConfigurer [PropertiesLoaderSupport.java:172] Loading properties file from class path resource [db/db.properties]
+13:08:27.947 [localhost-startStop-1] INFO  o.s.b.f.a.AutowiredAnnotationBeanPostProcessor [AutowiredAnnotationBeanPostProcessor.java:153] JSR-330 'javax.inject.Inject' annotation found and supported for autowiring
+13:08:28.007 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.test()
+13:08:28.008 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.dc.controller.DcController.processDcData()
+13:08:28.008 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/zuoye/zyPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.dc.controller.DcController.selectDcData()
+13:08:28.009 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/login],methods=[POST],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(javax.servlet.http.HttpServletRequest)
+13:08:28.010 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/hello],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.test(com.luju.pojo.JcPlanInfo)
+13:08:28.010 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/jcPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allJcData(com.luju.pojo.JcPlanInfo)
+13:08:28.010 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/bwPlan],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public org.springframework.web.servlet.ModelAndView com.luju.ygz.test.controller.TestController.allBwData(com.luju.pojo.JcPlanInfo)
+13:08:28.010 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/route],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.routeLogin()
+13:08:28.011 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/luju/world],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.test.controller.TestController.dataFromCopyToOne(com.luju.pojo.JcPlanInfo)
+13:08:28.011 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerMapping [AbstractHandlerMethodMapping.java:217] Mapped "{[/about/index],methods=[],params=[],headers=[],consumes=[],produces=[],custom=[]}" onto public java.lang.String com.luju.ygz.about.controller.AboutUsController.aboutUs()
+13:08:28.058 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 13:08:27 CST 2017]; parent: Root WebApplicationContext
+13:08:28.122 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 13:08:27 CST 2017]; parent: Root WebApplicationContext
+13:08:28.164 [localhost-startStop-1] INFO  o.s.w.s.h.SimpleUrlHandlerMapping [AbstractUrlHandlerMapping.java:314] Mapped URL path [/static/**] onto handler 'org.springframework.web.servlet.resource.ResourceHttpRequestHandler#0'
+13:08:28.179 [localhost-startStop-1] INFO  o.s.w.s.m.m.a.RequestMappingHandlerAdapter [RequestMappingHandlerAdapter.java:517] Looking for @ControllerAdvice: WebApplicationContext for namespace 'springServlet-servlet': startup date [Tue Aug 15 13:08:27 CST 2017]; parent: Root WebApplicationContext
+13:08:28.206 [localhost-startStop-1] INFO  o.s.web.servlet.DispatcherServlet [FrameworkServlet.java:503] FrameworkServlet 'springServlet': initialization completed in 384 ms
+13:09:56.698 [http-bio-8080-exec-4] INFO  o.s.b.f.xml.XmlBeanDefinitionReader [XmlBeanDefinitionReader.java:317] Loading XML bean definitions from class path resource [org/springframework/jdbc/support/sql-error-codes.xml]
+13:09:56.745 [http-bio-8080-exec-4] INFO  o.s.j.support.SQLErrorCodesFactory [SQLErrorCodesFactory.java:126] SQLErrorCodes loaded: [DB2, Derby, H2, HSQL, Informix, MS-SQL, MySQL, Oracle, PostgreSQL, Sybase, Hana]
