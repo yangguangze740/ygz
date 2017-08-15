@@ -39,7 +39,7 @@
         <section class="sidebar">
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
-                <li><a href="${contextPath}/luju/jcPlan.action"><i class="fa fa-file-code-o" aria-hidden="true"></i><span>接车计划</span></a></li>
+                <li><a href="${contextPath}/zuoye/zyPlan.action"><i class="fa fa-file-code-o" aria-hidden="true"></i><span>接车计划</span></a></li>
             </ul>
         </section>
     </aside>
