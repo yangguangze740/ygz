@@ -2,6 +2,7 @@ package com.luju.ygz.test.service;
 
 import com.luju.pojo.JcPlanInfo;
 import java.util.List;
+import java.util.Set;
 
 public interface TestServiceI {
 
@@ -15,16 +16,10 @@ public interface TestServiceI {
     public void selectPlanData4HCJSL();
 
     /* select all processed data from jc_plan */
-    public List<JcPlanInfo> selectPlan4XD();
+    public Set<JcPlanInfo> selectAllData();
 
-    /* select path to determine the conflict */
-    public List<JcPlanInfo> selectPath();
-
-    /* 处理本务机数据 */
+    /* process bwj data */
     public void selectBwjData();
 
-    /* 获取本务机车辆*/
-    public List<JcPlanInfo> selectBwPlanAll();
-
-    public List<JcPlanInfo> selectBwPlanInPath();
+    public List<JcPlanInfo> selectBwPlanInPath(JcPlanInfo jcPlanInfo);
 }

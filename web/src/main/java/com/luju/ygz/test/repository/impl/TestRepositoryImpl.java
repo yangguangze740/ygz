@@ -108,28 +108,11 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectJcPlan4XD() {
-        String sql = "SELECT P.jcNumber, jcType, jcStartTime, jcEndTime, jcSource, jcDestination, jcXD, jcDH, I.jcPath,  group_concat(jcDCH) H, group_concat(jcImportant) T, group_concat(jcJSL) J FROM ygz_show.jc_plan P left join (select jcPath, jcDCH FROM ygz_show.jc_path_info) I on P.jcPath = CONVERT(I.jcPath USING utf8) COLLATE utf8_general_ci left join (select distinct jcNumber, jcJSL, jcImportant FROM ygz_show.jc_plan_detals) D on P.jcNumber = D.jcNumber WHERE jcType = '接车' AND jcXD = 'XD' group by jcNumber,jcPath,jcDestination,jcType order by jcStartTime";
+        String sql = "SELECT P.jcNumber,jcType,jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcPath,GROUP_CONCAT(jcImportant) T,GROUP_CONCAT(jcJSL) J FROM jc_plan P LEFT JOIN (SELECT DISTINCT jcNumber, jcJSL, jcImportant FROM jc_plan_detals) D ON P.jcNumber = D.jcNumber WHERE jcType = '接车' AND jcXD = 'XD' GROUP BY jcNumber , jcType, jcStartTime,jcEndTime,jcSource,jcDestination,jcXD,jcDH,jcPath ORDER BY jcStartTime";
         Object[] args = {};
 
         try {
             return mysqlJdbcTemplate.query(sql, args, new JcPlanALLRowMapper());
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("error");
-            return null;
-        }
-    }
-
-    @Override
-    public List<JcPlanInfo> selectJcPath() {
-        StringBuffer sql = new StringBuffer();
-        sql.append("SELECT bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjDestination,bwjPath, GROUP_CONCAT(jcDCH)");
-        sql.append(" D FROM bwj_plan P LEFT JOIN jc_path_info I ON P.bwjPath = I.jcPath GROUP BY bwjNumber , bwjType , bwjStartTime , bwjEndTime , bwjDestination , bwjPath ORDER BY bwjStartTime");
-
-        Object[] args = {};
-
-        try {
-            return mysqlJdbcTemplate.query(sql.toString(), args, new JcPlanPathRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("error");
@@ -153,7 +136,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectBwjData() {
-        String sql = "SELECT bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjSource FROM bwj_plan group by bwjNumber,bwjType,bwjStartTime,bwjEndTime,bwjSource order by bwjStartTime";
+        String sql = "SELECT jcNumber,jcType,jcStartTime,jcEndTime,jcSource FROM bwj_plan group by jcNumber,jcType,jcStartTime,jcEndTime,jcSource order by jcStartTime";
         Object[] args = {};
 
         try{
@@ -167,9 +150,12 @@ public class TestRepositoryImpl implements TestRepositoryI {
     }
 
     @Override
-    public List<JcPlanInfo> selectBwjDataInPath() {
-        String sql = "SELECT bwjNumber,bwjDestination,bwjPath FROM bwj_plan where bwjNumber = ? and bwjDestination = ?";
-        Object[] args = {};
+    public List<JcPlanInfo> selectBwjDataInPath(JcPlanInfo jcPlanInfo) {
+        String sql = "SELECT jcNumber,jcDestination,jcPath FROM bwj_plan where jcNumber = ? and jcDestination = ?";
+        Object[] args = {
+                jcPlanInfo.getTRAIN_NUM(),
+                jcPlanInfo.getTRACK_NUM()
+        };
 
         try{
             return mysqlJdbcTemplate.query(sql,args,new BwjPlanInPathRowMapper());
@@ -308,7 +294,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public boolean insertToBwjPlan4S(JcPlanInfo info) {
-        String sql = "INSERT INTO bwj_plan (planId, bwjNumber, bwjSource, bwjStartTime, bwjEndTime, bwjDestination, bwjType, bwjPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bwj_plan (planId, jcNumber, jcSource, jcStartTime, jcEndTime, jcDestination, jcType, jcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
 
                 uuid.uuidPrimaryKey(),
@@ -330,7 +316,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public boolean insertToBwjPlan4N(JcPlanInfo info) {
-        String sql = "INSERT INTO bwj_plan (planId, bwjNumber, bwjSource, bwjStartTime, bwjEndTime, bwjDestination, bwjType, bwjPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bwj_plan (planId, jcNumber, jcSource, jcStartTime, jcEndTime, jcDestination, jcType, jcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
 
                 uuid.uuidPrimaryKey(),
@@ -452,7 +438,6 @@ public class TestRepositoryImpl implements TestRepositoryI {
             userInfo.setJcXD(resultSet.getString("jcXD"));
             userInfo.setJcDH(resultSet.getString("jcDH"));
             userInfo.setJcPath(resultSet.getString("jcPath"));
-            userInfo.setJcDCH(resultSet.getString("H"));
             userInfo.setJcImportant(resultSet.getString("T"));
             userInfo.setJcJSL(resultSet.getString("J"));
 
@@ -485,17 +470,6 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     }
 
-    private class JcPlanPathRowMapper implements RowMapper<JcPlanInfo> {
-        public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
-            JcPlanInfo userInfo = new JcPlanInfo();
-
-            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
-            userInfo.setJcPath(resultSet.getString("jcPath"));
-
-            return userInfo;
-        }
-    }
-
     private class BwjPlanCopyRowMapper implements RowMapper<JcPlanInfo>{
         public JcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
             JcPlanInfo userInfo = new JcPlanInfo();
@@ -513,11 +487,11 @@ public class TestRepositoryImpl implements TestRepositoryI {
         public JcPlanInfo mapRow(ResultSet resultSet, int i)throws SQLException{
             JcPlanInfo userInfo = new JcPlanInfo();
 
-            userInfo.setTRAIN_NUM(resultSet.getString("bwjNumber"));
-            userInfo.setJcType(resultSet.getString("bwjType"));
-            userInfo.setJcStartTime(resultSet.getTimestamp("bwjStartTime"));
-            userInfo.setTIME(resultSet.getTimestamp("bwjEndTime"));
-            userInfo.setNODE_FOUR_WAY(resultSet.getString("bwjSource"));
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
+            userInfo.setJcType(resultSet.getString("jcType"));
+            userInfo.setJcStartTime(resultSet.getTimestamp("jcStartTime"));
+            userInfo.setTIME(resultSet.getTimestamp("jcEndTime"));
+            userInfo.setNODE_FOUR_WAY(resultSet.getString("jcSource"));
 
             return userInfo;
         }
@@ -527,9 +501,9 @@ public class TestRepositoryImpl implements TestRepositoryI {
         public JcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
             JcPlanInfo userInfo = new JcPlanInfo();
 
-            userInfo.setTRAIN_NUM(resultSet.getString("bwjNumber"));
+            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
             userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
-            userInfo.setJcPath(resultSet.getString("bwjPath"));
+            userInfo.setJcPath(resultSet.getString("jcPath"));
 
             return userInfo;
         }

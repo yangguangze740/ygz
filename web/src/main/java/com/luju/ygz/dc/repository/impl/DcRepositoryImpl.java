@@ -192,9 +192,12 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> selectJtDataInPath1() {
+    public List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo) {
         String sql = "SELECT dcNumber,dcSource,dcPath1 FROM dc_jt_plan where dcNumber = ? and dcSource = ?;";
-        Object[] args = {};
+        Object[] args = {
+                dcPlanInfo.getDcNumber(),
+                dcPlanInfo.getDcSource()
+        };
 
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcJtDataInPath1RowMapper());
@@ -206,15 +209,36 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> selectZmDataInPath1() {
+    public List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo) {
         String sql = "SELECT dcNumber,dcSource,dcPath1 FROM dc_zm_plan where dcNumber = ? and dcSource = ?";
-        Object[] args = {};
+        Object[] args = {
+                dcPlanInfo.getDcNumber(),
+                dcPlanInfo.getDcSource()
+        };
 
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcZmDataInPath1RowMapper());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("select jt path1 error");
+            System.out.println("select zm path1 error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo) {
+        String sql = "SELECT distinct dcNumber,dcSource,dcDestination,dcPath FROM dc_tc_plan where dcNumber = ? and dcSource = ? and dcDestination = ?";
+        Object[] args = {
+                dcPlanInfo.getDcNumber(),
+                dcPlanInfo.getDcSource(),
+                dcPlanInfo.getDcDestination()
+        };
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcTcDataInPath1RowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select tc path1 error");
             return null;
         }
     }
@@ -714,4 +738,16 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
+    private class DcTcDataInPath1RowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcSource(resultSet.getString("dcSource"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcPath1(resultSet.getString("dcPath"));
+
+            return userInfo;
+        }
+    }
 }

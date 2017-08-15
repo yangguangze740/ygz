@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class TestServiceImpl implements TestServiceI {
@@ -66,13 +67,11 @@ public class TestServiceImpl implements TestServiceI {
     }
 
     @Override
-    public List<JcPlanInfo> selectPlan4XD() {
-        return testRepository.selectJcPlan4XD();
-    }
+    public Set<JcPlanInfo> selectAllData() {
+        List<JcPlanInfo> list4jc = testRepository.selectJcPlan4XD();
+        List<JcPlanInfo> list4bwj = testRepository.selectBwjData();
 
-    @Override
-    public List<JcPlanInfo> selectPath() {
-        return testRepository.selectJcPath();
+        return null;
     }
 
     @Override
@@ -87,12 +86,7 @@ public class TestServiceImpl implements TestServiceI {
     }
 
     @Override
-    public List<JcPlanInfo> selectBwPlanAll() {
-        return testRepository.selectBwjData();
-    }
-
-    @Override
-    public List<JcPlanInfo> selectBwPlanInPath() {
-        return testRepository.selectBwjDataInPath();
+    public List<JcPlanInfo> selectBwPlanInPath(JcPlanInfo jcPlanInfo) {
+        return testRepository.selectBwjDataInPath(jcPlanInfo);
     }
 }

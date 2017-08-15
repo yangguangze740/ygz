@@ -26,9 +26,6 @@ public interface TestRepositoryI {
     /* select all processed data */
     public List<JcPlanInfo> selectJcPlan4XD();
 
-    /* select path data to determine the conflict */
-    public List<JcPlanInfo> selectJcPath();
-
     /* process bwj data*/
     public List<JcPlanInfo> selectBwjPlan();
 
@@ -36,7 +33,7 @@ public interface TestRepositoryI {
     public List<JcPlanInfo> selectBwjData();
 
     /* select bwj data path*/
-    public List<JcPlanInfo> selectBwjDataInPath();
+    public List<JcPlanInfo> selectBwjDataInPath(JcPlanInfo jcPlanInfo);
 
     /* data insert from ora to mysql*/
     public boolean insertToPlanCopy(JcPlanInfo info);

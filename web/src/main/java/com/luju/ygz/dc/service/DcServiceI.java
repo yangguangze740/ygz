@@ -29,8 +29,11 @@ public interface DcServiceI {
     public Set<DcPlanInfo> processAllData(ListToSet comparatorSet);
 
     /* select jt data*/
-    public List<DcPlanInfo> selectJtDataInPath1();
+    public List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* select zm data*/
-    public List<DcPlanInfo> selectZmDataInPath1();
+    public List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
+
+    /* select tc data*/
+    public List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
 }

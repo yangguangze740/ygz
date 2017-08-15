@@ -1,6 +1,7 @@
 package luju.common.util;
 
 import com.luju.pojo.DcPlanInfo;
+import com.luju.pojo.JcPlanInfo;
 
 import java.util.*;
 
@@ -24,16 +25,17 @@ public class ListToSet {
         set.addAll(list4zc);
         set.addAll(list4tc);
 
-        System.out.println("-------------");
-        System.out.println(set);
-
-        for(DcPlanInfo dcPlanInfo : set) {
-            System.out.println(dcPlanInfo.getDcType());
-            System.out.println(dcPlanInfo.getDcStartTime());
-        }
-
         return set;
     }
 
+    public Set<JcPlanInfo> comparatorSet4Jc(List<JcPlanInfo> list4jt1,
+                                         List<JcPlanInfo> list4jt) {
+
+        SortedSet<JcPlanInfo> set = new TreeSet<JcPlanInfo>();
+
+        set.addAll(list4jt1);
+
+        return set;
+    }
 }
 
