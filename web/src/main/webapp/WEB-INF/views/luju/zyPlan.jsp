@@ -60,17 +60,17 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${dcSet}" var="record" varStatus="status">
+                                <c:forEach items="${allDataSet}" var="record" varStatus="status">
                                         <tr>
                                             <td>${status.index + 1}</td>
-                                            <td>${record.dcNumber}</td>
-                                            <td>${record.dcType}</td>
-                                            <td>${record.dcStartTime}</td>
-                                            <td>${record.dcEndTime}</td>
+                                            <td>${record.number}</td>
+                                            <td>${record.type}</td>
+                                            <td>${record.startTime}</td>
+                                            <td>${record.endTime}</td>
                                             <td></td>
-                                            <td>${record.dcDestination}</td>
+                                            <td>${record.destination}</td>
                                             <td></td>
-                                            <td><select class="form-control" name="zyPlan">
+                                            <td><select class="form-control" name="zyPlan" id = "zyId">
                                                 <option value="0">请选择状态</option>
                                                 <option value="6">已完成</option>
                                             </select></td>
@@ -236,6 +236,22 @@
 
     <script type="text/javascript">
         $(function () {
+            function zyPlan(condition) {
+                function loadData(result) {
+
+                }
+                $.ajax({
+                    type:'post',
+                    contentType:'application/x-www-form-urlencoded',
+                    data:condition,
+                    dataType:'json',
+                    url:'${contextPath}/luju/jcPath.action',
+                    success:function (result) {
+                        loadData(result)
+                    }
+                })
+
+            }
             // 颜色rgb转换为16进制
             function RGBToHex(rgb){
                 rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);

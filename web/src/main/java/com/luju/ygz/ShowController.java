@@ -62,6 +62,7 @@ public class ShowController {
         List<ResultInfo> tcList = dcService.processTcData();
 
         Set<ResultInfo> allDataSet = listToSet.comparatorSet(jcList,bwjList,jt1List,jt2List,zm1List,zm2List,zcList,tcList);
+        mav.addObject("allDataSet",allDataSet);
 
         return mav;
     }
