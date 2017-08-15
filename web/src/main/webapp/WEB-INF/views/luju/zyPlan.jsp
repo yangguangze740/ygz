@@ -64,13 +64,16 @@
                                         <tr>
                                             <td>${status.index + 1}</td>
                                             <td>${record.dcNumber}</td>
-                                            <td>${record. dcType}</td>
-                                            <td>${record. dcStartTime}</td>
-                                            <td>${record. dcMidTime}</td>
-                                            <td>${record. dcMidTime}</td>
+                                            <td>${record.dcType}</td>
+                                            <td>${record.dcStartTime}</td>
+                                            <td>${record.dcEndTime}</td>
                                             <td></td>
+                                            <td>${record.dcDestination}</td>
                                             <td></td>
-                                            <td></td>
+                                            <td><select class="form-control" name="zyPlan">
+                                                <option value="0">请选择状态</option>
+                                                <option value="6">已完成</option>
+                                            </select></td>
                                             <td></td>
                                             <td></td>
                                         </tr>
@@ -88,11 +91,6 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4ErrorTable">
-                                <%--<c:forEach items="${list}" var="record">--%>
-                                <%--<tr>--%>
-                                <%--<td value="${record.TRAIN_NUM}" id="${record.TRAIN_NUM}">${record.TRAIN_NUM}</td>--%>
-                                <%--</tr>--%>
-                                <%--</c:forEach>--%>
                                 <tr>
                                     <td>
                                         2&nbsp行超长4、5道接车
@@ -126,11 +124,6 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4CCCXTable">
-                                <%--<c:forEach items="${list}" var="record">--%>
-                                <%--<tr>--%>
-                                <%--<td value="${record.TRAIN_NUM}" id="${record.TRAIN_NUM}">${record.TRAIN_NUM}</td>--%>
-                                <%--</tr>--%>
-                                <%--</c:forEach>--%>
                                 <tr>
                                     <td>
                                         10&nbsp行禁峰优先2、3、4道接车
@@ -153,11 +146,6 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
-                                <%--<c:forEach items="${list}" var="record">--%>
-                                <%--<tr>--%>
-                                <%--<td value="${record.TRAIN_NUM}" id="${record.TRAIN_NUM}">${record.TRAIN_NUM}</td>--%>
-                                <%--</tr>--%>
-                                <%--</c:forEach>--%>
                                 <tr>
                                     <td>
                                         2&nbsp;行分区错误

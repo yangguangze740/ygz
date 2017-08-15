@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Set;
 
 @Controller
-@RequestMapping("/ygz")
+@RequestMapping("/luju")
 public class ShowController {
 
     @Autowired
@@ -41,18 +41,19 @@ public class ShowController {
         String admin = "admin";
 
         if (username.equals(admin) && password.equals(admin)) {
-            return "redirect:/luju/jcPlan.action";
+            return "redirect:/luju/zyPlan.action";
         } else {
             return "redirect:/luju/route.action";
         }
     }
 
-    @RequestMapping("/showPlan")
+    @RequestMapping("/zyPlan")
     public ModelAndView allJcData(JcPlanInfo info) {
-        ModelAndView mav = new ModelAndView("/luju/jcPlan");
+        ModelAndView mav = new ModelAndView("luju/zyPlan");
 
         Set<JcPlanInfo> jcSet = service.selectAllData();
         Set<DcPlanInfo> dcSet = dcService.processAllData(comparatorSet);
+        mav.addObject("dcSet",dcSet);
 
         return mav;
     }
