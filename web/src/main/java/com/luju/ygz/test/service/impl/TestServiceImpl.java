@@ -90,7 +90,7 @@ public class TestServiceImpl implements TestServiceI {
     }
 
     @Override
-    public List<JcPlanInfo> selectBwPlanInPath(JcPlanInfo jcPlanInfo) {
+    public List<ResultInfo> selectBwPlanInPath(JcPlanInfo jcPlanInfo) {
         return testRepository.selectBwjDataInPath(jcPlanInfo);
     }
 }

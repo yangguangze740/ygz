@@ -25,5 +25,5 @@ public interface TestServiceI {
     /* process bwj data */
     void selectBwjData();
 
-    List<JcPlanInfo> selectBwPlanInPath(JcPlanInfo jcPlanInfo);
+    List<ResultInfo> selectBwPlanInPath(JcPlanInfo jcPlanInfo);
 }

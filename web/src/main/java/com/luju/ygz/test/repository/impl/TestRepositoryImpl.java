@@ -151,7 +151,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
     }
 
     @Override
-    public List<JcPlanInfo> selectBwjDataInPath(JcPlanInfo jcPlanInfo) {
+    public List<ResultInfo> selectBwjDataInPath(JcPlanInfo jcPlanInfo) {
         String sql = "SELECT jcNumber,jcDestination,jcPath FROM bwj_plan where jcNumber = ? and jcDestination = ?";
         Object[] args = {
                 jcPlanInfo.getTRAIN_NUM(),
@@ -498,13 +498,13 @@ public class TestRepositoryImpl implements TestRepositoryI {
         }
     }
 
-    private class BwjPlanInPathRowMapper implements RowMapper<JcPlanInfo>{
-        public JcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
-            JcPlanInfo userInfo = new JcPlanInfo();
+    private class BwjPlanInPathRowMapper implements RowMapper<ResultInfo>{
+        public ResultInfo mapRow(ResultSet resultSet,int i)throws SQLException{
+            ResultInfo userInfo = new ResultInfo();
 
-            userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
-            userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
-            userInfo.setJcPath(resultSet.getString("jcPath"));
+            userInfo.setNumber(resultSet.getString("jcNumber"));
+            userInfo.setDestination(resultSet.getString("jcDestination"));
+            userInfo.setPath(resultSet.getString("jcPath"));
 
             return userInfo;
         }

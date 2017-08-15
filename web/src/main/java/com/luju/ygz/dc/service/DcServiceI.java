@@ -45,11 +45,11 @@ public interface DcServiceI {
     List<ResultInfo> processTcData();
 
     /* select jt data in path*/
-    List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
+    List<ResultInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* select zm data in path*/
-    List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
+    List<ResultInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* select tc data in path*/
-    List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
+    List<ResultInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
 }

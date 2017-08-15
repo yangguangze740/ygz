@@ -45,13 +45,13 @@ public interface DcRepositoryI {
 
 
     /* select jt data for ajax in path1*/
-    List<DcPlanInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
+    List<ResultInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* select zm data for ajax in path1*/
-    List<DcPlanInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
+    List<ResultInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* select tc data for ajax in path1*/
-    List<DcPlanInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
+    List<ResultInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
 
     /* data insert from ora to mysql*/
     boolean insertToPlanCopy(DcPlanInfo info);

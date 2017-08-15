@@ -2,13 +2,16 @@ package luju.common.util;
 
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.JcPlanInfo;
+import com.luju.pojo.ResultInfo;
 import org.joda.time.DateTime;
 
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DataProcess {
 
@@ -405,6 +408,20 @@ public class DataProcess {
             list.get(k).setDcTF(TF);
         }
         return list;
+    }
+
+    public List<ResultInfo> selectPath (List<ResultInfo> list, List<ResultInfo> pathList) {
+
+        for (int i = 0; i<list.size();i++) {
+            pathList.get(i).setNumber(list.get(i).getNumber());
+            pathList.get(i).setSource(list.get(i).getSource());
+            pathList.get(i).setPath(list.get(i).getPath());
+        }
+        for (int k = 0; k<pathList.size(); k++) {
+            System.out.println(pathList.get(k));
+        }
+        return pathList;
+
     }
 
     public Timestamp time(String time) {
