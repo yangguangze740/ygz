@@ -1,51 +1,23 @@
 package com.luju.ygz;
 
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
+import com.luju.pojo.DcPlanInfo;
+
+import java.util.*;
 
 public class TestString {
 
     public static void main(String[] args) {
-        Set<Person> set = new TreeSet<Person>(new PersonComparator());
+        List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
+        Set<String> set=new HashSet<String>();
+        Collections.sort(list, new Comparator<Object>() {
 
-        Person p1 =  new Person(10);
-        Person p2 =  new Person(20);
-        Person p3 =  new Person(30);
-        Person p4 =  new Person(40);
+            @Override
+            public int compare(Object o1, Object o2) {
 
-        set.add(p1);
-        set.add(p2);
-        set.add(p3);
-        set.add(p4);
-
-        for(Iterator<Person> iterator = set.iterator();iterator.hasNext();){
-            System.out.print(iterator.next().score+" ");
-        }
+                return o2.toString().compareTo(o1.toString());
+            }
+        });
     }
-}
-
-class Person{
-    int score;
-
-    public Person(int score){
-        this.score = score;
-    }
-
-    public String toString(){
-        return String.valueOf(this.score);
-    }
-}
-
-class PersonComparator implements Comparator<Person>{
-
-    @Override
-    public int compare(Person o1, Person o2) {
-
-        return o1.score - o2.score;
-    }
-
 }
 
 //        String fu = "-";

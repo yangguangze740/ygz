@@ -1,10 +1,11 @@
 package com.luju.ygz.dc.service;
 
 import com.luju.pojo.DcPlanInfo;
-import luju.common.util.ComparatorSet;
 import luju.common.util.DataProcess;
+import luju.common.util.ListToSet;
 
 import java.util.List;
+import java.util.Set;
 
 public interface DcServiceI {
     
@@ -25,20 +26,11 @@ public interface DcServiceI {
     public void selectZcPlanData(DataProcess dataProcess);
 
     /* select all data and process */
-    public List<DcPlanInfo> processAllData(ComparatorSet comparatorSet);
-
+    public Set<DcPlanInfo> processAllData(ListToSet comparatorSet);
 
     /* select jt data*/
-    public List<DcPlanInfo> selectJtData1();
-    public List<DcPlanInfo> selectJtData2();
     public List<DcPlanInfo> selectJtDataInPath1();
 
     /* select zm data*/
-    public List<DcPlanInfo> selectZmData1();
-    public List<DcPlanInfo> selectZmData2();
     public List<DcPlanInfo> selectZmDataInPath1();
-
-    /* select zc data*/
-    public List<DcPlanInfo> selectZcData();
-
 }

@@ -5,6 +5,7 @@ import com.luju.ygz.dc.repository.DcRepositoryI;
 import com.luju.ygz.dc.service.DcServiceI;
 import luju.common.util.ComparatorSet;
 import luju.common.util.DataProcess;
+import luju.common.util.ListToSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -79,27 +80,16 @@ public class DcServiceImpl implements DcServiceI {
 
 
     @Override
-    public List<DcPlanInfo> processAllData(ComparatorSet comparatorSet) {
+    public Set<DcPlanInfo> processAllData(ListToSet comparatorSet) {
         List<DcPlanInfo> list4jt1 = dcRepository.selectJtData4XD1();
         List<DcPlanInfo> list4jt2 = dcRepository.selectJtData4XD2();
         List<DcPlanInfo> list4zm1 = dcRepository.selectZmData4XD1();
         List<DcPlanInfo> list4zm2 = dcRepository.selectZmData4XD2();
         List<DcPlanInfo> list4zc = dcRepository.selectZcData();
         List<DcPlanInfo> list4tc = dcRepository.selectTcData();
-//        Set<DcPlanInfo> set = comparatorSet.comparatorSet(list4jt1,list4jt2,list4zm1,list4zm2,list4zc,list4tc);
+        Set<DcPlanInfo> set = comparatorSet.comparatorSet(list4jt1,list4jt2,list4zm1,list4zm2,list4zc,list4tc);
 
-        return null;
-    }
-
-
-    @Override
-    public List<DcPlanInfo> selectJtData1() {
-        return dcRepository.selectJtData4XD1();
-    }
-
-    @Override
-    public List<DcPlanInfo> selectJtData2() {
-        return dcRepository.selectJtData4XD2();
+        return set;
     }
 
     @Override
@@ -108,22 +98,7 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public List<DcPlanInfo> selectZmData1() {
-        return dcRepository.selectZmData4XD1();
-    }
-
-    @Override
-    public List<DcPlanInfo> selectZmData2() {
-        return dcRepository.selectZmData4XD2();
-    }
-
-    @Override
     public List<DcPlanInfo> selectZmDataInPath1() {
         return dcRepository.selectZmDataInPath1();
-    }
-
-    @Override
-    public List<DcPlanInfo> selectZcData() {
-        return dcRepository.selectZcData();
     }
 }

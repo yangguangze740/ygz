@@ -611,7 +611,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
             userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
-            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcMidTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDestination(resultSet.getString("dcDestination"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
@@ -626,7 +626,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             DcPlanInfo userInfo = new DcPlanInfo();
 
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcMidTime"));
             userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDestination(resultSet.getString("dcDestination"));
@@ -645,7 +645,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
             userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
-            userInfo.setDcMidTime(resultSet.getTimestamp("dcMidTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcMidTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDestination(resultSet.getString("dcDestination"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
@@ -660,7 +660,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             DcPlanInfo userInfo = new DcPlanInfo();
 
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcMidTime1(resultSet.getTimestamp("dcMidTime1"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcMidTime1"));
             userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDestination(resultSet.getString("dcDestination"));
@@ -677,7 +677,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             DcPlanInfo userInfo = new DcPlanInfo();
 
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
-            userInfo.setDcMidTime1(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
             userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcSource(resultSet.getString("dcSource"));
