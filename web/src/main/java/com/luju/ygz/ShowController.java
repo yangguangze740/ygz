@@ -2,6 +2,7 @@ package com.luju.ygz;
 
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.JcPlanInfo;
+import com.luju.pojo.ResultInfo;
 import com.luju.ygz.dc.service.DcServiceI;
 import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.ConstantFields;
@@ -48,12 +49,19 @@ public class ShowController {
     }
 
     @RequestMapping("/zyPlan")
-    public ModelAndView allJcData(JcPlanInfo info) {
+    public ModelAndView allJcData(ListToSet listToSet) {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
-        Set<JcPlanInfo> jcSet = service.selectAllData();
-        Set<DcPlanInfo> dcSet = dcService.processAllData(comparatorSet);
-        mav.addObject("dcSet",dcSet);
+        List<ResultInfo> jcList = service.processJcData();
+        List<ResultInfo> bwjList = service.processBwjData();
+        List<ResultInfo> jt1List = dcService.processJt1Data();
+        List<ResultInfo> jt2List = dcService.processJt2Data();
+        List<ResultInfo> zm1List = dcService.processZm1Data();
+        List<ResultInfo> zm2List = dcService.processZm2Data();
+        List<ResultInfo> zcList = dcService.processZcData();
+        List<ResultInfo> tcList = dcService.processTcData();
+
+        Set<ResultInfo> allDataSet = listToSet.comparatorSet(jcList,bwjList,jt1List,jt2List,zm1List,zm2List,zcList,tcList);
 
         return mav;
     }
