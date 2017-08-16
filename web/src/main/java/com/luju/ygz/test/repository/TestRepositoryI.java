@@ -64,4 +64,5 @@ public interface TestRepositoryI {
     List<DcPlanInfo> selectBwjPlanNew();
 
     List<DcPlanInfo> selectJcPlanNew();
+
 }

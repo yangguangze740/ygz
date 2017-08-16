@@ -142,7 +142,7 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public void processDcData(DataProcess dataProcess) {
+    public List<DcPlanInfo> processDcData(DataProcess dataProcess) {
         List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
 
         list.addAll(dataProcess.jtDataList1(dcRepository.selectJtPlan()));
@@ -153,6 +153,13 @@ public class DcServiceImpl implements DcServiceI {
         list.addAll(dcRepository.selectTcPlanNew());
         list.addAll(dataProcess.bwjTimeListNew(jcRepository.selectBwjPlanNew()));
         list.addAll(dataProcess.jcDataList(jcRepository.selectJcPlanNew()));
+
+        boolean b = dcRepository.insertDcData(list);
+        System.out.println(b);
+
+        list = dcRepository.selectDcData();
+
+        return list;
 
     }
 }

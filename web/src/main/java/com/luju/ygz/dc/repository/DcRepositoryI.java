@@ -86,4 +86,8 @@ public interface DcRepositoryI {
     boolean insertTcDataNew(DcPlanInfo info);
 
     List<DcPlanInfo> selectTcPlanNew();
+
+    boolean insertDcData(final List<DcPlanInfo> dcPlanInfos);
+
+    List<DcPlanInfo> selectDcData();
 }

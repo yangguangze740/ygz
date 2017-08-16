@@ -60,19 +60,26 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${allDataSet}" var="record" varStatus="status">
+                                    <c:forEach items="${allList}" var="record" varStatus="status">
                                         <tr style="text-align: center;">
                                             <td>${status.index + 1}</td>
-                                            <td>${record.number}</td>
-                                            <td>${record.type}</td>
-                                            <td>${record.startTime}</td>
-                                            <td>${record.endTime}</td>
-                                            <td>${record.source}</td>
-                                            <td>${record.destination}</td>
-                                            <td>${record.dj}</td>
-                                            <td>${record.important}</td>
-                                            <td>${record.jsl}</td>
-                                            <%--<td>${record.dj}</td>--%>
+                                            <td>${record.dcNumber}</td>
+                                            <td>${record.dcType}</td>
+                                            <td>${record.dcStartTime}</td>
+                                            <td>${record.dcEndTime}</td>
+                                            <td>${record.dcSource}</td>
+                                            <td>${record.dcDestination}
+                                                <%--<c:if test="${record.dcDestination == null} && ${record.dcType == '本务机'}">--%>
+                                                    <%--<select class="form-control">--%>
+                                                        <%--<option value="0">南入库</option>--%>
+                                                        <%--<option value="1">北入库</option>--%>
+                                                    <%--</select>--%>
+                                                <%--</c:if>--%>
+                                            </td>
+                                            <td>${record.dcDj}</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

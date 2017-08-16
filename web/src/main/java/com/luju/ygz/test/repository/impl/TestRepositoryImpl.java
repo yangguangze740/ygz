@@ -559,7 +559,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
             userInfo.setDcEndTime(resultSet.getTimestamp("jcEndTime"));
             userInfo.setDcXD(resultSet.getString("jcXD"));
             userInfo.setDcDH(resultSet.getString("jcDH"));
-            userInfo.setDcDestination(resultSet.getString("jcDestination"));
+            userInfo.setDcSource(resultSet.getString("jcDestination"));
 
             return userInfo;
         }

@@ -55,5 +55,5 @@ public interface DcServiceI {
 
     void processTcDataNew(DataProcess dataProcess);
 
-    void processDcData(DataProcess dataProcess);
+    List<DcPlanInfo> processDcData(DataProcess dataProcess);
 }

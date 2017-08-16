@@ -29,6 +29,24 @@ public class DcPlanInfo {
     private String dcPath1;
     private String dcPath2;
     private int dcCS6;
+    private String dcId;
+    private String dcPath;
+
+    public String getDcPath() {
+        return dcPath;
+    }
+
+    public void setDcPath(String dcPath) {
+        this.dcPath = dcPath;
+    }
+
+    public String getDcId() {
+        return dcId;
+    }
+
+    public void setDcId(String dcId) {
+        this.dcId = dcId;
+    }
     private float jcSumHc;
 
     public float getJcSumHc() {
