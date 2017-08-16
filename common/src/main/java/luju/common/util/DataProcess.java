@@ -30,7 +30,8 @@ public class DataProcess {
     int cs;
     int cs1;
     int cs6; // whether > 6
-    boolean b6;
+    boolean isB6;
+
 
     public List<JcPlanInfo> jcTimeList(List<JcPlanInfo> list) {
 
@@ -337,19 +338,21 @@ public class DataProcess {
                             dcd = fields[j].get(oi).toString();
                         }
                         if (fields[j].get(oi).toString().equals(dcd)) {
-                            b6 = true;
                             dcd = fields[j].get(oi).toString();
                         } else {
-                            b6 = false;
+                            dcd = fields[j].get(oi).toString();
+                            isB6 = false;
                             cs1 = 0;
                         }
                     }
                     if(fields[j].getName().equals("dcCS")){
 
                         cs1 += Integer.parseInt(fields[j].get(oi).toString());
-                        if (cs1 > 6) {
+                        if (cs1 > 6 && isB6 == false) {
                             cs6 = 1;
-                        } else {
+                            isB6 = true;
+                        }
+                        if (cs1 < 6 && isB6 == false) {
                             cs6 = 0;
                         }
 
@@ -423,6 +426,268 @@ public class DataProcess {
             }
         }
         return pathList;
+    }
+
+    // 8.16 new code
+    public List<DcPlanInfo> jtDataList1(List<DcPlanInfo> list) {
+        String des = null;
+
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if (fields[j].getName().equals("dcStartTime")) {
+
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        long t = date.getMillis()+ConstantFields.JT1_TIME;
+                        long t1 = date.getMillis()+ConstantFields.JT2_TIME;
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                        ts2 = Timestamp.valueOf(simpleDateFormat.format(t1));
+                    }
+                    if(fields[j].getName().equals("dcSource")){
+                        des = fields[j].get(oi).toString();
+                        XD = des.substring(0,2);
+                        DH = des.substring(2,4);
+                    }
+                    if(fields[j].getName().equals("dcTFX")){
+                        String de = fields[j].get(oi).toString();
+                        TF = de.substring(0,2);
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcStartTime(ts1);
+            list.get(k).setDcEndTime(ts2);
+            list.get(k).setDcTF(TF);
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcDestination(des);
+            list.get(k).setDcSource(null);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> jtDataList2(List<DcPlanInfo> list) {
+        String des = null;
+
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if (fields[j].getName().equals("dcStartTime")) {
+
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        long t = date.getMillis()+ConstantFields.JT2_TIME;
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                    }
+                    if(fields[j].getName().equals("dcSource")){
+                        des = fields[j].get(oi).toString();
+                        XD = des.substring(0,2);
+                        DH = des.substring(2,4);
+                        if(Integer.parseInt(DH) == 2 || Integer.parseInt(DH) == 3 || Integer.parseInt(DH) == 4){
+                            end = ConstantFields.XT2;//2、3、4南
+                        } else {
+                            end = ConstantFields.XT1;//5、6、7北
+                        }
+                    }
+                    if(fields[j].getName().equals("dcTFX")){
+                        String de = fields[j].get(oi).toString();
+                        TF = de.substring(0,2);
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcStartTime(ts1);
+            list.get(k).setDcTF(TF);
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcDestination(end);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> zmDataList1(List<DcPlanInfo> list) {
+        String des = null;
+
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if (fields[j].getName().equals("dcStartTime")) {
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        if (list.get(k).getDcDj() == 1 || list.get(k).getDcDj() == 3) {
+                            long t = date.getMillis()+ConstantFields.ZM1_TIME;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                            ts2 = Timestamp.valueOf(simpleDateFormat.format(t));
+                        } else {
+                            long t = date.getMillis()+ConstantFields.ZM3_TIME;
+                            long t1 = date.getMillis()+ConstantFields.ZM4_TIME;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                            ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                            ts2 = Timestamp.valueOf(simpleDateFormat.format(t1));
+                        }
+                    }
+                    if(fields[j].getName().equals("dcSource")){
+                        des = fields[j].get(oi).toString();
+                        XD = des.substring(0,2);
+                        DH = des.substring(2,4);
+                    }
+                    if(fields[j].getName().equals("dcTFX")){
+                        String de = fields[j].get(oi).toString();
+                        TF = de.substring(0,2);
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcStartTime(ts1);
+            list.get(k).setDcEndTime(ts2);
+            list.get(k).setDcTF(TF);
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcDestination(des);
+            list.get(k).setDcSource(null);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> zmDataList2(List<DcPlanInfo> list) {
+        String des = null;
+
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if (fields[j].getName().equals("dcStartTime")) {
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        if (list.get(k).getDcDj() == 1 || list.get(k).getDcDj() == 3) {
+                            long t = date.getMillis()+ConstantFields.ZM2_TIME;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                            ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                        } else {
+                            long t = date.getMillis()+ConstantFields.ZM5_TIME;
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                            ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
+                        }
+                    }
+                    if(fields[j].getName().equals("dcSource")){
+                        des = fields[j].get(oi).toString();
+                        XD = des.substring(0,2);
+                        DH = des.substring(2,4);
+                        if(Integer.parseInt(DH) == 3 || Integer.parseInt(DH) == 2 || Integer.parseInt(DH) == 4){
+                            end = ConstantFields.XT2;//2、3、4南
+                        } else {
+                            end = ConstantFields.XT1;//5、6、7北
+                        }
+                    }
+                    if(fields[j].getName().equals("dcTFX")){
+                        String de = fields[j].get(oi).toString();
+                        TF = de.substring(0,2);
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcStartTime(ts1);
+            list.get(k).setDcTF(TF);
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcDestination(end);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> bwjTimeListNew(List<DcPlanInfo> list) {
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcEndTime")){
+                        fields[j].get(oi).toString();
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        long time = date.getMillis()+ConstantFields.BWJ1_TIME;
+                        long time1 = date.getMillis()+ConstantFields.BWJ2_TIME;
+                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        ts1 = Timestamp.valueOf(simpleDateFormat1.format(time));
+                        ts2 = Timestamp.valueOf(simpleDateFormat1.format(time1));
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcStartTime(ts1);
+            list.get(k).setDcEndTime(ts2);
+            list.get(k).setDcType(ConstantFields.TYPE_BWJ);
+        }
+        return list;
+
+    }
+
+    public List<DcPlanInfo> jcDataList(List<DcPlanInfo> list) {
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcDestination")){
+                        String des = fields[j].get(oi).toString();
+                        XD = des.substring(0,2);
+                        DH = des.substring(2,4);
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+        }
+        return list;
     }
 
     public Timestamp time(String time) {

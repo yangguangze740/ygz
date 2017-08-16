@@ -513,6 +513,82 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
+    @Override
+    public boolean insertTcPlanNew(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_tc_plan (tcId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDestination, dcDj, dcTFX, dcTF, dcXD, dcDH, dcSWH, dcCS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getDcNumber(),
+                info.getDcStartTime(),
+                info.getDcEndTime(),
+                info.getDcType(),
+                info.getDcSource(),
+                info.getDcDestination(),
+                info.getDcDj(),
+                info.getDcTFX(),
+                info.getDcTF(),
+                info.getDcXD(),
+                info.getDcDH(),
+                info.getDcSWH(),
+                info.getDcCS()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert tc error");
+            return false;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> processTcDataNew() {
+        String sql = "SELECT tcId,dcDestination,dcSWH,dcCS FROM dc_tc_plan order by dcDestination,dcSWH";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcTcDataNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public boolean insertTcDataNew(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_tc_six (tcId, dcDestination, dcSWH, dcCS, dcCS6) VALUES (?, ?, ?, ?, ?)";
+        Object[] args = {
+                info.getJtId(),
+                info.getDcDestination(),
+                info.getDcSWH(),
+                info.getDcCS(),
+                info.getDcCS6()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert tc data error");
+            return false;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectTcPlanNew() {
+        String sql = "SELECT distinct dcNumber,dcStartTime,dcEndTime,dcType,dcSource,S.dcDestination,dcDj,dcTFX,dcTF,dcXD,dcDH,dcCS6 FROM dc_tc_plan P left join dc_tc_six S on P.tcId = S.tcId where dcCS6 = 1 ORDER BY dcDestination";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcTcPlanNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select tc data error");
+            return null;
+        }
+    }
+
+
     private class DcPlanCopyRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
@@ -760,6 +836,43 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setSource(resultSet.getString("dcSource"));
             userInfo.setDestination(resultSet.getString("dcDestination"));
             userInfo.setPath(resultSet.getString("dcPath"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcTcDataNewRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setJtId(resultSet.getString("dcNumber"));
+            userInfo.setDcDestination(resultSet.getString("dcStartTime"));
+            userInfo.setDcSWH(resultSet.getInt("dcEndTime"));
+            userInfo.setDcCS(resultSet.getInt("dcSource"));
+            userInfo.setDcCS(resultSet.getInt("dcDestination"));
+            userInfo.setDcCS(resultSet.getInt("dcType"));
+            userInfo.setDcCS(resultSet.getInt("dcType"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcTcPlanNewRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcSource(resultSet.getString("dcSource"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcTFX(resultSet.getString("dcTFX"));
+            userInfo.setDcTF(resultSet.getString("dcTF"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+            userInfo.setDcDH(resultSet.getString("dcDH"));
+            userInfo.setDcCS6(resultSet.getInt("dcCS6"));
 
             return userInfo;
         }

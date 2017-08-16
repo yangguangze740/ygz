@@ -52,4 +52,8 @@ public interface DcServiceI {
 
     /* select tc data in path*/
     List<ResultInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
+
+    void processTcDataNew(DataProcess dataProcess);
+
+    void processDcData(DataProcess dataProcess);
 }

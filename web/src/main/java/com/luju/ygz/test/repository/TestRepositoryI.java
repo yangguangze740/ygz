@@ -1,5 +1,6 @@
 package com.luju.ygz.test.repository;
 
+import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.JcPlanInfo;
 import com.luju.pojo.ResultInfo;
 
@@ -59,4 +60,8 @@ public interface TestRepositoryI {
     boolean insertToBwjPlan4S(JcPlanInfo info);
 
     int deletePlanCopy();
+
+    List<DcPlanInfo> selectBwjPlanNew();
+
+    List<DcPlanInfo> selectJcPlanNew();
 }
