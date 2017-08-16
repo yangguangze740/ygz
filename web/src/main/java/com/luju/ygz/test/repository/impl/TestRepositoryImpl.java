@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -123,7 +124,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectBwjPlan() {
-        String sql = "SELECT jcNumber,jcType,jcEndTime,jcDestination FROM jc_plan";
+        String sql = "SELECT jcNumber,jcType,jcEndTime,jcXD,jcDH,jcDestination FROM jc_plan";
         Object[] args = {};
 
         try {
@@ -137,7 +138,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<ResultInfo> selectBwjData() {
-        String sql = "SELECT jcNumber,jcType,jcStartTime,jcEndTime,jcSource FROM bwj_plan group by jcNumber,jcType,jcStartTime,jcEndTime,jcSource order by jcStartTime";
+        String sql = "SELECT jcNumber,jcType,jcStartTime,jcEndTime,jcSource FROM bwj_plan where jcXD = 'XD' group by jcNumber,jcType,jcStartTime,jcEndTime,jcSource order by jcStartTime";
         Object[] args = {};
 
         try{
@@ -295,7 +296,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public boolean insertToBwjPlan4S(JcPlanInfo info) {
-        String sql = "INSERT INTO bwj_plan (planId, jcNumber, jcSource, jcStartTime, jcEndTime, jcDestination, jcType, jcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bwj_plan (planId, jcNumber, jcSource, jcStartTime, jcEndTime, jcDestination, jcType, jcXD, jcDH,jcPath) VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
 
                 uuid.uuidPrimaryKey(),
@@ -305,6 +306,8 @@ public class TestRepositoryImpl implements TestRepositoryI {
                 info.getTIME(),
                 ConstantFields.BWJDS,
                 info.getJcType(),
+                info.getJcXD(),
+                info.getJcDH(),
                 ConstantFields.S+info.getTRACK_NUM()
         };
         try {
@@ -317,7 +320,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public boolean insertToBwjPlan4N(JcPlanInfo info) {
-        String sql = "INSERT INTO bwj_plan (planId, jcNumber, jcSource, jcStartTime, jcEndTime, jcDestination, jcType, jcPath) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO bwj_plan (planId, jcNumber, jcSource, jcStartTime, jcEndTime, jcDestination, jcType,jcXD, jcDH, jcPath) VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
 
                 uuid.uuidPrimaryKey(),
@@ -327,6 +330,8 @@ public class TestRepositoryImpl implements TestRepositoryI {
                 info.getTIME(),
                 ConstantFields.BWJDN,
                 info.getJcType(),
+                info.getJcXD(),
+                info.getJcDH(),
                 ConstantFields.N+info.getTRACK_NUM()
         };
         try {
@@ -478,6 +483,8 @@ public class TestRepositoryImpl implements TestRepositoryI {
             userInfo.setTRAIN_NUM(resultSet.getString("jcNumber"));
             userInfo.setJcType(resultSet.getString("jcType"));
             userInfo.setTIME(resultSet.getTimestamp("jcEndTime"));
+            userInfo.setJcXD(resultSet.getString("jcXD"));
+            userInfo.setJcDH(resultSet.getString("jcDH"));
             userInfo.setTRACK_NUM(resultSet.getString("jcDestination"));
 
             return userInfo;
@@ -487,12 +494,16 @@ public class TestRepositoryImpl implements TestRepositoryI {
     private class BwPlanAllRowMapper implements RowMapper<ResultInfo>{
         public ResultInfo mapRow(ResultSet resultSet, int i)throws SQLException{
             ResultInfo userInfo = new ResultInfo();
+            List<String> list = new ArrayList<String>();
+            list.add(ConstantFields.BWJDS);
+            list.add(ConstantFields.BWJDN);
 
             userInfo.setNumber(resultSet.getString("jcNumber"));
             userInfo.setType(resultSet.getString("jcType"));
             userInfo.setStartTime(resultSet.getTimestamp("jcStartTime"));
             userInfo.setEndTime(resultSet.getTimestamp("jcEndTime"));
             userInfo.setSource(resultSet.getString("jcSource"));
+            userInfo.setSelect(list);
 
             return userInfo;
         }

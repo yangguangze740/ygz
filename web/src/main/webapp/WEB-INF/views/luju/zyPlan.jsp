@@ -68,7 +68,11 @@
                                             <td>${record.startTime}</td>
                                             <td>${record.endTime}</td>
                                             <td>${record.source}</td>
-                                            <td>${record.destination}</td>
+                                            <td><c:if test="${record.destination == null}">
+                                                <select class="form-control">
+                                                        <option value="" selected>${record.select}</option>
+                                                </select>
+                                            </c:if></td>
                                             <td>${record.dj}</td>
                                             <td>${record.important}</td>
                                             <td>${record.jsl}</td>

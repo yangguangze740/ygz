@@ -75,8 +75,8 @@ public class ShowController {
 //        pathListZm = dataProcess.selectPath(jcList,pathListZm);
 //        pathListTc = dataProcess.selectPath(jcList,pathListTc);
 
-        //pathListJc.addAll(pathListJt);
-        //pathListJc.addAll(pathListZm);
+//        pathListJc.addAll(pathListJt);
+//        pathListJc.addAll(pathListZm);
 //        pathListJc.addAll(pathListTc);
 
 

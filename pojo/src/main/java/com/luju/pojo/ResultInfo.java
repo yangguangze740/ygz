@@ -1,6 +1,7 @@
 package com.luju.pojo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ResultInfo {
     private String number;
@@ -16,6 +17,15 @@ public class ResultInfo {
     private String jsl;
     private int dj;
     private int color;
+    private List<String> select;
+
+    public List<String> getSelect() {
+        return select;
+    }
+
+    public void setSelect(List<String> select) {
+        this.select = select;
+    }
 
     public int getColor() {
         return color;
