@@ -70,19 +70,17 @@ public class ShowController {
         List<ResultInfo> zcList = dcService.processZcData();//path
         List<ResultInfo> tcList = dcService.processTcData();
 
-        pathListJc = dataProcess.selectPath(jcList,pathListJc);
-        pathListJt = dataProcess.selectPath(jcList,pathListJt);
-        pathListZm = dataProcess.selectPath(jcList,pathListZm);
-        pathListTc = dataProcess.selectPath(jcList,pathListTc);
+//        pathListJc = dataProcess.selectPath(jcList,pathListJc);
+//        pathListJt = dataProcess.selectPath(jcList,pathListJt);
+//        pathListZm = dataProcess.selectPath(jcList,pathListZm);
+//        pathListTc = dataProcess.selectPath(jcList,pathListTc);
 
-        pathListJc.addAll(pathListJt);
-        pathListJc.addAll(pathListZm);
-        pathListJc.addAll(pathListTc);
+        //pathListJc.addAll(pathListJt);
+        //pathListJc.addAll(pathListZm);
+//        pathListJc.addAll(pathListTc);
 
 
         Set<ResultInfo> allDataSet = listToSet.comparatorSet(jcList,bwjList,jt1List,jt2List,zm1List,zm2List,zcList,tcList);
-        mav.addObject("allDataSet",allDataSet);
-
         mav.addObject("allDataSet",allDataSet);
 
         return mav;
