@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -602,6 +603,9 @@ public class DcRepositoryImpl implements DcRepositoryI {
     private class DcTcDataRowMapper implements RowMapper<ResultInfo> {
         public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             ResultInfo userInfo = new ResultInfo();
+            List<String> list = new ArrayList<String>();
+            list.add(ConstantFields.XT1);
+            list.add(ConstantFields.XT2);
 
             userInfo.setDj(resultSet.getInt("dcDj"));
             userInfo.setNumber(resultSet.getString("dcNumber"));
@@ -609,6 +613,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setType(resultSet.getString("dcType"));
             userInfo.setDestination(resultSet.getString("dcDestination"));
+            userInfo.setSelect(list);
 
             return userInfo;
         }
@@ -633,6 +638,9 @@ public class DcRepositoryImpl implements DcRepositoryI {
     private class DcJtData1RowMapper implements RowMapper<ResultInfo> {
         public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             ResultInfo userInfo = new ResultInfo();
+            List<String> list = new ArrayList<String>();
+            list.add(ConstantFields.TYPE_QCX);
+            list.add(ConstantFields.TYPE_JDX);
 
             userInfo.setNumber(resultSet.getString("dcNumber"));
             userInfo.setStartTime(resultSet.getTimestamp("dcStartTime"));
@@ -641,6 +649,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDestination(resultSet.getString("dcDestination"));
             userInfo.setDj(resultSet.getInt("dcDj"));
             userInfo.setXd(resultSet.getString("dcXD"));
+            userInfo.setSelect(list);
 
             return userInfo;
         }
@@ -667,6 +676,9 @@ public class DcRepositoryImpl implements DcRepositoryI {
     private class DcZmData1RowMapper implements RowMapper<ResultInfo> {
         public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             ResultInfo userInfo = new ResultInfo();
+            List<String> list = new ArrayList<String>();
+            list.add(ConstantFields.XT1);
+            list.add(ConstantFields.XT2);
 
             userInfo.setNumber(resultSet.getString("dcNumber"));
             userInfo.setStartTime(resultSet.getTimestamp("dcStartTime"));
