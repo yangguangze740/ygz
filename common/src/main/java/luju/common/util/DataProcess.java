@@ -413,15 +413,16 @@ public class DataProcess {
     public List<ResultInfo> selectPath (List<ResultInfo> list, List<ResultInfo> pathList) {
 
         for (int i = 0; i<list.size();i++) {
-            pathList.get(i).setNumber(list.get(i).getNumber());
-            pathList.get(i).setSource(list.get(i).getSource());
-            pathList.get(i).setPath(list.get(i).getPath());
-        }
-        for (int k = 0; k<pathList.size(); k++) {
-            System.out.println(pathList.get(k));
+            String number = list.get(i).getNumber();
+            String source = list.get(i).getSource();
+            String path = list.get(i).getPath();
+            for (int k =0; k<pathList.size(); k++){
+                pathList.get(k).setNumber(number);
+                pathList.get(k).setSource(source);
+                pathList.get(k).setPath(path);
+            }
         }
         return pathList;
-
     }
 
     public Timestamp time(String time) {
