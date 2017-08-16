@@ -6,12 +6,15 @@ import com.luju.ygz.dc.repository.DcRepositoryI;
 import luju.common.util.ConstantFields;
 import luju.common.util.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -602,6 +605,9 @@ public class DcRepositoryImpl implements DcRepositoryI {
     private class DcTcDataRowMapper implements RowMapper<ResultInfo> {
         public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             ResultInfo userInfo = new ResultInfo();
+            List<String> list = new ArrayList<String>();
+            list.add(ConstantFields.XT1);
+            list.add(ConstantFields.XT2);
 
             userInfo.setDj(resultSet.getInt("dcDj"));
             userInfo.setNumber(resultSet.getString("dcNumber"));
@@ -609,6 +615,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setType(resultSet.getString("dcType"));
             userInfo.setDestination(resultSet.getString("dcDestination"));
+            userInfo.setSelect(list);
 
             return userInfo;
         }
@@ -633,6 +640,9 @@ public class DcRepositoryImpl implements DcRepositoryI {
     private class DcJtData1RowMapper implements RowMapper<ResultInfo> {
         public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             ResultInfo userInfo = new ResultInfo();
+            List<String> list = new ArrayList<String>();
+            list.add(ConstantFields.TYPE_QCX);
+            list.add(ConstantFields.TYPE_JDX);
 
             userInfo.setNumber(resultSet.getString("dcNumber"));
             userInfo.setStartTime(resultSet.getTimestamp("dcStartTime"));
@@ -641,6 +651,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDestination(resultSet.getString("dcDestination"));
             userInfo.setDj(resultSet.getInt("dcDj"));
             userInfo.setXd(resultSet.getString("dcXD"));
+            userInfo.setSelect(list);
 
             return userInfo;
         }
@@ -667,6 +678,9 @@ public class DcRepositoryImpl implements DcRepositoryI {
     private class DcZmData1RowMapper implements RowMapper<ResultInfo> {
         public ResultInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             ResultInfo userInfo = new ResultInfo();
+            List<String> list = new ArrayList<String>();
+            list.add(ConstantFields.XT1);
+            list.add(ConstantFields.XT2);
 
             userInfo.setNumber(resultSet.getString("dcNumber"));
             userInfo.setStartTime(resultSet.getTimestamp("dcStartTime"));
@@ -750,6 +764,67 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setPath(resultSet.getString("dcPath"));
 
             return userInfo;
+        }
+    }
+
+    public boolean insertDcData(final List<DcPlanInfo> dcPlanInfos){
+        String sql ="insert dc_show_data(dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDesination,dcDj,dcTFX,dcTF,dcXD,dcDH,dcPath) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        int[] result = jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                DcPlanInfo dcPlanInfo = dcPlanInfos.get(i);
+
+                ps.setString(1, dcPlanInfo.getDcId());
+                ps.setString(2, dcPlanInfo.getDcNumber());
+                ps.setTimestamp(3, dcPlanInfo.getDcStartTime());
+                ps.setTimestamp(4, dcPlanInfo.getDcEndTime());
+                ps.setString(5, dcPlanInfo.getDcType());
+                ps.setString(6,dcPlanInfo.getDcSource());
+                ps.setString(7,dcPlanInfo.getDcDestination());
+                ps.setInt(8,dcPlanInfo.getDcDj());
+                ps.setString(9,dcPlanInfo.getDcTFX());
+                ps.setString(10,dcPlanInfo.getDcTF());
+                ps.setString(11,dcPlanInfo.getDcXD());
+                ps.setString(12,dcPlanInfo.getDcDH());
+                ps.setString(13,dcPlanInfo.getDcPath());
+
+            }
+
+            @Override
+            public int getBatchSize() {
+                return dcPlanInfos.size();
+            }
+        });
+
+        return result.length == dcPlanInfos.size();
+
+    }
+    public List<ResultInfo> selectDcData(){
+        String sql = "select dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj,dcPath FROM dc_show_data where dcXD = 'XD'";
+        Object[] args = {};
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+    private class DcDataRowMapper implements RowMapper<ResultInfo>{
+        public ResultInfo mapRow(ResultSet resultset,int i )throws SQLException{
+            ResultInfo dcPlanInfo = new ResultInfo();
+
+            dcPlanInfo.setUuid(resultset.getString("dcId"));
+            dcPlanInfo.setNumber(resultset.getString("dcNumber"));
+            dcPlanInfo.setStartTime(resultset.getTimestamp("dcStartTime"));
+            dcPlanInfo.setEndTime(resultset.getTimestamp("dcEndTime"));
+            dcPlanInfo.setType(resultset.getString("dcType"));
+            dcPlanInfo.setSource(resultset.getString("dcSource"));
+            dcPlanInfo.setDestination(resultset.getString("dcDestination"));
+            dcPlanInfo.setDj(resultset.getInt("dcDj"));
+            dcPlanInfo.setPath(resultset.getString("dcPath"));
+
+            return dcPlanInfo;
         }
     }
 }

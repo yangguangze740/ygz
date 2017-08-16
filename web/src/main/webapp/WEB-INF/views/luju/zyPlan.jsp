@@ -68,10 +68,11 @@
                                             <td>${record.startTime}</td>
                                             <td>${record.endTime}</td>
                                             <td>${record.source}</td>
-                                            <td><c:if test="${record.destination == null}">
-                                                <select class="form-control">
-                                                        <option value="" selected>${record.select}</option>
-                                                </select>
+                                            <td><c:if test="${record.destination == null} && ${record.type == '本务机'}">
+                                                    <select class="form-control">
+                                                        <option value="0">南入库</option>
+                                                        <option value="1">北入库</option>
+                                                    </select>
                                             </c:if></td>
                                             <td>${record.dj}</td>
                                             <td>${record.important}</td>

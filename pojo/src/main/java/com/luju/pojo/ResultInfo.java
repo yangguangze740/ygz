@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 public class ResultInfo {
+
+    private String uuid;
     private String number;
     private String type;
     private Timestamp startTime;
@@ -18,6 +20,14 @@ public class ResultInfo {
     private int dj;
     private int color;
     private List<String> select;
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public List<String> getSelect() {
         return select;
