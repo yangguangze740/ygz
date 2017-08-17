@@ -79,7 +79,7 @@
                                                     ${record.dcSource}
                                                 </c:if>
                                             </td>
-                                            </td>${record.dcDestination}<td>
+                                            <td>${record.dcDestination}</td>
                                             <td></td>
                                             <td></td>
                                         </tr>
