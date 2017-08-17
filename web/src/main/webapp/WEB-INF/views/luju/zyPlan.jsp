@@ -68,7 +68,7 @@
                                             <td>${record.startTime}</td>
                                             <td>${record.endTime}</td>
                                             <td>${record.source}</td>
-                                            <td><c:if test="${record.destination == null} && ${record.type == '本务机'}">
+                                            <td><c:if test="${record.type == '本务机'}">
                                                     <select class="form-control">
                                                         <option value="0">南入库</option>
                                                         <option value="1">北入库</option>
