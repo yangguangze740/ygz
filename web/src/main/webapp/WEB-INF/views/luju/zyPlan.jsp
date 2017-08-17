@@ -63,20 +63,33 @@
                                     <c:forEach items="${allList}" var="record" varStatus="status">
                                         <tr style="text-align: center;">
                                             <td>${status.index + 1}</td>
-                                            <td>${record.number}</td>
-                                            <td>${record.type}</td>
-                                            <td>${record.startTime}</td>
-                                            <td>${record.endTime}</td>
-                                            <td>${record.source}</td>
-                                            <td><c:if test="${record.type == '本务机'}">
+                                            <td>${record.dcNumber}</td>
+                                            <td>${record.dcType}</td>
+                                            <td>${record.dcStartTime}</td>
+                                            <td>${record.dcEndTime}</td>
+                                            <td><c:if test="${record.dcType eq '解体' &&  record.dcType eq null}">
+                                                <select class="form-control">
+                                                    <option value="0">牵出线</option>
+                                                    <option value="1">机带线</option>
+                                                </select>
+                                            </c:if>
+                                                <c:if test="${record.dcType != null}">
+                                                    ${record.dcSource}
+                                                </c:if>
+                                            </td>
+                                            <td><c:if test="${record.dcType == '本务机'}">
                                                     <select class="form-control">
                                                         <option value="0">南入库</option>
                                                         <option value="1">北入库</option>
                                                     </select>
-                                            </c:if></td>
-                                            <td>${record.dj}</td>
-                                            <td>${record.important}</td>
-                                            <td>${record.jsl}</td>
+                                            </c:if>
+                                                <c:if test="${record.dcType != null}">
+                                                    ${record.dcDestination}
+                                                </c:if>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <%--<td>${record.dj}</td>--%>
                                         </tr>
                                     </c:forEach>
