@@ -78,4 +78,16 @@ public interface DcRepositoryI {
 
     /* delete data from mysql before inserting new data */
     int deletePlanCopy();
+
+    boolean insertTcPlanNew(DcPlanInfo info);
+
+    List<DcPlanInfo> processTcDataNew();
+
+    boolean insertTcDataNew(DcPlanInfo info);
+
+    List<DcPlanInfo> selectTcPlanNew();
+
+    boolean insertDcData(final List<DcPlanInfo> dcPlanInfos);
+
+    List<DcPlanInfo> selectDcData();
 }

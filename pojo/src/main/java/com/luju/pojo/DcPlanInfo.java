@@ -47,6 +47,15 @@ public class DcPlanInfo {
     public void setDcId(String dcId) {
         this.dcId = dcId;
     }
+    private float jcSumHc;
+
+    public float getJcSumHc() {
+        return jcSumHc;
+    }
+
+    public void setJcSumHc(float jcSumHc) {
+        this.jcSumHc = jcSumHc;
+    }
 
     public int getDcCS6() {
         return dcCS6;

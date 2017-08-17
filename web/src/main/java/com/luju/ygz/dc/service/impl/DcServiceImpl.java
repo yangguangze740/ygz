@@ -4,17 +4,21 @@ import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.ResultInfo;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import com.luju.ygz.dc.service.DcServiceI;
+import com.luju.ygz.test.repository.TestRepositoryI;
 import luju.common.util.DataProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class DcServiceImpl implements DcServiceI {
 
     @Autowired
     private DcRepositoryI dcRepository;
+
+    @Autowired
+    private TestRepositoryI jcRepository;
 
     @Override
     public void selectPlanDataFromOra(DataProcess dataProcess) {
@@ -120,5 +124,42 @@ public class DcServiceImpl implements DcServiceI {
     @Override
     public List<ResultInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo) {
         return dcRepository.selectTcDataInPath1(dcPlanInfo);
+    }
+
+    @Override
+    public void processTcDataNew(DataProcess dataProcess) {
+        List<DcPlanInfo> list = dcRepository.selectTcPlan();
+        list = dataProcess.tcTimeList(list);
+        for (int k =0; k < list.size(); k++) {
+            dcRepository.insertTcPlanNew(list.get(k));
+        }
+        list = dcRepository.processTcDataNew();
+
+        list = dataProcess.tcDataList(list);
+        for (int k =0; k < list.size(); k++) {
+            dcRepository.insertTcDataNew(list.get(k));
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> processDcData(DataProcess dataProcess) {
+        List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
+
+        list.addAll(dataProcess.jtDataList1(dcRepository.selectJtPlan()));
+        list.addAll(dataProcess.jtDataList2(dcRepository.selectJtPlan()));
+        list.addAll(dataProcess.zmDataList1(dcRepository.selectZmPlan()));
+        list.addAll(dataProcess.zmDataList2(dcRepository.selectZmPlan()));
+        list.addAll(dataProcess.zcTimeList(dcRepository.selectZcPlan()));
+        list.addAll(dcRepository.selectTcPlanNew());
+        list.addAll(dataProcess.bwjTimeListNew(jcRepository.selectBwjPlanNew()));
+        list.addAll(dataProcess.jcDataList(jcRepository.selectJcPlanNew()));
+
+        boolean b = dcRepository.insertDcData(list);
+        System.out.println(b);
+
+        list = dcRepository.selectDcData();
+
+        return list;
+
     }
 }

@@ -57,18 +57,18 @@ public class ShowController {
 
         DataProcess dataProcess = new DataProcess();
 
-        List<ResultInfo> pathListJt = null;
-        List<ResultInfo> pathListZm = null;
-        List<ResultInfo> pathListTc = null;
-
-        List<ResultInfo> jcList = service.processJcData(); // path
-        List<ResultInfo> bwjList = service.processBwjData();
-        List<ResultInfo> jt1List = dcService.processJt1Data();
-        List<ResultInfo> jt2List = dcService.processJt2Data();//path
-        List<ResultInfo> zm1List = dcService.processZm1Data();
-        List<ResultInfo> zm2List = dcService.processZm2Data();//path
-        List<ResultInfo> zcList = dcService.processZcData();//path
-        List<ResultInfo> tcList = dcService.processTcData();
+//        List<ResultInfo> pathListJt = null;
+//        List<ResultInfo> pathListZm = null;
+//        List<ResultInfo> pathListTc = null;
+//
+//        List<ResultInfo> jcList = service.processJcData(); // path
+//        List<ResultInfo> bwjList = service.processBwjData();
+//        List<ResultInfo> jt1List = dcService.processJt1Data();
+//        List<ResultInfo> jt2List = dcService.processJt2Data();//path
+//        List<ResultInfo> zm1List = dcService.processZm1Data();
+//        List<ResultInfo> zm2List = dcService.processZm2Data();//path
+//        List<ResultInfo> zcList = dcService.processZcData();//path
+//        List<ResultInfo> tcList = dcService.processTcData();
 
 //        pathListJc = dataProcess.selectPath(jcList,pathListJc);
 //        pathListJt = dataProcess.selectPath(jcList,pathListJt);
@@ -79,9 +79,10 @@ public class ShowController {
 //        pathListJc.addAll(pathListZm);
 //        pathListJc.addAll(pathListTc);
 
+        List<DcPlanInfo> allList = dcService.processDcData(dataProcess);
 
-        Set<ResultInfo> allDataSet = listToSet.comparatorSet(jcList,bwjList,jt1List,jt2List,zm1List,zm2List,zcList,tcList);
-        mav.addObject("allDataSet",allDataSet);
+//        Set<ResultInfo> allDataSet = listToSet.comparatorSet(jcList,bwjList,jt1List,jt2List,zm1List,zm2List,zcList,tcList);
+        mav.addObject("allList",allList);
 
         return mav;
     }

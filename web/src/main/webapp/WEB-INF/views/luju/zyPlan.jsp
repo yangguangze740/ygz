@@ -51,16 +51,16 @@
                                         <th>作业类别</th>
                                         <th>开始时间</th>
                                         <th>结束时间</th>
-                                        <th>源</th>
-                                        <th>目的</th>
-                                        <th>调机</th>
+                                        <th>方向</th>
+                                        <th>股道</th>
+                                        <th>调别</th>
                                         <th>重点事项</th>
                                         <th>记事</th>
                                         <%--<th>进路</th>--%>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <c:forEach items="${allDataSet}" var="record" varStatus="status">
+                                    <c:forEach items="${allList}" var="record" varStatus="status">
                                         <tr style="text-align: center;">
                                             <td>${status.index + 1}</td>
                                             <td>${record.number}</td>

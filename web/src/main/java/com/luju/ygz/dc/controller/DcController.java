@@ -31,6 +31,7 @@ public class DcController {
         service.selectZcPlanData(dataProcess);
         service.selectZmPlanData(dataProcess);
         service.processTcPlanData(dataProcess);
+        service.processTcDataNew(dataProcess);
 
         return "world";
     }

@@ -43,7 +43,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectJtPlan() {
-        String sql = "SELECT dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj, dcTFX FROM ygz_show.dc_plan_copy where dcType='解体' group by dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj,dcTFX order by dcStartTime";
+        String sql = "SELECT distinct dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj, dcTFX FROM ygz_show.dc_plan_copy where dcType='解体' order by dcStartTime";
         Object[] args = {};
 
         try {
@@ -57,7 +57,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectZmPlan() {
-        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '摘帽' group by dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj order by dcStartTime";
+        String sql = "SELECT distinct dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '摘帽'  order by dcStartTime";
         Object[] args = {};
 
         try {
@@ -99,7 +99,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectZcPlan() {
-        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '转场' order by dcNumber";
+        String sql = "SELECT distinct dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '转场' order by dcNumber";
         Object[] args = {};
 
         try {
@@ -515,6 +515,82 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
+    @Override
+    public boolean insertTcPlanNew(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_tc_plan (tcId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDestination, dcDj, dcTFX, dcTF, dcXD, dcDH, dcSWH, dcCS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getDcNumber(),
+                info.getDcStartTime(),
+                info.getDcEndTime(),
+                info.getDcType(),
+                info.getDcSource(),
+                info.getDcDestination(),
+                info.getDcDj(),
+                info.getDcTFX(),
+                info.getDcTF(),
+                info.getDcXD(),
+                info.getDcDH(),
+                info.getDcSWH(),
+                info.getDcCS()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert tc error");
+            return false;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> processTcDataNew() {
+        String sql = "SELECT tcId,dcDestination,dcSWH,dcCS FROM dc_tc_plan order by dcDestination,dcSWH";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcTcDataNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public boolean insertTcDataNew(DcPlanInfo info) {
+        String sql = "INSERT INTO dc_tc_six (tcId, dcDestination, dcSWH, dcCS, dcCS6) VALUES (?, ?, ?, ?, ?)";
+        Object[] args = {
+                info.getJtId(),
+                info.getDcDestination(),
+                info.getDcSWH(),
+                info.getDcCS(),
+                info.getDcCS6()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql, args) == 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert tc data error");
+            return false;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectTcPlanNew() {
+        String sql = "SELECT distinct dcNumber,dcStartTime,dcEndTime,dcType,dcSource,S.dcDestination,dcDj,dcTFX,dcTF,dcXD,dcDH,dcCS6 FROM dc_tc_plan P left join dc_tc_six S on P.tcId = S.tcId where dcCS6 = 1 ORDER BY dcDestination";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcTcPlanNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select tc data error");
+            return null;
+        }
+    }
+
+
     private class DcPlanCopyRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
@@ -767,14 +843,52 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
-    public boolean insertDcData(final List<DcPlanInfo> dcPlanInfos){
-        String sql ="insert dc_show_data(dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDesination,dcDj,dcTFX,dcTF,dcXD,dcDH,dcPath) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-        int[] result = jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+    private class DcTcDataNewRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setJtId(resultSet.getString("dcNumber"));
+            userInfo.setDcDestination(resultSet.getString("dcStartTime"));
+            userInfo.setDcSWH(resultSet.getInt("dcEndTime"));
+            userInfo.setDcCS(resultSet.getInt("dcSource"));
+            userInfo.setDcCS(resultSet.getInt("dcDestination"));
+            userInfo.setDcCS(resultSet.getInt("dcType"));
+            userInfo.setDcCS(resultSet.getInt("dcType"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcTcPlanNewRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcSource(resultSet.getString("dcSource"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcTFX(resultSet.getString("dcTFX"));
+            userInfo.setDcTF(resultSet.getString("dcTF"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+            userInfo.setDcDH(resultSet.getString("dcDH"));
+            userInfo.setDcCS6(resultSet.getInt("dcCS6"));
+
+            return userInfo;
+        }
+    }
+
+    @Override
+    public boolean insertDcData(final List<DcPlanInfo> dcPlanInfos) {
+        String sql ="insert dc_show_data(dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj,dcTFX,dcTF,dcXD,dcDH,dcPath,dcCS6,jcSumHc) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        int[] result = mysqlJdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
                 DcPlanInfo dcPlanInfo = dcPlanInfos.get(i);
 
-                ps.setString(1, dcPlanInfo.getDcId());
+                ps.setString(1, uuid.uuidPrimaryKey());
                 ps.setString(2, dcPlanInfo.getDcNumber());
                 ps.setTimestamp(3, dcPlanInfo.getDcStartTime());
                 ps.setTimestamp(4, dcPlanInfo.getDcEndTime());
@@ -787,6 +901,8 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 ps.setString(11,dcPlanInfo.getDcXD());
                 ps.setString(12,dcPlanInfo.getDcDH());
                 ps.setString(13,dcPlanInfo.getDcPath());
+                ps.setInt(14,dcPlanInfo.getDcCS6());
+                ps.setFloat(15,dcPlanInfo.getJcSumHc());
 
             }
 
@@ -799,8 +915,10 @@ public class DcRepositoryImpl implements DcRepositoryI {
         return result.length == dcPlanInfos.size();
 
     }
-    public List<ResultInfo> selectDcData(){
-        String sql = "select dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj,dcPath FROM dc_show_data where dcXD = 'XD'";
+
+    @Override
+    public List<DcPlanInfo> selectDcData() {
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcDataRowMapper());
@@ -810,19 +928,18 @@ public class DcRepositoryImpl implements DcRepositoryI {
             return null;
         }
     }
-    private class DcDataRowMapper implements RowMapper<ResultInfo>{
-        public ResultInfo mapRow(ResultSet resultset,int i )throws SQLException{
-            ResultInfo dcPlanInfo = new ResultInfo();
+    private class DcDataRowMapper implements RowMapper<DcPlanInfo>{
+        public DcPlanInfo mapRow(ResultSet resultset,int i )throws SQLException{
+            DcPlanInfo dcPlanInfo = new DcPlanInfo();
 
-            dcPlanInfo.setUuid(resultset.getString("dcId"));
-            dcPlanInfo.setNumber(resultset.getString("dcNumber"));
-            dcPlanInfo.setStartTime(resultset.getTimestamp("dcStartTime"));
-            dcPlanInfo.setEndTime(resultset.getTimestamp("dcEndTime"));
-            dcPlanInfo.setType(resultset.getString("dcType"));
-            dcPlanInfo.setSource(resultset.getString("dcSource"));
-            dcPlanInfo.setDestination(resultset.getString("dcDestination"));
-            dcPlanInfo.setDj(resultset.getInt("dcDj"));
-            dcPlanInfo.setPath(resultset.getString("dcPath"));
+            dcPlanInfo.setJtId(resultset.getString("dcId"));
+            dcPlanInfo.setDcNumber(resultset.getString("dcNumber"));
+            dcPlanInfo.setDcStartTime(resultset.getTimestamp("dcStartTime"));
+            dcPlanInfo.setDcEndTime(resultset.getTimestamp("dcEndTime"));
+            dcPlanInfo.setDcType(resultset.getString("dcType"));
+            dcPlanInfo.setDcSource(resultset.getString("dcSource"));
+            dcPlanInfo.setDcDestination(resultset.getString("dcDestination"));
+            dcPlanInfo.setDcDj(resultset.getInt("dcDj"));
 
             return dcPlanInfo;
         }

@@ -47,7 +47,7 @@ public class ConstantFields {
 
     /* 作业类别*/
     public static final String TYPE_JC = "接车";
-    public static final String TYPE_TC = "挑车";
+    public static final String TYPE_TC = "TC";
     public static final String TYPE_BWJ = "本务机";
     public static final String TYPE_QCX = "牵出线";
     public static final String TYPE_JDX = "机待线";

@@ -1,5 +1,6 @@
 package com.luju.ygz.test.repository.impl;
 
+import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.JcPlanInfo;
 import com.luju.pojo.ResultInfo;
 import com.luju.ygz.test.repository.TestRepositoryI;
@@ -355,6 +356,34 @@ public class TestRepositoryImpl implements TestRepositoryI {
         }
     }
 
+    @Override
+    public List<DcPlanInfo> selectBwjPlanNew() {
+        String sql = "SELECT jcNumber,jcType,jcEndTime,jcXD,jcDH,jcDestination FROM jc_plan";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new BwjPlanNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJcPlanNew() {
+        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM jc_plan_copy group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
     private class JcPlanCopyRowMapper implements RowMapper<JcPlanInfo> {
         public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             JcPlanInfo userInfo = new JcPlanInfo();
@@ -516,6 +545,37 @@ public class TestRepositoryImpl implements TestRepositoryI {
             userInfo.setNumber(resultSet.getString("jcNumber"));
             userInfo.setDestination(resultSet.getString("jcDestination"));
             userInfo.setPath(resultSet.getString("jcPath"));
+
+            return userInfo;
+        }
+    }
+
+    private class BwjPlanNewRowMapper implements RowMapper<DcPlanInfo>{
+        public DcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("jcNumber"));
+            userInfo.setDcType(resultSet.getString("jcType"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("jcEndTime"));
+            userInfo.setDcXD(resultSet.getString("jcXD"));
+            userInfo.setDcDH(resultSet.getString("jcDH"));
+            userInfo.setDcSource(resultSet.getString("jcDestination"));
+
+            return userInfo;
+        }
+    }
+
+    private class JcPlanNewRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("jcNumber"));
+            userInfo.setDcSource(resultSet.getString("jcSource"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("jcEndTime"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("jcStartTime"));
+            userInfo.setDcDestination(resultSet.getString("jcDestination"));
+            userInfo.setDcType(resultSet.getString("jcType"));
+            userInfo.setJcSumHc(resultSet.getFloat("S"));
 
             return userInfo;
         }
