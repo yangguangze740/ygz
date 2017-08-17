@@ -8,13 +8,8 @@ public class TestString {
 
     public static void main(String[] args) {
 
-        String a = "123";
-        String b = null;
-        if (b != null) {
-            System.out.println("非空");
-        } else {
-            System.out.println("null");
-        }
+        System.out.println(true&&false);
+        System.out.println(true||false);
 //        List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
 //        Set<String> set=new HashSet<String>();
 //        Collections.sort(list, new Comparator<Object>() {

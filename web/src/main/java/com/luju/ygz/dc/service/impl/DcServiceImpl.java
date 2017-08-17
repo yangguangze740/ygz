@@ -167,6 +167,26 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
+    public List<DcPlanInfo> selectDcPath() {
+
+        List<DcPlanInfo> pathList = new ArrayList<DcPlanInfo>();
+        List<String> arrayList = new ArrayList<String>();
+
+//        List<DcPlanInfo> list = dcRepository.selectDcData();
+//        for (int i = 0; i<list.size();i++) {
+//            String uuid = list.get(i).getDcId();
+//            arrayList.add(uuid);
+//
+//            pathList = dcRepository.selectPath(list.get(i));
+//            for (int k =0 ;k<pathList.size(); k++) {
+//                if (arrayList.contains())
+//                arrayList.add(pathList.get(k).getDcId());
+//            }
+//        }
+        return null;
+    }
+
+    @Override
     public int updateSource(DcPlanInfo dcPlanInfo) {
         return dcRepository.updateSource(dcPlanInfo);
     }

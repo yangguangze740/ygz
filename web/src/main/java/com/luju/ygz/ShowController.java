@@ -52,7 +52,7 @@ public class ShowController {
     }
 
     @RequestMapping("/zyPlan")
-    public ModelAndView allJcData(ListToSet listToSet) {
+    public ModelAndView allJcData() {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
         DataProcess dataProcess = new DataProcess();

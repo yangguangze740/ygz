@@ -91,6 +91,8 @@ public interface DcRepositoryI {
 
     List<DcPlanInfo> selectDcData();
 
+    List<DcPlanInfo> selectPath(DcPlanInfo dcPlanInfo);
+
     int deleteDcShow();
 
     int updateSource(DcPlanInfo info);

@@ -594,6 +594,28 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public List<DcPlanInfo> selectPath(DcPlanInfo dcPlanInfo) {
+        String sql = "SELECT dcId, jcPath, dcStartTime, dcEndTime FROM dc_show_data D LEFT JOIN (SELECT DISTINCT jcPath FROM jc_path_info WHERE jcDCH IN (SELECT jcDCH FROM jc_path_info WHERE jcPath = ? )) I ON D.dcPath = I.jcPath WHERE jcPath is not null and (dcStartTime < ? AND dcEndTime > ? OR dcStartTime > ? AND ? > dcStartTime OR dcEndTime > ? AND dcEndTime < ?)";
+        Object[] args = {
+                dcPlanInfo.getDcPath(),
+                dcPlanInfo.getDcStartTime(),
+                dcPlanInfo.getDcEndTime(),
+                dcPlanInfo.getDcStartTime(),
+                dcPlanInfo.getDcEndTime(),
+                dcPlanInfo.getDcStartTime(),
+                dcPlanInfo.getDcEndTime()
+        };
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcPathRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select tc data error");
+            return null;
+        }
+    }
+
+    @Override
     public int deleteDcShow() {
         String sql = "TRUNCATE TABLE dc_show_data";
 
@@ -897,13 +919,10 @@ public class DcRepositoryImpl implements DcRepositoryI {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
 
-            userInfo.setJtId(resultSet.getString("dcNumber"));
-            userInfo.setDcDestination(resultSet.getString("dcStartTime"));
-            userInfo.setDcSWH(resultSet.getInt("dcEndTime"));
-            userInfo.setDcCS(resultSet.getInt("dcSource"));
-            userInfo.setDcCS(resultSet.getInt("dcDestination"));
-            userInfo.setDcCS(resultSet.getInt("dcType"));
-            userInfo.setDcCS(resultSet.getInt("dcType"));
+            userInfo.setDcId(resultSet.getString("tcId"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcSWH(resultSet.getInt("dcSWH"));
+            userInfo.setDcCS(resultSet.getInt("dcCS"));
 
             return userInfo;
         }
@@ -985,7 +1004,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
         public DcPlanInfo mapRow(ResultSet resultset,int i )throws SQLException{
             DcPlanInfo dcPlanInfo = new DcPlanInfo();
 
-            dcPlanInfo.setJtId(resultset.getString("dcId"));
+            dcPlanInfo.setDcId(resultset.getString("dcId"));
             dcPlanInfo.setDcNumber(resultset.getString("dcNumber"));
             dcPlanInfo.setDcStartTime(resultset.getTimestamp("dcStartTime"));
             dcPlanInfo.setDcEndTime(resultset.getTimestamp("dcEndTime"));
@@ -1021,6 +1040,21 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 dcPlanInfo.setSelectList(dataProcess.bwjSelectList());
             }
             return dcPlanInfo;
+        }
+    }
+
+    private class DcPathRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+            String[] conflict = {userInfo.getDcId()};
+
+            userInfo.setDcId(resultSet.getString("dcId"));
+            userInfo.setDcPath(resultSet.getString("jcPath"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+
+
+            return userInfo;
         }
     }
 }
