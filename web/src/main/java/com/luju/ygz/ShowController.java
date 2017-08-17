@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -52,7 +53,7 @@ public class ShowController {
     }
 
     @RequestMapping("/zyPlan")
-    public ModelAndView allJcData(ListToSet listToSet) {
+    public ModelAndView allJcData() {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
         DataProcess dataProcess = new DataProcess();
@@ -80,16 +81,24 @@ public class ShowController {
 //        pathListJc.addAll(pathListTc);
 
         List<DcPlanInfo> allList = dcService.selectDcData();
+        List<Map<String,List<DcPlanInfo>>> mapList = dcService.selectDcPath();
 
 //        Set<ResultInfo> allDataSet = listToSet.comparatorSet(jcList,bwjList,jt1List,jt2List,zm1List,zm2List,zcList,tcList);
         mav.addObject("allList",allList);
+        mav.addObject("mapList",mapList);
 
         return mav;
     }
 
     @RequestMapping("/updateSource")
-    public int updateSource(DcPlanInfo dcPlanInfo) {
-        return dcService.updateSource(dcPlanInfo);
+    public List<Map<String,List<DcPlanInfo>>> updateSource(DcPlanInfo dcPlanInfo) {
+        List<Map<String,List<DcPlanInfo>>> mapList;
+        if (dcService.updateSource(dcPlanInfo) != 0) {
+            mapList = dcService.selectDcPath();
+        } else {
+            return null;
+        }
+        return mapList;
     }
 
     @RequestMapping("/updateDestination")
