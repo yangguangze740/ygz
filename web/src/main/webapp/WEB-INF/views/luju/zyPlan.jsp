@@ -67,30 +67,21 @@
                                             <td>${record.dcType}</td>
                                             <td>${record.dcStartTime}</td>
                                             <td>${record.dcEndTime}</td>
-                                            <td><c:if test="${record.dcType eq '解体' &&  record.dcType eq null}">
+                                            <td>
+                                                <c:if test="${record.dcSource == null}">
                                                 <select class="form-control">
-                                                    <option value="0">牵出线</option>
-                                                    <option value="1">机带线</option>
+                                                    <c:forEach items="${allList}" var="record">
+                                                        ${record.dcSource}
+                                                    </c:forEach>
                                                 </select>
                                             </c:if>
-                                                <c:if test="${record.dcType != null}">
+                                                <c:if test="${record.dcSource != null}">
                                                     ${record.dcSource}
                                                 </c:if>
                                             </td>
-                                            <td><c:if test="${record.dcType == '本务机'}">
-                                                    <select class="form-control">
-                                                        <option value="0">南入库</option>
-                                                        <option value="1">北入库</option>
-                                                    </select>
-                                            </c:if>
-                                                <c:if test="${record.dcType != null}">
-                                                    ${record.dcDestination}
-                                                </c:if>
-                                            </td>
+                                            </td>${record.dcDestination}<td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <%--<td>${record.dj}</td>--%>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
