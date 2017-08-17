@@ -67,18 +67,19 @@
                                             <td>${record.dcType}</td>
                                             <td>${record.dcStartTime}</td>
                                             <td>${record.dcEndTime}</td>
-                                            <td>${record.dcSource}</td>
-                                            <td>${record.dcDestination}
-                                                <c:if test="${record.dcDestination == null} && ${record.dcType == '本务机'}">
-                                                    <select class="form-control">
-                                                        <option value="0">南入库</option>
-                                                        <option value="1">北入库</option>
-                                                    </select>
+                                            <td>
+                                                <c:if test="${record.dcSource == null}">
+                                                <select class="form-control">
+                                                    <c:forEach items="${allList}" var="record">
+                                                        ${record.dcSource}
+                                                    </c:forEach>
+                                                </select>
+                                            </c:if>
+                                                <c:if test="${record.dcSource != null}">
+                                                    ${record.dcSource}
                                                 </c:if>
-
                                             </td>
-                                            <td>${record.dcDj}</td>
-                                            <td></td>
+                                            </td>${record.dcDestination}<td>
                                             <td></td>
                                             <td></td>
                                         </tr>
