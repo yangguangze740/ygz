@@ -90,4 +90,6 @@ public interface DcRepositoryI {
     boolean insertDcData(final List<DcPlanInfo> dcPlanInfos);
 
     List<DcPlanInfo> selectDcData();
+
+    int deleteDcShow();
 }

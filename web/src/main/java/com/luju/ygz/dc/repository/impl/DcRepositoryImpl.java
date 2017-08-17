@@ -590,6 +590,19 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
+    @Override
+    public int deleteDcShow() {
+        String sql = "TRUNCATE TABLE dc_show_data";
+
+        try {
+            return mysqlJdbcTemplate.update(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("delete dc show error");
+            return 0;
+        }
+    }
+
 
     private class DcPlanCopyRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {

@@ -143,6 +143,8 @@ public class DcServiceImpl implements DcServiceI {
 
     @Override
     public List<DcPlanInfo> processDcData(DataProcess dataProcess) {
+
+        dcRepository.deleteDcShow();
         List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
 
         list.addAll(dataProcess.jtDataList1(dcRepository.selectJtPlan()));
