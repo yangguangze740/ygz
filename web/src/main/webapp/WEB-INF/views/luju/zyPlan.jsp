@@ -70,13 +70,8 @@
                                             <td>
                                                 <c:if test="${record.dcSource == null}">
                                                 <select class="form-control">
-                                                    <c:forEach items="${allList}" var="record">
-                                                        ${record.dcSource}
-                                                    </c:forEach>
-                                                </select>
-                                            </c:if>
-                                                <c:if test="${record.dcSource != null}">
                                                     ${record.dcSource}
+                                                </select>
                                                 </c:if>
                                             </td>
                                             <td>${record.dcDestination}</td>

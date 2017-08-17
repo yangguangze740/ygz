@@ -1015,7 +1015,6 @@ public class DcRepositoryImpl implements DcRepositoryI {
                     dcPlanInfo.setSelectList(dataProcess.tcSelectList());
                 }
             }
-
             String des = resultset.getString("dcDestination");
             if (des == null && resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
                 dcPlanInfo.setSelectList(dataProcess.bwjSelectList());
