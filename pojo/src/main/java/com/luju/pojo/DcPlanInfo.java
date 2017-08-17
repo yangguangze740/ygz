@@ -33,7 +33,16 @@ public class DcPlanInfo {
     private int dcCS6;
     private String dcId;
     private String dcPath;
+    private int isUpdate;
     private List<String> selectList;
+
+    public int getIsUpdate() {
+        return isUpdate;
+    }
+
+    public void setIsUpdate(int isUpdate) {
+        this.isUpdate = isUpdate;
+    }
 
     public List<String> getSelectList() {
         return selectList;

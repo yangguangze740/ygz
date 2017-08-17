@@ -79,12 +79,22 @@ public class ShowController {
 //        pathListJc.addAll(pathListZm);
 //        pathListJc.addAll(pathListTc);
 
-        List<DcPlanInfo> allList = dcService.processDcData(dataProcess);
+        List<DcPlanInfo> allList = dcService.selectDcData();
 
 //        Set<ResultInfo> allDataSet = listToSet.comparatorSet(jcList,bwjList,jt1List,jt2List,zm1List,zm2List,zcList,tcList);
         mav.addObject("allList",allList);
 
         return mav;
+    }
+
+    @RequestMapping("/updateSource")
+    public int updateSource(DcPlanInfo dcPlanInfo) {
+        return dcService.updateSource(dcPlanInfo);
+    }
+
+    @RequestMapping("/updateDestination")
+    public int updateDestination(DcPlanInfo dcPlanInfo) {
+        return dcService.updateDestination(dcPlanInfo);
     }
 
     @RequestMapping("/bwjPath")

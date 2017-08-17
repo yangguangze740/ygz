@@ -55,5 +55,11 @@ public interface DcServiceI {
 
     void processTcDataNew(DataProcess dataProcess);
 
-    List<DcPlanInfo> processDcData(DataProcess dataProcess);
+    boolean processDcData(DataProcess dataProcess);
+
+    List<DcPlanInfo> selectDcData();
+
+    int updateSource(DcPlanInfo dcPlanInfo);
+
+    int updateDestination(DcPlanInfo dcPlanInfo);
 }

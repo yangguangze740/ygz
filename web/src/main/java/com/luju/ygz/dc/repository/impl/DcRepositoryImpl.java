@@ -606,6 +606,40 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
+    @Override
+    public int updateSource(DcPlanInfo info) {
+        String sql = "UPDATE dc_show_data SET dcSource = ?, dcPath = ?, dcIsUpdate = 1 where dcId = ?";
+        Object[] args = {
+                info.getDcSource(),
+                info.getDcTypeE()+info.getDcSource()+info.getDcDestination(),
+                info.getDcId()
+            };
+        try {
+            return mysqlJdbcTemplate.update(sql,args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("update source error");
+            return 0;
+        }
+    }
+
+    @Override
+    public int updateDestination(DcPlanInfo info) {
+        String sql = "UPDATE dc_show_data SET dcDestination = ?, dcPath = ?, dcIsUpdate = 1 where dcId = ?";
+        Object[] args = {
+                info.getDcDestination(),
+                info.getDcTypeE()+info.getDcSource()+info.getDcDestination(),
+                info.getDcId()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql,args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("update destination error");
+            return 0;
+        }
+    }
+
 
     private class DcPlanCopyRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -936,7 +970,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcData() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcDataRowMapper());
@@ -946,6 +980,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             return null;
         }
     }
+
     private class DcDataRowMapper implements RowMapper<DcPlanInfo>{
         public DcPlanInfo mapRow(ResultSet resultset,int i )throws SQLException{
             DcPlanInfo dcPlanInfo = new DcPlanInfo();
@@ -959,6 +994,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             dcPlanInfo.setDcDestination(resultset.getString("dcDestination"));
             dcPlanInfo.setDcDj(resultset.getInt("dcDj"));
             dcPlanInfo.setDcPath(resultset.getString("dcPath"));
+            dcPlanInfo.setIsUpdate(resultset.getInt("dcIsUpdate"));
 
             String source = resultset.getString("dcSource");
             if (source != null && source.equals(ConstantFields.JCSOURCE)) {
