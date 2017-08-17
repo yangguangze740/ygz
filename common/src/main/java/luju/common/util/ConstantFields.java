@@ -77,8 +77,18 @@ public class ConstantFields {
     public static final String JD = "JD";
     public static final String XT1 = "XT1";//南
     public static final String XT2 = "XT2";//北
+
+    /* 8.17 new data type */
+
+    public static final String JC = "JC";
+    public static final String BWJ = "BWJ";
+    public static final String JT = "JT";
     public static final String ZC = "ZC";
     public static final String ZM = "ZM";
+    public static final String JCSOURCE = "MSJ";
+    public static final String JCSOURCEC = "马三家";
+    public static final String ZCSOURCE = "SXBFC";
+    public static final String ZCSOURCEC = "上行编发场";
 
 
     /**

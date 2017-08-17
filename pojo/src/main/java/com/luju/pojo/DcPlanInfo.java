@@ -1,6 +1,7 @@
 package com.luju.pojo;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class DcPlanInfo {
 
@@ -13,6 +14,7 @@ public class DcPlanInfo {
     private Timestamp dcMidTime1;
     private Timestamp dcEndTime;
     private String dcType;
+    private String dcTypeE;
     private String dcSource;
     private String dcEnd;
     private String dcDestination;
@@ -31,6 +33,23 @@ public class DcPlanInfo {
     private int dcCS6;
     private String dcId;
     private String dcPath;
+    private List<String> selectList;
+
+    public List<String> getSelectList() {
+        return selectList;
+    }
+
+    public void setSelectList(List<String> selectList) {
+        this.selectList = selectList;
+    }
+
+    public String getDcTypeE() {
+        return dcTypeE;
+    }
+
+    public void setDcTypeE(String dcTypeE) {
+        this.dcTypeE = dcTypeE;
+    }
 
     public String getDcPath() {
         return dcPath;

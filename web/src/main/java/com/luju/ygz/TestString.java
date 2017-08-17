@@ -7,16 +7,24 @@ import java.util.*;
 public class TestString {
 
     public static void main(String[] args) {
-        List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
-        Set<String> set=new HashSet<String>();
-        Collections.sort(list, new Comparator<Object>() {
 
-            @Override
-            public int compare(Object o1, Object o2) {
-
-                return o2.toString().compareTo(o1.toString());
-            }
-        });
+        String a = "123";
+        String b = null;
+        if (b != null) {
+            System.out.println("非空");
+        } else {
+            System.out.println("null");
+        }
+//        List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
+//        Set<String> set=new HashSet<String>();
+//        Collections.sort(list, new Comparator<Object>() {
+//
+//            @Override
+//            public int compare(Object o1, Object o2) {
+//
+//                return o2.toString().compareTo(o1.toString());
+//            }
+//        });
     }
 }
 
