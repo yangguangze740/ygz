@@ -6,6 +6,7 @@ import luju.common.util.DataProcess;
 import luju.common.util.ListToSet;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public interface DcServiceI {
@@ -46,7 +47,6 @@ public interface DcServiceI {
 
     /* select jt data in path*/
     List<ResultInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo);
-
     /* select zm data in path*/
     List<ResultInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo);
 
@@ -59,7 +59,7 @@ public interface DcServiceI {
 
     List<DcPlanInfo> selectDcData();
 
-    List<DcPlanInfo> selectDcPath();
+    List<Map<String,List<DcPlanInfo>>> selectDcPath();
 
     int updateSource(DcPlanInfo dcPlanInfo);
 

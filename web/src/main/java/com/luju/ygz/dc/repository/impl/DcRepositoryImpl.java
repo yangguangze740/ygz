@@ -595,7 +595,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectPath(DcPlanInfo dcPlanInfo) {
-        String sql = "SELECT dcId, jcPath, dcStartTime, dcEndTime FROM dc_show_data D LEFT JOIN (SELECT DISTINCT jcPath FROM jc_path_info WHERE jcDCH IN (SELECT jcDCH FROM jc_path_info WHERE jcPath = ? )) I ON D.dcPath = I.jcPath WHERE jcPath is not null and (dcStartTime < ? AND dcEndTime > ? OR dcStartTime > ? AND ? > dcStartTime OR dcEndTime > ? AND dcEndTime < ?)";
+        String sql = "SELECT dcId, dcNumber, dcType,jcPath, dcStartTime, dcEndTime  FROM dc_show_data D LEFT JOIN (SELECT DISTINCT jcPath FROM jc_path_info WHERE jcDCH IN (SELECT jcDCH FROM jc_path_info WHERE jcPath = ? )) I ON D.dcPath = I.jcPath WHERE jcPath is not null and (dcStartTime < ? AND dcEndTime > ? OR dcStartTime > ? AND ? > dcStartTime OR dcEndTime > ? AND dcEndTime < ?)";
         Object[] args = {
                 dcPlanInfo.getDcPath(),
                 dcPlanInfo.getDcStartTime(),
@@ -1049,6 +1049,8 @@ public class DcRepositoryImpl implements DcRepositoryI {
             String[] conflict = {userInfo.getDcId()};
 
             userInfo.setDcId(resultSet.getString("dcId"));
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcPath(resultSet.getString("jcPath"));
             userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
             userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));

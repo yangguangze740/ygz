@@ -167,23 +167,37 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public List<DcPlanInfo> selectDcPath() {
+    public List<Map<String,List<DcPlanInfo>>> selectDcPath() {
 
         List<DcPlanInfo> pathList = new ArrayList<DcPlanInfo>();
+        List<Map<String,List<DcPlanInfo>>> listMap = new ArrayList<Map<String,List<DcPlanInfo>>>();
+        Map<String,List<DcPlanInfo>> map = new HashMap<String,List<DcPlanInfo>>();
         List<String> arrayList = new ArrayList<String>();
+        List<String> arrayListEquals = new ArrayList<String>();
 
-//        List<DcPlanInfo> list = dcRepository.selectDcData();
-//        for (int i = 0; i<list.size();i++) {
-//            String uuid = list.get(i).getDcId();
-//            arrayList.add(uuid);
-//
-//            pathList = dcRepository.selectPath(list.get(i));
-//            for (int k =0 ;k<pathList.size(); k++) {
-//                if (arrayList.contains())
-//                arrayList.add(pathList.get(k).getDcId());
-//            }
-//        }
-        return null;
+        List<DcPlanInfo> list = dcRepository.selectDcData();
+
+        for (int i = 0; i<list.size();i++) {
+
+            String uuid = list.get(i).getDcId();
+            pathList = dcRepository.selectPath(list.get(i));
+
+            if (pathList.size() != 0) {
+                arrayList.add(uuid);
+                for (int k =0 ;k<pathList.size(); k++) {
+                    arrayList.add(pathList.get(k).getDcId());
+                }
+                if (Collections.disjoint(arrayList,arrayListEquals)){
+                    System.out.println(Collections.disjoint(arrayList,arrayListEquals));
+                    arrayListEquals.addAll(arrayList);
+                    arrayList.removeAll(arrayListEquals);
+                    pathList.add(list.get(i));
+                    map.put(uuid,pathList);
+                    listMap.add(map);
+                }
+            }
+        }
+        return listMap;
     }
 
     @Override
