@@ -4,6 +4,7 @@ import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.ResultInfo;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import luju.common.util.ConstantFields;
+import luju.common.util.DataProcess;
 import luju.common.util.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -26,6 +27,8 @@ public class DcRepositoryImpl implements DcRepositoryI {
     private JdbcTemplate mysqlJdbcTemplate;
 
     PrimaryKeyUtil uuid = new PrimaryKeyUtil();
+
+    DataProcess dataProcess = new DataProcess();
 
     @Override
     public List<DcPlanInfo> selectDcPlanFromOra() {
@@ -888,6 +891,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcXD(resultSet.getString("dcXD"));
             userInfo.setDcDH(resultSet.getString("dcDH"));
             userInfo.setDcCS6(resultSet.getInt("dcCS6"));
+            userInfo.setDcTypeE(ConstantFields.TYPE_TC);
 
             return userInfo;
         }
@@ -895,7 +899,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public boolean insertDcData(final List<DcPlanInfo> dcPlanInfos) {
-        String sql ="insert dc_show_data(dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj,dcTFX,dcTF,dcXD,dcDH,dcPath,dcCS6,jcSumHc) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql ="insert dc_show_data(dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj,dcTFX,dcTF,dcXD,dcDH,dcPath,dcCS6,jcSumHc,dcTypeE) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         int[] result = mysqlJdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement ps, int i) throws SQLException {
@@ -916,6 +920,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 ps.setString(13,dcPlanInfo.getDcPath());
                 ps.setInt(14,dcPlanInfo.getDcCS6());
                 ps.setFloat(15,dcPlanInfo.getJcSumHc());
+                ps.setString(16,dcPlanInfo.getDcTypeE());
 
             }
 
@@ -931,13 +936,13 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcData() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcDataRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("select error");
+            System.out.println("select dc show data error");
             return null;
         }
     }
@@ -950,10 +955,35 @@ public class DcRepositoryImpl implements DcRepositoryI {
             dcPlanInfo.setDcStartTime(resultset.getTimestamp("dcStartTime"));
             dcPlanInfo.setDcEndTime(resultset.getTimestamp("dcEndTime"));
             dcPlanInfo.setDcType(resultset.getString("dcType"));
-            dcPlanInfo.setDcSource(resultset.getString("dcSource"));
+            dcPlanInfo.setDcTypeE(resultset.getString("dcTypeE"));
             dcPlanInfo.setDcDestination(resultset.getString("dcDestination"));
             dcPlanInfo.setDcDj(resultset.getInt("dcDj"));
+            dcPlanInfo.setDcPath(resultset.getString("dcPath"));
 
+            String source = resultset.getString("dcSource");
+            if (source != null && source.equals(ConstantFields.JCSOURCE)) {
+                dcPlanInfo.setDcSource(ConstantFields.JCSOURCEC);
+            } else if (source != null && source.equals(ConstantFields.ZCSOURCE)){
+                dcPlanInfo.setDcSource(ConstantFields.ZCSOURCEC);
+            } else {
+                dcPlanInfo.setDcSource(source);
+                if(resultset.getString("dcTypeE").equals(ConstantFields.JT)) {
+                    dcPlanInfo.setSelectList(dataProcess.jtSelectList());
+                }
+
+                if(resultset.getString("dcTypeE").equals(ConstantFields.ZM)) {
+                    dcPlanInfo.setSelectList(dataProcess.zmSelectList());
+                }
+
+                if(resultset.getString("dcTypeE").equals(ConstantFields.TYPE_TC)) {
+                    dcPlanInfo.setSelectList(dataProcess.tcSelectList());
+                }
+            }
+
+            String des = resultset.getString("dcDestination");
+            if (des == null && resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
+                dcPlanInfo.setSelectList(dataProcess.bwjSelectList());
+            }
             return dcPlanInfo;
         }
     }

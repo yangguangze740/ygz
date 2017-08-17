@@ -8,10 +8,7 @@ import org.joda.time.DateTime;
 import java.lang.reflect.Field;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class DataProcess {
 
@@ -60,6 +57,7 @@ public class DataProcess {
             }
             list.get(k).setJcStartTime(ts1);
             list.get(k).setJcType(ConstantFields.TYPE_JC);
+            list.get(k).setNODE_FOUR_WAY(ConstantFields.JCSOURCE);
         }
         return list;
     }
@@ -370,6 +368,8 @@ public class DataProcess {
 
     public List<DcPlanInfo> zcTimeList(List<DcPlanInfo> list) {
 
+        String des = null;
+
         for (int k = 0; k < list.size(); k++) {
             Field[] fields = list.get(k).getClass().getDeclaredFields();
             Object oi = list.get(k);
@@ -386,7 +386,7 @@ public class DataProcess {
                         ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
                     }
                     if(fields[j].getName().equals("dcDestination") && fields[j].get(oi) !=null){
-                        String des = fields[j].get(oi).toString();
+                        des = fields[j].get(oi).toString();
                         XD = des.substring(0,2);
                         DH = des.substring(2,4);
                     }
@@ -394,9 +394,8 @@ public class DataProcess {
                         if (fields[j].get(oi) == null) {
                             TF = null;
                         } else {
-                            String des = fields[j].get(oi).toString();
-                            TF = des.substring(0,2);
-                            System.out.println();
+                            String de = fields[j].get(oi).toString();
+                            TF = de.substring(0,2);
                         }
                     }
                 } catch (IllegalArgumentException e) {
@@ -409,6 +408,9 @@ public class DataProcess {
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
             list.get(k).setDcTF(TF);
+            list.get(k).setDcSource(ConstantFields.ZCSOURCE);
+            list.get(k).setDcTypeE(ConstantFields.ZC);
+            list.get(k).setDcPath(ConstantFields.ZC+des);
         }
         return list;
     }
@@ -472,6 +474,7 @@ public class DataProcess {
             list.get(k).setDcDH(DH);
             list.get(k).setDcDestination(des);
             list.get(k).setDcSource(null);
+            list.get(k).setDcTypeE(ConstantFields.JT);
         }
         return list;
     }
@@ -520,6 +523,8 @@ public class DataProcess {
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
             list.get(k).setDcDestination(end);
+            list.get(k).setDcTypeE(ConstantFields.JT);
+            list.get(k).setDcPath(ConstantFields.JT+des+end);
         }
         return list;
     }
@@ -572,6 +577,7 @@ public class DataProcess {
             list.get(k).setDcDH(DH);
             list.get(k).setDcDestination(des);
             list.get(k).setDcSource(null);
+            list.get(k).setDcTypeE(ConstantFields.ZM);
         }
         return list;
     }
@@ -625,6 +631,8 @@ public class DataProcess {
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
             list.get(k).setDcDestination(end);
+            list.get(k).setDcTypeE(ConstantFields.ZM);
+            list.get(k).setDcPath(ConstantFields.ZM+des+end);
         }
         return list;
     }
@@ -658,12 +666,14 @@ public class DataProcess {
             list.get(k).setDcStartTime(ts1);
             list.get(k).setDcEndTime(ts2);
             list.get(k).setDcType(ConstantFields.TYPE_BWJ);
+            list.get(k).setDcTypeE(ConstantFields.BWJ);
         }
         return list;
 
     }
 
     public List<DcPlanInfo> jcDataList(List<DcPlanInfo> list) {
+        String des = null;
 
         for(int k=0;k<list.size();k++){
             Field[] fields = list.get(k).getClass().getDeclaredFields();
@@ -674,10 +684,11 @@ public class DataProcess {
                 }
                 try {
                     if(fields[j].getName().equals("dcDestination")){
-                        String des = fields[j].get(oi).toString();
+                        des = fields[j].get(oi).toString();
                         XD = des.substring(0,2);
                         DH = des.substring(2,4);
                     }
+
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -686,8 +697,46 @@ public class DataProcess {
             }
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
+            list.get(k).setDcTypeE(ConstantFields.JC);
+            list.get(k).setDcPath(ConstantFields.JC+ConstantFields.JCSOURCE+des);
         }
         return list;
+    }
+
+    public List<String> jtSelectList() {
+        List<String> jtSelectList = new ArrayList<String>();
+
+        jtSelectList.add(ConstantFields.TYPE_QCX);
+        jtSelectList.add(ConstantFields.TYPE_JDX);
+
+        return jtSelectList;
+    }
+
+    public List<String> zmSelectList() {
+        List<String> zmSelectList = new ArrayList<String>();
+
+        zmSelectList.add(ConstantFields.XT1);
+        zmSelectList.add(ConstantFields.XT2);
+
+        return zmSelectList;
+    }
+
+    public List<String> tcSelectList() {
+        List<String> tcSelectList = new ArrayList<String>();
+
+        tcSelectList.add(ConstantFields.XT1);
+        tcSelectList.add(ConstantFields.XT2);
+
+        return tcSelectList;
+    }
+
+    public List<String> bwjSelectList() {
+        List<String> bwjSelectList = new ArrayList<String>();
+
+        bwjSelectList.add(ConstantFields.BWJDS);
+        bwjSelectList.add(ConstantFields.BWJDN);
+
+        return bwjSelectList;
     }
 
     public Timestamp time(String time) {
