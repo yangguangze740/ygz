@@ -62,7 +62,7 @@
                                 <tbody id="showDataTbody">
                                     <c:forEach items="${allList}" var="record" varStatus="status">
                                         <c:set value="${record.selectList }" var="selectList"/>
-                                        <tr style="text-align: center;" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
+                                        <tr style="text-align: center;" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                             <td>${status.index + 1}</td>
                                             <td>${record.dcNumber}</td>
                                             <td>${record.dcType}</td>
@@ -189,7 +189,7 @@
                                     <c:forEach items="${mapList}" var="map" varStatus="status">
                                         <c:forEach items="${map.value}" var="entry" varStatus="status">
                                             <tr>
-                                                <td> ${map.key} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
+                                                <td> ${map.key.dcNumber} ${map.key.dcType} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
                                                 <td>
                                                     <div style="text-align:right;">
                                                         <button type="button" class="btn btn-warning">撤销</button>
@@ -239,24 +239,23 @@
     <script type="text/javascript">
         $(function () {
             $("#showDataTbody select.sourceUpdate").change(function() {
-
                 console.log($(this));
                 // run
 
                 var dcId = $(this).parent().parent().attr("dcId");
                 var dcTypeE = $(this).parent().parent().attr("dcTypeE");
                 var dcDestination = $(this).parent().parent().attr("dcDestination");
+                var dcNumber = $(this).parent().parent().attr("dcNumber");
+                var dcType = $(this).parent().parent().attr("dcType");
                 var selectValue = $(this).val();
                 var postData = {
                     dcId: dcId,
                     dcSource: selectValue,
                     dcTypeE: dcTypeE,
-                    dcDestination: dcDestination
+                    dcDestination: dcDestination,
+                    dcNumber: dcNumber,
+                    dcType: dcType
                 }
-                console.log(dcId);
-                console.log(selectValue);
-                console.log(dcDestination);
-                console.log(dcTypeE);
 
                 $.ajax({
                     type:'post',
@@ -264,18 +263,28 @@
                     data:postData,
                     dataType:'json',
                     url:'${contextPath}/luju/updateSource.action',
-                    success:function (result) {
+                    success:function (list) {
+                        console.log(list);
                         // result == list<Map<String,List<DcPlanInfo>>>
                         $("#conflictTable").empty();
-                        console.log(result);
-                        $.each(result, function(index, value) {
-
-                            $.each(value, function(index, value1) {
-
-                                $.each(value1.list, function(index, value2) {
-                                    var oneTrValue = value2;
-                                    $("#conflictTable").append(oneTrValue);
+                        $.each(list, function(i, map) {
+                            $.each(map, function(i1, lists) {
+                                $.each(lists, function(i2, value2) {
+                                    var oneTrValue = value2.dcNumber;
+                                    var twoTrValue = value2.dcType;
+                                    console.log(dcNumber);
+                                    console.log(dcType);
                                     console.log(oneTrValue);
+                                    console.log(twoTrValue);
+                                    $("#conflictTable").append(
+                                    "<tr><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
+"                                            <div style=\"text-align:right;\">\n" +
+"                                                <button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
+"                                                <button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
+"                                            </div>\n" +
+"                                        </td>\n" +
+"                                    </tr>"
+                                    );
                                 })
                             })
                         })
@@ -319,7 +328,9 @@
 
                                 $.each(value1.list, function(index, value2) {
                                     var oneTrValue = value2;
-                                    $("#conflictTable").append(oneTrValue);
+                                    $("#conflictTable").append(
+
+                                    );
                                     console.log(oneTrValue);
                                 })
                             })

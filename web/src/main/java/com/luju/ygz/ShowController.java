@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +65,7 @@ public class ShowController {
         return mav;
     }
 
+    @ResponseBody
     @RequestMapping("/updateSource")
     public List<Map<DcPlanInfo,List<DcPlanInfo>>> updateSource(DcPlanInfo dcPlanInfo) {
         List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList;
@@ -76,6 +78,7 @@ public class ShowController {
         return mapList;
     }
 
+    @ResponseBody
     @RequestMapping("/updateDestination")
     public List<Map<DcPlanInfo,List<DcPlanInfo>>> updateDestination(DcPlanInfo dcPlanInfo) {
         List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList;
