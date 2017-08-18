@@ -1020,6 +1020,10 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 dcPlanInfo.setDcSource(ConstantFields.JCSOURCEC);
             } else if (source != null && source.equals(ConstantFields.ZCSOURCE)){
                 dcPlanInfo.setDcSource(ConstantFields.ZCSOURCEC);
+            } else if (source != null && source.equals(ConstantFields.QC)){
+                dcPlanInfo.setDcSource(ConstantFields.TYPE_QCX);
+            } else if (source != null && source.equals(ConstantFields.JD)){
+                dcPlanInfo.setDcSource(ConstantFields.TYPE_JDX);
             } else {
                 dcPlanInfo.setDcSource(source);
                 if(resultset.getString("dcTypeE").equals(ConstantFields.JT)) {

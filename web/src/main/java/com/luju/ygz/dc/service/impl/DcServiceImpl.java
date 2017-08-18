@@ -5,6 +5,7 @@ import com.luju.pojo.ResultInfo;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import com.luju.ygz.dc.service.DcServiceI;
 import com.luju.ygz.test.repository.TestRepositoryI;
+import luju.common.util.ConstantFields;
 import luju.common.util.DataProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -202,11 +203,24 @@ public class DcServiceImpl implements DcServiceI {
 
     @Override
     public int updateSource(DcPlanInfo dcPlanInfo) {
+        if (dcPlanInfo.getDcSource().equals(ConstantFields.TYPE_QCX)) {
+            dcPlanInfo.setDcSource(ConstantFields.QC);
+        }
+        if (dcPlanInfo.getDcSource().equals(ConstantFields.TYPE_JDX)) {
+            dcPlanInfo.setDcSource(ConstantFields.JD);
+        }
+
         return dcRepository.updateSource(dcPlanInfo);
     }
 
     @Override
     public int updateDestination(DcPlanInfo dcPlanInfo) {
+        if (dcPlanInfo.getDcDestination().equals(ConstantFields.BWJDS)) {
+            dcPlanInfo.setDcSource(ConstantFields.S);
+        }
+        if (dcPlanInfo.getDcDestination().equals(ConstantFields.BWJDN)) {
+            dcPlanInfo.setDcSource(ConstantFields.N);
+        }
         return dcRepository.updateDestination(dcPlanInfo);
     }
 }

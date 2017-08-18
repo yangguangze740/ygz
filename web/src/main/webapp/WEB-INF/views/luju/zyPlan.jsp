@@ -59,11 +59,10 @@
                                         <%--<th>进路</th>--%>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="showDataTbody">
                                     <c:forEach items="${allList}" var="record" varStatus="status">
                                         <c:set value="${record.selectList }" var="selectList"/>
-                                        <tr style="text-align: center;">
-                                            <%--<td class="display:none">${record.dcId}</td>--%>
+                                        <tr style="text-align: center;" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                             <td>${status.index + 1}</td>
                                             <td>${record.dcNumber}</td>
                                             <td>${record.dcType}</td>
@@ -71,9 +70,9 @@
                                             <td>${record.dcEndTime}</td>
                                             <td>
                                                 <c:if test="${record.dcSource == null}">
-                                                    <select class="update form-control" style = "width:150px;">
+                                                    <select class="sourceUpdate form-control" style = "width:150px;">
                                                         <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                            <option value ="select">${recordSelect}</option>
+                                                            <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </c:if>
@@ -83,9 +82,9 @@
                                             </td>
                                             <td>
                                                 <c:if test="${record.dcDestination == null}">
-                                                    <select class="willUpdate form-control" style = "width:150px; text-align: right;">
+                                                    <select class="destinationUpdate form-control" style = "width:150px; text-align: right;">
                                                         <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                            <option value ="select">${recordSelect}</option>
+                                                            <option value ="${recordSelect}">${recordSelect}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </c:if>
@@ -241,16 +240,25 @@
 
     <script type="text/javascript">
         $(function () {
-            $("#table select .update").change(function() {
+            $("#showDataTbody select.sourceUpdate").change(function() {
 
-                var uuid = $(this).parent().parent().attr();
-                var selectValue = $(this).find("option:selected").text();
+                console.log($(this));
+                // run
+
+                var dcId = $(this).parent().parent().attr("dcId");
+                var dcTypeE = $(this).parent().parent().attr("dcTypeE");
+                var dcDestination = $(this).parent().parent().attr("dcDestination");
+                var selectValue = $(this).val();
                 var postData = {
-                    dcId: uuid,
-                    dcSource: selectValue
+                    dcId: dcId,
+                    dcSource: selectValue,
+                    dcTypeE: dcTypeE,
+                    dcDestination: dcDestination
                 }
-                console.log(uuid);
+                console.log(dcId);
                 console.log(selectValue);
+                console.log(dcDestination);
+                console.log(dcTypeE);
 
                 $.ajax({
                     type:'post',
@@ -258,6 +266,51 @@
                     data:postData,
                     dataType:'json',
                     url:'${contextPath}/luju/updateSource.action',
+                    success:function (result) {
+                        // result == list<Map<String,List<DcPlanInfo>>>
+                        $("#conflictTable").empty();
+
+                        $.each(result, function(index, value) {
+
+                            $.each(value, function(index, value1) {
+
+                                $.each(value1.list, function(index, value2) {
+                                    var oneTrValue = value2;
+                                    $("#conflictTable").append(oneTrValue);
+                                    console.log(oneTrValue);
+                                })
+                            })
+                        })
+                    }
+                })
+            })
+
+            $("#showDataTbody select.destinationUpdate").change(function() {
+
+                console.log($(this));
+                // run
+
+                var dcId = $(this).parent().parent().attr("dcId");
+                var dcTypeE = $(this).parent().parent().attr("dcTypeE");
+                var dcSource = $(this).parent().parent().attr("dcSource");
+                var selectValue = $(this).val();
+                var postData = {
+                    dcId: dcId,
+                    dcDestination: selectValue,
+                    dcTypeE: dcTypeE,
+                    dcSource: dcSource
+                }
+                console.log(dcId);
+                console.log(selectValue);
+                console.log(dcSource);
+                console.log(dcTypeE);
+
+                $.ajax({
+                    type:'post',
+                    contentType:'application/x-www-form-urlencoded',
+                    data:postData,
+                    dataType:'json',
+                    url:'${contextPath}/luju/updateDestination.action',
                     success:function (result) {
                         // result == list<Map<String,List<DcPlanInfo>>>
                         $("#conflictTable").empty();
@@ -340,7 +393,7 @@
             $("button[value='cd']").click(function () {
                 $("#noteModal").modal();
             });
-        });
+        })
     </script>
 
     <!-- 底部栏 -->

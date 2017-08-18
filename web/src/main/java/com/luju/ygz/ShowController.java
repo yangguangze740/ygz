@@ -31,7 +31,7 @@ public class ShowController {
 
     List<ResultInfo> pathListJc = null;
 
-    ListToSet comparatorSet = new ListToSet();
+    DataProcess dataProcess = new DataProcess();
 
     @RequestMapping("/route")
     public String routeLogin() {
@@ -56,8 +56,7 @@ public class ShowController {
     public ModelAndView allJcData() {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
-        DataProcess dataProcess = new DataProcess();
-
+//        dcService.processDcData(dataProcess);
         List<DcPlanInfo> allList = dcService.selectDcData();
         List<Map<String,List<DcPlanInfo>>> mapList = dcService.selectDcPath();
 
@@ -70,7 +69,8 @@ public class ShowController {
     @RequestMapping("/updateSource")
     public List<Map<String,List<DcPlanInfo>>> updateSource(DcPlanInfo dcPlanInfo) {
         List<Map<String,List<DcPlanInfo>>> mapList;
-        if (dcService.updateSource(dcPlanInfo) != 0) {
+        int result = dcService.updateSource(dcPlanInfo);
+        if (result != 0) {
             mapList = dcService.selectDcPath();
         } else {
             return null;
