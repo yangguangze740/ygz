@@ -61,7 +61,9 @@
                                 </thead>
                                 <tbody>
                                     <c:forEach items="${allList}" var="record" varStatus="status">
+                                        <c:set value="${record.selectList }" var="selectList"/>
                                         <tr style="text-align: center;">
+                                            <%--<td class="display:none">${record.dcId}</td>--%>
                                             <td>${status.index + 1}</td>
                                             <td>${record.dcNumber}</td>
                                             <td>${record.dcType}</td>
@@ -69,13 +71,29 @@
                                             <td>${record.dcEndTime}</td>
                                             <td>
                                                 <c:if test="${record.dcSource == null}">
-                                                <select class="form-control">
+                                                    <select class="update form-control" style = "width:150px;">
+                                                        <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
+                                                            <option value ="select">${recordSelect}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </c:if>
+                                                <c:if test="${record.dcSource != null}">
                                                     ${record.dcSource}
-                                                </select>
                                                 </c:if>
                                             </td>
-                                            <td>${record.dcDestination}</td>
-                                            <td></td>
+                                            <td>
+                                                <c:if test="${record.dcDestination == null}">
+                                                    <select class="willUpdate form-control" style = "width:150px; text-align: right;">
+                                                        <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
+                                                            <option value ="select">${recordSelect}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </c:if>
+                                                <c:if test="${record.dcDestination != null}">
+                                                    ${record.dcDestination}
+                                                </c:if>
+                                            </td>
+                                            <td>${record.dcDj}</td>
                                             <td></td>
                                         </tr>
                                     </c:forEach>
@@ -157,17 +175,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        11&nbsp;行分区错误
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
                             </table>
                         </div>
                     </div>
@@ -181,18 +188,13 @@
                             <table class="table" id="conflictTable">
                                 <tr>
                                     <td>
-                                        2、5&nbsp;行进路交叉
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        3、9&nbsp;行进路交叉
+                                        <c:forEach items="${mapList}" var="mapList" varStatus="status">
+                                            <c:forEach items="${mapList}" var="list" varStatus="status">
+                                                <c:forEach items="${list.value}" var="entry" varStatus="status">
+                                                    ${entry.dcNumber}&nbsp;&nbsp;${entry.dcType} 冲突
+                                                </c:forEach>
+                                            </c:forEach>
+                                        </c:forEach>
                                     </td>
                                     <td>
                                         <div style="text-align:right;">
@@ -234,8 +236,47 @@
 
     <%@ include file="/WEB-INF/include/javascript.jsp"%>
 
+
+
+
     <script type="text/javascript">
         $(function () {
+            $("#table select .update").change(function() {
+
+                var uuid = $(this).parent().parent().attr();
+                var selectValue = $(this).find("option:selected").text();
+                var postData = {
+                    dcId: uuid,
+                    dcSource: selectValue
+                }
+                console.log(uuid);
+                console.log(selectValue);
+
+                $.ajax({
+                    type:'post',
+                    contentType:'application/x-www-form-urlencoded',
+                    data:postData,
+                    dataType:'json',
+                    url:'${contextPath}/luju/updateSource.action',
+                    success:function (result) {
+                        // result == list<Map<String,List<DcPlanInfo>>>
+                        $("#conflictTable").empty();
+
+                        $.each(result, function(index, value) {
+
+                            $.each(value, function(index, value1) {
+
+                                $.each(value1.list, function(index, value2) {
+                                    var oneTrValue = value2;
+                                    $("#conflictTable").append(oneTrValue);
+                                    console.log(oneTrValue);
+                                })
+                            })
+                        })
+                    }
+                })
+            })
+
             function zyPlan(condition) {
                 function loadData(result) {
 

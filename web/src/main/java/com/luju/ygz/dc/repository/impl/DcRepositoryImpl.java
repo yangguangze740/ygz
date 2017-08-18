@@ -989,7 +989,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcData() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcDataRowMapper());
@@ -1036,7 +1036,14 @@ public class DcRepositoryImpl implements DcRepositoryI {
             }
             String des = resultset.getString("dcDestination");
             if (des == null && resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
-                dcPlanInfo.setSelectList(dataProcess.bwjSelectList());
+                if (Integer.parseInt(resultset.getString("dcDH")) == 2 ||
+                        Integer.parseInt(resultset.getString("dcDH")) == 3 ||
+                        Integer.parseInt(resultset.getString("dcDH")) == 4) {
+                    dcPlanInfo.setSelectList(dataProcess.bwjSelectList4S());
+                } else {
+                    dcPlanInfo.setSelectList(dataProcess.bwjSelectList4N());
+                }
+
             }
             return dcPlanInfo;
         }

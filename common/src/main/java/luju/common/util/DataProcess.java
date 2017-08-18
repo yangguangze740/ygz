@@ -730,11 +730,20 @@ public class DataProcess {
         return tcSelectList;
     }
 
-    public List<String> bwjSelectList() {
+    public List<String> bwjSelectList4S() {
         List<String> bwjSelectList = new ArrayList<String>();
 
         bwjSelectList.add(ConstantFields.BWJDS);
         bwjSelectList.add(ConstantFields.BWJDN);
+
+        return bwjSelectList;
+    }
+
+    public List<String> bwjSelectList4N() {
+        List<String> bwjSelectList = new ArrayList<String>();
+
+        bwjSelectList.add(ConstantFields.BWJDN);
+        bwjSelectList.add(ConstantFields.BWJDS);
 
         return bwjSelectList;
     }

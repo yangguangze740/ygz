@@ -58,32 +58,9 @@ public class ShowController {
 
         DataProcess dataProcess = new DataProcess();
 
-//        List<ResultInfo> pathListJt = null;
-//        List<ResultInfo> pathListZm = null;
-//        List<ResultInfo> pathListTc = null;
-//
-//        List<ResultInfo> jcList = service.processJcData(); // path
-//        List<ResultInfo> bwjList = service.processBwjData();
-//        List<ResultInfo> jt1List = dcService.processJt1Data();
-//        List<ResultInfo> jt2List = dcService.processJt2Data();//path
-//        List<ResultInfo> zm1List = dcService.processZm1Data();
-//        List<ResultInfo> zm2List = dcService.processZm2Data();//path
-//        List<ResultInfo> zcList = dcService.processZcData();//path
-//        List<ResultInfo> tcList = dcService.processTcData();
-
-//        pathListJc = dataProcess.selectPath(jcList,pathListJc);
-//        pathListJt = dataProcess.selectPath(jcList,pathListJt);
-//        pathListZm = dataProcess.selectPath(jcList,pathListZm);
-//        pathListTc = dataProcess.selectPath(jcList,pathListTc);
-
-//        pathListJc.addAll(pathListJt);
-//        pathListJc.addAll(pathListZm);
-//        pathListJc.addAll(pathListTc);
-
         List<DcPlanInfo> allList = dcService.selectDcData();
         List<Map<String,List<DcPlanInfo>>> mapList = dcService.selectDcPath();
 
-//        Set<ResultInfo> allDataSet = listToSet.comparatorSet(jcList,bwjList,jt1List,jt2List,zm1List,zm2List,zcList,tcList);
         mav.addObject("allList",allList);
         mav.addObject("mapList",mapList);
 
@@ -102,8 +79,14 @@ public class ShowController {
     }
 
     @RequestMapping("/updateDestination")
-    public int updateDestination(DcPlanInfo dcPlanInfo) {
-        return dcService.updateDestination(dcPlanInfo);
+    public List<Map<String,List<DcPlanInfo>>> updateDestination(DcPlanInfo dcPlanInfo) {
+        List<Map<String,List<DcPlanInfo>>> mapList;
+        if (dcService.updateDestination(dcPlanInfo) != 0) {
+            mapList = dcService.selectDcPath();
+        } else {
+            return null;
+        }
+        return mapList;
     }
 
     @RequestMapping("/bwjPath")
