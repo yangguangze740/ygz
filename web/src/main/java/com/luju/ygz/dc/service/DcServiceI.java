@@ -59,7 +59,7 @@ public interface DcServiceI {
 
     List<DcPlanInfo> selectDcData();
 
-    List<Map<String,List<DcPlanInfo>>> selectDcPath();
+    List<Map<DcPlanInfo,List<DcPlanInfo>>> selectDcPath();
 
     int updateSource(DcPlanInfo dcPlanInfo);
 

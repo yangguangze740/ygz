@@ -8,8 +8,63 @@ public class TestString {
 
     public static void main(String[] args) {
 
-        System.out.println(true&&false);
-        System.out.println(true||false);
+        List<String> string1 = new ArrayList<>();
+        string1.add("1");
+        string1.add("2");
+        string1.add("3");
+
+        List<String> string2 = new ArrayList<>();
+        string2.add("a");
+        string2.add("b");
+        string2.add("c");
+
+        List<List<List<String>>> list = new ArrayList<List<List<String>>>();
+        List<List<List<String>>> list1 = new ArrayList<List<List<String>>>();
+        List<List<String>> listList = new ArrayList<>();
+
+        for (List<String> s1 :listList) {
+            for (String s : s1){
+                s = "a";
+            }
+            System.out.println(s1);
+        }
+
+        for (List<List<String>> lists : list) {
+            for (List<String> strings : lists) {
+                for (String s : strings){
+                    s = "1";
+                    s = "2";
+                }
+                System.out.println(strings);
+            }
+        }
+
+        for (List<List<String>> lists : list1) {
+            for (List<String> strings : lists) {
+                for (String s : strings){
+                    s = "1";
+                    s = "3";
+                }
+            }
+        }
+
+        for (int i = 0; i< list1.size(); i++) {
+            List<List<String>>  lists = list1.get(i);
+            for (List<String> strings : lists) {
+                for (String s : strings){
+                    s = "2";
+                    s = "1";
+                }
+            }
+        }
+        boolean b = Collections.disjoint(list,list1);
+        if (b = true) {
+            System.out.println("不同");
+        } else {
+            System.out.println("相同");
+        }
+
+
 //        List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
 //        Set<String> set=new HashSet<String>();
 //        Collections.sort(list, new Comparator<Object>() {

@@ -185,23 +185,21 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflictTable">
-                                <tr>
-                                    <td>
-                                        <c:forEach items="${mapList}" var="mapList" varStatus="status">
-                                            <c:forEach items="${mapList}" var="list" varStatus="status">
-                                                <c:forEach items="${list.value}" var="entry" varStatus="status">
-                                                    ${entry.dcNumber}&nbsp;&nbsp;${entry.dcType} 冲突
-                                                </c:forEach>
-                                            </c:forEach>
+                                <c:forEach items="${mapList}" var="mapList" varStatus="status">
+                                    <c:forEach items="${mapList}" var="map" varStatus="status">
+                                        <c:forEach items="${map.value}" var="entry" varStatus="status">
+                                            <tr>
+                                                <td> ${map.key} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
+                                                <td>
+                                                    <div style="text-align:right;">
+                                                        <button type="button" class="btn btn-warning">撤销</button>
+                                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                         </c:forEach>
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                    </c:forEach>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>
@@ -269,7 +267,7 @@
                     success:function (result) {
                         // result == list<Map<String,List<DcPlanInfo>>>
                         $("#conflictTable").empty();
-
+                        console.log(result);
                         $.each(result, function(index, value) {
 
                             $.each(value, function(index, value1) {

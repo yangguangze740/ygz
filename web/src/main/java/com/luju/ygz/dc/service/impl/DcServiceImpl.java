@@ -168,18 +168,17 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public List<Map<String,List<DcPlanInfo>>> selectDcPath() {
+    public List<Map<DcPlanInfo,List<DcPlanInfo>>> selectDcPath() {
 
         List<DcPlanInfo> pathList = new ArrayList<DcPlanInfo>();
-        List<Map<String,List<DcPlanInfo>>> listMap = new ArrayList<Map<String,List<DcPlanInfo>>>();
-        Map<String,List<DcPlanInfo>> map = new HashMap<String,List<DcPlanInfo>>();
+        List<Map<DcPlanInfo,List<DcPlanInfo>>> listMap = new ArrayList<Map<DcPlanInfo,List<DcPlanInfo>>>();
+        Map<DcPlanInfo,List<DcPlanInfo>> map = new HashMap<DcPlanInfo,List<DcPlanInfo>>();
         List<String> arrayList = new ArrayList<String>();
         List<String> arrayListEquals = new ArrayList<String>();
 
         List<DcPlanInfo> list = dcRepository.selectDcData();
 
         for (int i = 0; i<list.size();i++) {
-
             String uuid = list.get(i).getDcId();
             pathList = dcRepository.selectPath(list.get(i));
 
@@ -192,8 +191,7 @@ public class DcServiceImpl implements DcServiceI {
                     System.out.println(Collections.disjoint(arrayList,arrayListEquals));
                     arrayListEquals.addAll(arrayList);
                     arrayList.removeAll(arrayListEquals);
-                    pathList.add(list.get(i));
-                    map.put(uuid,pathList);
+                    map.put(list.get(i),pathList);
                     listMap.add(map);
                 }
             }

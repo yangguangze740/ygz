@@ -7,7 +7,6 @@ import com.luju.ygz.dc.service.DcServiceI;
 import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.ConstantFields;
 import luju.common.util.DataProcess;
-import luju.common.util.ListToSet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/luju")
@@ -58,7 +56,7 @@ public class ShowController {
 
 //        dcService.processDcData(dataProcess);
         List<DcPlanInfo> allList = dcService.selectDcData();
-        List<Map<String,List<DcPlanInfo>>> mapList = dcService.selectDcPath();
+        List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList = dcService.selectDcPath();
 
         mav.addObject("allList",allList);
         mav.addObject("mapList",mapList);
@@ -67,8 +65,8 @@ public class ShowController {
     }
 
     @RequestMapping("/updateSource")
-    public List<Map<String,List<DcPlanInfo>>> updateSource(DcPlanInfo dcPlanInfo) {
-        List<Map<String,List<DcPlanInfo>>> mapList;
+    public List<Map<DcPlanInfo,List<DcPlanInfo>>> updateSource(DcPlanInfo dcPlanInfo) {
+        List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList;
         int result = dcService.updateSource(dcPlanInfo);
         if (result != 0) {
             mapList = dcService.selectDcPath();
@@ -79,8 +77,8 @@ public class ShowController {
     }
 
     @RequestMapping("/updateDestination")
-    public List<Map<String,List<DcPlanInfo>>> updateDestination(DcPlanInfo dcPlanInfo) {
-        List<Map<String,List<DcPlanInfo>>> mapList;
+    public List<Map<DcPlanInfo,List<DcPlanInfo>>> updateDestination(DcPlanInfo dcPlanInfo) {
+        List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList;
         if (dcService.updateDestination(dcPlanInfo) != 0) {
             mapList = dcService.selectDcPath();
         } else {
