@@ -650,7 +650,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
         String sql = "UPDATE dc_show_data SET dcDestination = ?, dcPath = ?, dcIsUpdate = 1 where dcId = ?";
         Object[] args = {
                 info.getDcDestination(),
-                info.getDcTypeE()+info.getDcSource()+info.getDcDestination(),
+                info.getDcTypeE()+info.getDcDestination()+info.getDcSource(),
                 info.getDcId()
         };
         try {
@@ -1047,7 +1047,12 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 } else {
                     dcPlanInfo.setSelectList(dataProcess.bwjSelectList4N());
                 }
-
+            }
+            if (des != null && des.equals(ConstantFields.S)) {
+                dcPlanInfo.setDcDestination(ConstantFields.BWJDS);
+            }
+            if (des != null && des.equals(ConstantFields.N)) {
+                dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
             }
             return dcPlanInfo;
         }
