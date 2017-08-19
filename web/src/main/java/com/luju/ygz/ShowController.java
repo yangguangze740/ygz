@@ -55,7 +55,6 @@ public class ShowController {
     public ModelAndView allJcData() {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
-//        dcService.processDcData(dataProcess);
         List<DcPlanInfo> allList = dcService.selectDcData();
         List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList = dcService.selectDcPath();
 

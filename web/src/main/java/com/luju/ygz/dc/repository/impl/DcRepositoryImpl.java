@@ -647,7 +647,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public int updateDestination(DcPlanInfo info) {
-        String sql = "UPDATE dc_show_data SET dcDestination = ?, dcPath = ?, dcIsUpdate = 1 where dcId = ?";
+        String sql = "UPDATE dc_show_data SET dcDestination = ?, dcPath = ?, dcIsUpdate = 2 where dcId = ?";
         Object[] args = {
                 info.getDcDestination(),
                 info.getDcTypeE()+info.getDcDestination()+info.getDcSource(),
@@ -989,7 +989,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcData() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcDataRowMapper());
@@ -1014,6 +1014,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             dcPlanInfo.setDcDj(resultset.getInt("dcDj"));
             dcPlanInfo.setDcPath(resultset.getString("dcPath"));
             dcPlanInfo.setIsUpdate(resultset.getInt("dcIsUpdate"));
+            dcPlanInfo.setSumHc(resultset.getFloat("jcSumHc"));
 
             String source = resultset.getString("dcSource");
             if (source != null && source.equals(ConstantFields.JCSOURCE)) {
@@ -1038,6 +1039,26 @@ public class DcRepositoryImpl implements DcRepositoryI {
                     dcPlanInfo.setSelectList(dataProcess.tcSelectList());
                 }
             }
+
+            if (source != null && resultset.getInt("dcIsUpdate") == 1) {
+                if (resultset.getString("dcTypeE").equals(ConstantFields.JT)) {
+                    if (source.equals(ConstantFields.QC)){
+                        dcPlanInfo.setDcSource(ConstantFields.TYPE_QCX);
+                    } else {
+                        dcPlanInfo.setDcSource(ConstantFields.TYPE_JDX);
+                    }
+                    dcPlanInfo.setSelectList(dataProcess.jtSelectListUpdate(dcPlanInfo.getDcSource()));
+                }
+                if (resultset.getString("dcTypeE").equals(ConstantFields.ZM)) {
+                    dcPlanInfo.setSelectList(dataProcess.zmtcSelectListUpdate(dcPlanInfo.getDcSource()));
+                }
+                if (resultset.getString("dcTypeE").equals(ConstantFields.TYPE_TC)) {
+                    dcPlanInfo.setSelectList(dataProcess.zmtcSelectListUpdate(dcPlanInfo.getDcSource()));
+                }
+
+            }
+
+
             String des = resultset.getString("dcDestination");
             if (des == null && resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
                 if (Integer.parseInt(resultset.getString("dcDH")) == 2 ||
@@ -1054,6 +1075,18 @@ public class DcRepositoryImpl implements DcRepositoryI {
             if (des != null && des.equals(ConstantFields.N)) {
                 dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
             }
+
+            if (des != null && resultset.getInt("dcIsUpdate") == 2) {
+                if (resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
+                    if (des.equals(ConstantFields.S)){
+                        dcPlanInfo.setDcDestination(ConstantFields.BWJDS);
+                    } else {
+                        dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
+                    }
+                    dcPlanInfo.setSelectList(dataProcess.bwjSelectListUpdate(dcPlanInfo.getDcDestination()));
+                }
+            }
+
             return dcPlanInfo;
         }
     }

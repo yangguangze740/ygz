@@ -748,6 +748,44 @@ public class DataProcess {
         return bwjSelectList;
     }
 
+    public List<String> jtSelectListUpdate(String s) {
+        List<String> jtSelectList = new ArrayList<String>();
+
+        if (s.equals(ConstantFields.TYPE_QCX)) {
+            jtSelectList.add(ConstantFields.TYPE_QCX);
+            jtSelectList.add(ConstantFields.TYPE_JDX);
+        } else {
+            jtSelectList.add(ConstantFields.TYPE_JDX);
+            jtSelectList.add(ConstantFields.TYPE_QCX);
+        }
+        return jtSelectList;
+    }
+
+    public List<String> zmtcSelectListUpdate(String s) {
+        List<String> zmSelectList = new ArrayList<String>();
+
+        if (s.equals(ConstantFields.XT1)){
+            zmSelectList.add(ConstantFields.XT1);
+            zmSelectList.add(ConstantFields.XT2);
+        } else {
+            zmSelectList.add(ConstantFields.XT2);
+            zmSelectList.add(ConstantFields.XT1);
+        }
+        return zmSelectList;
+    }
+
+    public List<String> bwjSelectListUpdate(String s) {
+        List<String> bwjSelectList = new ArrayList<String>();
+
+        if (s.equals(ConstantFields.BWJDS)){
+            bwjSelectList.add(ConstantFields.BWJDS);
+            bwjSelectList.add(ConstantFields.BWJDN);
+        } else {
+            bwjSelectList.add(ConstantFields.BWJDN);
+            bwjSelectList.add(ConstantFields.BWJDS);
+        }
+        return bwjSelectList;
+    }
     public Timestamp time(String time) {
 
         Timestamp ts = new Timestamp(Calendar.getInstance().getTime().getTime());

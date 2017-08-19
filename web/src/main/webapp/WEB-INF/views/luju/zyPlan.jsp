@@ -62,7 +62,7 @@
                                 <tbody id="showDataTbody">
                                     <c:forEach items="${allList}" var="record" varStatus="status">
                                         <c:set value="${record.selectList }" var="selectList"/>
-                                        <tr style="text-align: center;" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
+                                        <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                             <td>${status.index + 1}</td>
                                             <td>${record.dcNumber}</td>
                                             <td>${record.dcType}</td>
@@ -76,7 +76,14 @@
                                                         </c:forEach>
                                                     </select>
                                                 </c:if>
-                                                <c:if test="${record.dcSource != null}">
+                                                <c:if test="${record.dcSource != null && record.isUpdate == 1}">
+                                                    <select class="sourceUpdate form-control" style = "width:150px;">
+                                                        <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
+                                                            <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </c:if>
+                                                <c:if test="${record.dcSource != null && record.isUpdate !=1}">
                                                     ${record.dcSource}
                                                 </c:if>
                                             </td>
@@ -88,7 +95,14 @@
                                                         </c:forEach>
                                                     </select>
                                                 </c:if>
-                                                <c:if test="${record.dcDestination != null}">
+                                                <c:if test="${record.dcDestination != null && record.isUpdate == 2}">
+                                                    <select class="destinationUpdate form-control" style = "width:150px;">
+                                                        <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
+                                                            <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
+                                                        </c:forEach>
+                                                    </select>
+                                                </c:if>
+                                                <c:if test="${record.dcDestination != null && record.isUpdate !=2}">
                                                     ${record.dcDestination}
                                                 </c:if>
                                             </td>
@@ -107,29 +121,22 @@
                             <h3 class="box-title">超长、超限 错办进路</h3>
                         </div>
                         <div class="box-body">
-                            <table class="table" id="conflict4ErrorTable">
-                                <tr>
-                                    <td>
-                                        2&nbsp行超长4、5道接车
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        8&nbsp行超限2、5道接车
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <table class="table" id="conflict4CCCXTable">
+                                <c:forEach items="${allList}" var="entry" varStatus="status">
+                                    <c:if test="${entry.sumHc > 84}">
+                                        <tr dcId1="${entry.dcId}">
+                                            <td>
+                                                ${entry.dcNumber} ${entry.dcType}超长
+                                            </td>
+                                            <td>
+                                                <div style="text-align:right;">
+                                                    <button type="button" class="btn btn-warning">撤销</button>
+                                                    <button type="button" class="btn btn-danger" value="cd">调整</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>
@@ -140,7 +147,7 @@
                             <h3 class="box-title">禁峰 交叉进路</h3>
                         </div>
                         <div class="box-body">
-                            <table class="table" id="conflict4CCCXTable">
+                            <table class="table" id="conflict4JFTable">
                                 <tr>
                                     <td>
                                         10&nbsp行禁峰优先2、3、4道接车
@@ -188,7 +195,7 @@
                                 <c:forEach items="${mapList}" var="mapList" varStatus="status">
                                     <c:forEach items="${mapList}" var="map" varStatus="status">
                                         <c:forEach items="${map.value}" var="entry" varStatus="status">
-                                            <tr>
+                                            <tr dcId1="${map.key.dcId}" dcId2="${entry.dcId}">
                                                 <td> ${map.key.dcNumber} ${map.key.dcType} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
                                                 <td>
                                                     <div style="text-align:right;">
@@ -264,7 +271,6 @@
                     dataType:'json',
                     url:'${contextPath}/luju/updateSource.action',
                     success:function (list) {
-                        console.log(list);
                         // result == list<Map<String,List<DcPlanInfo>>>
                         $("#conflictTable").empty();
                         $.each(list, function(i, map) {
@@ -272,22 +278,18 @@
                                 $.each(lists, function(i2, value2) {
                                     var oneTrValue = value2.dcNumber;
                                     var twoTrValue = value2.dcType;
-                                    console.log(dcNumber);
-                                    console.log(dcType);
-                                    console.log(oneTrValue);
-                                    console.log(twoTrValue);
+                                    var threeTrValue = value2.dcId;
                                     $("#conflictTable").append(
-                                    "<tr><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
-"                                            <div style=\"text-align:right;\">\n" +
-"                                                <button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
-"                                                <button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
-"                                            </div>\n" +
-"                                        </td>\n" +
-"                                    </tr>"
+                                        "<tr dcId1 = "+ dcId +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
+                                        "<div style=\"text-align:right;\">\n" +
+                                        "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
+                                        "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
+                                        "</div></td></tr>"
                                     );
                                 })
                             })
                         })
+                        $("#conflictTable tr").click();
                     }
                 })
             })
@@ -300,17 +302,18 @@
                 var dcId = $(this).parent().parent().attr("dcId");
                 var dcTypeE = $(this).parent().parent().attr("dcTypeE");
                 var dcSource = $(this).parent().parent().attr("dcSource");
+                var dcNumber = $(this).parent().parent().attr("dcNumber");
+                var dcType = $(this).parent().parent().attr("dcType");
                 var selectValue = $(this).val();
                 var postData = {
                     dcId: dcId,
                     dcDestination: selectValue,
                     dcTypeE: dcTypeE,
-                    dcSource: dcSource
+                    dcSource: dcSource,
+                    dcNumber: dcNumber,
+                    dcType: dcType
                 }
                 console.log(dcId);
-                console.log(selectValue);
-                console.log(dcSource);
-                console.log(dcTypeE);
 
                 $.ajax({
                     type:'post',
@@ -318,20 +321,23 @@
                     data:postData,
                     dataType:'json',
                     url:'${contextPath}/luju/updateDestination.action',
-                    success:function (result) {
+                    success:function (list) {
+                        console.log(list);
                         // result == list<Map<String,List<DcPlanInfo>>>
                         $("#conflictTable").empty();
-
-                        $.each(result, function(index, value) {
-
-                            $.each(value, function(index, value1) {
-
-                                $.each(value1.list, function(index, value2) {
-                                    var oneTrValue = value2;
+                        $.each(list, function(i, map) {
+                            $.each(map, function(i1, lists) {
+                                $.each(lists, function(i2, value2) {
+                                    var oneTrValue = value2.dcNumber;
+                                    var twoTrValue = value2.dcType;
+                                    var threeTrValue = value2.dcId;
                                     $("#conflictTable").append(
-
+                                        "<tr dcId1 = "+ dcId +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
+                                        "<div style=\"text-align:right;\">\n" +
+                                        "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
+                                        "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
+                                        "</div></td></tr>"
                                     );
-                                    console.log(oneTrValue);
                                 })
                             })
                         })
@@ -366,36 +372,25 @@
 
             // 清空上一次冲突选择后的颜色
             function clearOldColor() {
-                $("#zuoyejihuaTable tr").each(function (index, value) {
+                $("#showDataTbody tr").each(function (index, value) {
                     var bg = RGBToHex($(value).css("background-color"));
 
-                    if (bg == "#FFFF00") {
+
+                    if (bg == "#ffff00") {
+                        console.log(bg);
                         $(value).css("background-color", "#F5F5F5");
                     }
                 });
             }
 
-            $("#conflictTable tr td").click(function () {
-                console.log($(this).attr("value"));
-                console.log($(this).attr("id"));
+            $("#conflictTable tr").click(function () {
+                console.log("click")
+                clearOldColor();
 
-                var postData = {
-
-                };
-                $.ajax({
-                    type: "post",
-                    contentType: 'application/x-www-form-urlencoded',
-                    data: postData,
-                    dateType: 'json',
-                    url: "${contextPath}/",
-                    success: function(result) {
-                        clearOldColor();
-
-                        $.each(result.list, function (index, value) {
-                            $("#" + value).css("background-color", "#FFFF00");
-                        });
-                    }
-                });
+                var dcId1 = $(this).attr("dcId1");
+                var dcId2 = $(this).attr("dcId2");
+                $("#" + dcId1).css("background-color", "#FFFF00");
+                $("#" + dcId2).css("background-color", "#FFFF00");
             });
 
             // 调整按钮modal打开

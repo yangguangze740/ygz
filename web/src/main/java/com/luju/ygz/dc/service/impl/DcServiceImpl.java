@@ -188,7 +188,6 @@ public class DcServiceImpl implements DcServiceI {
                     arrayList.add(pathList.get(k).getDcId());
                 }
                 if (Collections.disjoint(arrayList,arrayListEquals)){
-                    System.out.println(Collections.disjoint(arrayList,arrayListEquals));
                     arrayListEquals.addAll(arrayList);
                     arrayList.removeAll(arrayListEquals);
                     map.put(list.get(i),pathList);
@@ -214,10 +213,10 @@ public class DcServiceImpl implements DcServiceI {
     @Override
     public int updateDestination(DcPlanInfo dcPlanInfo) {
         if (dcPlanInfo.getDcDestination().equals(ConstantFields.BWJDS)) {
-            dcPlanInfo.setDcSource(ConstantFields.S);
+            dcPlanInfo.setDcDestination(ConstantFields.S);
         }
         if (dcPlanInfo.getDcDestination().equals(ConstantFields.BWJDN)) {
-            dcPlanInfo.setDcSource(ConstantFields.N);
+            dcPlanInfo.setDcDestination(ConstantFields.N);
         }
         return dcRepository.updateDestination(dcPlanInfo);
     }

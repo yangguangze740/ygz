@@ -34,7 +34,16 @@ public class DcPlanInfo {
     private String dcId;
     private String dcPath;
     private int isUpdate;
+    private float sumHc;
     private List<String> selectList;
+
+    public float getSumHc() {
+        return sumHc;
+    }
+
+    public void setSumHc(float sumHc) {
+        this.sumHc = sumHc;
+    }
 
     public int getIsUpdate() {
         return isUpdate;
