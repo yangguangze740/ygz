@@ -10,6 +10,10 @@ public interface DcRepositoryI {
     /* data select from ora to mysql*/
     List<DcPlanInfo> selectDcPlanFromOra();
 
+    List<DcPlanInfo> selectCopyData();
+
+    int deleteRepeatDataFromCopy(String s);
+
     /* data select from ora to mysql*/
     List<DcPlanInfo> selectJtPlan();
 

@@ -131,7 +131,7 @@
                                             <td>
                                                 <div style="text-align:right;">
                                                     <button type="button" class="btn btn-warning">撤销</button>
-                                                    <button type="button" class="btn btn-danger" value="cd">调整</button>
+                                                    <button type="button" class="btn btn-danger" >调整</button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -192,19 +192,17 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflictTable">
-                                <c:forEach items="${mapList}" var="mapList" varStatus="status">
-                                    <c:forEach items="${mapList}" var="map" varStatus="status">
-                                        <c:forEach items="${map.value}" var="entry" varStatus="status">
+                                <c:forEach items="${mapList}" var="map" varStatus="status">
+                                    <c:forEach items="${map.value}" var="entry" varStatus="status">
                                             <tr dcId1="${map.key.dcId}" dcId2="${entry.dcId}">
                                                 <td> ${map.key.dcNumber} ${map.key.dcType} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
                                                 <td>
                                                     <div style="text-align:right;">
                                                         <button type="button" class="btn btn-warning">撤销</button>
-                                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
+                                                        <button type="button" class="btn btn-danger" id="tz">调整</button>
                                                     </div>
                                                 </td>
                                             </tr>
-                                        </c:forEach>
                                     </c:forEach>
                                 </c:forEach>
                             </table>
@@ -246,7 +244,6 @@
     <script type="text/javascript">
         $(function () {
             $("#showDataTbody select.sourceUpdate").change(function() {
-                console.log($(this));
                 // run
 
                 var dcId = $(this).parent().parent().attr("dcId");
@@ -270,23 +267,22 @@
                     data:postData,
                     dataType:'json',
                     url:'${contextPath}/luju/updateSource.action',
-                    success:function (list) {
-                        // result == list<Map<String,List<DcPlanInfo>>>
+                    success:function (map) {
+                        // result == Map<String,List<DcPlanInfo>>
                         $("#conflictTable").empty();
-                        $.each(list, function(i, map) {
-                            $.each(map, function(i1, lists) {
-                                $.each(lists, function(i2, value2) {
-                                    var oneTrValue = value2.dcNumber;
-                                    var twoTrValue = value2.dcType;
-                                    var threeTrValue = value2.dcId;
-                                    $("#conflictTable").append(
-                                        "<tr dcId1 = "+ dcId +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
-                                        "<div style=\"text-align:right;\">\n" +
-                                        "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
-                                        "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
-                                        "</div></td></tr>"
-                                    );
-                                })
+                        console.log(map);
+                        $.each(map, function(i, list) {
+                            $.each(list, function(i1, value2) {
+                                var oneTrValue = value2.dcNumber;
+                                var twoTrValue = value2.dcType;
+                                var threeTrValue = value2.dcId;
+                                $("#conflictTable").append(
+                                    "<tr dcId1 = "+ dcId +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
+                                    "<div style=\"text-align:right;\">\n" +
+                                    "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
+                                    "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
+                                    "</div></td></tr>"
+                                );
                             })
                         })
                         $("#conflictTable tr").click();
@@ -325,20 +321,18 @@
                         console.log(list);
                         // result == list<Map<String,List<DcPlanInfo>>>
                         $("#conflictTable").empty();
-                        $.each(list, function(i, map) {
-                            $.each(map, function(i1, lists) {
-                                $.each(lists, function(i2, value2) {
-                                    var oneTrValue = value2.dcNumber;
-                                    var twoTrValue = value2.dcType;
-                                    var threeTrValue = value2.dcId;
-                                    $("#conflictTable").append(
-                                        "<tr dcId1 = "+ dcId +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
-                                        "<div style=\"text-align:right;\">\n" +
-                                        "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
-                                        "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
-                                        "</div></td></tr>"
-                                    );
-                                })
+                        $.each(map, function(i, list) {
+                            $.each(list, function(i1, value1) {
+                                var oneTrValue = value1.dcNumber;
+                                var twoTrValue = value1.dcType;
+                                var threeTrValue = value1.dcId;
+                                $("#conflictTable").append(
+                                    "<tr dcId1 = "+ dcId +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
+                                    "<div style=\"text-align:right;\">\n" +
+                                    "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
+                                    "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
+                                    "</div></td></tr>"
+                                );
                             })
                         })
                     }
@@ -382,6 +376,12 @@
                     }
                 });
             }
+
+            $("#conflictTable tr td button").click(function () {
+                console.log("click")
+                clearOldColor();
+
+            });
 
             $("#conflictTable tr").click(function () {
                 console.log("click")

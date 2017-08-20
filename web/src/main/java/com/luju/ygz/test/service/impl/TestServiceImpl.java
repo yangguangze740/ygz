@@ -23,11 +23,10 @@ public class TestServiceImpl implements TestServiceI {
     private TestRepositoryI testRepository;
 
     @Override
-    public void selectPlanDataFromOra() {
+    public void selectPlanDataFromOra(DataProcess dataProcess) {
         testRepository.deletePlanCopy();
         List<JcPlanInfo> list = testRepository.selectJcPlanFromOra();
-        DataProcess timeProcess = new DataProcess();
-        list = timeProcess.jcTimeList(list);
+        list = dataProcess.jcTimeList(list);
 
         for (int k = 0; k< list.size(); k++){
             testRepository.insertToPlanCopy(list.get(k));
