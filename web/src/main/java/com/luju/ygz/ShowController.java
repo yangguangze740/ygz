@@ -55,12 +55,12 @@ public class ShowController {
     public ModelAndView allJcData() {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
-        dcService.deleteShowData();
-        dcService.deleteTcData();
-        dcService.deleteTcDataSix();
-
-        dcService.processTcDataNew(dataProcess);
-        dcService.processDcData(dataProcess);
+//        dcService.deleteShowData();
+//        dcService.deleteTcData();
+//        dcService.deleteTcDataSix();
+//
+//        dcService.processTcDataNew(dataProcess);
+//        dcService.processDcData(dataProcess);
 
         List<DcPlanInfo> allList = dcService.selectDcData();
         Map<DcPlanInfo,List<DcPlanInfo>> mapList = dcService.selectDcPath();
@@ -78,6 +78,7 @@ public class ShowController {
 
         dcService.updateSource(dcPlanInfo);
         Map<DcPlanInfo,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+        System.out.println(mapList);
 
         return mapList;
     }

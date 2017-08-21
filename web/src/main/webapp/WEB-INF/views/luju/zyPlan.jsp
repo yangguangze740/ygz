@@ -245,7 +245,6 @@
         $(function () {
             $("#showDataTbody select.sourceUpdate").change(function() {
                 // run
-
                 var dcId = $(this).parent().parent().attr("dcId");
                 var dcTypeE = $(this).parent().parent().attr("dcTypeE");
                 var dcDestination = $(this).parent().parent().attr("dcDestination");
@@ -253,7 +252,7 @@
                 var dcType = $(this).parent().parent().attr("dcType");
                 var selectValue = $(this).val();
                 var postData = {
-                    dcId: dcId,
+                    dcId : dcId,
                     dcSource: selectValue,
                     dcTypeE: dcTypeE,
                     dcDestination: dcDestination,
@@ -271,20 +270,21 @@
                         console.log(result);
                         // result == Map<String,List<DcPlanInfo>>
                         $("#conflictTable").empty();
-                        $.each(result, function(i, list) {
-                            $.each(list, function(i1, value2) {
+                        for (var key in result) {
+                            $.each(result[key], function(i1, value2) {
                                 var oneTrValue = value2.dcNumber;
                                 var twoTrValue = value2.dcType;
                                 var threeTrValue = value2.dcId;
+
                                 $("#conflictTable").append(
-                                    "<tr dcId1 = "+ dcId +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
+                                    "<tr dcId1 = "+ dcId1 +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
                                     "<div style=\"text-align:right;\">\n" +
                                     "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
                                     "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
                                     "</div></td></tr>"
                                 );
                             })
-                        })
+                        }
                         $("#conflictTable tr").click();
                     }
                 })
@@ -302,14 +302,13 @@
                 var dcType = $(this).parent().parent().attr("dcType");
                 var selectValue = $(this).val();
                 var postData = {
-                    dcId: dcId,
+                    dcId : dcId,
                     dcDestination: selectValue,
                     dcTypeE: dcTypeE,
                     dcSource: dcSource,
                     dcNumber: dcNumber,
                     dcType: dcType
                 }
-                console.log(dcId);
 
                 $.ajax({
                     type:'post',
