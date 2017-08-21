@@ -18,7 +18,7 @@ public class DcController {
     @RequestMapping("/hello")
     public String test() {
 
-        service.selectPlanDataFromOra(dataProcess);
+//        service.selectPlanDataFromOra(dataProcess);
 
         return "hello";
     }

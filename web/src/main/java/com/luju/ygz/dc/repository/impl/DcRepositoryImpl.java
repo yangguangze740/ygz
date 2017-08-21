@@ -32,16 +32,46 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcPlanFromOra() {
-        String sql = "SELECT CC, JHKSSJ, JHJSSJ, ZYXM, ZYGD,TFX, DJ, M.GJHID, SWH, ZGBZ, CS, JSL FROM CQZ_GJHML M LEFT JOIN CQZ_GJHZW Z ON M.GJHID = Z.GJHID";
+        String sql = "SELECT CC, JHKSSJ, JHJSSJ, ZYXM, ZYGD,TFX, DJ, M.GJHID, SWH, ZGBZ, CS, JSL,JLSJ FROM CQZ_GJHML M LEFT JOIN CQZ_GJHZW Z ON M.GJHID = Z.GJHID";
         Object[] args = {};
 
         try {
-            return  jdbcTemplate.query(sql, args, new DcPlanCopyRowMapper());
+            return jdbcTemplate.query(sql, args, new DcPlanCopyRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select from ora error");
         return null;
         }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectCopyData() {
+        String sql = "SELECT dcGJHID,dcJLSJ FROM dc_plan_copy order by dcGJHID,dcJLSJ";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcCopyDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public int deleteRepeatDataFromCopy(String s) {
+        String sql = "DELETE FROM dc_plan_copy WHERE dcGJHID='?' ";
+        Object[] args = {
+                s
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql,args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("deleteRepeatDataFromCopy error");
+            return 0;
+        }
+
     }
 
     @Override
@@ -252,7 +282,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public boolean insertToPlanCopy(DcPlanInfo info) {
-        String sql = "INSERT INTO dc_plan_copy (copyId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj, dcGJHID, dcZGBZ, dcCS, dcJSL, dcTFX, dcSWH) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO dc_plan_copy (copyId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj, dcGJHID, dcZGBZ, dcCS, dcJSL, dcTFX, dcSWH, dcJLSJ) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
                 uuid.uuidPrimaryKey(),
                 info.getDcNumber(),
@@ -266,7 +296,8 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 info.getDcCS(),
                 info.getDcJSL(),
                 info.getDcTFX(),
-                info.getDcSWH()
+                info.getDcSWH(),
+                info.getJLSJ()
         };
         try {
             return mysqlJdbcTemplate.update(sql, args) == 1;
@@ -679,6 +710,18 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcZGBZ(resultSet.getString("ZGBZ"));
             userInfo.setDcCS(resultSet.getInt("CS"));
             userInfo.setDcJSL(resultSet.getString("JSL"));
+            userInfo.setJLSJ(resultSet.getTimestamp("JLSJ"));
+
+            return userInfo;
+        }
+    }
+
+    private class DcCopyDataRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcGJHID(resultSet.getString("dcGJHID"));
+            userInfo.setJLSJ(resultSet.getTimestamp("dcJLSJ"));
 
             return userInfo;
         }

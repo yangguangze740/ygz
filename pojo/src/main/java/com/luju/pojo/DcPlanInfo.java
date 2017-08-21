@@ -36,6 +36,15 @@ public class DcPlanInfo {
     private int isUpdate;
     private float sumHc;
     private List<String> selectList;
+    private Timestamp JLSJ;
+
+    public Timestamp getJLSJ() {
+        return JLSJ;
+    }
+
+    public void setJLSJ(Timestamp JLSJ) {
+        this.JLSJ = JLSJ;
+    }
 
     public float getSumHc() {
         return sumHc;

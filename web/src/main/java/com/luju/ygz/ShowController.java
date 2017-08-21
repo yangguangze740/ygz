@@ -55,8 +55,12 @@ public class ShowController {
     public ModelAndView allJcData() {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
+        dcService.deleteShowData();
+        dcService.processTcDataNew(dataProcess);
+        dcService.processDcData(dataProcess);
+
         List<DcPlanInfo> allList = dcService.selectDcData();
-        List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList = dcService.selectDcPath();
+        Map<DcPlanInfo,List<DcPlanInfo>> mapList = dcService.selectDcPath();
 
         mav.addObject("allList",allList);
         mav.addObject("mapList",mapList);
@@ -66,26 +70,21 @@ public class ShowController {
 
     @ResponseBody
     @RequestMapping("/updateSource")
-    public List<Map<DcPlanInfo,List<DcPlanInfo>>> updateSource(DcPlanInfo dcPlanInfo) {
-        List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList;
-        int result = dcService.updateSource(dcPlanInfo);
-        if (result != 0) {
-            mapList = dcService.selectDcPath();
-        } else {
-            return null;
-        }
+    public Map<DcPlanInfo,List<DcPlanInfo>> updateSource(DcPlanInfo dcPlanInfo) {
+
+        dcService.updateSource(dcPlanInfo);
+        Map<DcPlanInfo,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+
         return mapList;
     }
 
     @ResponseBody
     @RequestMapping("/updateDestination")
-    public List<Map<DcPlanInfo,List<DcPlanInfo>>> updateDestination(DcPlanInfo dcPlanInfo) {
-        List<Map<DcPlanInfo,List<DcPlanInfo>>> mapList;
-        if (dcService.updateDestination(dcPlanInfo) != 0) {
-            mapList = dcService.selectDcPath();
-        } else {
-            return null;
-        }
+    public Map<DcPlanInfo,List<DcPlanInfo>> updateDestination(DcPlanInfo dcPlanInfo) {
+
+        dcService.updateDestination(dcPlanInfo);
+        Map<DcPlanInfo,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+
         return mapList;
     }
 

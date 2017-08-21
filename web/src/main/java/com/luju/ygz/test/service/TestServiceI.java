@@ -2,6 +2,7 @@ package com.luju.ygz.test.service;
 
 import com.luju.pojo.JcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import luju.common.util.DataProcess;
 
 import java.util.List;
 import java.util.Set;
@@ -9,7 +10,7 @@ import java.util.Set;
 public interface TestServiceI {
 
     /* data select from ora to mysql*/
-    void selectPlanDataFromOra();
+    void selectPlanDataFromOra(DataProcess dataProcess);
 
     /* data processing from mysql copy data to jc_plan */
     void selectPlanData4One();

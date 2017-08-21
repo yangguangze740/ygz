@@ -59,9 +59,11 @@ public interface DcServiceI {
 
     List<DcPlanInfo> selectDcData();
 
-    List<Map<DcPlanInfo,List<DcPlanInfo>>> selectDcPath();
+    Map<DcPlanInfo,List<DcPlanInfo>> selectDcPath();
 
     int updateSource(DcPlanInfo dcPlanInfo);
 
     int updateDestination(DcPlanInfo dcPlanInfo);
+
+    int deleteShowData();
 }

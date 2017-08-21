@@ -15,7 +15,6 @@ public class TestController {
     @RequestMapping("/hello")
     public String test() {
 
-        service.selectPlanDataFromOra();
         return "hello";
     }
 

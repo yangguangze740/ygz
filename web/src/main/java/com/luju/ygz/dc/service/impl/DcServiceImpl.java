@@ -23,12 +23,41 @@ public class DcServiceImpl implements DcServiceI {
 
     @Override
     public void selectPlanDataFromOra(DataProcess dataProcess) {
-        dcRepository.deletePlanCopy();
+        List<DcPlanInfo> listEquals = new ArrayList<>();
         List<DcPlanInfo> list = dcRepository.selectDcPlanFromOra();
         list = dataProcess.dcTimeList(list);
 
-        for (int k = 0; k < list.size(); k++){
-            dcRepository.insertToPlanCopy(list.get(k));
+        List<DcPlanInfo> jlsj = dcRepository.selectCopyData();
+
+        for (DcPlanInfo entry1  :list) {
+            int i = 0;
+
+            if (jlsj.size() != 0) {
+
+                for (DcPlanInfo entry2 :jlsj) {
+                    if ( (!(entry1.getJLSJ().equals(entry2.getJLSJ()))) && (entry1.getDcGJHID().equals(entry2.getDcGJHID()))) {
+                        // delete and insert
+                        dcRepository.deleteRepeatDataFromCopy(entry1.getDcGJHID());
+                        listEquals.add(entry1);
+                        break;
+                    } else if ( entry1.getDcGJHID().equals(entry2.getDcGJHID()) && entry1.getJLSJ().equals(entry2.getJLSJ()) ) {
+                        break;
+                    } else {
+                        //insert
+                        i++;
+                    }
+                }
+            } else {
+                dcRepository.insertToPlanCopy(entry1);
+            }
+            if (i == jlsj.size() && jlsj.size()!=0) {
+                listEquals.add(entry1);
+            }
+        }
+        if (listEquals.size()!= 0) {
+            for (DcPlanInfo equals: listEquals){
+                dcRepository.insertToPlanCopy(equals);
+            }
         }
     }
 
@@ -145,8 +174,7 @@ public class DcServiceImpl implements DcServiceI {
     @Override
     public boolean processDcData(DataProcess dataProcess) {
 
-        dcRepository.deleteDcShow();
-        List<DcPlanInfo> list = new ArrayList<DcPlanInfo>();
+        List<DcPlanInfo> list = new ArrayList<>();
 
         list.addAll(dataProcess.jtDataList1(dcRepository.selectJtPlan()));
         list.addAll(dataProcess.jtDataList2(dcRepository.selectJtPlan()));
@@ -168,34 +196,36 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public List<Map<DcPlanInfo,List<DcPlanInfo>>> selectDcPath() {
+    public Map<DcPlanInfo,List<DcPlanInfo>> selectDcPath() {
 
-        List<DcPlanInfo> pathList = new ArrayList<DcPlanInfo>();
-        List<Map<DcPlanInfo,List<DcPlanInfo>>> listMap = new ArrayList<Map<DcPlanInfo,List<DcPlanInfo>>>();
         Map<DcPlanInfo,List<DcPlanInfo>> map = new HashMap<DcPlanInfo,List<DcPlanInfo>>();
-        List<String> arrayList = new ArrayList<String>();
-        List<String> arrayListEquals = new ArrayList<String>();
+
+        List<String> strings1 = new ArrayList<>();
+        List<List<String>> listString1 = new ArrayList<>();
+        List<List<String>> listString2 = new ArrayList<>();
 
         List<DcPlanInfo> list = dcRepository.selectDcData();
 
         for (int i = 0; i<list.size();i++) {
             String uuid = list.get(i).getDcId();
-            pathList = dcRepository.selectPath(list.get(i));
+            List<DcPlanInfo> pathList = dcRepository.selectPath(list.get(i));
 
             if (pathList.size() != 0) {
-                arrayList.add(uuid);
                 for (int k =0 ;k<pathList.size(); k++) {
-                    arrayList.add(pathList.get(k).getDcId());
-                }
-                if (Collections.disjoint(arrayList,arrayListEquals)){
-                    arrayListEquals.addAll(arrayList);
-                    arrayList.removeAll(arrayListEquals);
-                    map.put(list.get(i),pathList);
-                    listMap.add(map);
+                    strings1.add(uuid);
+                    strings1.add(pathList.get(k).getDcId());
+                    listString1.add(strings1);
+                    boolean b = listString1.removeAll(listString2);
+
+                    if (b == false) {
+                        listString2.addAll(listString1);
+                        listString1.removeAll(listString2);
+                        map.put(list.get(i),pathList);
+                    }
                 }
             }
         }
-        return listMap;
+        return map;
     }
 
     @Override
@@ -219,5 +249,10 @@ public class DcServiceImpl implements DcServiceI {
             dcPlanInfo.setDcDestination(ConstantFields.N);
         }
         return dcRepository.updateDestination(dcPlanInfo);
+    }
+
+    @Override
+    public int deleteShowData() {
+        return dcRepository.deleteDcShow();
     }
 }
