@@ -595,7 +595,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
     public boolean insertTcDataNew(DcPlanInfo info) {
         String sql = "INSERT INTO dc_tc_six (tcId, dcDestination, dcSWH, dcCS, dcCS6) VALUES (?, ?, ?, ?, ?)";
         Object[] args = {
-                info.getJtId(),
+                info.getDcId(),
                 info.getDcDestination(),
                 info.getDcSWH(),
                 info.getDcCS(),
@@ -605,7 +605,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             return mysqlJdbcTemplate.update(sql, args) == 1;
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("insert tc data error");
+            System.out.println("insert tc six error");
             return false;
         }
     }
@@ -655,6 +655,32 @@ public class DcRepositoryImpl implements DcRepositoryI {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("delete dc show error");
+            return 0;
+        }
+    }
+
+    @Override
+    public int deleteTcData() {
+        String sql = "TRUNCATE TABLE dc_tc_plan";
+
+        try {
+            return mysqlJdbcTemplate.update(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("delete dc tc plan error");
+            return 0;
+        }
+    }
+
+    @Override
+    public int deleteTcDataSix() {
+        String sql = "TRUNCATE TABLE dc_tc_six";
+
+        try {
+            return mysqlJdbcTemplate.update(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("delete dc tc six error");
             return 0;
         }
     }
@@ -1032,6 +1058,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcData() {
+        //AND dcStartTime > now() AND dcStartTime < ADDDATE(now(),interval 10800 second)
         String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
         Object[] args = {};
         try {
