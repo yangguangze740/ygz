@@ -99,6 +99,10 @@ public interface DcRepositoryI {
 
     int deleteDcShow();
 
+    int deleteTcData();
+
+    int deleteTcDataSix();
+
     int updateSource(DcPlanInfo info);
 
     int updateDestination(DcPlanInfo info);

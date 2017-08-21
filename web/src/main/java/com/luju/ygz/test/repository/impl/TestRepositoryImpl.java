@@ -358,7 +358,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectBwjPlanNew() {
-        String sql = "SELECT jcNumber,jcType,jcEndTime,jcXD,jcDH,jcDestination FROM jc_plan";
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcDestination,dcXD,dcDH FROM ygz_show.dc_show_data where dcType='接车' order by dcStartTime;";
         Object[] args = {};
 
         try {
@@ -554,12 +554,11 @@ public class TestRepositoryImpl implements TestRepositoryI {
         public DcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
             DcPlanInfo userInfo = new DcPlanInfo();
 
-            userInfo.setDcNumber(resultSet.getString("jcNumber"));
-            userInfo.setDcType(resultSet.getString("jcType"));
-            userInfo.setDcEndTime(resultSet.getTimestamp("jcEndTime"));
-            userInfo.setDcXD(resultSet.getString("jcXD"));
-            userInfo.setDcDH(resultSet.getString("jcDH"));
-            userInfo.setDcSource(resultSet.getString("jcDestination"));
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcSource(resultSet.getString("dcDestination"));
+            userInfo.setDcXD(resultSet.getString("dcXD"));
+            userInfo.setDcDH(resultSet.getString("dcDH"));
 
             return userInfo;
         }

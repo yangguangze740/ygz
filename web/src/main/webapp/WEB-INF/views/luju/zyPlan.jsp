@@ -199,7 +199,7 @@
                                                 <td>
                                                     <div style="text-align:right;">
                                                         <button type="button" class="btn btn-warning">撤销</button>
-                                                        <button type="button" class="btn btn-danger" id="tz">调整</button>
+                                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -267,11 +267,11 @@
                     data:postData,
                     dataType:'json',
                     url:'${contextPath}/luju/updateSource.action',
-                    success:function (map) {
+                    success:function (result) {
+                        console.log(result);
                         // result == Map<String,List<DcPlanInfo>>
                         $("#conflictTable").empty();
-                        console.log(map);
-                        $.each(map, function(i, list) {
+                        $.each(result, function(i, list) {
                             $.each(list, function(i1, value2) {
                                 var oneTrValue = value2.dcNumber;
                                 var twoTrValue = value2.dcType;
@@ -317,11 +317,11 @@
                     data:postData,
                     dataType:'json',
                     url:'${contextPath}/luju/updateDestination.action',
-                    success:function (list) {
-                        console.log(list);
+                    success:function (result) {
+                        console.log(result);
                         // result == list<Map<String,List<DcPlanInfo>>>
                         $("#conflictTable").empty();
-                        $.each(map, function(i, list) {
+                        $.each(result, function(i, list) {
                             $.each(list, function(i1, value1) {
                                 var oneTrValue = value1.dcNumber;
                                 var twoTrValue = value1.dcType;
@@ -348,13 +348,20 @@
                     contentType:'application/x-www-form-urlencoded',
                     data:condition,
                     dataType:'json',
-                    url:'${contextPath}/luju/jcPath.action',
+                    url:'${contextPath}/luju/zyPlan.action',
                     success:function (result) {
                         loadData(result)
                     }
                 })
 
             }
+            // 页面自动刷新
+            function webReFlash(){
+                window.location="http://localhost:8080/ygz/luju/zyPlan.action";
+            }
+
+            window.setInterval(webReFlash, 1500000);
+
             // 颜色rgb转换为16进制
             function RGBToHex(rgb){
                 rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);

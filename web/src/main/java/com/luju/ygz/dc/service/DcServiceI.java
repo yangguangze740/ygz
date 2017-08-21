@@ -66,4 +66,8 @@ public interface DcServiceI {
     int updateDestination(DcPlanInfo dcPlanInfo);
 
     int deleteShowData();
+
+    int deleteTcData();
+
+    int deleteTcDataSix();
 }

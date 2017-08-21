@@ -56,6 +56,9 @@ public class ShowController {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
         dcService.deleteShowData();
+        dcService.deleteTcData();
+        dcService.deleteTcDataSix();
+
         dcService.processTcDataNew(dataProcess);
         dcService.processDcData(dataProcess);
 
@@ -64,6 +67,7 @@ public class ShowController {
 
         mav.addObject("allList",allList);
         mav.addObject("mapList",mapList);
+        System.out.println("web reFlash");
 
         return mav;
     }

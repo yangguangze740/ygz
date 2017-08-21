@@ -25,6 +25,8 @@ public class DcServiceImpl implements DcServiceI {
     public void selectPlanDataFromOra(DataProcess dataProcess) {
         List<DcPlanInfo> listEquals = new ArrayList<>();
         List<DcPlanInfo> list = dcRepository.selectDcPlanFromOra();
+        List<String> gjhIdList1 = new ArrayList<>();
+        List<String> gjhIdList2 = new ArrayList<>();
         list = dataProcess.dcTimeList(list);
 
         List<DcPlanInfo> jlsj = dcRepository.selectCopyData();
@@ -39,10 +41,13 @@ public class DcServiceImpl implements DcServiceI {
                         // delete and insert
                         dcRepository.deleteRepeatDataFromCopy(entry1.getDcGJHID());
                         listEquals.add(entry1);
+                        gjhIdList1.add(entry1.getDcGJHID());
                         break;
-                    } else if ( entry1.getDcGJHID().equals(entry2.getDcGJHID()) && entry1.getJLSJ().equals(entry2.getJLSJ()) ) {
+                    }
+                    if ( entry1.getDcGJHID().equals(entry2.getDcGJHID()) && entry1.getJLSJ().equals(entry2.getJLSJ()) ) {
                         break;
-                    } else {
+                    }
+                    if ( (!(entry1.getJLSJ().equals(entry2.getJLSJ()))) && (!(entry1.getDcGJHID().equals(entry2.getDcGJHID()))) ){
                         //insert
                         i++;
                     }
@@ -52,8 +57,10 @@ public class DcServiceImpl implements DcServiceI {
             }
             if (i == jlsj.size() && jlsj.size()!=0) {
                 listEquals.add(entry1);
+                gjhIdList2.add(entry1.getDcGJHID());
             }
         }
+
         if (listEquals.size()!= 0) {
             for (DcPlanInfo equals: listEquals){
                 dcRepository.insertToPlanCopy(equals);
@@ -175,6 +182,7 @@ public class DcServiceImpl implements DcServiceI {
     public boolean processDcData(DataProcess dataProcess) {
 
         List<DcPlanInfo> list = new ArrayList<>();
+        List<DcPlanInfo> list4Bwj = new ArrayList<>();
 
         list.addAll(dataProcess.jtDataList1(dcRepository.selectJtPlan()));
         list.addAll(dataProcess.jtDataList2(dcRepository.selectJtPlan()));
@@ -182,12 +190,15 @@ public class DcServiceImpl implements DcServiceI {
         list.addAll(dataProcess.zmDataList2(dcRepository.selectZmPlan()));
         list.addAll(dataProcess.zcTimeList(dcRepository.selectZcPlan()));
         list.addAll(dcRepository.selectTcPlanNew());
-        list.addAll(dataProcess.bwjTimeListNew(jcRepository.selectBwjPlanNew()));
         list.addAll(dataProcess.jcDataList(jcRepository.selectJcPlanNew()));
 
-        boolean b = dcRepository.insertDcData(list);
+        boolean dataWithoutBwj = dcRepository.insertDcData(list);
 
-        return b;
+        list4Bwj.addAll(dataProcess.bwjTimeListNew(jcRepository.selectBwjPlanNew()));
+
+        boolean dataWithBwj = dcRepository.insertDcData(list4Bwj);
+
+        return (dataWithBwj && dataWithoutBwj);
     }
 
     @Override
@@ -255,4 +266,15 @@ public class DcServiceImpl implements DcServiceI {
     public int deleteShowData() {
         return dcRepository.deleteDcShow();
     }
+
+    @Override
+    public int deleteTcData() {
+        return dcRepository.deleteTcData();
+    }
+
+    @Override
+    public int deleteTcDataSix() {
+        return dcRepository.deleteTcDataSix();
+    }
+
 }
