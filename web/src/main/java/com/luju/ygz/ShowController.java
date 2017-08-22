@@ -68,6 +68,7 @@ public class ShowController {
         mav.addObject("allList",allList);
         mav.addObject("mapList",mapList);
         System.out.println("web reFlash");
+        System.out.println(allList);
 
         return mav;
     }

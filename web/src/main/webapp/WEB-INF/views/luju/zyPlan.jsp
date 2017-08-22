@@ -389,7 +389,7 @@
                 window.location="http://localhost:8080/ygz/luju/zyPlan.action";
             }
 
-            window.setInterval(webReFlash, 1500000);
+            window.setInterval(webReFlash, 220000);
 
             // 颜色rgb转换为16进制
             function RGBToHex(rgb){

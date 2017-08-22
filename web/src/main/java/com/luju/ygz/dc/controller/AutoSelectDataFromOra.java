@@ -18,7 +18,7 @@ public class AutoSelectDataFromOra {
 
     DataProcess dataProcess = new DataProcess();
 
-    @Scheduled(cron = "0 0 10 * * ?")
+    @Scheduled(cron = "0 0/2 * * * ?")
     public void AutoSelectDataFromOra() {
         System.out.println("ora reFlash");
         dcService.selectPlanDataFromOra(dataProcess);

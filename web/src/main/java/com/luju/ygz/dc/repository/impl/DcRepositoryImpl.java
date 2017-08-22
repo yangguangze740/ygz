@@ -60,7 +60,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public int deleteRepeatDataFromCopy(String s) {
-        String sql = "DELETE FROM dc_plan_copy WHERE dcGJHID='?' ";
+        String sql = "DELETE FROM dc_plan_copy WHERE dcGJHID= ? ";
         Object[] args = {
                 s
         };
@@ -626,7 +626,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectPath(DcPlanInfo dcPlanInfo) {
-        String sql = "SELECT dcId, dcNumber, dcType,jcPath, dcStartTime, dcEndTime  FROM dc_show_data D LEFT JOIN (SELECT DISTINCT jcPath FROM jc_path_info WHERE jcDCH IN (SELECT jcDCH FROM jc_path_info WHERE jcPath = ? )) I ON D.dcPath = I.jcPath WHERE jcPath is not null and (dcStartTime < ? AND dcEndTime > ? OR dcStartTime > ? AND ? > dcStartTime OR dcEndTime > ? AND dcEndTime < ?)";
+        String sql = "SELECT dcId, dcNumber, dcType,jcPath, dcStartTime, dcEndTime  FROM dc_show_data D LEFT JOIN (SELECT DISTINCT jcPath FROM jc_path_info WHERE jcDCH IN (SELECT jcDCH FROM jc_path_info WHERE jcPath = ? )) I ON D.dcPath = I.jcPath WHERE jcPath is not null and (dcStartTime < ? AND dcEndTime > ? OR dcStartTime > ? AND ? > dcStartTime OR dcEndTime > ? AND ? > dcEndTime)";
         Object[] args = {
                 dcPlanInfo.getDcPath(),
                 dcPlanInfo.getDcStartTime(),
@@ -1059,7 +1059,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
     @Override
     public List<DcPlanInfo> selectDcData() {
         //AND dcStartTime > now() AND dcStartTime < ADDDATE(now(),interval 10800 second)
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'XD' AND dcStartTime > now() order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcDataRowMapper());

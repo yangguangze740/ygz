@@ -39,9 +39,10 @@ public class DcServiceImpl implements DcServiceI {
                 for (DcPlanInfo entry2 :jlsj) {
                     if ( (!(entry1.getJLSJ().equals(entry2.getJLSJ()))) && (entry1.getDcGJHID().equals(entry2.getDcGJHID()))) {
                         // delete and insert
+//                        System.out.println(entry1.getDcGJHID());
                         dcRepository.deleteRepeatDataFromCopy(entry1.getDcGJHID());
                         listEquals.add(entry1);
-                        gjhIdList1.add(entry1.getDcGJHID());
+//                        gjhIdList1.add(entry1.getDcGJHID());
                         break;
                     }
                     if ( entry1.getDcGJHID().equals(entry2.getDcGJHID()) && entry1.getJLSJ().equals(entry2.getJLSJ()) ) {
@@ -57,7 +58,7 @@ public class DcServiceImpl implements DcServiceI {
             }
             if (i == jlsj.size() && jlsj.size()!=0) {
                 listEquals.add(entry1);
-                gjhIdList2.add(entry1.getDcGJHID());
+//                gjhIdList2.add(entry1.getDcGJHID());
             }
         }
 
@@ -219,21 +220,27 @@ public class DcServiceImpl implements DcServiceI {
 
         for (DcPlanInfo bean : list) {
             String uuid = bean.getDcId();
+
             List<DcPlanInfo> pathList = dcRepository.selectPath(bean);
+
 
             if (pathList.size() != 0) {
                 for (DcPlanInfo entry : pathList) {
                     strings1.add(uuid);
                     strings1.add(entry.getDcId());
+
+                    System.out.println(bean.getDcNumber());
+                    System.out.println(entry.getDcNumber());
                     listString1.add(strings1);
                     boolean b = listString1.removeAll(listString2);
 
                     if (b == false) {
                         listString2.addAll(listString1);
                         listString1.removeAll(listString2);
-                        String key = " "+bean.getDcId()+" "+bean.getDcNumber()+" "+bean.getDcType();
-                        map.put(key,pathList);
+
                     }
+                    String key = " "+bean.getDcId()+" "+bean.getDcNumber()+" "+bean.getDcType();
+                    map.put(key,pathList);
                 }
             }
         }
