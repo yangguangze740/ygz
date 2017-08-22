@@ -130,8 +130,8 @@
                                             </td>
                                             <td>
                                                 <div style="text-align:right;">
-                                                    <button type="button" class="btn btn-warning">撤销</button>
-                                                    <button type="button" class="btn btn-danger" >调整</button>
+                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                    <button type="button" class="btn btn-danger" value="cd" >调整</button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -148,17 +148,17 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4JFTable">
-                                <tr>
-                                    <td>
-                                        10&nbsp行禁峰优先2、3、4道接车
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <%--<tr>--%>
+                                    <%--<td>--%>
+                                        <%--10&nbsp行禁峰优先2、3、4道接车--%>
+                                    <%--</td>--%>
+                                    <%--<td>--%>
+                                        <%--<div style="text-align:right;">--%>
+                                            <%--<button type="button" class="btn btn-warning">撤销</button>--%>
+                                            <%--<button type="button" class="btn btn-danger" value="cd">调整</button>--%>
+                                        <%--</div>--%>
+                                    <%--</td>--%>
+                                <%--</tr>--%>
                             </table>
                         </div>
                     </div>
@@ -170,17 +170,17 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
-                                <tr>
-                                    <td>
-                                        2&nbsp;行分区错误
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                <%--<tr>--%>
+                                    <%--<td>--%>
+                                        <%--2&nbsp;行分区错误--%>
+                                    <%--</td>--%>
+                                    <%--<td>--%>
+                                        <%--<div style="text-align:right;">--%>
+                                            <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
+                                            <%--<button type="button" class="btn btn-danger" value="cd">调整</button>--%>
+                                        <%--</div>--%>
+                                    <%--</td>--%>
+                                <%--</tr>--%>
                             </table>
                         </div>
                     </div>
@@ -194,11 +194,15 @@
                             <table class="table" id="conflictTable">
                                 <c:forEach items="${mapList}" var="map" varStatus="status">
                                     <c:forEach items="${map.value}" var="entry" varStatus="status">
-                                            <tr dcId1="${map.key.dcId}" dcId2="${entry.dcId}">
-                                                <td> ${map.key.dcNumber} ${map.key.dcType} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
+                                        <c:set var = "k" value="${map.key}" />
+                                        <c:set var = "length" value="${fn:length(k)}"/>
+                                        <c:set var = "firstDcId" value="${fn:substring(k, 1, 37)}" />
+                                        <c:set var = "firstDcNumber" value="${fn:substring(k, 38, length)}" />
+                                            <tr dcId1="${firstDcId}" dcId2="${entry.dcId}">
+                                                <td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
                                                 <td>
                                                     <div style="text-align:right;">
-                                                        <button type="button" class="btn btn-warning">撤销</button>
+                                                        <button type="button" class="btn btn-warning" value="cx">撤销</button>
                                                         <button type="button" class="btn btn-danger" value="cd">调整</button>
                                                     </div>
                                                 </td>
@@ -267,7 +271,7 @@
                     dataType:'json',
                     url:'${contextPath}/luju/updateSource.action',
                     success:function (result) {
-                        console.log(result);
+                        //console.log(result);
                         // result == Map<String,List<DcPlanInfo>>
                         $("#conflictTable").empty();
                         for (var key in result) {
@@ -275,9 +279,21 @@
                                 var oneTrValue = value2.dcNumber;
                                 var twoTrValue = value2.dcType;
                                 var threeTrValue = value2.dcId;
-
+                                console.log(key);
+                                console.log(threeTrValue);
+                                console.log(oneTrValue);
+                                console.log(twoTrValue);
+                                var strs= new Array(); //定义一数组
+                                strs= key.split(" ");
+                                var firstDcId = strs[1];
+                                var firstDcNumber = strs[2];
+                                var firstDcType = strs[3];
+                                var processFirstDcid = strs[1].substring(1);
+                                console.log(processFirstDcid);
+                                console.log(firstDcNumber);
+                                console.log(firstDcType);
                                 $("#conflictTable").append(
-                                    "<tr dcId1 = "+ dcId1 +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
+                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
                                     "<div style=\"text-align:right;\">\n" +
                                     "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
                                     "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
@@ -285,7 +301,7 @@
                                 );
                             })
                         }
-                        $("#conflictTable tr").click();
+                        afterAppend();
                     }
                 })
             })
@@ -320,20 +336,34 @@
                         console.log(result);
                         // result == list<Map<String,List<DcPlanInfo>>>
                         $("#conflictTable").empty();
-                        $.each(result, function(i, list) {
-                            $.each(list, function(i1, value1) {
-                                var oneTrValue = value1.dcNumber;
-                                var twoTrValue = value1.dcType;
-                                var threeTrValue = value1.dcId;
+                        for (var key in result) {
+                            $.each(result[key], function(i1, value2) {
+                                var oneTrValue = value2.dcNumber;
+                                var twoTrValue = value2.dcType;
+                                var threeTrValue = value2.dcId;
+                                console.log(key);
+                                console.log(threeTrValue);
+                                console.log(oneTrValue);
+                                console.log(twoTrValue);
+                                var strs= new Array(); //定义一数组
+                                strs= key.split(" ");
+                                var firstDcId = strs[1];
+                                var firstDcNumber = strs[2];
+                                var firstDcType = strs[3];
+                                var processFirstDcid = strs[1].substring(1);
+                                console.log(processFirstDcid);
+                                console.log(firstDcNumber);
+                                console.log(firstDcType);
                                 $("#conflictTable").append(
-                                    "<tr dcId1 = "+ dcId +" dcId2= "+threeTrValue +"><td>" + dcNumber + dcType + "与" +oneTrValue+ twoTrValue+ "<td>\n" +
+                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
                                     "<div style=\"text-align:right;\">\n" +
                                     "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
                                     "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
                                     "</div></td></tr>"
                                 );
                             })
-                        })
+                        }
+                        afterAppend();
                     }
                 })
             })
@@ -380,14 +410,33 @@
                         console.log(bg);
                         $(value).css("background-color", "#F5F5F5");
                     }
+                    if(bg == "#ff0000"){
+                        console.log(bg);
+                        $(value).css("background-color", "#F5F5F5");
+                    }
                 });
             }
 
-            $("#conflictTable tr td button").click(function () {
+            $("#conflict4CCCXTable tr").click(function () {
                 console.log("click")
                 clearOldColor();
 
+                var dcId1 = $(this).attr("dcId1");
+                $("#" + dcId1).css("background-color", "#FF0000");
+
             });
+
+            function afterAppend() {
+                $("#conflictTable tr").click(function () {
+                    console.log("click")
+                    clearOldColor();
+
+                    var dcId1 = $(this).attr("dcId1");
+                    var dcId2 = $(this).attr("dcId2");
+                    $("#" + dcId1).css("background-color", "#FFFF00");
+                    $("#" + dcId2).css("background-color", "#FFFF00");
+                });
+            }
 
             $("#conflictTable tr").click(function () {
                 console.log("click")
@@ -402,6 +451,14 @@
             // 调整按钮modal打开
             $("button[value='cd']").click(function () {
                 $("#noteModal").modal();
+            });
+
+            // 撤销按钮
+            $("button[value='cx']").click(function () {
+                var dcId1 = $(this).attr("dcId1");
+                var dcId2 = $(this).attr("dcId2");
+                $("#" + dcId1).css("background-color", "#F5F5F5");
+                $("#" + dcId2).css("background-color", "#F5F5F5");
             });
         })
     </script>

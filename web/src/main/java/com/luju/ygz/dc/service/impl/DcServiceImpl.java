@@ -207,9 +207,9 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public Map<DcPlanInfo,List<DcPlanInfo>> selectDcPath() {
+    public Map<String,List<DcPlanInfo>> selectDcPath() {
 
-        Map<DcPlanInfo,List<DcPlanInfo>> map = new HashMap<DcPlanInfo,List<DcPlanInfo>>();
+        Map<String,List<DcPlanInfo>> map = new HashMap<>();
 
         List<String> strings1 = new ArrayList<>();
         List<List<String>> listString1 = new ArrayList<>();
@@ -217,21 +217,22 @@ public class DcServiceImpl implements DcServiceI {
 
         List<DcPlanInfo> list = dcRepository.selectDcData();
 
-        for (int i = 0; i<list.size();i++) {
-            String uuid = list.get(i).getDcId();
-            List<DcPlanInfo> pathList = dcRepository.selectPath(list.get(i));
+        for (DcPlanInfo bean : list) {
+            String uuid = bean.getDcId();
+            List<DcPlanInfo> pathList = dcRepository.selectPath(bean);
 
             if (pathList.size() != 0) {
-                for (int k =0 ;k<pathList.size(); k++) {
+                for (DcPlanInfo entry : pathList) {
                     strings1.add(uuid);
-                    strings1.add(pathList.get(k).getDcId());
+                    strings1.add(entry.getDcId());
                     listString1.add(strings1);
                     boolean b = listString1.removeAll(listString2);
 
                     if (b == false) {
                         listString2.addAll(listString1);
                         listString1.removeAll(listString2);
-                        map.put(list.get(i),pathList);
+                        String key = " "+bean.getDcId()+" "+bean.getDcNumber()+" "+bean.getDcType();
+                        map.put(key,pathList);
                     }
                 }
             }
