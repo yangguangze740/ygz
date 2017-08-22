@@ -123,7 +123,7 @@
                         <div class="box-body">
                             <table class="table" id="conflict4CCCXTable">
                                 <c:forEach items="${allList}" var="entry" varStatus="status">
-                                    <c:if test="${entry.sumHc > 84}">
+                                    <c:if test="${entry.sumHc > 84 && entry.sumHc <100}">
                                         <tr dcId1="${entry.dcId}">
                                             <td>
                                                 ${entry.dcNumber} ${entry.dcType}超长
