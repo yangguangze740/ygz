@@ -187,6 +187,11 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public List<ResultInfo> selectZmData4XD2() {
+        return null;
+    }
+
+    @Override
     public List<ResultInfo> aqselectZmData4XD2() {
         String sql = "SELECT dcNumber,dcMidTime1,dcEndTime,dcType,dcDestination,dcEnd,dcDj,dcXD,dcPath2 FROM dc_zm_plan where dcXD = 'XD' group by dcNumber,dcMidTime1,dcEndTime,dcType,dcDestination,dcEnd,dcDj,dcXD,dcPath2 order by dcMidTime1";
         Object[] args = {};

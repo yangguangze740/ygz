@@ -57,12 +57,16 @@ public interface DcRepositoryI {
     /* select tc data for ajax in path1*/
     List<ResultInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo);
 
+    List<ResultInfo> aqselectZmData4XD2();
+
     /* data insert from ora to mysql*/
     boolean insertToPlanCopy(DcPlanInfo info);
 
     /* jt data insert to mysql*/
     boolean insertJtPlan4QC(DcPlanInfo info);
     boolean insertJtPlan4JD(DcPlanInfo info);
+
+
 
     /* zm data insert to mysql*/
     boolean insertZmPlan4XT1(DcPlanInfo info);
