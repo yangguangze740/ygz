@@ -1,7 +1,9 @@
 package com.luju.ygz.dc.service.impl;
 
 import com.luju.pojo.DcPlanInfo;
+import com.luju.pojo.JcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import com.luju.pojo.TextareaInfo;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import com.luju.ygz.dc.service.DcServiceI;
 import com.luju.ygz.test.repository.TestRepositoryI;
@@ -31,7 +33,7 @@ public class DcServiceImpl implements DcServiceI {
 
         List<DcPlanInfo> jlsj = dcRepository.selectCopyData();
 
-        for (DcPlanInfo entry1  :list) {
+        for (DcPlanInfo entry1 :list) {
             int i = 0;
 
             if (jlsj.size() != 0) {
@@ -56,6 +58,7 @@ public class DcServiceImpl implements DcServiceI {
             } else {
                 dcRepository.insertToPlanCopy(entry1);
             }
+
             if (i == jlsj.size() && jlsj.size()!=0) {
                 listEquals.add(entry1);
 //                gjhIdList2.add(entry1.getDcGJHID());
@@ -168,15 +171,12 @@ public class DcServiceImpl implements DcServiceI {
     public void processTcDataNew(DataProcess dataProcess) {
         List<DcPlanInfo> list = dcRepository.selectTcPlan();
         list = dataProcess.tcTimeList(list);
-        for (int k =0; k < list.size(); k++) {
-            dcRepository.insertTcPlanNew(list.get(k));
-        }
+        dcRepository.insertTcPlanNewAll(list);
+
         list = dcRepository.processTcDataNew();
 
         list = dataProcess.tcDataList(list);
-        for (int k =0; k < list.size(); k++) {
-            dcRepository.insertTcDataNew(list.get(k));
-        }
+        dcRepository.insertTcDataNewAll(list);
     }
 
     @Override
@@ -223,7 +223,6 @@ public class DcServiceImpl implements DcServiceI {
 
             List<DcPlanInfo> pathList = dcRepository.selectPath(bean);
 
-
             if (pathList.size() != 0) {
                 for (DcPlanInfo entry : pathList) {
                     strings1.add(uuid);
@@ -245,6 +244,23 @@ public class DcServiceImpl implements DcServiceI {
             }
         }
         return map;
+    }
+
+    @Override
+    public void processJFCX() {
+        List<JcPlanInfo> listJF = jcRepository.selectJcPlan4JF();
+        List<JcPlanInfo> listCX = jcRepository.selectJcPlan4CX();
+        for (JcPlanInfo jf : listJF) {
+            jcRepository.insertToPlan4JF(jf);
+        }
+        for (JcPlanInfo cx : listCX) {
+            jcRepository.insertToPlan4CX(cx);
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJFCX() {
+        return dcRepository.selectJFCX();
     }
 
     @Override
@@ -283,6 +299,31 @@ public class DcServiceImpl implements DcServiceI {
     @Override
     public int deleteTcDataSix() {
         return dcRepository.deleteTcDataSix();
+    }
+
+    @Override
+    public int deleteTFCX() {
+        return dcRepository.deleteTFCX();
+    }
+
+    @Override
+    public int deleteDcCopy() {
+        return dcRepository.deleteDcCopy();
+    }
+
+    @Override
+    public int insertTextarea(String s) {
+        return dcRepository.insertTextarea(s);
+    }
+
+    @Override
+    public List<TextareaInfo> selectTextarea(TextareaInfo info) {
+        return dcRepository.selectTextareaInfo(info);
+    }
+
+    @Override
+    public int updateTextareaIsSelected(int isS) {
+        return dcRepository.updateTextareaInfoIsSelected(isS);
     }
 
 }

@@ -21,6 +21,8 @@ public class TestString {
             System.out.println("true");
         }
 
+        Integer.parseInt(a);
+
 
 //        List<List<List<String>>> list = new ArrayList<>();
 //        List<List<List<String>>> list1 = new ArrayList<>();

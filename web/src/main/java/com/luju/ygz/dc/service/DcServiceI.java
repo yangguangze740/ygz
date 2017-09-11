@@ -2,12 +2,11 @@ package com.luju.ygz.dc.service;
 
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import com.luju.pojo.TextareaInfo;
 import luju.common.util.DataProcess;
-import luju.common.util.ListToSet;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public interface DcServiceI {
     
@@ -61,6 +60,10 @@ public interface DcServiceI {
 
     Map<String,List<DcPlanInfo>> selectDcPath();
 
+    void processJFCX();
+
+    List<DcPlanInfo> selectJFCX();
+
     int updateSource(DcPlanInfo dcPlanInfo);
 
     int updateDestination(DcPlanInfo dcPlanInfo);
@@ -70,4 +73,14 @@ public interface DcServiceI {
     int deleteTcData();
 
     int deleteTcDataSix();
+
+    int deleteTFCX();
+
+    int deleteDcCopy();
+
+    int insertTextarea(String s);
+
+    List<TextareaInfo> selectTextarea(TextareaInfo info);
+
+    int updateTextareaIsSelected(int isS);
 }

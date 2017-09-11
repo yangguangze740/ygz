@@ -37,6 +37,25 @@ public class DcPlanInfo {
     private float sumHc;
     private List<String> selectList;
     private Timestamp JLSJ;
+    private String dcImportant;
+    private String dcGDM;
+
+
+    public String getDcGDM() {
+        return dcGDM;
+    }
+
+    public void setDcGDM(String dcGDM) {
+        this.dcGDM = dcGDM;
+    }
+
+    public String getDcImportant() {
+        return dcImportant;
+    }
+
+    public void setDcImportant(String dcImportant) {
+        this.dcImportant = dcImportant;
+    }
 
     public Timestamp getJLSJ() {
         return JLSJ;

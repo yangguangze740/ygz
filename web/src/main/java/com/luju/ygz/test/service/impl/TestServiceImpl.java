@@ -4,17 +4,11 @@ import com.luju.pojo.JcPlanInfo;
 import com.luju.pojo.ResultInfo;
 import com.luju.ygz.test.repository.TestRepositoryI;
 import com.luju.ygz.test.service.TestServiceI;
-import luju.common.util.ConstantFields;
 import luju.common.util.DataProcess;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class TestServiceImpl implements TestServiceI {
@@ -28,9 +22,7 @@ public class TestServiceImpl implements TestServiceI {
         List<JcPlanInfo> list = testRepository.selectJcPlanFromOra();
         list = dataProcess.jcTimeList(list);
 
-        for (int k = 0; k< list.size(); k++){
-            testRepository.insertToPlanCopy(list.get(k));
-        }
+        testRepository.insertJcData(list);
     }
 
     @Override

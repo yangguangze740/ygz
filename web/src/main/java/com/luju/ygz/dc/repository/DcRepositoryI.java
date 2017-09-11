@@ -2,6 +2,7 @@ package com.luju.ygz.dc.repository;
 
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import com.luju.pojo.TextareaInfo;
 
 import java.util.List;
 
@@ -28,6 +29,8 @@ public interface DcRepositoryI {
 
     /* process zc data*/
     List<DcPlanInfo> selectZcPlan();
+
+    List<DcPlanInfo> selectJFCX();
 
     /* select jt data1*/
     List<ResultInfo> selectJtData4XD1();
@@ -85,9 +88,13 @@ public interface DcRepositoryI {
 
     boolean insertTcPlanNew(DcPlanInfo info);
 
+    boolean insertTcPlanNewAll(final List<DcPlanInfo> dcPlanInfos);
+
     List<DcPlanInfo> processTcDataNew();
 
     boolean insertTcDataNew(DcPlanInfo info);
+
+    boolean insertTcDataNewAll(final List<DcPlanInfo> dcPlanInfos);
 
     List<DcPlanInfo> selectTcPlanNew();
 
@@ -103,7 +110,17 @@ public interface DcRepositoryI {
 
     int deleteTcDataSix();
 
+    int deleteTFCX();
+
+    int deleteDcCopy();
+
     int updateSource(DcPlanInfo info);
 
     int updateDestination(DcPlanInfo info);
+
+    int insertTextarea(String s);
+
+    List<TextareaInfo> selectTextareaInfo(TextareaInfo info);
+
+    int updateTextareaInfoIsSelected(int isS);
 }

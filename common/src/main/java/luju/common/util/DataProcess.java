@@ -23,11 +23,15 @@ public class DataProcess {
     String end = "";
     String destination;
     String dcd; // use for tc > 6
+    String num;
+    String gdm;
 
     int cs;
     int cs1;
     int cs6; // whether > 6
+    int swh;
     boolean isB6;
+    boolean isTrue;
 
 
     public List<JcPlanInfo> jcTimeList(List<JcPlanInfo> list) {
@@ -369,8 +373,10 @@ public class DataProcess {
     public List<DcPlanInfo> zcTimeList(List<DcPlanInfo> list) {
 
         String des = null;
+        DcPlanInfo dcPlanInfo = new DcPlanInfo();
 
         for (int k = 0; k < list.size(); k++) {
+
             Field[] fields = list.get(k).getClass().getDeclaredFields();
             Object oi = list.get(k);
             for (int j = 1; j < fields.length; j++) {
@@ -411,6 +417,53 @@ public class DataProcess {
             list.get(k).setDcSource(ConstantFields.ZCSOURCE);
             list.get(k).setDcTypeE(ConstantFields.ZC);
             list.get(k).setDcPath(ConstantFields.ZC+des);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> zcTimeListNew(List<DcPlanInfo> list) {
+
+        String des = null;
+        DcPlanInfo dcPlanInfo = new DcPlanInfo();
+
+        for (int k = 0; k < list.size(); k++) {
+
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcNumber") && fields[j].get(oi) !=null){
+                        if (k == 0) {
+                            num = fields[j].get(oi).toString();
+                        }
+                        if (fields[j].get(oi).toString().equals(num)) {
+                            num = fields[j].get(oi).toString();
+                        } else {
+                            num = fields[j].get(oi).toString();
+                            isTrue = true;
+                        }
+                    }
+                    if(fields[j].getName().equals("dcGDM")){
+
+                        gdm = fields[j].get(oi).toString();
+                        dcPlanInfo.setDcGDM(gdm);
+                        if (isTrue == true) {
+                            gdm = fields[j].get(oi).toString();
+                            isB6 = true;
+                        }
+                        if (cs1 < 6 && isB6 == false) {
+                            cs6 = 0;
+                        }
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
         }
         return list;
     }
@@ -683,10 +736,12 @@ public class DataProcess {
                     fields[j].setAccessible(true);
                 }
                 try {
-                    if(fields[j].getName().equals("dcDestination")){
+                    if(fields[j].getName().equals("dcDestination") ){
                         des = fields[j].get(oi).toString();
-                        XD = des.substring(0,2);
-                        DH = des.substring(2,4);
+                        if (des.length() ==4) {
+                            XD = des.substring(0,2);
+                            DH = des.substring(2,4);
+                        }
                     }
 
                 } catch (IllegalArgumentException e) {

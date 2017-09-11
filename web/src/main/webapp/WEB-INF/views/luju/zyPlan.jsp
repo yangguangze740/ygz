@@ -123,7 +123,7 @@
                         <div class="box-body">
                             <table class="table" id="conflict4CCCXTable">
                                 <c:forEach items="${allList}" var="entry" varStatus="status">
-                                    <c:if test="${entry.sumHc > 84 && entry.sumHc <100}">
+                                    <c:if test="${(entry.sumHc > 84 && entry.sumHc <100) && (entry.dcDH.equals('03') || entry.dcDH.equals('04')) }">
                                         <tr dcId1="${entry.dcId}">
                                             <td>
                                                 ${entry.dcNumber} ${entry.dcType}超长
@@ -166,7 +166,7 @@
                 <div class="col-md-4">
                     <div class="box box-warning" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
-                            <h3 class="box-title">分区交叉进路</h3>
+                            <h3 class="box-title">分区 交叉进路</h3>
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
@@ -198,12 +198,12 @@
                                         <c:set var = "length" value="${fn:length(k)}"/>
                                         <c:set var = "firstDcId" value="${fn:substring(k, 1, 37)}" />
                                         <c:set var = "firstDcNumber" value="${fn:substring(k, 38, length)}" />
-                                            <tr dcId1="${firstDcId}" dcId2="${entry.dcId}">
+                                            <tr dcId1="${firstDcId}" dcId2="${entry.dcId}" >
                                                 <td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
                                                 <td>
                                                     <div style="text-align:right;">
                                                         <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
+                                                        <button type="button" info1="${firstDcNumber}" info2="${entry.dcNumber}" info3="${entry.dcType}" class="btn btn-danger" value="cd">调整</button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -224,16 +224,35 @@
                                 <span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">修改意见</h4>
                         </div>
-                        <div class="modal-body" id="noteModalContent">
-                            <div class="form-group">
-                                <label>请填写意见</label>
-                                <textarea class="form-control" rows="3" placeholder="请输入意见......"></textarea>
+                        <form action="${contextPath}/luju/textarea.action" method="post">
+                            <div class="modal-body" id="noteModalContent">
+                                <div class="form-group">
+                                    <label>请输入意见：</label>
+                                    <textarea id="areaValue" class="form-control" rows="3" name="areaValue"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal">提交至场调</button>
-                            <button type="button" class="btn btn-success" data-dismiss="modal">提交至站调</button>
-                        </div>
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <%--<div class="checkbox">--%>
+                                        <%--<label>--%>
+                                            <%--<h5>--%>
+                                                <%--<input type="checkbox">--%>
+                                                <%--提交至站调--%>
+                                            <%--</h5>--%>
+                                        <%--</label>--%>
+                                        <%--<label>--%>
+                                            <%--<h5>--%>
+                                                <%--<input type="checkbox">--%>
+                                                <%--提交至站调--%>
+                                            <%--</h5>--%>
+                                        <%--</label>--%>
+                                    <%--</div>--%>
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-primary">提交</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -386,10 +405,10 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/ygz/luju/zyPlan.action";
+                window.location="http://222.33.43.200:8080/ygz/luju/zyPlan.action";
             }
 
-            window.setInterval(webReFlash, 220000);
+            window.setInterval(webReFlash, 1300000);
 
             // 颜色rgb转换为16进制
             function RGBToHex(rgb){
@@ -406,11 +425,7 @@
                     var bg = RGBToHex($(value).css("background-color"));
 
 
-                    if (bg == "#ffff00") {
-                        console.log(bg);
-                        $(value).css("background-color", "#F5F5F5");
-                    }
-                    if(bg == "#ff0000"){
+                    if (bg == "#ffff00" || bg == "#ff0000") {
                         console.log(bg);
                         $(value).css("background-color", "#F5F5F5");
                     }
@@ -450,6 +465,16 @@
 
             // 调整按钮modal打开
             $("button[value='cd']").click(function () {
+
+                var info1 = $(this).attr("info1");
+                var info2 = $(this).attr("info2");
+                var info3 = $(this).attr("info3");
+                console.log('-----');
+                console.log(info1);
+                console.log(info2);
+                console.log(info3);
+
+                $("#areaValue").val(info1 +' 与 '+ info2+' '+ info3 +' '+ '冲突');
                 $("#noteModal").modal();
             });
 
