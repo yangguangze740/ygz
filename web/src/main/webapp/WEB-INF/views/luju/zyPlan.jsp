@@ -123,7 +123,7 @@
                         <div class="box-body">
                             <table class="table" id="conflict4CCCXTable">
                                 <c:forEach items="${allList}" var="entry" varStatus="status">
-                                    <c:if test="${(entry.sumHc > 84 && entry.sumHc <100) && (entry.dcDH.equals('03') || entry.dcDH.equals('04')) }">
+                                    <c:if test="${(entry.sumHc > 84 && entry.sumHc <100) && ( !entry.dcDH.equals('03') || !entry.dcDH.equals('04')) }">
                                         <tr dcId1="${entry.dcId}">
                                             <td>
                                                 ${entry.dcNumber} ${entry.dcType}超长
@@ -150,7 +150,7 @@
                             <table class="table" id="conflict4JFTable">
                                 <%--<tr>--%>
                                     <%--<td>--%>
-                                        <%--10&nbsp行禁峰优先2、3、4道接车--%>
+                                        <%--41111 接车禁峰--%>
                                     <%--</td>--%>
                                     <%--<td>--%>
                                         <%--<div style="text-align:right;">--%>
@@ -172,7 +172,7 @@
                             <table class="table" id="conflict4TwoTable">
                                 <%--<tr>--%>
                                     <%--<td>--%>
-                                        <%--2&nbsp;行分区错误--%>
+                                        <%--41111 接车分区交叉--%>
                                     <%--</td>--%>
                                     <%--<td>--%>
                                         <%--<div style="text-align:right;">--%>
@@ -438,6 +438,14 @@
 
                 var dcId1 = $(this).attr("dcId1");
                 $("#" + dcId1).css("background-color", "#FF0000");
+
+            });
+
+            $("#showDataTbody tr").click(function () {
+                console.log("click")
+
+                var dcId1 = $(this).attr("dcId");
+                $("#" + dcId1).css("background-color", "#FFA500");
 
             });
 
