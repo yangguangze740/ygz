@@ -19,6 +19,7 @@
                     <li><a href="#">上发</a></li>
                     <li><a href="#">上行</a></li>
                     <li><a href="#">全站</a></li>
+                    <li><a href="${contextPath}/luju/statistics.action">查询</a></li>
                     <li style="float: right;">
                         <a href="#" class="dropdown-toggle" id="nowDay">
                         </a>
@@ -123,7 +124,7 @@
                         <div class="box-body">
                             <table class="table" id="conflict4CCCXTable">
                                 <c:forEach items="${allList}" var="entry" varStatus="status">
-                                    <c:if test="${(entry.sumHc > 84 && entry.sumHc <100) && ( !entry.dcDH.equals('03') || !entry.dcDH.equals('04')) }">
+                                    <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !entry.dcDH.equals('05') || !entry.dcDH.equals('04')) }">
                                         <tr dcId1="${entry.dcId}">
                                             <td>
                                                 ${entry.dcNumber} ${entry.dcType}超长
@@ -148,17 +149,19 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4JFTable">
-                                <%--<tr>--%>
-                                    <%--<td>--%>
-                                        <%--41111 接车禁峰--%>
-                                    <%--</td>--%>
-                                    <%--<td>--%>
-                                        <%--<div style="text-align:right;">--%>
-                                            <%--<button type="button" class="btn btn-warning">撤销</button>--%>
-                                            <%--<button type="button" class="btn btn-danger" value="cd">调整</button>--%>
-                                        <%--</div>--%>
-                                    <%--</td>--%>
-                                <%--</tr>--%>
+                                <c:forEach items="${JFCXList}" var="entry" varStatus="status">
+                                    <tr dcId1="${entry.dcId}">
+                                        <td>
+                                            ${entry.dcNumber} ${entry.dcType} ${entry.dcJSL} ${entry.dcImportant}
+                                        </td>
+                                        <td>
+                                            <div style="text-align:right;">
+                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>
@@ -405,10 +408,10 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://222.33.43.200:8080/ygz/luju/zyPlan.action";
+                window.location="http://10.39.3.120:8080/ygz/luju/zyPlan.action";
             }
 
-            window.setInterval(webReFlash, 1300000);
+            window.setInterval(webReFlash, 300000);
 
             // 颜色rgb转换为16进制
             function RGBToHex(rgb){
@@ -441,13 +444,13 @@
 
             });
 
-            $("#showDataTbody tr").click(function () {
-                console.log("click")
-
-                var dcId1 = $(this).attr("dcId");
-                $("#" + dcId1).css("background-color", "#FFA500");
-
-            });
+//            $("#showDataTbody tr").click(function () {
+//                console.log("click")
+//
+//                var dcId1 = $(this).attr("dcId");
+//                $("#" + dcId1).css("background-color", "#FFA500");
+//
+//            });
 
             function afterAppend() {
                 $("#conflictTable tr").click(function () {
