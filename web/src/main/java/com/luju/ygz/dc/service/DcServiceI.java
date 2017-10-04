@@ -2,9 +2,12 @@ package com.luju.ygz.dc.service;
 
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import com.luju.pojo.StatisticsInfo;
 import com.luju.pojo.TextareaInfo;
 import luju.common.util.DataProcess;
 
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +15,8 @@ public interface DcServiceI {
     
     /* data select from ora to mysql*/
     void selectPlanDataFromOra(DataProcess dataProcess);
+
+    void selectPlanDataFromOraWithDelete(DataProcess dataProcess);
 
     /* select jt data and process*/
     void selectJtPlanData(DataProcess dataProcess);
@@ -83,4 +88,6 @@ public interface DcServiceI {
     List<TextareaInfo> selectTextarea(TextareaInfo info);
 
     int updateTextareaIsSelected(int isS);
+
+    List<StatisticsInfo> selectStatisticsInfoWithTime(String time);
 }

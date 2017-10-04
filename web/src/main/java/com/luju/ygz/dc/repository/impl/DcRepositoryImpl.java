@@ -2,6 +2,7 @@ package com.luju.ygz.dc.repository.impl;
 
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import com.luju.pojo.StatisticsInfo;
 import com.luju.pojo.TextareaInfo;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import luju.common.util.ConstantFields;
@@ -13,9 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,7 +146,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectJFCX() {
-        String sql = "SELECT dcId, dcNumber, dcType, jcJSL, jcImportant FROM dc_show_data S LEFT JOIN jc_plan_detals D ON S.dcNumber = D.jcNumber WHERE dcType = '接车'";
+        String sql = "SELECT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM dc_show_data S LEFT JOIN jc_plan_detals D ON S.dcNumber = D.jcNumber WHERE dcType = '接车' and dcStartTime < ADDDATE(now(),interval 10800 second) and jcJSL != null order by dcStartTime";
         Object[] args = {};
 
         try {
@@ -553,19 +552,6 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public int deletePlanCopy() {
-        String sql = "TRUNCATE TABLE dc_plan_copy";
-
-        try {
-            return mysqlJdbcTemplate.update(sql);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("delete error");
-            return 0;
-        }
-    }
-
-    @Override
     public boolean insertTcPlanNew(DcPlanInfo info) {
         String sql = "INSERT INTO dc_tc_plan (tcId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDestination, dcDj, dcTFX, dcTF, dcXD, dcDH, dcSWH, dcCS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
@@ -627,8 +613,6 @@ public class DcRepositoryImpl implements DcRepositoryI {
         return result.length == dcPlanInfos.size();
 
     }
-
-
 
     @Override
     public List<DcPlanInfo> processTcDataNew() {
@@ -871,12 +855,71 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
+    @Override
+    public int insertStatisticsInfo(StatisticsInfo info) {
+        String sql = "insert into dc_statistics (statisticsId,logTime,data1,data2) value (?,CURDATE(),?,?)";
+        Object[] args = {
+                uuid.uuidPrimaryKey(),
+                info.getData1(),
+                info.getData2()
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql,args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert StatisticsInfo error");
+            return 0;
+        }
+    }
+
+    @Override
+    public List<StatisticsInfo> selectStatisticsInfo() {
+        String sql = "SELECT logTime,data1,data2 FROM dc_statistics;";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new selectStatisticsInfoRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select selectStatisticsInfo error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<StatisticsInfo> selectStatisticsInfoWithTime(String time) {
+        String sql = "SELECT logTime,data1,data2 FROM dc_statistics where logTime = ? ";
+        Object[] args = {
+                time
+        };
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new selectStatisticsInfoRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select selectStatisticsInfoWithTime error");
+            return null;
+        }
+    }
+
     private class TextareaInfoRowMapper implements RowMapper<TextareaInfo> {
         public TextareaInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             TextareaInfo userInfo = new TextareaInfo();
 
             userInfo.setTextareaId(resultSet.getInt("textId"));
             userInfo.setTextarea(resultSet.getString("dcText"));
+
+            return userInfo;
+        }
+    }
+
+    private class selectStatisticsInfoRowMapper implements RowMapper<StatisticsInfo> {
+        public StatisticsInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            StatisticsInfo userInfo = new StatisticsInfo();
+
+            userInfo.setLogTime(resultSet.getString("logTime"));
+            userInfo.setData1(resultSet.getString("data1"));
+            userInfo.setData2(resultSet.getString("data2"));
 
             return userInfo;
         }

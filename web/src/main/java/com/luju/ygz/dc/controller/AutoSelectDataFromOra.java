@@ -18,13 +18,14 @@ public class AutoSelectDataFromOra {
 
     DataProcess dataProcess = new DataProcess();
 
-    @Scheduled(cron = "0 0/55 * * * ?")
+    @Scheduled(cron = "0 0/4 * * * ?")
     public void AutoSelectDataFromOra() {
 
         jcService.selectPlanDataFromOra(dataProcess);
         System.out.println("jc select ora");
 
-        dcService.selectPlanDataFromOra(dataProcess);
+//        dcService.selectPlanDataFromOra(dataProcess);
+        dcService.selectPlanDataFromOraWithDelete(dataProcess);
         System.out.println("dc select ora");
 
         dcService.deleteShowData();
@@ -35,10 +36,11 @@ public class AutoSelectDataFromOra {
         dcService.processTcDataNew(dataProcess);
         dcService.processDcData(dataProcess);
         dcService.processJFCX();
+
     }
 
-    @Scheduled(cron = "0 0 4 * * ?")
-    public void AutoDeleteDataFromOra() {
-        dcService.deleteDcCopy();
-    }
+//    @Scheduled(cron = "0 0 4 * * ?")
+//    public void AutoDeleteDataFromOra() {
+//        dcService.deleteDcCopy();
+//    }
 }
