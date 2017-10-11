@@ -57,12 +57,16 @@ public class ShowController {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
         List<DcPlanInfo> allList = dcService.selectDcData();
-        List<DcPlanInfo> JFCXList = dcService.selectJFCX();
+        List<DcPlanInfo> JFList = dcService.selectJF();
+        List<DcPlanInfo> CXList = dcService.selectCX();
         Map<String,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+        List<DcPlanInfo> partitionList = dcService.select4Partition();
 
         mav.addObject("allList",allList);
         mav.addObject("mapList",mapList);
-        mav.addObject("JFCXList",JFCXList);
+        mav.addObject("JFList",JFList);
+        mav.addObject("CXList",CXList);
+        mav.addObject("partitionList",partitionList);
         System.out.println("web reFlash");
 
         return mav;
@@ -73,12 +77,16 @@ public class ShowController {
         ModelAndView mav = new ModelAndView("luju/jcPlan");
 
         List<DcPlanInfo> allList = dcService.selectDcData();
-        List<DcPlanInfo> JFCXList = dcService.selectJFCX();
+        List<DcPlanInfo> JFList = dcService.selectJF();
+        List<DcPlanInfo> CXList = dcService.selectCX();
         Map<String,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+        List<DcPlanInfo> partitionList = dcService.select4Partition();
 
         mav.addObject("allList",allList);
         mav.addObject("mapList",mapList);
-        mav.addObject("JFCXList",JFCXList);
+        mav.addObject("JFCXList",JFList);
+        mav.addObject("CXList",CXList);
+        mav.addObject("partitionList",partitionList);
         System.out.println("web reFlash");
 
         return mav;
@@ -140,6 +148,7 @@ public class ShowController {
         List<StatisticsInfo> list4Time = dcService.selectStatisticsInfoWithTime(dateWithChange);
         return list4Time;
     }
+
 
 
 
