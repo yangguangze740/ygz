@@ -40,6 +40,9 @@ public interface TestRepositoryI {
 
     /* data insert from ora to mysql*/
     boolean insertToPlanCopy(JcPlanInfo info);
+
+    boolean insertJcData(final List<JcPlanInfo> jcPlanInfos);
+
     /* insert processed data from mysql copy data to jc_plan */
     boolean insertToPlan4One(JcPlanInfo info);
 

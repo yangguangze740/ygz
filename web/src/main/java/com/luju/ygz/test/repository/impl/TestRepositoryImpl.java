@@ -7,10 +7,12 @@ import com.luju.ygz.test.repository.TestRepositoryI;
 import luju.common.util.ConstantFields;
 import luju.common.util.PrimaryKeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -193,6 +195,37 @@ public class TestRepositoryImpl implements TestRepositoryI {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public boolean insertJcData(final List<JcPlanInfo> jcPlanInfos) {
+        String sql = "INSERT INTO jc_plan_copy (copyId, jcSource, jcNumber, jcEndTime, jcStartTime, jcDestination, jcHc, jcQBID, jcQBIDN, jcJSL, jcType ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        int[] result = mysqlJdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                JcPlanInfo jcPlanInfo = jcPlanInfos.get(i);
+
+                ps.setString(1, uuid.uuidPrimaryKey());
+                ps.setString(2, jcPlanInfo.getNODE_FOUR_WAY());
+                ps.setString(3, jcPlanInfo.getTRAIN_NUM());
+                ps.setTimestamp(4, jcPlanInfo.getTIME());
+                ps.setTimestamp(5, jcPlanInfo.getJcStartTime());
+                ps.setString(6,jcPlanInfo.getTRACK_NUM());
+                ps.setFloat(7,jcPlanInfo.getJcHc());
+                ps.setString(8,jcPlanInfo.getJcQBID());
+                ps.setString(9,jcPlanInfo.getJcQBIDN());
+                ps.setString(10,jcPlanInfo.getJcJSL());
+                ps.setString(11,jcPlanInfo.getJcType());
+
+            }
+
+            @Override
+            public int getBatchSize() {
+                return jcPlanInfos.size();
+            }
+        });
+
+        return result.length == jcPlanInfos.size();
     }
 
     @Override

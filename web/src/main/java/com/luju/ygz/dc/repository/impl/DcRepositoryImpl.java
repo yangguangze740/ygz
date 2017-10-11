@@ -2,6 +2,7 @@ package com.luju.ygz.dc.repository.impl;
 
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import com.luju.pojo.TextareaInfo;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import luju.common.util.ConstantFields;
 import luju.common.util.DataProcess;
@@ -32,7 +33,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcPlanFromOra() {
-        String sql = "SELECT CC, JHKSSJ, JHJSSJ, ZYXM, ZYGD,TFX, DJ, M.GJHID, SWH, ZGBZ, CS, JSL,JLSJ FROM CQZ_GJHML M LEFT JOIN CQZ_GJHZW Z ON M.GJHID = Z.GJHID";
+        String sql = "SELECT CC, JHKSSJ, JHJSSJ, ZYXM, ZYGD,TFX, DJ, M.GJHID, SWH, ZGBZ, CS, JSL,JLSJ,GDM FROM CQZ_GJHML M LEFT JOIN CQZ_GJHZW Z ON M.GJHID = Z.GJHID";
         Object[] args = {};
 
         try {
@@ -60,7 +61,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public int deleteRepeatDataFromCopy(String s) {
-        String sql = "DELETE FROM dc_plan_copy WHERE dcGJHID='?' ";
+        String sql = "DELETE FROM dc_plan_copy WHERE dcGJHID= ? ";
         Object[] args = {
                 s
         };
@@ -132,7 +133,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectZcPlan() {
-        String sql = "SELECT distinct dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '转场' order by dcNumber";
+        String sql = "SELECT distinct dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj,dcGDM FROM ygz_show.dc_plan_copy where dcType = '转场' order by dcNumber";
         Object[] args = {};
 
         try {
@@ -140,6 +141,20 @@ public class DcRepositoryImpl implements DcRepositoryI {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectJFCX() {
+        String sql = "SELECT dcId, dcNumber, dcType, jcJSL, jcImportant FROM dc_show_data S LEFT JOIN jc_plan_detals D ON S.dcNumber = D.jcNumber WHERE dcType = '接车'";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JFCXRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select JFCX error");
             return null;
         }
     }
@@ -287,7 +302,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public boolean insertToPlanCopy(DcPlanInfo info) {
-        String sql = "INSERT INTO dc_plan_copy (copyId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj, dcGJHID, dcZGBZ, dcCS, dcJSL, dcTFX, dcSWH, dcJLSJ) VALUES (?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO dc_plan_copy (copyId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj, dcGJHID, dcZGBZ, dcCS, dcJSL, dcTFX, dcSWH, dcJLSJ,dcGDM) VALUES (?,?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         Object[] args = {
                 uuid.uuidPrimaryKey(),
                 info.getDcNumber(),
@@ -302,7 +317,8 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 info.getDcJSL(),
                 info.getDcTFX(),
                 info.getDcSWH(),
-                info.getJLSJ()
+                info.getJLSJ(),
+                info.getDcGDM()
         };
         try {
             return mysqlJdbcTemplate.update(sql, args) == 1;
@@ -583,6 +599,43 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public boolean insertTcPlanNewAll(final List<DcPlanInfo> dcPlanInfos) {
+        String sql = "INSERT INTO dc_tc_plan (tcId, dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDestination, dcDj, dcTFX, dcTF, dcXD, dcDH, dcSWH, dcCS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        int[] result = mysqlJdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                DcPlanInfo dcPlanInfo = dcPlanInfos.get(i);
+
+                ps.setString(1, uuid.uuidPrimaryKey());
+                ps.setString(2, dcPlanInfo.getDcNumber());
+                ps.setTimestamp(3, dcPlanInfo.getDcStartTime());
+                ps.setTimestamp(4, dcPlanInfo.getDcEndTime());
+                ps.setString(5, dcPlanInfo.getDcType());
+                ps.setString(6,dcPlanInfo.getDcSource());
+                ps.setString(7,dcPlanInfo.getDcDestination());
+                ps.setInt(8,dcPlanInfo.getDcDj());
+                ps.setString(9,dcPlanInfo.getDcTFX());
+                ps.setString(10,dcPlanInfo.getDcTF());
+                ps.setString(11,dcPlanInfo.getDcXD());
+                ps.setString(12,dcPlanInfo.getDcDH());
+                ps.setInt(13,dcPlanInfo.getDcSWH());
+                ps.setInt(14,dcPlanInfo.getDcCS());
+
+            }
+
+            @Override
+            public int getBatchSize() {
+                return dcPlanInfos.size();
+            }
+        });
+
+        return result.length == dcPlanInfos.size();
+
+    }
+
+
+
+    @Override
     public List<DcPlanInfo> processTcDataNew() {
         String sql = "SELECT tcId,dcDestination,dcSWH,dcCS FROM dc_tc_plan order by dcDestination,dcSWH";
         Object[] args = {};
@@ -616,6 +669,32 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public boolean insertTcDataNewAll(final List<DcPlanInfo> dcPlanInfos) {
+        String sql = "INSERT INTO dc_tc_six (tcId, dcDestination, dcSWH, dcCS, dcCS6) VALUES (?, ?, ?, ?, ?)";
+        int[] result = mysqlJdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                DcPlanInfo dcPlanInfo = dcPlanInfos.get(i);
+
+                ps.setString(1, dcPlanInfo.getDcId());
+                ps.setString(2, dcPlanInfo.getDcDestination());
+                ps.setInt(3, dcPlanInfo.getDcSWH());
+                ps.setInt(4, dcPlanInfo.getDcCS());
+                ps.setInt(5, dcPlanInfo.getDcCS6());
+
+            }
+
+            @Override
+            public int getBatchSize() {
+                return dcPlanInfos.size();
+            }
+        });
+
+        return result.length == dcPlanInfos.size();
+
+    }
+
+    @Override
     public List<DcPlanInfo> selectTcPlanNew() {
         String sql = "SELECT distinct dcNumber,dcStartTime,dcEndTime,dcType,dcSource,S.dcDestination,dcDj,dcTFX,dcTF,dcXD,dcDH,dcCS6 FROM dc_tc_plan P left join dc_tc_six S on P.tcId = S.tcId where dcCS6 = 1 ORDER BY dcDestination";
         Object[] args = {};
@@ -631,7 +710,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectPath(DcPlanInfo dcPlanInfo) {
-        String sql = "SELECT dcId, dcNumber, dcType,jcPath, dcStartTime, dcEndTime  FROM dc_show_data D LEFT JOIN (SELECT DISTINCT jcPath FROM jc_path_info WHERE jcDCH IN (SELECT jcDCH FROM jc_path_info WHERE jcPath = ? )) I ON D.dcPath = I.jcPath WHERE jcPath is not null and (dcStartTime < ? AND dcEndTime > ? OR dcStartTime > ? AND ? > dcStartTime OR dcEndTime > ? AND dcEndTime < ?)";
+        String sql = "SELECT dcId, dcNumber, dcType,jcPath, dcStartTime, dcEndTime  FROM dc_show_data D LEFT JOIN (SELECT DISTINCT jcPath FROM jc_path_info WHERE jcDCH IN (SELECT jcDCH FROM jc_path_info WHERE jcPath = ? )) I ON D.dcPath = I.jcPath WHERE jcPath is not null and (dcStartTime < ? AND dcEndTime > ? OR dcStartTime > ? AND ? > dcStartTime OR dcEndTime > ? AND ? > dcEndTime)";
         Object[] args = {
                 dcPlanInfo.getDcPath(),
                 dcPlanInfo.getDcStartTime(),
@@ -691,6 +770,32 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public int deleteTFCX() {
+        String sql = "TRUNCATE TABLE jc_plan_detals";
+
+        try {
+            return mysqlJdbcTemplate.update(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("delete tf cx error");
+            return 0;
+        }
+    }
+
+    @Override
+    public int deleteDcCopy() {
+        String sql = "TRUNCATE TABLE dc_plan_copy";
+
+        try {
+            return mysqlJdbcTemplate.update(sql);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("delete dc copy error");
+            return 0;
+        }
+    }
+
+    @Override
     public int updateSource(DcPlanInfo info) {
         String sql = "UPDATE dc_show_data SET dcSource = ?, dcPath = ?, dcIsUpdate = 1 where dcId = ?";
         Object[] args = {
@@ -724,6 +829,63 @@ public class DcRepositoryImpl implements DcRepositoryI {
         }
     }
 
+    @Override
+    public int insertTextarea(String s) {
+        String sql = "INSERT INTO dc_text (dcText) VALUES (?)";
+        Object[] args = {
+                s
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql,args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("insert textarea error");
+            return 0;
+        }
+    }
+
+    @Override
+    public List<TextareaInfo> selectTextareaInfo(TextareaInfo info) {
+        String sql = "SELECT textId,dcText FROM dc_text where isSelected = 0";
+        Object[] args = {
+                info.getTextareaId(),
+                info.getTextarea()
+        };
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new TextareaInfoRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select textareaInfo error");
+            return null;
+        }
+    }
+
+    @Override
+    public int updateTextareaInfoIsSelected(int isS) {
+        String sql = "UPDATE dc_text SET isSelected = 1 where textId = ?";
+        Object[] args = {
+                isS
+        };
+        try {
+            return mysqlJdbcTemplate.update(sql,args);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("update isSelected error");
+            return 0;
+        }
+    }
+
+    private class TextareaInfoRowMapper implements RowMapper<TextareaInfo> {
+        public TextareaInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            TextareaInfo userInfo = new TextareaInfo();
+
+            userInfo.setTextareaId(resultSet.getInt("textId"));
+            userInfo.setTextarea(resultSet.getString("dcText"));
+
+            return userInfo;
+        }
+    }
 
     private class DcPlanCopyRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
@@ -742,6 +904,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcCS(resultSet.getInt("CS"));
             userInfo.setDcJSL(resultSet.getString("JSL"));
             userInfo.setJLSJ(resultSet.getTimestamp("JLSJ"));
+            userInfo.setDcGDM(resultSet.getString("GDM"));
 
             return userInfo;
         }
@@ -854,6 +1017,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcDestination(resultSet.getString("dcSource"));
             userInfo.setDcTFX(resultSet.getString("dcTFX"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
+            userInfo.setDcGDM(resultSet.getString("dcGDM"));
 
             return userInfo;
         }
@@ -1063,8 +1227,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectDcData() {
-        //AND dcStartTime > now() AND dcStartTime < ADDDATE(now(),interval 10800 second)
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'XD' order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'XD' AND dcStartTime > now() AND dcStartTime > now() AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new DcDataRowMapper());
@@ -1169,7 +1332,6 @@ public class DcRepositoryImpl implements DcRepositoryI {
     private class DcPathRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
-            String[] conflict = {userInfo.getDcId()};
 
             userInfo.setDcId(resultSet.getString("dcId"));
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
@@ -1178,6 +1340,20 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
             userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
 
+
+            return userInfo;
+        }
+    }
+
+    private class JFCXRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcId(resultSet.getString("dcId"));
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcJSL(resultSet.getString("jcJSL"));
+            userInfo.setDcImportant(resultSet.getString("jcImportant"));
 
             return userInfo;
         }

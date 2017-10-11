@@ -3,6 +3,7 @@ package com.luju.ygz;
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.JcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import com.luju.pojo.TextareaInfo;
 import com.luju.ygz.dc.service.DcServiceI;
 import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.ConstantFields;
@@ -55,18 +56,29 @@ public class ShowController {
     public ModelAndView allJcData() {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
 
-        //dcService.deleteShowData();
-        //dcService.deleteTcData();
-        //dcService.deleteTcDataSix();
-
-        //dcService.processTcDataNew(dataProcess);
-        //dcService.processDcData(dataProcess);
-
         List<DcPlanInfo> allList = dcService.selectDcData();
-        Map<DcPlanInfo,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+        List<DcPlanInfo> JFCXList = dcService.selectJFCX();
+        Map<String,List<DcPlanInfo>> mapList = dcService.selectDcPath();
 
         mav.addObject("allList",allList);
         mav.addObject("mapList",mapList);
+        mav.addObject("JFCXList",JFCXList);
+        System.out.println("web reFlash");
+
+        return mav;
+    }
+
+    @RequestMapping("/jcPlan")
+    public ModelAndView allJcDataNew() {
+        ModelAndView mav = new ModelAndView("luju/jcPlan");
+
+        List<DcPlanInfo> allList = dcService.selectDcData();
+        List<DcPlanInfo> JFCXList = dcService.selectJFCX();
+        Map<String,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+
+        mav.addObject("allList",allList);
+        mav.addObject("mapList",mapList);
+        mav.addObject("JFCXList",JFCXList);
         System.out.println("web reFlash");
 
         return mav;
@@ -74,23 +86,43 @@ public class ShowController {
 
     @ResponseBody
     @RequestMapping("/updateSource")
-    public Map<DcPlanInfo,List<DcPlanInfo>> updateSource(DcPlanInfo dcPlanInfo) {
+    public Map<String,List<DcPlanInfo>> updateSource(DcPlanInfo dcPlanInfo) {
 
         dcService.updateSource(dcPlanInfo);
-        Map<DcPlanInfo,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+        Map<String,List<DcPlanInfo>> mapList = dcService.selectDcPath();
 
         return mapList;
     }
 
     @ResponseBody
     @RequestMapping("/updateDestination")
-    public Map<DcPlanInfo,List<DcPlanInfo>> updateDestination(DcPlanInfo dcPlanInfo) {
+    public Map<String,List<DcPlanInfo>> updateDestination(DcPlanInfo dcPlanInfo) {
 
         dcService.updateDestination(dcPlanInfo);
-        Map<DcPlanInfo,List<DcPlanInfo>> mapList = dcService.selectDcPath();
+        Map<String,List<DcPlanInfo>> mapList = dcService.selectDcPath();
 
         return mapList;
     }
+
+    @RequestMapping(value = "/textarea", method = RequestMethod.POST)
+    public String textarea(HttpServletRequest request) {
+        String areaValue = request.getParameter("areaValue");
+        int count = dcService.insertTextarea(areaValue);
+        if (count==0) {
+           System.out.println("提交出错");
+        } else {
+            System.out.println("提交成功");
+        }
+        return "redirect:/luju/zyPlan.action";
+    }
+
+    @RequestMapping(value = "/selectTextarea", method = RequestMethod.POST)
+    public List<TextareaInfo> selectTextarea(TextareaInfo info) {
+        List<TextareaInfo> list = dcService.selectTextarea(info);
+        return list;
+    }
+
+
 
     @RequestMapping("/bwjPath")
     public String selectBwjPath(JcPlanInfo jcPlanInfo) {

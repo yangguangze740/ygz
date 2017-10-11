@@ -8,38 +8,52 @@ public class TestString {
 
     public static void main(String[] args) {
 
+        String a = "abc";
+        String b = "bc";
+
+        String c = "c";
+        String d = "c";
 
 
-        List<List<List<String>>> list = new ArrayList<>();
-        List<List<List<String>>> list1 = new ArrayList<>();
+        System.out.println( );
 
-        List<List<String>> listList1 = new ArrayList<>();
-        List<List<String>> listList2 = new ArrayList<>();
+        if (!(a.equals(b)) && c.equals(d)) {
+            System.out.println("true");
+        }
 
-        List<String> string1 = new ArrayList<>();
-
-        string1.add("a");
-        string1.add("b");
-
-        List<String> string2 = new ArrayList<>();
-        string2.add("b");
-        string2.add("a");
-
-        List<String> string3 = new ArrayList<>();
-
-        string3.add("1");
-        string3.add("2");
-
-        listList1.add(string1);
+        Integer.parseInt(a);
 
 
-        listList2.add(string2);
-
-        listList1.add(string3);
-
-        System.out.println(listList1);
-        System.out.println(listList2);
-        System.out.println(listList1.removeAll(listList2));
+//        List<List<List<String>>> list = new ArrayList<>();
+//        List<List<List<String>>> list1 = new ArrayList<>();
+//
+//        List<List<String>> listList1 = new ArrayList<>();
+//        List<List<String>> listList2 = new ArrayList<>();
+//
+//        List<String> string1 = new ArrayList<>();
+//
+//        string1.add("a");
+//        string1.add("b");
+//
+//        List<String> string2 = new ArrayList<>();
+//        string2.add("b");
+//        string2.add("a");
+//
+//        List<String> string3 = new ArrayList<>();
+//
+//        string3.add("1");
+//        string3.add("2");
+//
+//        listList1.add(string1);
+//
+//
+//        listList2.add(string2);
+//
+//        listList1.add(string3);
+//
+//        System.out.println(listList1);
+//        System.out.println(listList2);
+//        System.out.println(listList1.removeAll(listList2));
 
 
 

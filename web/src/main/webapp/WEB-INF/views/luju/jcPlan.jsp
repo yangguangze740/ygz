@@ -5,333 +5,392 @@
 <body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 <div class="wrapper">
 
-<header class="main-header">
-    <!-- 头部内容 -->
-    <nav class="navbar" style="margin-left: 0px;">
-        <div class="navbar">
-            <ul class="nav navbar-nav">
-                <li><a href="#">下到</a></li>
-                <li><a href="#">下直</a></li>
-                <li><a href="#">下发</a></li>
-                <li><a href="#">下行</a></li>
-                <li><a href="#">上到</a></li>
-                <li><a href="#">上直</a></li>
-                <li><a href="#">上发</a></li>
-                <li><a href="#">上行</a></li>
-                <li><a href="#">全站</a></li>
-                <li style="float: right;">
-                    <a href="#" class="dropdown-toggle" id="nowDay">
-                    </a>
-                </li>
-                <script>
-                    document.getElementById("nowDay").innerHTML = new Date().toLocaleDateString();
-                </script>
-            </ul>
-        </div>
-    </nav>
-</header>
+    <header class="main-header">
+        <!-- 头部内容 -->
+        <nav class="navbar" style="margin-left: 0px;">
+            <div class="navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">下到</a></li>
+                    <li><a href="#">下直</a></li>
+                    <li><a href="#">下发</a></li>
+                    <li><a href="#">下行</a></li>
+                    <li><a href="#">上到</a></li>
+                    <li><a href="#">上直</a></li>
+                    <li><a href="#">上发</a></li>
+                    <li><a href="#">上行</a></li>
+                    <li><a href="#">全站</a></li>
+                    <li style="float: right;">
+                        <a href="#" class="dropdown-toggle" id="nowDay">
+                        </a>
+                    </li>
+                    <script>
+                        document.getElementById("nowDay").innerHTML = new Date().toLocaleDateString();
+                    </script>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-<!-- 中心内容 -->
-<div class="content-wrapper" style="margin-left: 0px !important;">
-    <section class="content">
-        <div class="row">
-            <%-- 需要审验的命令数据 --%>
-            <div class="col-md-8">
-                <%-- 设定作业计划box背景色--%>
-                <div class="box box-success" style="background-color: #F5F5F5;">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">裕国站下行到达场作业计划推演</h3>
-                    </div>
-                    <div class="box-body no-padding">
-                        <table class="table" id="zuoyejihuaTable">
-                            <thead>
+    <!-- 中心内容 -->
+    <div class="content-wrapper" style="margin-left: 0px !important;">
+        <section class="content">
+            <div class="row">
+                <%-- 需要审验的命令数据 --%>
+                <div class="col-md-8">
+                    <%-- 设定作业计划box背景色--%>
+                    <div class="box box-success" style="background-color: #F5F5F5;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">裕国站下行到达场作业计划推演</h3>
+                        </div>
+                        <div class="box-body no-padding">
+                            <table class="table" id="zuoyejihuaTable">
+                                <thead>
                                 <tr style="text-align: center;">
                                     <th>序号</th>
                                     <th>车次</th>
                                     <th>作业类别</th>
                                     <th>开始时间</th>
                                     <th>结束时间</th>
-                                    <th>源</th>
-                                    <th>目的</th>
-                                    <th>调机</th>
+                                    <th>方向</th>
+                                    <th>股道</th>
+                                    <th>调别</th>
                                     <th>重点事项</th>
                                     <th>记事</th>
-                                    <th>进路</th>
+                                    <%--<th>进路</th>--%>
                                 </tr>
-                            </thead>
-                            <tbody>
-                            <c:forEach items="${list}" var="record" varStatus="status">
-                                <c:if test="${record.color == 1}">
-                                    <tr style="background-color: #FFFF00; text-align: center; border-bottom: 2px solid #D3D3D3;" id="${record.TRAIN_NUM}">
+                                </thead>
+                                <tbody id="showDataTbody">
+                                <c:forEach items="${allList}" var="record" varStatus="status">
+                                    <c:set value="${record.selectList }" var="selectList"/>
+                                    <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                         <td>${status.index + 1}</td>
-                                        <td>${record.TRAIN_NUM}</td>
-                                        <td>${record.jcType}</td>
-                                        <td>${record.jcStartTime}</td>
-                                        <td>${record.TIME}</td>
-                                        <td>${record.NODE_FOUR_WAY}</td>
-                                        <td>${record.TRACK_NUM}</td>
-                                        <td></td>
-                                        <td>${record.jcImportant}</td>
-                                        <td>${record.jcJSL}</td>
-                                        <%--<td>${record.jcDCH}</td>--%>
+                                        <td>${record.dcNumber}</td>
+                                        <td>${record.dcType}</td>
+                                        <td>${record.dcStartTime}</td>
+                                        <td>${record.dcEndTime}</td>
+                                        <td>${record.dcSource}</td>
+                                        <td>${record.dcDestination}</td>
+                                        <td>${record.dcDj}</td>
                                         <td></td>
                                     </tr>
-                                </c:if>
-                                <c:if test="${record.color == 2}">
-                                    <tr style="background-color: #ff2222; text-align: center; border-bottom: 2px solid #D3D3D3;" id="${record.TRAIN_NUM}">
-                                        <td>${status.index + 1}</td>
-                                        <td>${record.TRAIN_NUM}</td>
-                                        <td>${record.jcType}</td>
-                                        <td>${record.jcStartTime}</td>
-                                        <td>${record.TIME}</td>
-                                        <td>${record.NODE_FOUR_WAY}</td>
-                                        <td>${record.TRACK_NUM}</td>
-                                        <td></td>
-                                        <td>${record.jcImportant}</td>
-                                        <td>${record.jcJSL}</td>
-                                        <%--<td>${record.jcDCH}</td>--%>
-                                        <td></td>
-                                    </tr>
-                                </c:if>
-                                <c:if test="${record.color == 0}">
-                                    <tr style="text-align: center; border-bottom: 2px solid #D3D3D3;" id="${record.TRAIN_NUM}">
-                                        <td>${status.index + 1}</td>
-                                        <td>${record.TRAIN_NUM}</td>
-                                        <td>${record.jcType}</td>
-                                        <td>${record.jcStartTime}</td>
-                                        <td>${record.TIME}</td>
-                                        <td>${record.NODE_FOUR_WAY}</td>
-                                        <td>${record.TRACK_NUM}</td>
-                                        <td></td>
-                                        <td>${record.jcImportant}</td>
-                                        <td>${record.jcJSL}</td>
-                                        <%--<td>${record.jcDCH}</td>--%>
-                                        <td></td>
-                                    </tr>
-                                </c:if>
-                            </c:forEach>
-                            </tr>
-                            </tbody>
-                        </table>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box box-danger" style="background-color: #F5F5F5;">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">超长、超限 错办进路</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table" id="conflict4ErrorTable">
-                            <%--<c:forEach items="${list}" var="record">--%>
-                                <%--<tr>--%>
-                                    <%--<td value="${record.TRAIN_NUM}" id="${record.TRAIN_NUM}">${record.TRAIN_NUM}</td>--%>
-                                <%--</tr>--%>
-                            <%--</c:forEach>--%>
-                            <tr>
-                                <td>
-                                    2&nbsp行超长4、5道接车
-                                </td>
-                                <td>
-                                    <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning">撤销</button>
-                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    8&nbsp行超限2、5道接车
-                                </td>
-                                <td>
-                                    <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning">撤销</button>
-                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                <div class="col-md-4">
+                    <div class="box box-danger" style="background-color: #F5F5F5;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">超长、超限 错办进路</h3>
+                        </div>
+                        <div class="box-body">
+                            <table class="table" id="conflict4CCCXTable">
+                                <c:forEach items="${allList}" var="entry" varStatus="status">
+                                    <c:if test="${(entry.sumHc > 84 && entry.sumHc <100) && (entry.dcDH.equals('03') || entry.dcDH.equals('04')) }">
+                                        <tr dcId1="${entry.dcId}">
+                                            <td>
+                                                    ${entry.dcNumber} ${entry.dcType}超长
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
                 <div class="col-md-4">
                     <div class="box box-warning" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
                             <h3 class="box-title">禁峰 交叉进路</h3>
                         </div>
                         <div class="box-body">
-                            <table class="table" id="conflict4CCCXTable">
-                                <%--<c:forEach items="${list}" var="record">--%>
-                                <%--<tr>--%>
-                                <%--<td value="${record.TRAIN_NUM}" id="${record.TRAIN_NUM}">${record.TRAIN_NUM}</td>--%>
-                                <%--</tr>--%>
-                                <%--</c:forEach>--%>
-                                <tr>
-                                    <td>
-                                        10&nbsp行禁峰优先2、3、4道接车
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
+                            <table class="table" id="conflict4JFTable">
                             </table>
                         </div>
                     </div>
                 </div>
-            <div class="col-md-4">
-                <div class="box box-warning" style="background-color: #F5F5F5;">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">分区交叉进路</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table" id="conflict4TwoTable">
-                            <%--<c:forEach items="${list}" var="record">--%>
-                            <%--<tr>--%>
-                            <%--<td value="${record.TRAIN_NUM}" id="${record.TRAIN_NUM}">${record.TRAIN_NUM}</td>--%>
-                            <%--</tr>--%>
-                            <%--</c:forEach>--%>
-                            <tr>
-                                <td>
-                                    2&nbsp;行分区错误
-                                </td>
-                                <td>
-                                    <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning">撤销</button>
-                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    11&nbsp;行分区错误
-                                </td>
-                                <td>
-                                    <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning">撤销</button>
-                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="box box-warning" style="background-color: #F5F5F5;">
-                    <div class="box-header with-border">
-                        <h3 class="box-title">计划交叉进路</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table" id="conflictTable">
-                            <tr>
-                                <td>
-                                    2、5&nbsp;行进路交叉
-                                </td>
-                                <td>
-                                    <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning">撤销</button>
-                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    3、9&nbsp;行进路交叉
-                                </td>
-                                <td>
-                                    <div style="text-align:right;">
-                                        <button type="button" class="btn btn-warning">撤销</button>
-                                        <button type="button" class="btn btn-danger" value="cd">调整</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <%-- 弹出modal --%>
-        <div class="modal fade" id="noteModal">
-            <div class="modal-dialog" role="dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">修改意见</h4>
-                    </div>
-                    <div class="modal-body" id="noteModalContent">
-                        <div class="form-group">
-                            <label>请填写意见</label>
-                            <textarea class="form-control" rows="3" placeholder="请输入意见......"></textarea>
+                <div class="col-md-4">
+                    <div class="box box-warning" style="background-color: #F5F5F5;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">分区 交叉进路</h3>
+                        </div>
+                        <div class="box-body">
+                            <table class="table" id="conflict4TwoTable">
+                            </table>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-success" data-dismiss="modal">提交至场调</button>
-                        <button type="button" class="btn btn-success" data-dismiss="modal">提交至站调</button>
+                </div>
+                <div class="col-md-4">
+                    <div class="box box-warning" style="background-color: #F5F5F5;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">计划交叉进路</h3>
+                        </div>
+                        <div class="box-body">
+                            <table class="table" id="conflictTable">
+                                <c:forEach items="${mapList}" var="map" varStatus="status">
+                                    <c:forEach items="${map.value}" var="entry" varStatus="status">
+                                        <c:set var = "k" value="${map.key}" />
+                                        <c:set var = "length" value="${fn:length(k)}"/>
+                                        <c:set var = "firstDcId" value="${fn:substring(k, 1, 37)}" />
+                                        <c:set var = "firstDcNumber" value="${fn:substring(k, 38, length)}" />
+                                        <tr dcId1="${firstDcId}" dcId2="${entry.dcId}">
+                                            <td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:forEach>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
 
-<%@ include file="/WEB-INF/include/javascript.jsp"%>
+            <%-- 弹出modal --%>
+            <div class="modal fade" id="noteModal">
+                <div class="modal-dialog" role="dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">修改意见</h4>
+                        </div>
+                        <div class="modal-body" id="noteModalContent">
+                            <div class="form-group">
+                                <label>请填写意见</label>
+                                <textarea class="form-control" rows="3" placeholder="请输入意见......"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success" data-dismiss="modal">提交至场调</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal">提交至站调</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-<script type="text/javascript">
-    $(function () {
-        // 颜色rgb转换为16进制
-        function RGBToHex(rgb){
-            rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
-            return (rgb && rgb.length === 4) ? "#" +
-                ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-                ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-                ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
-        }
+    <%@ include file="/WEB-INF/include/javascript.jsp"%>
 
-        // 清空上一次冲突选择后的颜色
-        function clearOldColor() {
-            $("#zuoyejihuaTable tr").each(function (index, value) {
-                var bg = RGBToHex($(value).css("background-color"));
 
-                if (bg == "#FFFF00") {
-                    $(value).css("background-color", "#F5F5F5");
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("#showDataTbody select.sourceUpdate").change(function() {
+                // run
+                var dcId = $(this).parent().parent().attr("dcId");
+                var dcTypeE = $(this).parent().parent().attr("dcTypeE");
+                var dcDestination = $(this).parent().parent().attr("dcDestination");
+                var dcNumber = $(this).parent().parent().attr("dcNumber");
+                var dcType = $(this).parent().parent().attr("dcType");
+                var selectValue = $(this).val();
+                var postData = {
+                    dcId : dcId,
+                    dcSource: selectValue,
+                    dcTypeE: dcTypeE,
+                    dcDestination: dcDestination,
+                    dcNumber: dcNumber,
+                    dcType: dcType
                 }
-            });
-        }
 
-        $("#conflictTable tr td").click(function () {
-            console.log($(this).attr("value"));
-            console.log($(this).attr("id"));
+                $.ajax({
+                    type:'post',
+                    contentType:'application/x-www-form-urlencoded',
+                    data:postData,
+                    dataType:'json',
+                    url:'${contextPath}/luju/updateSource.action',
+                    success:function (result) {
+                        //console.log(result);
+                        // result == Map<String,List<DcPlanInfo>>
+                        $("#conflictTable").empty();
+                        for (var key in result) {
+                            $.each(result[key], function(i1, value2) {
+                                var oneTrValue = value2.dcNumber;
+                                var twoTrValue = value2.dcType;
+                                var threeTrValue = value2.dcId;
+                                console.log(key);
+                                console.log(threeTrValue);
+                                console.log(oneTrValue);
+                                console.log(twoTrValue);
+                                var strs= new Array(); //定义一数组
+                                strs= key.split(" ");
+                                var firstDcId = strs[1];
+                                var firstDcNumber = strs[2];
+                                var firstDcType = strs[3];
+                                var processFirstDcid = strs[1].substring(1);
+                                console.log(processFirstDcid);
+                                console.log(firstDcNumber);
+                                console.log(firstDcType);
+                                $("#conflictTable").append(
+                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突</td></tr>"
+                                );
+                            })
+                        }
+                        afterAppend();
+                    }
+                })
+            })
 
-            var postData = {
+            $("#showDataTbody select.destinationUpdate").change(function() {
 
-            };
+                console.log($(this));
+                // run
+
+                var dcId = $(this).parent().parent().attr("dcId");
+                var dcTypeE = $(this).parent().parent().attr("dcTypeE");
+                var dcSource = $(this).parent().parent().attr("dcSource");
+                var dcNumber = $(this).parent().parent().attr("dcNumber");
+                var dcType = $(this).parent().parent().attr("dcType");
+                var selectValue = $(this).val();
+                var postData = {
+                    dcId : dcId,
+                    dcDestination: selectValue,
+                    dcTypeE: dcTypeE,
+                    dcSource: dcSource,
+                    dcNumber: dcNumber,
+                    dcType: dcType
+                }
+
+                $.ajax({
+                    type:'post',
+                    contentType:'application/x-www-form-urlencoded',
+                    data:postData,
+                    dataType:'json',
+                    url:'${contextPath}/luju/updateDestination.action',
+                    success:function (result) {
+                        console.log(result);
+                        // result == list<Map<String,List<DcPlanInfo>>>
+                        $("#conflictTable").empty();
+                        for (var key in result) {
+                            $.each(result[key], function(i1, value2) {
+                                var oneTrValue = value2.dcNumber;
+                                var twoTrValue = value2.dcType;
+                                var threeTrValue = value2.dcId;
+                                console.log(key);
+                                console.log(threeTrValue);
+                                console.log(oneTrValue);
+                                console.log(twoTrValue);
+                                var strs= new Array(); //定义一数组
+                                strs= key.split(" ");
+                                var firstDcId = strs[1];
+                                var firstDcNumber = strs[2];
+                                var firstDcType = strs[3];
+                                var processFirstDcid = strs[1].substring(1);
+                                console.log(processFirstDcid);
+                                console.log(firstDcNumber);
+                                console.log(firstDcType);
+                                $("#conflictTable").append(
+                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突</td></tr>"
+                                );
+                            })
+                        }
+                        afterAppend();
+                    }
+                })
+            })
+
+            function zyPlan(condition) {
+                function loadData(result) {
+
+                }
+                $.ajax({
+                    type:'post',
+                    contentType:'application/x-www-form-urlencoded',
+                    data:condition,
+                    dataType:'json',
+                    url:'${contextPath}/luju/zyPlan.action',
+                    success:function (result) {
+                        loadData(result)
+                    }
+                })
+
+            }
+            // 页面自动刷新
+            function webReFlash(){
+                window.location="http://222.33.43.200:8080/ygz/luju/jcPlan.action";
+            }
+
+            window.setInterval(webReFlash, 1300000);
+
+            // 定时select textarea
             $.ajax({
-                type: "post",
-                contentType: 'application/x-www-form-urlencoded',
-                data: postData,
-                dateType: 'json',
-                url: "${contextPath}/",
-                success: function(result) {
+                type:'post',
+                contentType:'application/x-www-form-urlencoded',
+                dataType:'json',
+                url:'${contextPath}/luju/selectTextarea.action',
+                success:function (result) {
+                    loadData(result)
+                }
+            })
+
+            // 颜色rgb转换为16进制
+            function RGBToHex(rgb){
+                rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+                return (rgb && rgb.length === 4) ? "#" +
+                    ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+                    ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+                    ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+            }
+
+            // 清空上一次冲突选择后的颜色
+            function clearOldColor() {
+                $("#showDataTbody tr").each(function (index, value) {
+                    var bg = RGBToHex($(value).css("background-color"));
+
+
+                    if (bg == "#ffff00" || bg == "#ff0000") {
+                        console.log(bg);
+                        $(value).css("background-color", "#F5F5F5");
+                    }
+                });
+            }
+
+            $("#conflict4CCCXTable tr").click(function () {
+                console.log("click")
+                clearOldColor();
+
+                var dcId1 = $(this).attr("dcId1");
+                $("#" + dcId1).css("background-color", "#FF0000");
+
+            });
+
+            function afterAppend() {
+                $("#conflictTable tr").click(function () {
+                    console.log("click")
                     clearOldColor();
 
-                    $.each(result.list, function (index, value) {
-                        $("#" + value).css("background-color", "#FFFF00");
-                    });
-                }
-            });
-        });
+                    var dcId1 = $(this).attr("dcId1");
+                    var dcId2 = $(this).attr("dcId2");
+                    $("#" + dcId1).css("background-color", "#FFFF00");
+                    $("#" + dcId2).css("background-color", "#FFFF00");
+                });
+            }
 
-        // 调整按钮modal打开
-        $("button[value='cd']").click(function () {
-            $("#noteModal").modal();
-        });
-    });
-</script>
+            $("#conflictTable tr").click(function () {
+                console.log("click")
+                clearOldColor();
+
+                var dcId1 = $(this).attr("dcId1");
+                var dcId2 = $(this).attr("dcId2");
+                $("#" + dcId1).css("background-color", "#FFFF00");
+                $("#" + dcId2).css("background-color", "#FFFF00");
+            });
+
+            // 调整按钮modal打开
+            $("button[value='cd']").click(function () {
+                $("#noteModal").modal();
+            });
+
+            // 撤销按钮
+            $("button[value='cx']").click(function () {
+                var dcId1 = $(this).attr("dcId1");
+                var dcId2 = $(this).attr("dcId2");
+                $("#" + dcId1).css("background-color", "#F5F5F5");
+                $("#" + dcId2).css("background-color", "#F5F5F5");
+            });
+        })
+    </script>
 
     <!-- 底部栏 -->
     <footer class="main-footer" style="margin-left: 0px !important;">
