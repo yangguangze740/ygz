@@ -308,10 +308,10 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://222.33.43.200:8080/ygz/luju/jcPlan.action";
+                window.location="http://10.39.3.120:8080/ygz/luju/jcPlan.action";
             }
 
-            window.setInterval(webReFlash, 1300000);
+            window.setInterval(webReFlash, 300000);
 
             // 定时select textarea
             $.ajax({

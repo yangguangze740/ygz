@@ -2,8 +2,10 @@ package com.luju.ygz.dc.repository;
 
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.ResultInfo;
+import com.luju.pojo.StatisticsInfo;
 import com.luju.pojo.TextareaInfo;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface DcRepositoryI {
@@ -87,9 +89,6 @@ public interface DcRepositoryI {
     /* zc data insert to mysql*/
     boolean insertZcPlan(DcPlanInfo info);
 
-    /* delete data from mysql before inserting new data */
-    int deletePlanCopy();
-
     boolean insertTcPlanNew(DcPlanInfo info);
 
     boolean insertTcPlanNewAll(final List<DcPlanInfo> dcPlanInfos);
@@ -127,4 +126,12 @@ public interface DcRepositoryI {
     List<TextareaInfo> selectTextareaInfo(TextareaInfo info);
 
     int updateTextareaInfoIsSelected(int isS);
+
+    int insertStatisticsInfo(StatisticsInfo info);
+
+    List<StatisticsInfo> selectStatisticsInfo();
+
+    List<StatisticsInfo> selectStatisticsInfoWithTime(String time);
+
+
 }

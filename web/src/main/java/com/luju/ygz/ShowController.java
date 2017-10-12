@@ -1,9 +1,6 @@
 package com.luju.ygz;
 
-import com.luju.pojo.DcPlanInfo;
-import com.luju.pojo.JcPlanInfo;
-import com.luju.pojo.ResultInfo;
-import com.luju.pojo.TextareaInfo;
+import com.luju.pojo.*;
 import com.luju.ygz.dc.service.DcServiceI;
 import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.ConstantFields;
@@ -16,6 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -55,7 +55,6 @@ public class ShowController {
     @RequestMapping("/zyPlan")
     public ModelAndView allJcData() {
         ModelAndView mav = new ModelAndView("luju/zyPlan");
-
         List<DcPlanInfo> allList = dcService.selectDcData();
         List<DcPlanInfo> JFCXList = dcService.selectJFCX();
         Map<String,List<DcPlanInfo>> mapList = dcService.selectDcPath();
@@ -120,6 +119,25 @@ public class ShowController {
     public List<TextareaInfo> selectTextarea(TextareaInfo info) {
         List<TextareaInfo> list = dcService.selectTextarea(info);
         return list;
+    }
+
+    @RequestMapping(value = "/statistics",method = RequestMethod.GET)
+    public ModelAndView toStatistics() {
+        ModelAndView mav = new ModelAndView("luju/statistics");
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        String time = df.format(new Date());
+        List<StatisticsInfo> listNow = dcService.selectStatisticsInfoWithTime(time);
+        mav.addObject("listNow",listNow);
+
+        return mav;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/time",method = RequestMethod.POST)
+    public List<StatisticsInfo> list4Time(String dateWithChange) {
+
+        List<StatisticsInfo> list4Time = dcService.selectStatisticsInfoWithTime(dateWithChange);
+        return list4Time;
     }
 
 

@@ -2,26 +2,30 @@ package com.luju.ygz;
 
 import com.luju.pojo.DcPlanInfo;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TestString {
 
     public static void main(String[] args) {
 
-        String a = "abc";
-        String b = "bc";
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
+        System.out.println(df.format(new Date()).toString());
 
-        String c = "c";
-        String d = "c";
-
-
-        System.out.println( );
-
-        if (!(a.equals(b)) && c.equals(d)) {
-            System.out.println("true");
-        }
-
-        Integer.parseInt(a);
+//        String a = "abc";
+//        String b = "bc";
+//
+//        String c = "c";
+//        String d = "c";
+//
+//
+//        System.out.println( );
+//
+//        if (!(a.equals(b)) && c.equals(d)) {
+//            System.out.println("true");
+//        }
+//
+//        Integer.parseInt(a);
 
 
 //        List<List<List<String>>> list = new ArrayList<>();

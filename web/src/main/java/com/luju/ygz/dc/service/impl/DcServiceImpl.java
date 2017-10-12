@@ -1,9 +1,6 @@
 package com.luju.ygz.dc.service.impl;
 
-import com.luju.pojo.DcPlanInfo;
-import com.luju.pojo.JcPlanInfo;
-import com.luju.pojo.ResultInfo;
-import com.luju.pojo.TextareaInfo;
+import com.luju.pojo.*;
 import com.luju.ygz.dc.repository.DcRepositoryI;
 import com.luju.ygz.dc.service.DcServiceI;
 import com.luju.ygz.test.repository.TestRepositoryI;
@@ -12,6 +9,7 @@ import luju.common.util.DataProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -69,6 +67,16 @@ public class DcServiceImpl implements DcServiceI {
             for (DcPlanInfo equals: listEquals){
                 dcRepository.insertToPlanCopy(equals);
             }
+        }
+    }
+
+    @Override
+    public void selectPlanDataFromOraWithDelete(DataProcess dataProcess) {
+        dcRepository.deleteDcCopy();
+        List<DcPlanInfo> list = dcRepository.selectDcPlanFromOra();
+        list = dataProcess.dcTimeList(list);
+        for (DcPlanInfo entry : list) {
+            dcRepository.insertToPlanCopy(entry);
         }
     }
 
@@ -210,6 +218,7 @@ public class DcServiceImpl implements DcServiceI {
     @Override
     public Map<String,List<DcPlanInfo>> selectDcPath() {
 
+        StatisticsInfo info = new StatisticsInfo();
         Map<String,List<DcPlanInfo>> map = new HashMap<>();
 
         List<String> strings1 = new ArrayList<>();
@@ -240,6 +249,24 @@ public class DcServiceImpl implements DcServiceI {
                     }
                     String key = " "+bean.getDcId()+" "+bean.getDcNumber()+" "+bean.getDcType();
                     map.put(key,pathList);
+                }
+            }
+        }
+        for (Map.Entry<String,List<DcPlanInfo>> entry : map.entrySet()) {
+            info.setData1(entry.getKey());
+            for (DcPlanInfo entry1 : entry.getValue()) {
+                info.setData2(entry1.getDcId()+entry1.getDcNumber()+entry1.getDcType());
+                List<StatisticsInfo> statisticsInfos = dcRepository.selectStatisticsInfo();
+                for (StatisticsInfo entry2 :statisticsInfos) {
+                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                    String time = df.format(new Date()).toString();
+                    if (entry2.getData1().equals(info.getData1()) &&
+                            entry2.getData2().equals(info.getData2()) &&
+                            entry2.getLogTime().toString().equals(time)){
+                        break;
+                    }else {
+                        dcRepository.insertStatisticsInfo(info);
+                    }
                 }
             }
         }
@@ -324,6 +351,11 @@ public class DcServiceImpl implements DcServiceI {
     @Override
     public int updateTextareaIsSelected(int isS) {
         return dcRepository.updateTextareaInfoIsSelected(isS);
+    }
+
+    @Override
+    public List<StatisticsInfo> selectStatisticsInfoWithTime(String time) {
+        return dcRepository.selectStatisticsInfoWithTime(time);
     }
 
 }
