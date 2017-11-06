@@ -2,26 +2,33 @@
 
 <%@ include file="/WEB-INF/include/header.jsp"%>
 
-<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
-<div class="wrapper">
+<body class="skin-blue sidebar-mini sidebar-collapse" style="height: auto;">
+<div class="wrapper" style="height: auto;">
 
     <header class="main-header">
         <!-- 头部内容 -->
-        <nav class="navbar" style="margin-left: 0px;">
-            <div class="navbar">
-                <ul class="nav navbar-nav">
-                    <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
-                    <li><a href="#">下直</a></li>
-                    <li><a href="#">下发</a></li>
-                    <li><a href="#">下行</a></li>
-                    <li><a href="#">上到</a></li>
-                    <li><a href="#">上直</a></li>
-                    <li><a href="#">上发</a></li>
-                    <li><a href="#">上行</a></li>
-                    <li><a href="#">全站</a></li>
-                    <li><a href="${contextPath}/luju/statistics.action">查询</a></li>
-                    <li style="float: right;">
-                        <a href="#" class="dropdown-toggle" id="nowDay">
+            <nav class="navbar" style="margin-left: 0px;">
+                <div class="navbar">
+                    <ul class="nav navbar-nav">
+                        <li><a href="${contextPath}/luju/zyPlan.action"><strong>下行</strong></a></li>
+                        <li><a href="#">下到</a></li>
+                        <li><a href="#">下直</a></li>
+                        <li><a href="#">下发</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" style="margin-left: 50px;">
+                        <li><a href="#"><strong>上行</strong></a></li>
+                        <li><a href="#">上到</a></li>
+                        <li><a href="#">上直</a></li>
+                        <li><a href="#">上发</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" style="margin-left: 50px;">
+                        <li><a href="#"><strong>全站</strong></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" style="float: right;">
+                        <li><a href="${contextPath}/luju/statistics.action">查询</a></li>
+                        <li style="float: right;">
+
+                        <a href="#" class="dropdown-toggle" id="nowDay">日期：
                         </a>
                     </li>
                     <script>
@@ -33,7 +40,7 @@
     </header>
 
     <!-- 中心内容 -->
-    <div class="content-wrapper" style="margin-left: 0px !important;">
+    <div class="content-wrapper" style="margin-left: 0px !important; min-height: 718px;">
         <section class="content">
             <div class="row">
                 <%-- 需要审验的命令数据 --%>
@@ -154,8 +161,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
+
                     <div class="box box-warning" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
                             <h3 class="box-title">禁峰 交叉进路</h3>
@@ -178,8 +184,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
+
                     <div class="box box-warning" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
                             <h3 class="box-title">分区 交叉进路</h3>
@@ -202,8 +207,7 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-4">
+
                     <div class="box box-warning" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
                             <h3 class="box-title">计划交叉进路</h3>
@@ -231,7 +235,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
             <%-- 弹出modal --%>
             <div class="modal fade" id="noteModal">

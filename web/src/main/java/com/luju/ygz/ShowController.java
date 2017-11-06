@@ -29,10 +29,6 @@ public class ShowController {
     @Autowired
     private DcServiceI dcService;
 
-    List<ResultInfo> pathListJc = null;
-
-    DataProcess dataProcess = new DataProcess();
-
     @RequestMapping("/route")
     public String routeLogin() {
         return "luju/index";
@@ -147,44 +143,5 @@ public class ShowController {
 
         List<StatisticsInfo> list4Time = dcService.selectStatisticsInfoWithTime(dateWithChange);
         return list4Time;
-    }
-
-
-
-
-    @RequestMapping("/bwjPath")
-    public String selectBwjPath(JcPlanInfo jcPlanInfo) {
-
-        List<ResultInfo> list4BwjPath = service.selectBwPlanInPath(jcPlanInfo);
-        pathListJc.addAll(list4BwjPath);
-
-        return null;
-    }
-
-    @RequestMapping("/jtPath")
-    public String selectJtPath(DcPlanInfo dcPlanInfo) {
-
-        List<ResultInfo> list4JtP1 = dcService.selectJtDataInPath1(dcPlanInfo);
-        pathListJc.addAll(list4JtP1);
-
-        return null;
-    }
-
-    @RequestMapping("/zmPath")
-    public String selectZmPath(DcPlanInfo dcPlanInfo) {
-
-        List<ResultInfo> list4ZmP1 = dcService.selectZmDataInPath1(dcPlanInfo);
-        pathListJc.addAll(list4ZmP1);
-
-        return null;
-    }
-
-    @RequestMapping("/tcPath")
-    public ModelAndView selectTcPath(DcPlanInfo dcPlanInfo) {
-
-        List<ResultInfo> list4TcP1 = dcService.selectTcDataInPath1(dcPlanInfo);
-        pathListJc.addAll(list4TcP1);
-
-        return null;
     }
 }

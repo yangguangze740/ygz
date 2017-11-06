@@ -10,18 +10,25 @@
         <nav class="navbar" style="margin-left: 0px;">
             <div class="navbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
+                    <li><a href="${contextPath}/luju/zyPlan.action"><strong>下行</strong></a></li>
+                    <li><a href="#">下到</a></li>
                     <li><a href="#">下直</a></li>
                     <li><a href="#">下发</a></li>
-                    <li><a href="#">下行</a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="margin-left: 50px;">
+                    <li><a href="#"><strong>上行</strong></a></li>
                     <li><a href="#">上到</a></li>
                     <li><a href="#">上直</a></li>
                     <li><a href="#">上发</a></li>
-                    <li><a href="#">上行</a></li>
-                    <li><a href="#">全站</a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="margin-left: 50px;">
+                    <li><a href="#"><strong>全站</strong></a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="float: right;">
                     <li><a href="${contextPath}/luju/statistics.action">查询</a></li>
                     <li style="float: right;">
-                        <a href="#" class="dropdown-toggle" id="nowDay">
+
+                        <a href="#" class="dropdown-toggle" id="nowDay">日期：
                         </a>
                     </li>
                     <script>

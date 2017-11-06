@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 
 public class JcPlanInfo  {
 
-    private String copyId;
     private String NODE_FOUR_WAY;//source
     private String TRAIN_NUM;//number
     private String TRACK_NUM;//destination
@@ -12,16 +11,12 @@ public class JcPlanInfo  {
     private Timestamp jcStartTime;
     private String jcQBID;
     private float jcHc;
-    private float jcSumHc;
-    private int jcIsCC;
     private String jcJSL;
     private String jcImportant;
     private String jcType;
     private String jcQBIDN;
     private String jcXD;
     private String jcDH;
-    private String jcPath;
-    private String jcDCH;
     private int color;// 0白 1黄 2红
 
     public int getColor() {
@@ -30,38 +25,6 @@ public class JcPlanInfo  {
 
     public void setColor(int color) {
         this.color = color;
-    }
-
-    public String getJcDCH() {
-        return jcDCH;
-    }
-
-    public void setJcDCH(String jcDCH) {
-        this.jcDCH = jcDCH;
-    }
-
-    public String getJcPath() {
-        return jcPath;
-    }
-
-    public void setJcPath(String jcPath) {
-        this.jcPath = jcPath;
-    }
-
-    public float getJcSumHc() {
-        return jcSumHc;
-    }
-
-    public void setJcSumHc(float jcSumHc) {
-        this.jcSumHc = jcSumHc;
-    }
-
-    public String getCopyId() {
-        return copyId;
-    }
-
-    public void setCopyId(String copyId) {
-        this.copyId = copyId;
     }
 
     public String getNODE_FOUR_WAY() {
@@ -150,14 +113,6 @@ public class JcPlanInfo  {
 
     public void setJcType(String jcType) {
         this.jcType = jcType;
-    }
-
-    public int getJcIsCC() {
-        return jcIsCC;
-    }
-
-    public void setJcIsCC(int jcIsCC) {
-        this.jcIsCC = jcIsCC;
     }
 
     public String getJcXD() {

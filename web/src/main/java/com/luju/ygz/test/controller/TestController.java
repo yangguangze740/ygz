@@ -23,9 +23,6 @@ public class TestController {
     @RequestMapping("/world")
     public String dataFromCopyToOne() {
 
-        service.selectPlanData4One();
-        service.selectPlanData4HCJSL();
-        service.selectBwjData();
         return "world";
     }
 }

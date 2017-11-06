@@ -38,5 +38,10 @@
             text-align: center;
             vertical-align: middle !important;
         }
+
+        select{
+            width: 100%;
+            text-align: left;
+        }
     </style>
 </head>
