@@ -32,7 +32,9 @@ public interface DcRepositoryI {
     /* process zc data*/
     List<DcPlanInfo> selectZcPlan();
 
-    List<DcPlanInfo> selectJFCX();
+    List<DcPlanInfo> selectJF();
+
+    List<DcPlanInfo> selectCX();
 
     /* select jt data1*/
     List<ResultInfo> selectJtData4XD1();
@@ -132,6 +134,8 @@ public interface DcRepositoryI {
     List<StatisticsInfo> selectStatisticsInfo();
 
     List<StatisticsInfo> selectStatisticsInfoWithTime(String time);
+
+    List<DcPlanInfo> select4Partition();
 
 
 }

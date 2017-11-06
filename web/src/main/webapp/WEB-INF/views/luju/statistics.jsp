@@ -10,7 +10,7 @@
         <nav class="navbar" style="margin-left: 0px;">
             <div class="navbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">下到</a></li>
+                    <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
                     <li><a href="#">下直</a></li>
                     <li><a href="#">下发</a></li>
                     <li><a href="#">下行</a></li>

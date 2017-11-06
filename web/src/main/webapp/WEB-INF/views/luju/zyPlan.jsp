@@ -10,7 +10,7 @@
         <nav class="navbar" style="margin-left: 0px;">
             <div class="navbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">下到</a></li>
+                    <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
                     <li><a href="#">下直</a></li>
                     <li><a href="#">下发</a></li>
                     <li><a href="#">下行</a></li>
@@ -62,7 +62,7 @@
                                 </thead>
                                 <tbody id="showDataTbody">
                                     <c:forEach items="${allList}" var="record" varStatus="status">
-                                        <c:set value="${record.selectList }" var="selectList"/>
+                                        <c:set value="${record.selectList}" var="selectList"/>
                                         <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                             <td>${status.index + 1}</td>
                                             <td>${record.dcNumber}</td>
@@ -124,7 +124,7 @@
                         <div class="box-body">
                             <table class="table" id="conflict4CCCXTable">
                                 <c:forEach items="${allList}" var="entry" varStatus="status">
-                                    <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !entry.dcDH.equals('05') || !entry.dcDH.equals('04')) }">
+                                    <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !(entry.dcDH.equals('04')) && !(entry.dcDH.equals('05')) ) }">
                                         <tr dcId1="${entry.dcId}">
                                             <td>
                                                 ${entry.dcNumber} ${entry.dcType}超长
@@ -138,6 +138,19 @@
                                         </tr>
                                     </c:if>
                                 </c:forEach>
+                                <c:forEach items="${CXList}" var="entry4CX" varStatus="status">
+                                    <tr dcId1="${entry4CX.dcId}">
+                                        <td>
+                                                ${entry4CX.dcNumber} ${entry4CX.dcType} ${entry.dcJSL} ${entry.dcImportant}
+                                        </td>
+                                        <td>
+                                            <div style="text-align:right;">
+                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>
@@ -149,7 +162,7 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4JFTable">
-                                <c:forEach items="${JFCXList}" var="entry" varStatus="status">
+                                <c:forEach items="${JFList}" var="entry" varStatus="status">
                                     <tr dcId1="${entry.dcId}">
                                         <td>
                                             ${entry.dcNumber} ${entry.dcType} ${entry.dcJSL} ${entry.dcImportant}
@@ -173,17 +186,19 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
-                                <%--<tr>--%>
-                                    <%--<td>--%>
-                                        <%--41111 接车分区交叉--%>
-                                    <%--</td>--%>
-                                    <%--<td>--%>
-                                        <%--<div style="text-align:right;">--%>
-                                            <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
-                                            <%--<button type="button" class="btn btn-danger" value="cd">调整</button>--%>
-                                        <%--</div>--%>
-                                    <%--</td>--%>
-                                <%--</tr>--%>
+                                <c:forEach items="${partitionList}" var="entry" varStatus="status">
+                                    <tr dcId1="${entry.dcId}">
+                                        <td>
+                                                ${entry.partition} 分区交叉
+                                        </td>
+                                        <td>
+                                            <div style="text-align:right;">
+                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
                             </table>
                         </div>
                     </div>
@@ -435,6 +450,7 @@
                 });
             }
 
+            // 超长超限变色
             $("#conflict4CCCXTable tr").click(function () {
                 console.log("click")
                 clearOldColor();
@@ -442,7 +458,17 @@
                 var dcId1 = $(this).attr("dcId1");
                 $("#" + dcId1).css("background-color", "#FF0000");
 
-            });
+            })
+
+            // 禁峰变色
+            $("#conflict4JFTable tr").click(function () {
+                console.log("click")
+                clearOldColor();
+
+                var dcId1 = $(this).attr("dcId1");
+                $("#" + dcId1).css("background-color", "#FFA500");
+
+            })
 
 //            $("#showDataTbody tr").click(function () {
 //                console.log("click")

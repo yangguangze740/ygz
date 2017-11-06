@@ -9,8 +9,20 @@ public class TestString {
 
     public static void main(String[] args) {
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//设置日期格式
-        System.out.println(df.format(new Date()).toString());
+        String a = "12 ab";
+        String b = "34 de";
+
+        String c = "ab 12";
+        String d = "de 34";
+
+        System.out.println(a.equals(c));
+        System.out.println(a.equals(d));
+        System.out.println(b.equals(c));
+        System.out.println(b.equals(d));
+
+        if(!a.equals(c) && !a.equals(d) && !b.equals(c) && !b.equals(d)) {
+            System.out.println("insert");
+        }
 
 //        String a = "abc";
 //        String b = "bc";

@@ -39,7 +39,15 @@ public class DcPlanInfo {
     private Timestamp JLSJ;
     private String dcImportant;
     private String dcGDM;
+    private String partition;
 
+    public String getPartition() {
+        return partition;
+    }
+
+    public void setPartition(String partition) {
+        this.partition = partition;
+    }
 
     public String getDcGDM() {
         return dcGDM;

@@ -71,7 +71,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectJcPlan4JF() {
-        String sql = "SELECT jcNumber,jcJSL FROM ygz_show.jc_plan_copy where jcJSL like '%禁峰%' OR jcJSL like '%工程车%' OR jcJSL like '%客体车%' OR jcJSL like '%地铁%'";
+        String sql = "SELECT jcNumber,jcJSL FROM ygz_show.jc_plan_copy where jcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcHc>2.4 OR jcJSL like '%禁峰%' OR jcJSL like '%工程车%' OR jcJSL like '%客体车%' OR jcJSL like '%地铁%'";
         Object[] args = {};
 
         try {
@@ -85,7 +85,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectJcPlan4CX() {
-        String sql = "SELECT distinct jcNumber FROM ygz_show.jc_plan_copy where jcJSL like '%超限%'";
+        String sql = "SELECT distinct jcNumber FROM ygz_show.jc_plan_copy where jcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL like '%超限%'";
         Object[] args = {};
 
         try {

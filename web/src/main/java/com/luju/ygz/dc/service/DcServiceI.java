@@ -69,7 +69,9 @@ public interface DcServiceI {
 
     void processJFCX();
 
-    List<DcPlanInfo> selectJFCX();
+    List<DcPlanInfo> selectJF();
+
+    List<DcPlanInfo> selectCX();
 
     int updateSource(DcPlanInfo dcPlanInfo);
 
@@ -92,4 +94,6 @@ public interface DcServiceI {
     int updateTextareaIsSelected(int isS);
 
     List<StatisticsInfo> selectStatisticsInfoWithTime(String time);
+
+    List<DcPlanInfo> select4Partition();
 }

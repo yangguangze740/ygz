@@ -237,8 +237,8 @@ public class DcServiceImpl implements DcServiceI {
                     strings1.add(uuid);
                     strings1.add(entry.getDcId());
 
-                    System.out.println(bean.getDcNumber());
-                    System.out.println(entry.getDcNumber());
+//                    System.out.println(bean.getDcNumber());
+//                    System.out.println(entry.getDcNumber());
                     listString1.add(strings1);
                     boolean b = listString1.removeAll(listString2);
 
@@ -250,26 +250,37 @@ public class DcServiceImpl implements DcServiceI {
                     String key = " "+bean.getDcId()+" "+bean.getDcNumber()+" "+bean.getDcType();
                     map.put(key,pathList);
                 }
-            }
-        }
-        for (Map.Entry<String,List<DcPlanInfo>> entry : map.entrySet()) {
-            info.setData1(entry.getKey());
-            for (DcPlanInfo entry1 : entry.getValue()) {
-                info.setData2(entry1.getDcId()+entry1.getDcNumber()+entry1.getDcType());
-                List<StatisticsInfo> statisticsInfos = dcRepository.selectStatisticsInfo();
-                for (StatisticsInfo entry2 :statisticsInfos) {
-                    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                    String time = df.format(new Date()).toString();
-                    if (entry2.getData1().equals(info.getData1()) &&
-                            entry2.getData2().equals(info.getData2()) &&
-                            entry2.getLogTime().toString().equals(time)){
-                        break;
-                    }else {
-                        dcRepository.insertStatisticsInfo(info);
+                for (Map.Entry<String,List<DcPlanInfo>> entry : map.entrySet()) {
+                    String key  = entry.getKey();
+                    key = key.substring(38);
+                    info.setData1(key);
+                    for (DcPlanInfo entry1 : entry.getValue()) {
+                        info.setData2(entry1.getDcNumber()+" " +entry1.getDcType());
+                        List<StatisticsInfo> statisticsInfos = dcRepository.selectStatisticsInfo();
+                        if (statisticsInfos.size() != 0) {
+                            int index = 0;
+                            for (StatisticsInfo entry2 :statisticsInfos) {
+//                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+//                                String time = df.format(new Date()).toString();
+                                if (!entry2.getData1().equals(info.getData2()) && !entry2.getData2().equals(info.getData1())
+                                        && !entry2.getData1().equals(info.getData1()) && !entry2.getData2().equals(info.getData2())
+                                        ){
+                                    index++;
+                                }
+                            }
+                            if (index == statisticsInfos.size()) {
+                                dcRepository.insertStatisticsInfo(info);
+                            }
+                        } else {
+                            dcRepository.insertStatisticsInfo(info);
+                        }
                     }
                 }
             }
         }
+
+
+
         return map;
     }
 
@@ -286,8 +297,13 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public List<DcPlanInfo> selectJFCX() {
-        return dcRepository.selectJFCX();
+    public List<DcPlanInfo> selectJF() {
+        return dcRepository.selectJF();
+    }
+
+    @Override
+    public List<DcPlanInfo> selectCX() {
+        return dcRepository.selectCX();
     }
 
     @Override
@@ -356,6 +372,64 @@ public class DcServiceImpl implements DcServiceI {
     @Override
     public List<StatisticsInfo> selectStatisticsInfoWithTime(String time) {
         return dcRepository.selectStatisticsInfoWithTime(time);
+    }
+
+    @Override
+    public List<DcPlanInfo> select4Partition() {
+
+        List<DcPlanInfo> list4Return = new ArrayList<>();
+        DcPlanInfo dcPlanInfo = new DcPlanInfo();
+        String dcDH = null;
+        String partitionId = null;
+        String partitionNumber = null;
+        int partition = 0;
+        List<DcPlanInfo> list4Partition = dcRepository.select4Partition();
+        for (DcPlanInfo entry: list4Partition) {
+
+            if (dcDH == null) {
+                dcDH = entry.getDcDH();
+                if (entry.getDcDH().equals("02") || entry.getDcDH().equals("03") || entry.getDcDH().equals("04")) {
+                    partition = 1;
+                    partitionId = entry.getDcId();
+                    partitionNumber = entry.getDcNumber();
+                }
+                if (entry.getDcDH().equals("05") || entry.getDcDH().equals("06") || entry.getDcDH().equals("07")) {
+                    partition = 2;
+                    partitionId = entry.getDcId();
+                    partitionNumber = entry.getDcNumber();
+                }
+            }
+
+            else {
+                switch (partition){
+                    case 1 :
+                        if (entry.getDcDH().equals("02") || entry.getDcDH().equals("03") || entry.getDcDH().equals("04")) {
+                            dcPlanInfo.setDcId(partitionId);
+                            dcPlanInfo.setPartition(partitionNumber + " " +entry.getDcNumber());
+                            list4Return.add(dcPlanInfo);
+                        } else {
+                            partition = 2;
+                        }
+                        dcDH = entry.getDcDH();
+                        partitionId = entry.getDcId();
+                        partitionNumber = entry.getDcNumber();
+                        break;
+                    case 2 :
+                        if (entry.getDcDH().equals("05") || entry.getDcDH().equals("06") || entry.getDcDH().equals("07")) {
+                            dcPlanInfo.setDcId(partitionId);
+                            dcPlanInfo.setPartition(partitionNumber + " " +entry.getDcNumber());
+                            list4Return.add(dcPlanInfo);
+                        } else {
+                            partition = 1;
+                        }
+                        dcDH = entry.getDcDH();
+                        partitionId = entry.getDcId();
+                        partitionNumber = entry.getDcNumber();
+                        break;
+                }
+            }
+        }
+        return list4Return;
     }
 
 }

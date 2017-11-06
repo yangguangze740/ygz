@@ -145,15 +145,29 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> selectJFCX() {
-        String sql = "SELECT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM dc_show_data S LEFT JOIN jc_plan_detals D ON S.dcNumber = D.jcNumber WHERE dcType = '接车' and dcStartTime < ADDDATE(now(),interval 10800 second) and jcJSL != null order by dcStartTime";
+    public List<DcPlanInfo> selectJF() {
+        String sql = "SELECT distinct dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM jc_plan_detals D LEFT JOIN dc_show_data S ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL = '禁峰' AND dcXD = 'XD' ORDER BY dcStartTime";
         Object[] args = {};
 
         try {
             return mysqlJdbcTemplate.query(sql, args, new JFCXRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("select JFCX error");
+            System.out.println("select JF error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectCX() {
+        String sql = "SELECT distinct dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM jc_plan_detals D LEFT JOIN dc_show_data S ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcImportant = '超限' AND dcXD = 'XD' ORDER BY dcStartTime";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JFCXRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select CX error");
             return null;
         }
     }
@@ -879,7 +893,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<StatisticsInfo> selectStatisticsInfo() {
-        String sql = "SELECT logTime,data1,data2 FROM dc_statistics;";
+        String sql = "SELECT DISTINCT logTime,data1,data2 FROM dc_statistics;";
         Object[] args = {};
 
         try {
@@ -893,13 +907,27 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<StatisticsInfo> selectStatisticsInfoWithTime(String time) {
-        String sql = "SELECT logTime,data1,data2 FROM dc_statistics where logTime = ? ";
+        String sql = "SELECT DISTINCT logTime,data1,data2 FROM dc_statistics where logTime = ? ";
         Object[] args = {
                 time
         };
 
         try {
             return mysqlJdbcTemplate.query(sql, args, new selectStatisticsInfoRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select selectStatisticsInfoWithTime error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> select4Partition() {
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcDestination,dcDH FROM ygz_show.dc_show_data where dcXD = 'XD' and dcTypeE = 'JC' and dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) order by dcStartTime ";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new selectPartitionRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select selectStatisticsInfoWithTime error");
@@ -925,6 +953,23 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setLogTime(resultSet.getString("logTime"));
             userInfo.setData1(resultSet.getString("data1"));
             userInfo.setData2(resultSet.getString("data2"));
+
+            return userInfo;
+        }
+    }
+
+
+    private class selectPartitionRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcId(resultSet.getString("dcId"));
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDestination(resultSet.getString("dcDestination"));
+            userInfo.setDcDH(resultSet.getString("dcDH"));
 
             return userInfo;
         }
@@ -1296,6 +1341,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             dcPlanInfo.setDcPath(resultset.getString("dcPath"));
             dcPlanInfo.setIsUpdate(resultset.getInt("dcIsUpdate"));
             dcPlanInfo.setSumHc(resultset.getFloat("jcSumHc"));
+            dcPlanInfo.setDcDH(resultset.getString("dcDH"));
 
             String source = resultset.getString("dcSource");
             if (source != null && source.equals(ConstantFields.JCSOURCE)) {
