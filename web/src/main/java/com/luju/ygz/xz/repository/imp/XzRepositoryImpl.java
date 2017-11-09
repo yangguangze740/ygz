@@ -21,8 +21,8 @@ public class XzRepositoryImpl implements XzRepositoryI {
     public List<DcPlanInfo> select4AllXzData() {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data WHERE");
-        sql.append(" dcXD = 'XZ' AND dcStartTime > NOW() AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
-        sql.append(" AND dcDestination = 'XZ01' or dcDestination = 'XZ01' or dcDestination = 'XB01' ORDER BY dcStartTime");
+        sql.append(" dcXD = 'XZ'  AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
+        sql.append(" AND dcDestination = 'XZ01' or dcDestination = 'XZ01' or dcDestination = 'XB01' or dcSource = 'MSJ' ORDER BY dcStartTime");
         Object[] args = {};
         try {
             return  mysqlJdbcTemplate.query(sql.toString(), args, new XzDataRowMapper());
@@ -38,7 +38,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT DISTINCT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM dc_show_data S LEFT JOIN jc_plan_detals D ON D.jcNumber = S.dcNumber");
         sql.append(" WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
-        sql.append(" AND jcImportant = '超限' AND dcXD = 'XZ' AND dcPath = '01' ORDER BY dcStartTime");
+        sql.append(" AND jcJSL = '超限' AND dcDestination != 'XZ01' AND dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5");
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql.toString(), args, new CxDataRowMapper());
@@ -51,7 +51,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
 
     @Override
     public List<DcPlanInfo> select4XbData() {
-        String sql = "SELECT dcNumber, dcType FROM dc_show_data WHERE dcNumber = 'X215' AND dcNumber = 'X1463' AND dcNumber = 'X2435' AND dcDestination != 'XB01';";
+        String sql = "SELECT dcId, dcNumber, dcType, dcDestination FROM dc_show_data WHERE (dcNumber = 'X215' OR dcNumber = 'X1463' OR dcNumber = 'X2435') AND dcDestination != 'XB01'";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new XbDataRowMapper());
@@ -150,7 +150,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
             dcPlanInfo.setDcNumber(resultSet.getString("dcNumber"));
             dcPlanInfo.setDcType(resultSet.getString("dcType"));
             dcPlanInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
-            dcPlanInfo.setJLSJ(resultSet.getTimestamp("jcJSL"));
+            dcPlanInfo.setJcJSL(resultSet.getString("jcJSL"));
             dcPlanInfo.setJcImportant(resultSet.getString("jcImportant"));
 
             return dcPlanInfo;
@@ -162,6 +162,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
             DcPlanInfo dcPlanInfo = new DcPlanInfo();
             dcPlanInfo.setDcNumber(resultSet.getString("dcNumber"));
             dcPlanInfo.setDcType(resultSet.getString("dcType"));
+            dcPlanInfo.setDcDestination(resultSet.getString("dcDestination"));
 
             return dcPlanInfo;
         }

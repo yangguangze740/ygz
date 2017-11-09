@@ -96,7 +96,20 @@
                                 <c:forEach items="${cxList}" var="entry4CX" varStatus="status">
                                     <tr dcId1="${entry4CX.dcId}">
                                         <td>
-                                                ${entry4CX.dcNumber} ${entry4CX.dcType} ${entry.dcJSL} ${entry.dcImportant}
+                                                ${entry4CX.dcNumber} ${entry4CX.dcType} ${entry4CX.jcJSL} ${entry4CX.jcImportant}
+                                        </td>
+                                        <td>
+                                            <div style="text-align:right;">
+                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <c:forEach items="${jlList}" var="entry4Jl" varStatus="status">
+                                    <tr dcId1="${entry4Jl.dcId}">
+                                        <td>
+                                                ${entry4Jl.dcNumber} ${entry4Jl.dcType} 错办进路
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -116,10 +129,10 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
-                                <c:forEach items="${partitionList}" var="entry" varStatus="status">
+                                <c:forEach items="${xbList}" var="entry" varStatus="status">
                                     <tr dcId1="${entry.dcId}">
                                         <td>
-                                             ${entry.partition} 分区交叉
+                                             ${entry.dcNumber}${entry.dcType} 分区交叉
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -322,10 +335,10 @@
 
             }
             // 页面自动刷新
-            /**function webReFlash(){
+            function webReFlash(){
                 window.location="http://localhost:8080/ygz/luju/zyPlan.action";
             }
-             */
+
 
             window.setInterval(webReFlash, 300000);
 

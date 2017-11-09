@@ -33,6 +33,7 @@ public class XzController {
         mav.addObject("allXzList",allXzList);
         mav.addObject("cxList",cxList);
         mav.addObject("xbList",xbList);
+        mav.addObject("jlList",jlList);
 
         return mav;
     }

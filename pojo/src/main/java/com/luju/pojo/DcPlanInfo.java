@@ -38,6 +38,15 @@ public class DcPlanInfo {
     private String dcGDM;
     private String partition;
     private String jcImportant;
+    private String jcJSL;
+
+    public String getJcJSL() {
+        return jcJSL;
+    }
+
+    public void setJcJSL(String jcJSL) {
+        this.jcJSL = jcJSL;
+    }
 
     public String getJcImportant() {
         return jcImportant;
