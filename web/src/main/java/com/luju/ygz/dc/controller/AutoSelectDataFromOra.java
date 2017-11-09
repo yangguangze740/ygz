@@ -24,14 +24,13 @@ public class AutoSelectDataFromOra {
         jcService.selectPlanDataFromOra(dataProcess);
         System.out.println("jc select ora");
 
-//        dcService.selectPlanDataFromOra(dataProcess);
         dcService.selectPlanDataFromOraWithDelete(dataProcess);
         System.out.println("dc select ora");
 
         dcService.deleteShowData();
         dcService.deleteTcData();
         dcService.deleteTcDataSix();
-        dcService.deleteTFCX();
+        dcService.deleteJFCX();
 
         dcService.processTcDataNew(dataProcess);
         dcService.processDcData(dataProcess);

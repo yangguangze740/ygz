@@ -20,27 +20,11 @@ public class DcController {
 
     @RequestMapping("/hello")
     public String test() {
-
-//        service.selectPlanDataFromOra(dataProcess);
-        service.processJFCX();
-        List<DcPlanInfo> JFList = service.selectJF();
-        for (DcPlanInfo entry : JFList) {
-            System.out.println(entry.getDcNumber());
-            System.out.println(entry.getDcJSL());
-        }
         return "hello";
     }
 
     @RequestMapping("/world")
     public String processDcData() {
-
-        service.selectJtPlanData(dataProcess);
-        service.selectTcPlanData(dataProcess);
-        service.selectZcPlanData(dataProcess);
-        service.selectZmPlanData(dataProcess);
-        service.processTcPlanData(dataProcess);
-        service.processTcDataNew(dataProcess);
-
         return "world";
     }
 }

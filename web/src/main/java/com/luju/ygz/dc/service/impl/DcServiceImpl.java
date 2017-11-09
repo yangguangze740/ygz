@@ -81,101 +81,6 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public void selectJtPlanData(DataProcess dataProcess) {
-        List<DcPlanInfo> list = dcRepository.selectJtPlan();
-        list = dataProcess.jtTimeList(list);
-
-        for (int k =0; k < list.size(); k++) {
-            dcRepository.insertJtPlan4QC(list.get(k));
-            dcRepository.insertJtPlan4JD(list.get(k));
-        }
-    }
-
-    @Override
-    public void selectZmPlanData(DataProcess dataProcess) {
-        List<DcPlanInfo> list = dcRepository.selectZmPlan();
-        list = dataProcess.zmTimeList(list);
-        for (int k =0; k < list.size(); k++) {
-            dcRepository.insertZmPlan4XT1(list.get(k));
-            dcRepository.insertZmPlan4XT2(list.get(k));
-        }
-    }
-
-    @Override
-    public void selectTcPlanData(DataProcess dataProcess) {
-        List<DcPlanInfo> list = dcRepository.selectTcPlan();
-        list = dataProcess.tcTimeList(list);
-        for (int k =0; k < list.size(); k++) {
-            dcRepository.insertTcPlan4XT1(list.get(k));
-            dcRepository.insertTcPlan4XT2(list.get(k));
-        }
-    }
-
-    @Override
-    public void processTcPlanData(DataProcess dataProcess) {
-        List<DcPlanInfo> list = dcRepository.processTcPlan();
-        list = dataProcess.tcDataList(list);
-        for (int k =0; k < list.size(); k++) {
-            dcRepository.insertTcPlan4Six(list.get(k));
-        }
-    }
-
-    @Override
-    public void selectZcPlanData(DataProcess dataProcess) {
-        List<DcPlanInfo> list = dcRepository.selectZcPlan();
-        list = dataProcess.zcTimeList(list);
-        for (int k =0; k < list.size(); k++) {
-            dcRepository.insertZcPlan(list.get(k));
-        }
-    }
-
-
-    @Override
-    public List<ResultInfo> processJt1Data() {
-        return dcRepository.selectJtData4XD1();
-    }
-
-    @Override
-    public List<ResultInfo> processJt2Data() {
-        return dcRepository.selectJtData4XD2();
-    }
-
-    @Override
-    public List<ResultInfo> processZm1Data() {
-        return dcRepository.selectZmData4XD1();
-    }
-
-    @Override
-    public List<ResultInfo> processZm2Data() {
-        return dcRepository.selectZmData4XD2();
-    }
-
-    @Override
-    public List<ResultInfo> processZcData() {
-        return dcRepository.selectZcData();
-    }
-
-    @Override
-    public List<ResultInfo> processTcData() {
-        return dcRepository.selectTcData();
-    }
-
-    @Override
-    public List<ResultInfo> selectJtDataInPath1(DcPlanInfo dcPlanInfo) {
-        return dcRepository.selectJtDataInPath1(dcPlanInfo);
-    }
-
-    @Override
-    public List<ResultInfo> selectZmDataInPath1(DcPlanInfo dcPlanInfo) {
-        return dcRepository.selectZmDataInPath1(dcPlanInfo);
-    }
-
-    @Override
-    public List<ResultInfo> selectTcDataInPath1(DcPlanInfo dcPlanInfo) {
-        return dcRepository.selectTcDataInPath1(dcPlanInfo);
-    }
-
-    @Override
     public void processTcDataNew(DataProcess dataProcess) {
         List<DcPlanInfo> list = dcRepository.selectTcPlan();
         list = dataProcess.tcTimeList(list);
@@ -237,8 +142,6 @@ public class DcServiceImpl implements DcServiceI {
                     strings1.add(uuid);
                     strings1.add(entry.getDcId());
 
-//                    System.out.println(bean.getDcNumber());
-//                    System.out.println(entry.getDcNumber());
                     listString1.add(strings1);
                     boolean b = listString1.removeAll(listString2);
 
@@ -260,8 +163,6 @@ public class DcServiceImpl implements DcServiceI {
                         if (statisticsInfos.size() != 0) {
                             int index = 0;
                             for (StatisticsInfo entry2 :statisticsInfos) {
-//                                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-//                                String time = df.format(new Date()).toString();
                                 if (!entry2.getData1().equals(info.getData2()) && !entry2.getData2().equals(info.getData1())
                                         && !entry2.getData1().equals(info.getData1()) && !entry2.getData2().equals(info.getData2())
                                         ){
@@ -345,13 +246,8 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public int deleteTFCX() {
+    public int deleteJFCX() {
         return dcRepository.deleteTFCX();
-    }
-
-    @Override
-    public int deleteDcCopy() {
-        return dcRepository.deleteDcCopy();
     }
 
     @Override

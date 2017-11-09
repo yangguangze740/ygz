@@ -5,7 +5,6 @@ import java.util.List;
 
 public class DcPlanInfo {
 
-    private String jtId;
     private String dcNumber;
     private String dcStartTimeS;
     private String dcEndTimeS;
@@ -28,8 +27,6 @@ public class DcPlanInfo {
     private String dcXD;
     private String dcDH;
     private int dcSWH;
-    private String dcPath1;
-    private String dcPath2;
     private int dcCS6;
     private String dcId;
     private String dcPath;
@@ -40,6 +37,15 @@ public class DcPlanInfo {
     private String dcImportant;
     private String dcGDM;
     private String partition;
+    private String jcImportant;
+
+    public String getJcImportant() {
+        return jcImportant;
+    }
+
+    public void setJcImportant(String jcImportant) {
+        this.jcImportant = jcImportant;
+    }
 
     public String getPartition() {
         return partition;
@@ -138,22 +144,6 @@ public class DcPlanInfo {
         this.dcCS6 = dcCS6;
     }
 
-    public String getDcPath1() {
-        return dcPath1;
-    }
-
-    public void setDcPath1(String dcPath1) {
-        this.dcPath1 = dcPath1;
-    }
-
-    public String getDcPath2() {
-        return dcPath2;
-    }
-
-    public void setDcPath2(String dcPath2) {
-        this.dcPath2 = dcPath2;
-    }
-
     public Timestamp getDcMidTime1() {
         return dcMidTime1;
     }
@@ -176,14 +166,6 @@ public class DcPlanInfo {
 
     public void setDcEnd(String dcEnd) {
         this.dcEnd = dcEnd;
-    }
-
-    public String getJtId() {
-        return jtId;
-    }
-
-    public void setJtId(String jtId) {
-        this.jtId = jtId;
     }
 
     public Timestamp getDcMidTime() {
