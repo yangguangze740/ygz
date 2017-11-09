@@ -21,8 +21,8 @@ public class XzRepositoryImpl implements XzRepositoryI {
     public List<DcPlanInfo> select4AllXzData() {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data WHERE");
-        sql.append(" dcXD = 'XZ'  AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
-        sql.append(" AND dcDestination = 'XZ01' or dcDestination = 'XZ01' or dcDestination = 'XB01' or dcSource = 'MSJ' ORDER BY dcStartTime");
+        sql.append(" dcType = '接车' and (dcXD = 'XZ' OR dcXD ='XB' ) AND dcStartTime > NOW() ");
+        sql.append(" AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
         Object[] args = {};
         try {
             return  mysqlJdbcTemplate.query(sql.toString(), args, new XzDataRowMapper());
@@ -44,14 +44,14 @@ public class XzRepositoryImpl implements XzRepositoryI {
             return mysqlJdbcTemplate.query(sql.toString(), args, new CxDataRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("select dc show data error");
+            System.out.println("select xz show data error");
             return null;
         }
     }
 
     @Override
     public List<DcPlanInfo> select4XbData() {
-        String sql = "SELECT dcId, dcNumber, dcType, dcDestination FROM dc_show_data WHERE (dcNumber = 'X215' OR dcNumber = 'X1463' OR dcNumber = 'X2435') AND dcDestination != 'XB01'";
+        String sql = "SELECT dcId, dcNumber, dcType, dcDestination FROM dc_show_data WHERE (dcNumber = 'X215' OR dcNumber = 'X1463' OR dcNumber = 'X2435') AND dcDestination != 'XB01' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new XbDataRowMapper());
@@ -66,8 +66,8 @@ public class XzRepositoryImpl implements XzRepositoryI {
     public List<DcPlanInfo> select4JlData() {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
-        sql.append("  FROM dc_show_data WHERE dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5 AND dcStartTime > NOW()");
-        sql.append(" AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
+        sql.append(" FROM dc_show_data WHERE dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5");
+        sql.append(" AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
         Object[] args = {};
 
         try {
@@ -83,7 +83,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
     public List<DcPlanInfo> select4JlsData(DcPlanInfo time) {
             StringBuilder sql = new StringBuilder();
             sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
-            sql.append(" FROM dc_show_data WHERE dcDestination = 'XZ03' AND (dcStartTime > ? AND dcEndTime < ?) ORDER BY dcStartTime");
+            sql.append(" FROM dc_show_data WHERE dcDestination = 'XZ03' AND (dcStartTime > ? AND dcStartTime < ?) ORDER BY dcStartTime");
             Object[] args = {
                     time.getDcStartTime(),
                     time.getDcEndTime()
@@ -136,8 +136,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
             dcPlanInfo.setIsUpdate(resultset.getInt("dcIsUpdate"));
             dcPlanInfo.setSumHc(resultset.getFloat("jcSumHc"));
             dcPlanInfo.setDcDH(resultset.getString("dcDH"));
-            dcPlanInfo.setDcSource(resultset.getString("dcSource"));
-            dcPlanInfo.setDcDestination(resultset.getString("dcDestination"));
+            dcPlanInfo.setDcSource("马三家");
 
             return dcPlanInfo;
         }
