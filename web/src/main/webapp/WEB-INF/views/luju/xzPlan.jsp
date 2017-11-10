@@ -129,7 +129,7 @@
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
                                 <c:forEach items="${xbList}" var="entry" varStatus="status">
-                                    <tr dcId2="${entry.dcId}">
+                                    <tr dcId1="${entry.dcId}">
                                         <td>
                                                 ${entry.dcNumber}${entry.dcType} 分区交叉
                                         </td>
@@ -334,7 +334,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/ygz/luju/zyPlan.action";
+                window.location="http://localhost:8080/ygz/luju/xzPlan.action";
             }
 
 
@@ -359,6 +359,11 @@
                         $(value).css("background-color", "#F5F5F5");
                     }
 
+                    if (bg == "#ff9900" || bg == "#ff9900") {
+                        console.log(bg);
+                        $(value).css("background-color", "#F5F5F5");
+                    }
+
 
                 });
             }
@@ -369,7 +374,9 @@
                clearOldColor();
 
                 var dcId1 = $(this).attr("dcId1");
+
                 $("#" + dcId1).css("background-color", "#FF0000");
+
 
             })
             //黄色
@@ -377,8 +384,10 @@
                 console.log("click")
                 clearOldColor();
 
-                var dcId2 = $(this).attr("dcId2");
-                $("#" + dcId2).css("background-color", "#ff9900");
+                var dcId1 = $(this).attr("dcId1");
+
+                $("#" + dcId1).css("background-color", "#FF9900");
+
 
             })
 

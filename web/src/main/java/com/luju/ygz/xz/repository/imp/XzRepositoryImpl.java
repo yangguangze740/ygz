@@ -159,6 +159,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
     private class XbDataRowMapper implements RowMapper<DcPlanInfo>{
         public DcPlanInfo mapRow(ResultSet resultSet,int i)throws SQLException{
             DcPlanInfo dcPlanInfo = new DcPlanInfo();
+            dcPlanInfo.setDcId(resultSet.getString("dcId"));
             dcPlanInfo.setDcNumber(resultSet.getString("dcNumber"));
             dcPlanInfo.setDcType(resultSet.getString("dcType"));
             dcPlanInfo.setDcDestination(resultSet.getString("dcDestination"));
