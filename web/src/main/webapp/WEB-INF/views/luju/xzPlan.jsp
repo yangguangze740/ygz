@@ -69,7 +69,7 @@
                                 </thead>
                                 <tbody id="showDataTbody">
                                 <c:forEach items="${allXzList}" var="record" varStatus="status">
-                                    <tr style="text-align: center;">
+                                    <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                         <td>${status.index + 1}</td>
                                         <td>${record.dcNumber}</td>
                                         <td>${record.dcType}</td>
@@ -92,7 +92,7 @@
                             <h3 class="box-title">超长、超限 错办进路</h3>
                         </div>
                         <div class="box-body">
-                            <table class="table" id="conflict4CCCXTable">
+                            <table class="table" id="conflict4CCXTable">
                                 <c:forEach items="${cxList}" var="entry4CX" varStatus="status">
                                     <tr dcId1="${entry4CX.dcId}">
                                         <td>
@@ -109,7 +109,7 @@
                                 <c:forEach items="${jlList}" var="entry4Jl" varStatus="status">
                                     <tr dcId1="${entry4Jl.dcId}">
                                         <td>
-                                                ${entry4Jl.dcNumber} ${entry4Jl.dcType} 错办进路
+                                              ${entry4Jl.dcNumber} ${entry4Jl.dcType} 错办进路
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -122,7 +122,6 @@
                             </table>
                         </div>
                     </div>
-
                     <div class="box box-warning" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
                             <h3 class="box-title">分区 交叉进路</h3>
@@ -130,9 +129,9 @@
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
                                 <c:forEach items="${xbList}" var="entry" varStatus="status">
-                                    <tr dcId1="${entry.dcId}">
+                                    <tr dcId2="${entry.dcId}">
                                         <td>
-                                             ${entry.dcNumber}${entry.dcType} 分区交叉
+                                                ${entry.dcNumber}${entry.dcType} 分区交叉
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -145,7 +144,6 @@
                             </table>
                         </div>
                     </div>
-
                 <%-- 弹出modal --%>
                 <div class="modal fade" id="noteModal">
                     <div class="modal-dialog" role="dialog">
@@ -327,7 +325,7 @@
                     contentType:'application/x-www-form-urlencoded',
                     data:condition,
                     dataType:'json',
-                    url:'${contextPath}/luju/zyPlan.action',
+                    url:'${contextPath}/luju/xzPlan.action',
                     success:function (result) {
                         loadData(result)
                     }
@@ -356,42 +354,41 @@
                 $("#showDataTbody tr").each(function (index, value) {
                     var bg = RGBToHex($(value).css("background-color"));
 
-
                     if (bg == "#ffff00" || bg == "#ff0000") {
                         console.log(bg);
                         $(value).css("background-color", "#F5F5F5");
                     }
+
+
                 });
             }
 
             // 超长超限变色
-            $("#conflict4CCCXTable tr").click(function () {
+            $("#conflict4CCXTable tr").click(function () {
                 console.log("click")
-                clearOldColor();
+               clearOldColor();
 
                 var dcId1 = $(this).attr("dcId1");
                 $("#" + dcId1).css("background-color", "#FF0000");
 
             })
-
-            // 禁峰变色
-            $("#conflict4JFTable tr").click(function () {
+            //黄色
+            $("#conflict4TwoTable tr").click(function () {
                 console.log("click")
                 clearOldColor();
 
-                var dcId1 = $(this).attr("dcId1");
-                $("#" + dcId1).css("background-color", "#FFA500");
+                var dcId2 = $(this).attr("dcId2");
+                $("#" + dcId2).css("background-color", "#ff9900");
 
             })
 
-//            $("#showDataTbody tr").click(function () {
-//                console.log("click")
-//
-//                var dcId1 = $(this).attr("dcId");
-//                $("#" + dcId1).css("background-color", "#FFA500");
-//
-//            });
+         /** $("#showDataTbody tr").click(function () {
+               console.log("click")
+              var dcId1 = $(this).attr("dcId");
+                $("#" + dcId1).css("background-color", "#FFA500");
 
+         });
+          */
             function afterAppend() {
                 $("#conflictTable tr").click(function () {
                     console.log("click")
