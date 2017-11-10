@@ -22,7 +22,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data WHERE");
         sql.append(" dcXD = 'XZ'  AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
-        sql.append(" AND dcDestination = 'XZ01' or dcDestination = 'XZ01' or dcDestination = 'XB01' or dcSource = 'MSJ' ORDER BY dcStartTime");
+        sql.append(" AND dcDestination = 'XZ01' or dcDestination = 'XZ01' or dcDestination = 'XB01' or dcSource = 'MSJ' AND dcType = '接车' ORDER BY dcStartTime");
         Object[] args = {};
         try {
             return  mysqlJdbcTemplate.query(sql.toString(), args, new XzDataRowMapper());
@@ -136,7 +136,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
             dcPlanInfo.setIsUpdate(resultset.getInt("dcIsUpdate"));
             dcPlanInfo.setSumHc(resultset.getFloat("jcSumHc"));
             dcPlanInfo.setDcDH(resultset.getString("dcDH"));
-            dcPlanInfo.setDcSource(resultset.getString("dcSource"));
+            dcPlanInfo.setDcSource(("马三家"));
             dcPlanInfo.setDcDestination(resultset.getString("dcDestination"));
 
             return dcPlanInfo;
