@@ -70,14 +70,14 @@ public class ConstantFields {
     public static final String BWJDN = "北入库";
 
     /* 记事栏内容*/
-    public static final String CX = "超限";
-    public static final String JF = "禁峰";
+    public static final String CX = "超限列车";
+    public static final String JF = "禁峰列车";
     public static final String CC = "超长";
     public static final String XD = "XD";
 
     /* 重点事项内容*/
-    public static final String IMPORTANT_CX = "2、5道接车";
-    public static final String IMPORTANT_JF = "优先2、3、4道接车";
+    public static final String IMPORTANT_CX = "必须接入XD02或XD05道";
+    public static final String IMPORTANT_JF = "优先接入XD02道，XD03道，XD04道";
     public static final String IMPORTANT_CC = "4、5道接车";
 
     /* 作业类别缩写*/
