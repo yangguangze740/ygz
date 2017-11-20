@@ -101,6 +101,7 @@ public class ConstantFields {
     public static final String JC = "JC";
     public static final String BWJ = "BWJ";
     public static final String JT = "JT";
+    public static final String XXBFC = "XXBFC";
     public static final String ZC = "ZC";
     public static final String ZM = "ZM";
     public static final String JCSOURCE = "MSJ";

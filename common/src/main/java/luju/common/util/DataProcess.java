@@ -253,7 +253,6 @@ public class DataProcess {
     public List<DcPlanInfo> zcTimeList(List<DcPlanInfo> list) {
 
         String des = null;
-        DcPlanInfo dcPlanInfo = new DcPlanInfo();
 
         for (int k = 0; k < list.size(); k++) {
 
@@ -295,8 +294,8 @@ public class DataProcess {
             list.get(k).setDcDH(DH);
             list.get(k).setDcTF(TF);
             list.get(k).setDcSource(ConstantFields.ZCSOURCE);
-            list.get(k).setDcTypeE(ConstantFields.ZC);
-            list.get(k).setDcPath(ConstantFields.ZC+des);
+            list.get(k).setDcTypeE(ConstantFields.XXBFC);
+            list.get(k).setDcPath(ConstantFields.XXBFC+des);
         }
         return list;
     }

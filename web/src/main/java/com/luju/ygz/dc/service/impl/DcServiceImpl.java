@@ -127,6 +127,7 @@ public class DcServiceImpl implements DcServiceI {
         list.addAll(dataProcess.jtQcDataList2(dcRepository.selectJtPlan()));
         list.addAll(dataProcess.zmT2DataList1(dcRepository.selectZmPlan()));
         list.addAll(dataProcess.zmT2DataList2(dcRepository.selectZmPlan()));
+        list.addAll(dataProcess.zcTimeList(dcRepository.selectZcPlan()));
 
     }
 

@@ -426,7 +426,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost/ygz/luju/zyPlan.action";
+                window.location="http://localhost:8080/ygz/luju/zyPlan.action";
             }
 
             window.setInterval(webReFlash, 300000);
