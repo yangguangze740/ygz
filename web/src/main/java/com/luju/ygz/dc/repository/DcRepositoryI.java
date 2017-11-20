@@ -18,6 +18,8 @@ public interface DcRepositoryI {
     /* data select from ora to mysql*/
     List<DcPlanInfo> selectJtPlan();
 
+    List<DcPlanInfo> selectJtzData();
+
     /* process zm data*/
     List<DcPlanInfo> selectZmPlan();
 

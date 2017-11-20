@@ -7,6 +7,12 @@ public class ConstantFields {
     public static final String PAGE_KEY = "page";
     /* 消息操作key*/
     public static final String OPERATION_MESSAGE = "message";
+    /*转弯桥*/
+    public  static  final String ZWQ = "ZWQ";
+    /*转弯桥*/
+    public  static  final String DC = "DC";
+    /*转弯桥*/
+    public  static  final String YH = "YH";
 
     /* 添加成功消息*/
     public static final String ADD_SUCCESS_MESSAGE = "添加成功";
@@ -23,10 +29,16 @@ public class ConstantFields {
 
     /* 接车推演时间*/
     public static long JC_TIME = 480000;
+    /* 时间差*/
+    public static long TIME = 600000;
 
     /* 解体推演时间*/
     public static long JT1_TIME = 600000;
     public static long JT2_TIME = 960000;
+    /*下直推演时间*/
+    public static long XZ_TIME = 240000;
+    /*上直推演时间*/
+    public static long SZ_TIME = 240000;
 
     /* 解体推演时间*/
     public static long ZM1_TIME = 600000;
@@ -77,6 +89,12 @@ public class ConstantFields {
     public static final String JD = "JD";
     public static final String XT1 = "XT1";//南
     public static final String XT2 = "XT2";//北
+    public static final String JDZ = "Z";
+    public static final String JTD = "D";
+    public static final String JTY = "Y";
+    public static final String T404 = "T404";
+    public static final String T402 = "T402";
+
 
     /* 8.17 new data type */
 
@@ -89,6 +107,12 @@ public class ConstantFields {
     public static final String JCSOURCEC = "马三家";
     public static final String ZCSOURCE = "SXBFC";
     public static final String ZCSOURCEC = "上行编发场";
+
+    /* 上到数据常量*/
+    public static final String ZWQSOURCE = "ZWQ";
+    public static final String DCSOURCE = "DC";
+    public static final String YHSOURCE = "YH";
+
 
 
     /**

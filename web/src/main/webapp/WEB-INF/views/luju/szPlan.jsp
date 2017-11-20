@@ -7,26 +7,26 @@
 
     <header class="main-header">
         <!-- 头部内容 -->
-            <nav class="navbar" style="margin-left: 0px;">
-                <div class="navbar">
-                    <ul class="nav navbar-nav">
-                        <li><a href="${contextPath}/luju/zyPlan.action"><strong>下行</strong></a></li>
-                        <li><a href="#">下到</a></li>
-                        <li><a href="${contextPath}/luju/xzPlan.action"><strong>下直</strong></a></li>
-                        <li><a href="#">下发</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav" style="margin-left: 50px;">
-                        <li><a href="#"><strong>上行</strong></a></li>
-                        <li><a href="#">上到</a></li>
-                        <li><a href="#">上直</a></li>
-                        <li><a href="#">上发</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav" style="margin-left: 50px;">
-                        <li><a href="#"><strong>全站</strong></a></li>
-                    </ul>
-                    <ul class="nav navbar-nav" style="float: right;">
-                        <li><a href="${contextPath}/luju/statistics.action">查询</a></li>
-                        <li style="float: right;">
+        <nav class="navbar" style="margin-left: 0px;">
+            <div class="navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="${contextPath}/luju/zyPlan.action"><strong>下行</strong></a></li>
+                    <li><a href="#">下到</a></li>
+                    <li><a href="#">下直</a></li>
+                    <li><a href="#">下发</a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="margin-left: 50px;">
+                    <li><a href="#"><strong>上行</strong></a></li>
+                    <li><a href="#">上到</a></li>
+                    <li><a href="#">上直</a></li>
+                    <li><a href="#">上发</a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="margin-left: 50px;">
+                    <li><a href="#"><strong>全站</strong></a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="float: right;">
+                    <li><a href="${contextPath}/luju/statistics.action">查询</a></li>
+                    <li style="float: right;">
 
                         <a href="#" class="dropdown-toggle" id="nowDay">日期：
                         </a>
@@ -53,71 +53,34 @@
                         <div class="box-body no-padding">
                             <table class="table" id="zuoyejihuaTable">
                                 <thead>
-                                    <tr style="text-align: center;">
-                                        <th>序号</th>
-                                        <th>车次</th>
-                                        <th>作业类别</th>
-                                        <th>开始时间</th>
-                                        <th>结束时间</th>
-                                        <th>方向</th>
-                                        <th>股道</th>
-                                        <th>调别</th>
-                                        <th>重点事项</th>
-                                        <th>记事</th>
-                                        <%--<th>进路</th>--%>
-                                    </tr>
+                                <tr style="text-align: center;">
+                                    <th>序号</th>
+                                    <th>车次</th>
+                                    <th>作业类别</th>
+                                    <th>开始时间</th>
+                                    <th>结束时间</th>
+                                    <th>方向</th>
+                                    <th>股道</th>
+                                    <th>调别</th>
+                                    <th>重点事项</th>
+                                    <th>记事</th>
+                                    <%--<th>进路</th>--%>
+                                </tr>
                                 </thead>
                                 <tbody id="showDataTbody">
-                                    <c:forEach items="${allList}" var="record" varStatus="status">
-                                        <c:set value="${record.selectList}" var="selectList"/>
-                                        <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
-                                            <td>${status.index + 1}</td>
-                                            <td>${record.dcNumber}</td>
-                                            <td>${record.dcType}</td>
-                                            <td>${record.dcStartTime}</td>
-                                            <td>${record.dcEndTime}</td>
-                                            <td>
-                                                <c:if test="${record.dcSource == null}">
-                                                    <select class="sourceUpdate form-control" style = "width:150px;">
-                                                        <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                            <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </c:if>
-                                                <c:if test="${record.dcSource != null && record.isUpdate == 1}">
-                                                    <select class="sourceUpdate form-control" style = "width:150px;">
-                                                        <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                            <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </c:if>
-                                                <c:if test="${record.dcSource != null && record.isUpdate !=1}">
-                                                    ${record.dcSource}
-                                                </c:if>
-                                            </td>
-                                            <td>
-                                                <c:if test="${record.dcDestination == null}">
-                                                    <select class="destinationUpdate form-control" style = "width:150px; text-align: right;">
-                                                        <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                            <option value ="${recordSelect}">${recordSelect}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </c:if>
-                                                <c:if test="${record.dcDestination != null && record.isUpdate == 2}">
-                                                    <select class="destinationUpdate form-control" style = "width:150px;">
-                                                        <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                            <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                </c:if>
-                                                <c:if test="${record.dcDestination != null && record.isUpdate !=2}">
-                                                    ${record.dcDestination}
-                                                </c:if>
-                                            </td>
-                                            <td>${record.dcDj}</td>
-                                            <td></td>
-                                        </tr>
-                                    </c:forEach>
+                                <c:forEach items="${list}" var="record" varStatus="status">
+                                    <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
+                                        <td>${status.index + 1}</td>
+                                        <td>${record.dcNumber}</td>
+                                        <td>${record.dcType}</td>
+                                        <td>${record.dcStartTime}</td>
+                                        <td>${record.dcEndTime}</td>
+                                        <td>${record.dcSource}</td>
+                                        <td>${record.dcDestination}</td>
+                                        <td>${record.dcDj}</td>
+                                        <td></td>
+                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -129,26 +92,63 @@
                             <h3 class="box-title">错办进路</h3>
                         </div>
                         <div class="box-body">
-                            <table class="table" id="conflict4CCCXTable">
-                                <c:forEach items="${allList}" var="entry" varStatus="status">
-                                    <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !(entry.dcDH.equals('04')) && !(entry.dcDH.equals('05')) ) }">
-                                        <tr dcId1="${entry.dcId}">
-                                            <td>
-                                                ${entry.dcNumber} ${entry.dcType}超长
-                                            </td>
-                                            <td>
-                                                <div style="text-align:right;">
-                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                    <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </c:if>
-                                </c:forEach>
-                                <c:forEach items="${CXList}" var="entry4CX" varStatus="status">
-                                    <tr dcId1="${entry4CX.dcId}">
+                            <table class="table" id="conflict4CCXTable">
+                                <c:forEach items="${jlList}" var="entry4Jl" varStatus="status">
+                                    <tr dcId1="${entry4Jl.dcId}">
                                         <td>
-                                                ${entry4CX.dcNumber} ${entry4CX.dcType} ${entry.dcJSL} ${entry.dcImportant}
+                                                ${entry4Jl.dcNumber} 整列军用列车必须接入SZ06道
+                                        </td>
+                                        <td>
+                                            <div style="text-align:right;">
+                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <c:forEach items="${jcList}" var="entry4Jc" varStatus="status">
+                                    <tr dcId1="${entry4Jc.dcId}">
+                                        <td>
+                                                ${entry4Jc.dcNumber} 军用超限列车必须接入SZ06道
+                                        </td>
+                                        <td>
+                                            <div style="text-align:right;">
+                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <c:forEach items="${cxList}" var="entry4Cx" varStatus="status">
+                                <tr dcId1="${entry4Cx.dcId}">
+                                    <td>
+                                            ${entry4Cx.dcNumber} 超限列车必须接入SZ06道
+                                    </td>
+                                    <td>
+                                        <div style="text-align:right;">
+                                            <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                            <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                                <c:forEach items="${jlsList}" var="entry4Jls" varStatus="status">
+                                <tr dcId1="${entry4Jls.dcId}">
+                                    <td>
+                                            ${entry4Jls.dcNumber} 整列军用列车临线不得办理接发列车及调车作业
+                                    </td>
+                                    <td>
+                                        <div style="text-align:right;">
+                                            <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                            <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                                <c:forEach items="${yhList}" var="entry4YH" varStatus="status">
+                                    <tr dcId1="${entry4YH.dcId}">
+                                        <td>
+                                                ${entry4YH.dcNumber} 于洪方向接车必须接入SZ02道或SZ04道。
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -161,40 +161,29 @@
                             </table>
                         </div>
                     </div>
-
                     <div class="box box-warning" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
-                            <h3 class="box-title">优选进路</h3>
-                        </div>
-                        <div class="box-body">
-                            <table class="table" id="conflict4JFTable">
-                                <c:forEach items="${JFList}" var="entry" varStatus="status">
-                                    <tr dcId1="${entry.dcId}">
-                                        <td>
-                                            ${entry.dcNumber} ${entry.dcType} ${entry.dcJSL} ${entry.dcImportant}
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="box box-warning" style="background-color: #F5F5F5;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">优选进路</h3>
+                            <h3 class="box-title">优先进路</h3>
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
-                                <c:forEach items="${partitionList}" var="entry" varStatus="status">
+                                <c:forEach items="${fiveList}" var="entry" varStatus="status">
                                     <tr dcId1="${entry.dcId}">
                                         <td>
-                                                ${entry.partition} 分区交叉
+                                                ${entry.dcNumber}无列检作业列车优先接入SZ02道
+                                        </td>
+                                        <td>
+                                            <div style="text-align:right;">
+                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <c:forEach items="${xbList}" var="xbEntry" varStatus="status">
+                                    <tr dcId1="${xbEntry.dcId}">
+                                        <td>
+                                                ${xbEntry.dcNumber}行包列车优先接入SZ06道或SZ04道
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -207,76 +196,47 @@
                             </table>
                         </div>
                     </div>
-
-                    <div class="box box-warning" style="background-color: #F5F5F5;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">交叉进路</h3>
-                        </div>
-                        <div class="box-body">
-                            <table class="table" id="conflictTable">
-                                <c:forEach items="${mapList}" var="map" varStatus="status">
-                                    <c:forEach items="${map.value}" var="entry" varStatus="status">
-                                        <c:set var = "k" value="${map.key}" />
-                                        <c:set var = "length" value="${fn:length(k)}"/>
-                                        <c:set var = "firstDcId" value="${fn:substring(k, 1, 37)}" />
-                                        <c:set var = "firstDcNumber" value="${fn:substring(k, 38, length)}" />
-                                            <tr dcId1="${firstDcId}" dcId2="${entry.dcId}" >
-                                                <td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
-                                                <td>
-                                                    <div style="text-align:right;">
-                                                        <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                        <button type="button" info1="${firstDcNumber}" info2="${entry.dcNumber}" info3="${entry.dcType}" class="btn btn-danger" value="cd">调整</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                    </c:forEach>
-                                </c:forEach>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            <%-- 弹出modal --%>
-            <div class="modal fade" id="noteModal">
-                <div class="modal-dialog" role="dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title">修改意见</h4>
-                        </div>
-                        <form action="${contextPath}/luju/textarea.action" method="post">
-                            <div class="modal-body" id="noteModalContent">
-                                <div class="form-group">
-                                    <label>请输入意见：</label>
-                                    <textarea id="areaValue" class="form-control" rows="3" name="areaValue"></textarea>
+                    <%-- 弹出modal --%>
+                    <div class="modal fade" id="noteModal">
+                        <div class="modal-dialog" role="dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">修改意见</h4>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <div class="form-group">
-                                    <%--<div class="checkbox">--%>
-                                        <%--<label>--%>
-                                            <%--<h5>--%>
-                                                <%--<input type="checkbox">--%>
-                                                <%--提交至站调--%>
-                                            <%--</h5>--%>
-                                        <%--</label>--%>
-                                        <%--<label>--%>
-                                            <%--<h5>--%>
-                                                <%--<input type="checkbox">--%>
-                                                <%--提交至站调--%>
-                                            <%--</h5>--%>
-                                        <%--</label>--%>
-                                    <%--</div>--%>
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">提交</button>
+                                <form action="${contextPath}/luju/textarea.action" method="post">
+                                    <div class="modal-body" id="noteModalContent">
+                                        <div class="form-group">
+                                            <label>请输入意见：</label>
+                                            <textarea id="areaValue" class="form-control" rows="3" name="areaValue"></textarea>
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="modal-footer">
+                                        <div class="form-group">
+                                            <%--<div class="checkbox">--%>
+                                            <%--<label>--%>
+                                            <%--<h5>--%>
+                                            <%--<input type="checkbox">--%>
+                                            <%--提交至站调--%>
+                                            <%--</h5>--%>
+                                            <%--</label>--%>
+                                            <%--<label>--%>
+                                            <%--<h5>--%>
+                                            <%--<input type="checkbox">--%>
+                                            <%--提交至站调--%>
+                                            <%--</h5>--%>
+                                            <%--</label>--%>
+                                            <%--</div>--%>
+                                            <div class="box-footer">
+                                                <button type="submit" class="btn btn-primary">提交</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
-            </div>
         </section>
     </div>
 
@@ -333,11 +293,11 @@
                                 console.log(firstDcNumber);
                                 console.log(firstDcType);
                                 $("#conflictTable").append(
-                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
-                                    "<div style=\"text-align:right;\">\n" +
-                                    "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
-                                    "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
-                                    "</div></td></tr>"
+                                        "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
+                                        "<div style=\"text-align:right;\">\n" +
+                                        "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
+                                        "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
+                                        "</div></td></tr>"
                                 );
                             })
                         }
@@ -395,11 +355,11 @@
                                 console.log(firstDcNumber);
                                 console.log(firstDcType);
                                 $("#conflictTable").append(
-                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
-                                    "<div style=\"text-align:right;\">\n" +
-                                    "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
-                                    "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
-                                    "</div></td></tr>"
+                                        "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
+                                        "<div style=\"text-align:right;\">\n" +
+                                        "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
+                                        "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
+                                        "</div></td></tr>"
                                 );
                             })
                         }
@@ -417,7 +377,7 @@
                     contentType:'application/x-www-form-urlencoded',
                     data:condition,
                     dataType:'json',
-                    url:'${contextPath}/luju/zyPlan.action',
+                    url:'${contextPath}/luju/szPlan.action',
                     success:function (result) {
                         loadData(result)
                     }
@@ -426,8 +386,9 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost/ygz/luju/zyPlan.action";
+                window.location="http://localhost:8080/ygz/luju/szPlan.action";
             }
+
 
             window.setInterval(webReFlash, 300000);
 
@@ -445,42 +406,50 @@
                 $("#showDataTbody tr").each(function (index, value) {
                     var bg = RGBToHex($(value).css("background-color"));
 
-
                     if (bg == "#ffff00" || bg == "#ff0000") {
                         console.log(bg);
                         $(value).css("background-color", "#F5F5F5");
                     }
+
+                    if (bg == "#ff9900" || bg == "#ff9900") {
+                        console.log(bg);
+                        $(value).css("background-color", "#F5F5F5");
+                    }
+
+
                 });
             }
 
             // 超长超限变色
-            $("#conflict4CCCXTable tr").click(function () {
+            $("#conflict4CCXTable tr").click(function () {
                 console.log("click")
                 clearOldColor();
 
                 var dcId1 = $(this).attr("dcId1");
+
                 $("#" + dcId1).css("background-color", "#FF0000");
 
-            })
 
-            // 禁峰变色
-            $("#conflict4JFTable tr").click(function () {
+            })
+            //黄色
+            $("#conflict4TwoTable tr").click(function () {
                 console.log("click")
                 clearOldColor();
 
                 var dcId1 = $(this).attr("dcId1");
-                $("#" + dcId1).css("background-color", "#FFA500");
+
+                $("#" + dcId1).css("background-color", "#FF9900");
+
 
             })
 
-//            $("#showDataTbody tr").click(function () {
-//                console.log("click")
-//
-//                var dcId1 = $(this).attr("dcId");
-//                $("#" + dcId1).css("background-color", "#FFA500");
-//
-//            });
+            /** $("#showDataTbody tr").click(function () {
+               console.log("click")
+              var dcId1 = $(this).attr("dcId");
+                $("#" + dcId1).css("background-color", "#FFA500");
 
+         });
+             */
             function afterAppend() {
                 $("#conflictTable tr").click(function () {
                     console.log("click")

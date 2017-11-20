@@ -116,6 +116,22 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
+    public void processSdData(DataProcess dataProcess) {
+        List<DcPlanInfo> list = new ArrayList<>();
+        List<DcPlanInfo> bwjList = new ArrayList<>();
+
+        list.addAll(dataProcess.jcZwqList(jcRepository.selectJcPlanNew()));
+        list.addAll(dataProcess.jcDcList(jcRepository.selectJcPlanNew()));
+        list.addAll(dataProcess.yhDataList(jcRepository.selectJcPlanNew()));
+        list.addAll(dataProcess.jtQcDataList1(dcRepository.selectJtPlan()));
+        list.addAll(dataProcess.jtQcDataList2(dcRepository.selectJtPlan()));
+        list.addAll(dataProcess.zmT2DataList1(dcRepository.selectZmPlan()));
+        list.addAll(dataProcess.zmT2DataList2(dcRepository.selectZmPlan()));
+
+    }
+
+
+    @Override
     public List<DcPlanInfo> selectDcData() {
         return dcRepository.selectDcData();
     }

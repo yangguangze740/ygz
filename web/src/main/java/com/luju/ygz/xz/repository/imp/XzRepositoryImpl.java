@@ -38,7 +38,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT DISTINCT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM dc_show_data S LEFT JOIN jc_plan_detals D ON D.jcNumber = S.dcNumber");
         sql.append(" WHERE dcType = '接车' AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
-        sql.append(" AND jcJSL = '超限' AND dcDestination != 'XZ01' AND dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5");
+        sql.append(" AND jcJSL = '超限' AND dcDestination != 'XZ01' AND dcNumber NOT LIKE '9%' ");
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql.toString(), args, new CxDataRowMapper());
@@ -66,7 +66,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
     public List<DcPlanInfo> select4JlData() {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
-        sql.append(" FROM dc_show_data WHERE dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5");
+        sql.append(" FROM dc_show_data WHERE dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5 AND dcStartTime > NOW()");
         sql.append(" AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
         Object[] args = {};
 
@@ -83,7 +83,7 @@ public class XzRepositoryImpl implements XzRepositoryI {
     public List<DcPlanInfo> select4JlsData(DcPlanInfo time) {
             StringBuilder sql = new StringBuilder();
             sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
-            sql.append(" FROM dc_show_data WHERE dcDestination = 'XZ03' AND (dcStartTime > ? AND dcStartTime < ?) ORDER BY dcStartTime");
+            sql.append(" FROM dc_show_data WHERE dcDestination = 'XZ03' AND dcStartTime > NOW() AND (dcEndTime > ? AND dcStartTime < ?) ORDER BY dcStartTime");
             Object[] args = {
                     time.getDcStartTime(),
                     time.getDcEndTime()
@@ -94,6 +94,38 @@ public class XzRepositoryImpl implements XzRepositoryI {
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select dc show data error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> select4JllData() {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT DISTINCT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM dc_show_data S LEFT JOIN jc_plan_detals D ON D.jcNumber = S.dcNumber");
+        sql.append(" WHERE dcType = '接车' AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
+        sql.append(" AND jcJSL != '超限' AND dcDestination != 'XZ01' AND dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5 ");
+        Object[] args = {};
+        try {
+            return mysqlJdbcTemplate.query(sql.toString(), args, new CxDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select xz show data error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> select4JllsData() {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT DISTINCT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM dc_show_data S LEFT JOIN jc_plan_detals D ON D.jcNumber = S.dcNumber");
+        sql.append(" WHERE dcType = '接车' AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
+        sql.append(" AND jcJSL = '超限' AND dcDestination != 'XZ01' AND dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5 ");
+        Object[] args = {};
+        try {
+            return mysqlJdbcTemplate.query(sql.toString(), args, new CxDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select xz show data error");
             return null;
         }
     }

@@ -13,4 +13,8 @@ public interface XzServiceI {
     List<DcPlanInfo> selectxbData();
 
     List<DcPlanInfo> selectjlData();
+
+    List<DcPlanInfo> selectJllData();
+
+    List<DcPlanInfo> selectJlsData();
 }

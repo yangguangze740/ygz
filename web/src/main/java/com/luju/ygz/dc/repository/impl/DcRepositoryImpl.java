@@ -87,6 +87,20 @@ public class DcRepositoryImpl implements DcRepositoryI {
     }
 
     @Override
+    public List<DcPlanInfo> selectJtzData() {
+        String sql = "SELECT distinct dcNumber, dcStartTime, dcEndTime, dcType, dcSource, dcDj, dcTFX FROM ygz_show.dc_plan_copy where dcType='解体' order by dcStartTime";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new DcJtPlanRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select error");
+            return null;
+        }
+    }
+
+    @Override
     public List<DcPlanInfo> selectZmPlan() {
         String sql = "SELECT distinct dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcTFX,dcDj FROM ygz_show.dc_plan_copy where dcType = '摘帽'  order by dcStartTime";
         Object[] args = {};

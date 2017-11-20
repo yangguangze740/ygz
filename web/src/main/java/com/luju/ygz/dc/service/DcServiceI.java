@@ -69,4 +69,6 @@ public interface DcServiceI {
 
     /* 分区判断 */
     List<DcPlanInfo> select4Partition();
+
+    void processSdData(DataProcess dataProcess);
 }

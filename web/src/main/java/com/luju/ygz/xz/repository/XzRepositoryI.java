@@ -15,4 +15,8 @@ public interface XzRepositoryI {
     List<DcPlanInfo> select4JlData();
 
     List<DcPlanInfo> select4JlsData(DcPlanInfo time);
+
+    List<DcPlanInfo> select4JllData();
+
+    List<DcPlanInfo> select4JllsData();
 }

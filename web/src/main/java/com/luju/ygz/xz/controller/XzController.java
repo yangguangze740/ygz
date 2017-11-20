@@ -27,6 +27,8 @@ public class XzController {
         ModelAndView mav = new ModelAndView("luju/xzPlan");
         List<DcPlanInfo> allXzList = xzService.selectAllXzData();
         List<DcPlanInfo> cxList = xzService.selectCxData();
+        List<DcPlanInfo> jllList = xzService.selectJllData();
+        List<DcPlanInfo> jlsList = xzService.selectJlsData();
         List<DcPlanInfo> xbList = xzService.selectxbData();
         List<DcPlanInfo> jlList = xzService.selectjlData();
 
@@ -34,6 +36,8 @@ public class XzController {
         mav.addObject("cxList",cxList);
         mav.addObject("xbList",xbList);
         mav.addObject("jlList",jlList);
+        mav.addObject("jllList",jllList);
+        mav.addObject("jlsList",jlsList);
 
         return mav;
     }

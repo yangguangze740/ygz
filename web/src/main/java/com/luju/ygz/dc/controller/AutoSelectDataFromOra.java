@@ -18,7 +18,7 @@ public class AutoSelectDataFromOra {
 
     DataProcess dataProcess = new DataProcess();
 
-    @Scheduled(cron = "0 0/4 * * * ?")
+    @Scheduled(cron = "0 0/45 * * * ?")
     public void AutoSelectDataFromOra() {
 
         jcService.selectPlanDataFromOra(dataProcess);
@@ -34,6 +34,7 @@ public class AutoSelectDataFromOra {
 
         dcService.processTcDataNew(dataProcess);
         dcService.processDcData(dataProcess);
+        dcService.processSdData(dataProcess);
         dcService.processJFCX();
 
     }
