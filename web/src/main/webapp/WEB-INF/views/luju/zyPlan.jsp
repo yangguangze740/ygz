@@ -10,15 +10,15 @@
             <nav class="navbar" style="margin-left: 0px;">
                 <div class="navbar">
                     <ul class="nav navbar-nav">
-                        <li><a href="${contextPath}/luju/zyPlan.action"><strong>下行</strong></a></li>
-                        <li><a href="#">下到</a></li>
-                        <li><a href="${contextPath}/luju/xzPlan.action"><strong>下直</strong></a></li>
+                        <li><a href=""><strong>下行</strong></a></li>
+                        <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
+                        <li><a href="${contextPath}/luju/xzPlan.action">下直</a></li>
                         <li><a href="#">下发</a></li>
                     </ul>
                     <ul class="nav navbar-nav" style="margin-left: 50px;">
                         <li><a href="#"><strong>上行</strong></a></li>
                         <li><a href="#">上到</a></li>
-                        <li><a href="#">上直</a></li>
+                        <li><a href="${contextPath}/luju/szPlan.action">上直</a></li>
                         <li><a href="#">上发</a></li>
                     </ul>
                     <ul class="nav navbar-nav" style="margin-left: 50px;">
@@ -62,8 +62,8 @@
                                         <th>方向</th>
                                         <th>股道</th>
                                         <th>调别</th>
-                                        <th>重点事项</th>
-                                        <th>记事</th>
+                                        <%--<th>重点事项</th>--%>
+                                        <%--<th>记事</th>--%>
                                         <%--<th>进路</th>--%>
                                     </tr>
                                 </thead>
@@ -134,7 +134,7 @@
                                     <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !(entry.dcDH.equals('04')) && !(entry.dcDH.equals('05')) ) }">
                                         <tr dcId1="${entry.dcId}">
                                             <td>
-                                                ${entry.dcNumber} ${entry.dcType}超长
+                                                ${entry.dcNumber} ${entry.dcType} 超长列车必须接入XD04道或XD05道
                                             </td>
                                             <td>
                                                 <div style="text-align:right;">
@@ -148,7 +148,7 @@
                                 <c:forEach items="${CXList}" var="entry4CX" varStatus="status">
                                     <tr dcId1="${entry4CX.dcId}">
                                         <td>
-                                                ${entry4CX.dcNumber} ${entry4CX.dcType} ${entry.dcJSL} ${entry.dcImportant}
+                                                ${entry4CX.dcNumber} ${entry4CX.dcType} ${entry4CX.dcJSL} ${entry4CX.dcImportant}
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -181,16 +181,6 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="box box-warning" style="background-color: #F5F5F5;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">优选进路</h3>
-                        </div>
-                        <div class="box-body">
-                            <table class="table" id="conflict4TwoTable">
                                 <c:forEach items="${partitionList}" var="entry" varStatus="status">
                                     <tr dcId1="${entry.dcId}">
                                         <td>
@@ -221,7 +211,7 @@
                                         <c:set var = "firstDcId" value="${fn:substring(k, 1, 37)}" />
                                         <c:set var = "firstDcNumber" value="${fn:substring(k, 38, length)}" />
                                             <tr dcId1="${firstDcId}" dcId2="${entry.dcId}" >
-                                                <td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 冲突</td>
+                                                <td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 进路交叉</td>
                                                 <td>
                                                     <div style="text-align:right;">
                                                         <button type="button" class="btn btn-warning" value="cx">撤销</button>
@@ -333,7 +323,7 @@
                                 console.log(firstDcNumber);
                                 console.log(firstDcType);
                                 $("#conflictTable").append(
-                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
+                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 进路交叉<td>\n" +
                                     "<div style=\"text-align:right;\">\n" +
                                     "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
                                     "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
@@ -395,7 +385,7 @@
                                 console.log(firstDcNumber);
                                 console.log(firstDcType);
                                 $("#conflictTable").append(
-                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
+                                    "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 进路交叉<td>\n" +
                                     "<div style=\"text-align:right;\">\n" +
                                     "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
                                     "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +

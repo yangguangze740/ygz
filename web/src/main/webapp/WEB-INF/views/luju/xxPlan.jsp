@@ -10,7 +10,7 @@
         <nav class="navbar" style="margin-left: 0px;">
             <div class="navbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="${contextPath}/luju/xxPlan.action"><strong>下行</strong></a></li>
+                    <li><a href="${contextPath}/luju/xxPlan.action">下行</a></li>
                     <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
                     <li><a href="${contextPath}/luju/xzPlan.action">下直</a></li>
                     <li><a href="#">下发</a></li>
@@ -44,7 +44,7 @@
         <section class="content">
             <div class="row">
                 <%-- 需要审验的命令数据 --%>
-                <div class="col-md-8">
+                <div class="">
                     <%-- 设定作业计划box背景色--%>
                     <div class="box box-success" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
@@ -68,7 +68,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="showDataTbody">
-                                <c:forEach items="${list}" var="record" varStatus="status">
+                                <c:forEach items="${allList}" var="record" varStatus="status">
                                     <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                         <td>${status.index + 1}</td>
                                         <td>${record.dcNumber}</td>
@@ -86,116 +86,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="box box-danger" style="background-color: #F5F5F5;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">错办进路</h3>
-                        </div>
-                        <div class="box-body">
-                            <table class="table" id="conflict4CCXTable">
-                                <c:forEach items="${jlList}" var="entry4Jl" varStatus="status">
-                                    <tr dcId1="${entry4Jl.dcId}">
-                                        <td>
-                                                ${entry4Jl.dcNumber} 整列军用列车必须接入SZ06道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <c:forEach items="${jcList}" var="entry4Jc" varStatus="status">
-                                    <tr dcId1="${entry4Jc.dcId}">
-                                        <td>
-                                                ${entry4Jc.dcNumber} 军用超限列车必须接入SZ06道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <c:forEach items="${cxList}" var="entry4Cx" varStatus="status">
-                                <tr dcId1="${entry4Cx.dcId}">
-                                    <td>
-                                            ${entry4Cx.dcNumber} 超限列车必须接入SZ06道
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                                <c:forEach items="${jlsList}" var="entry4Jls" varStatus="status">
-                                <tr dcId1="${entry4Jls.dcId}">
-                                    <td>
-                                            ${entry4Jls.dcNumber} 整列军用列车临线不得办理接发列车及调车作业
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                                <c:forEach items="${yhList}" var="entry4YH" varStatus="status">
-                                    <tr dcId1="${entry4YH.dcId}">
-                                        <td>
-                                                ${entry4YH.dcNumber} 于洪方向接车必须接入SZ02道或SZ04道。
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="box box-warning" style="background-color: #F5F5F5;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">优先进路</h3>
-                        </div>
-                        <div class="box-body">
-                            <table class="table" id="conflict4TwoTable">
-                                <c:forEach items="${fiveList}" var="entry" varStatus="status">
-                                    <tr dcId1="${entry.dcId}">
-                                        <td>
-                                                ${entry.dcNumber}无列检作业列车优先接入SZ02道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <c:forEach items="${xbList}" var="xbEntry" varStatus="status">
-                                    <tr dcId1="${xbEntry.dcId}">
-                                        <td>
-                                                ${xbEntry.dcNumber}行包列车优先接入SZ06道或SZ04道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                        </div>
-                    </div>
                     <%-- 弹出modal --%>
                     <div class="modal fade" id="noteModal">
                         <div class="modal-dialog" role="dialog">
@@ -386,7 +276,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/ygz/luju/szPlan.action";
+                window.location="http://localhost:8080/ygz/luju/xxPlan.action";
             }
 
 

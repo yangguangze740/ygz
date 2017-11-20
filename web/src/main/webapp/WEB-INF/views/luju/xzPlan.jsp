@@ -10,15 +10,15 @@
         <nav class="navbar" style="margin-left: 0px;">
             <div class="navbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="${contextPath}/luju/zyPlan.action"><strong>下行</strong></a></li>
-                    <li><a href="#">下到</a></li>
-                    <li><a href="#">下直</a></li>
+                    <li><a href="${contextPath}/luju/xxPlan.action">下行</a></li>
+                    <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
+                    <li><a href="${contextPath}/luju/xzPlan.action">下直</a></li>
                     <li><a href="#">下发</a></li>
                 </ul>
                 <ul class="nav navbar-nav" style="margin-left: 50px;">
                     <li><a href="#"><strong>上行</strong></a></li>
                     <li><a href="#">上到</a></li>
-                    <li><a href="#">上直</a></li>
+                    <li><a href="${contextPath}/luju/szPlan.action">上直</a></li>
                     <li><a href="#">上发</a></li>
                 </ul>
                 <ul class="nav navbar-nav" style="margin-left: 50px;">
@@ -62,8 +62,8 @@
                                     <th>方向</th>
                                     <th>股道</th>
                                     <th>调别</th>
-                                    <th>重点事项</th>
-                                    <th>记事</th>
+                                    <%--<th>重点事项</th>--%>
+                                    <%--<th>记事</th>--%>
                                     <%--<th>进路</th>--%>
                                 </tr>
                                 </thead>
