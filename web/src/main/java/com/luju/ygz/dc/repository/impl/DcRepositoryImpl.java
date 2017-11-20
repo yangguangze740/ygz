@@ -144,7 +144,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectJF() {
-        String sql = "SELECT distinct dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM jc_plan_detals D LEFT JOIN dc_show_data S ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL = '禁峰' AND dcXD = 'XD' ORDER BY dcStartTime";
+        String sql = "SELECT distinct dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM jc_plan_detals D LEFT JOIN dc_show_data S ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL = '禁峰列车' AND dcXD = 'XD' ORDER BY dcStartTime";
         Object[] args = {};
 
         try {
@@ -158,7 +158,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectCX() {
-        String sql = "SELECT distinct dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM jc_plan_detals D LEFT JOIN dc_show_data S ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcImportant = '超限' AND dcXD = 'XD' ORDER BY dcStartTime";
+        String sql = "SELECT distinct dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM jc_plan_detals D LEFT JOIN dc_show_data S ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL = '超限列车' AND dcXD = 'XD' ORDER BY dcStartTime";
         Object[] args = {};
 
         try {

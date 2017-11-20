@@ -70,7 +70,7 @@ public class ConstantFields {
     public static final String BWJDN = "北入库";
 
     /* 记事栏内容*/
-    public static final String CX = "超限列车";
+    public static final String CX = "超限";
     public static final String JF = "禁峰列车";
     public static final String CC = "超长";
     public static final String XD = "XD";

@@ -62,8 +62,8 @@
                                         <th>方向</th>
                                         <th>股道</th>
                                         <th>调别</th>
-                                        <th>重点事项</th>
-                                        <th>记事</th>
+                                        <%--<th>重点事项</th>--%>
+                                        <%--<th>记事</th>--%>
                                         <%--<th>进路</th>--%>
                                     </tr>
                                 </thead>
@@ -148,7 +148,7 @@
                                 <c:forEach items="${CXList}" var="entry4CX" varStatus="status">
                                     <tr dcId1="${entry4CX.dcId}">
                                         <td>
-                                                ${entry4CX.dcNumber} ${entry4CX.dcType} ${entry.dcJSL} ${entry.dcImportant}
+                                                ${entry4CX.dcNumber} ${entry4CX.dcType} ${entry4CX.dcJSL} ${entry4CX.dcImportant}
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -416,7 +416,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost/ygz/luju/zyPlan.action";
+                window.location="http://localhost:8080/ygz/luju/zyPlan.action";
             }
 
             window.setInterval(webReFlash, 300000);
