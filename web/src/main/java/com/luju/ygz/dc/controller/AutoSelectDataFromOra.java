@@ -34,7 +34,7 @@ public class AutoSelectDataFromOra {
 
         dcService.processTcDataNew(dataProcess);
         dcService.processDcData(dataProcess);
-        //dcService.processSdData(dataProcess);  这个等你把 上到写完在执行
+        dcService.processSdData(dataProcess);
         dcService.processJFCX();
 
     }
