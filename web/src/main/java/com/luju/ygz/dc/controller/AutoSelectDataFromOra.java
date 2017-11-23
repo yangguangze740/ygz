@@ -18,7 +18,7 @@ public class AutoSelectDataFromOra {
 
     DataProcess dataProcess = new DataProcess();
 
-    @Scheduled(cron = "0 0/45 * * * ?")
+    @Scheduled(cron = "0 0/4 * * * ?")
     public void AutoSelectDataFromOra() {
 
         jcService.selectPlanDataFromOra(dataProcess);
