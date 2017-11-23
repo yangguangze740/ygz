@@ -506,7 +506,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> select4Partition() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcDestination,dcDH FROM ygz_show.dc_show_data where dcXD = 'XD' and dcTypeE = 'JC' and dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) order by dcStartTime ";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcDestination,dcDH FROM ygz_show.dc_show_data where dcXD = 'XD' and dcTypeE = 'JC' AND dcStartTime > now() and dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) order by dcStartTime ";
         Object[] args = {};
 
         try {

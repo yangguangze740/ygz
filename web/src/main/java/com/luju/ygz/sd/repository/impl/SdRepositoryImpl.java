@@ -9,22 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Controller
+@Repository
 public class SdRepositoryImpl implements SdRepositoryI {
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private JdbcTemplate mysqlJdbcTemplate;
 
     @Override
     public List<DcPlanInfo> select4SdList() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'SD' AND (dcSource = 'ZWQ' OR 'DC' OR 'YH') AND dcStartTime > now() AND dcStartTime > now() AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'SD' AND dcSource != 'MSJ' AND dcStartTime > now() AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
         Object[] args = {};
         try {
-            return jdbcTemplate.query(sql, args, new SdDataRowMapper());
+            return mysqlJdbcTemplate.query(sql, args, new SdDataRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select dc show data error");
