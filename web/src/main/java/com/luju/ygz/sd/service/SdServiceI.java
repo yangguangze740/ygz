@@ -7,4 +7,12 @@ import java.util.List;
 
 public interface SdServiceI {
     List<DcPlanInfo> selectSdList();
+
+    List<DcPlanInfo> selectCxList();
+
+    List<DcPlanInfo> selectSixList();
+
+    List<DcPlanInfo> selectTzList();
+
+    List<DcPlanInfo> selectPartitionList();
 }

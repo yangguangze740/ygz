@@ -96,7 +96,7 @@
                                 <c:forEach items="${cxList}" var="entry4CX" varStatus="status">
                                     <tr dcId1="${entry4CX.dcId}">
                                         <td>
-                                                ${entry4CX.dcNumber} 超限列车必须接入XZ01道
+                                                ${entry4CX.dcNumber} 超限列车必须接入SD05道或SD10道
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -106,36 +106,10 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
-                                <c:forEach items="${jllList}" var="entry4JLL" varStatus="status">
-                                    <tr dcId1="${entry4JLL.dcId}">
+                                <c:forEach items="${sixList}" var="six" varStatus="status">
+                                    <tr dcId1="${six.dcId}">
                                         <td>
-                                                ${entry4JLL.dcNumber} 整列军用列车必须接入XZ01道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <c:forEach items="${jlsList}" var="entry4JLS" varStatus="status">
-                                    <tr dcId1="${entry4JLS.dcId}">
-                                        <td>
-                                                ${entry4JLS.dcNumber} 军用超限列车必须接入XZ01道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <c:forEach items="${jlList}" var="entry4Jl" varStatus="status">
-                                    <tr dcId1="${entry4Jl.dcId}">
-                                        <td>
-                                                ${entry4Jl.dcNumber} 整列军用列车临线不得办理接发列车及调车作业
+                                                ${six.dcNumber} 小部调列车必须接入SD02道或SD10道
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -154,10 +128,38 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
-                                <c:forEach items="${xbList}" var="entry" varStatus="status">
+                                <c:forEach items="${sdList}" var="entry" varStatus="status">
+                                    <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !(entry.dcDH.equals('05')) && !(entry.dcDH.equals('06')) ) }">
+                                        <tr dcId1="${entry.dcId}">
+                                            <td>
+                                                    ${entry.dcNumber} ${entry.dcType} 超长列车优先接入SD05道或XD06道
+                                            </td>
+                                            <td>
+                                                <div style="text-align:right;">
+                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                    <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                                <c:forEach items="${tzList}" var="tzList" varStatus="status">
+                                    <tr dcId1="${tzList.dcId}">
+                                        <td>
+                                                ${tzList.dcNumber} 挂有特种车辆的列车优先接入SD02道，（SD03道，SD04道，SD05道）
+                                        </td>
+                                        <td>
+                                            <div style="text-align:right;">
+                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                <c:forEach items="${partition}" var="entry" varStatus="status">
                                     <tr dcId1="${entry.dcId}">
                                         <td>
-                                                ${entry.dcNumber} 行包列车优先接入XB01道
+                                                ${entry.partition} 分区交叉
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -360,7 +362,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/luju/xzPlan.action";
+                window.location="http://localhost:8080/ygz/luju/sdPlan.action";
             }
 
 

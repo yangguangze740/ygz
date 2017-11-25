@@ -43,7 +43,7 @@ public class SzRepositoryImpl implements SzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT DISTINCT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM dc_show_data S");
         sql.append(" LEFT JOIN jc_plan_detals D ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime > NOW()");
-        sql.append(" AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL != '超限' AND dcDestination != 'XZ06' AND dcNumber  LIKE '9%' AND LENGTH(dcNumber) = 5");
+        sql.append(" AND dcXD = 'SZ' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL != '超限' AND dcDestination != 'XZ06' AND dcNumber  LIKE '9%' AND LENGTH(dcNumber) = 5");
 
         Object[] args = {};
         try {
@@ -60,7 +60,7 @@ public class SzRepositoryImpl implements SzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT DISTINCT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM");
         sql.append(" dc_show_data S LEFT JOIN jc_plan_detals D ON D.jcNumber = S.dcNumber WHERE");
-        sql.append(" dcType = '接车' AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND dcNumber NOT LIKE '9%' AND jcJSL = '超限' AND dcDestination != 'XZ06'");
+        sql.append(" dcType = '接车' AND dcXD = 'SZ' AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND dcNumber NOT LIKE '9%' AND jcJSL = '超限' AND dcDestination != 'XZ06'");
 
         Object[] args = {};
         try {
@@ -76,7 +76,7 @@ public class SzRepositoryImpl implements SzRepositoryI {
     public List<DcPlanInfo> select4AllJlData() {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
-        sql.append(" FROM dc_show_data WHERE dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5 AND dcStartTime > NOW()");
+        sql.append(" FROM dc_show_data WHERE dcNumber LIKE '9%' AND dcXD = 'SZ' AND LENGTH(dcNumber) = 5 AND dcStartTime > NOW()");
         sql.append(" AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
 
         Object[] args = {};
@@ -113,7 +113,7 @@ public class SzRepositoryImpl implements SzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
         sql.append(" FROM dc_show_data WHERE dcNumber LIKE '5%' AND LENGTH(dcNumber) = 5 AND dcStartTime > NOW()");
-        sql.append(" AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
+        sql.append(" AND dcXD = 'SZ' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
 
         Object[] args = {};
         try {
@@ -130,7 +130,7 @@ public class SzRepositoryImpl implements SzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
         sql.append(" FROM dc_show_data WHERE (dcNumber = 'X292' OR 'X468' OR 'X2480') AND (dcDestination != 'SZ06' OR 'SZ04')");
-        sql.append(" AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
+        sql.append(" AND dcXD = 'SZ'AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)");
 
         Object[] args = {};
         try {
@@ -227,7 +227,7 @@ public class SzRepositoryImpl implements SzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT DISTINCT dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM");
         sql.append(" dc_show_data S LEFT JOIN jc_plan_detals D ON D.jcNumber = S.dcNumber WHERE");
-        sql.append(" dcType = '接车' AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5 AND jcJSL = '超限' AND dcDestination != 'XZ06'");
+        sql.append(" dcType = '接车' AND dcXD = 'SZ'AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND dcNumber LIKE '9%' AND LENGTH(dcNumber) = 5 AND jcJSL = '超限' AND dcDestination != 'XZ06'");
 
         Object[] args = {};
         try {

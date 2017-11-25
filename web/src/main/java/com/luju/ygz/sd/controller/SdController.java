@@ -19,8 +19,16 @@ public class SdController {
     public ModelAndView sdPlan(){
         ModelAndView mav = new ModelAndView("luju/sdPlan");
         List<DcPlanInfo> sdList = sdService.selectSdList();
+        List<DcPlanInfo> cxList = sdService.selectCxList();
+        List<DcPlanInfo> sixList = sdService.selectSixList();
+        List<DcPlanInfo> tzList = sdService.selectTzList();
+        List<DcPlanInfo> partition = sdService.selectPartitionList();
 
+        mav.addObject("cxList",cxList);
         mav.addObject("sdList",sdList);
+        mav.addObject("sixList",sixList);
+        mav.addObject("tzList",tzList);
+        mav.addObject("partion",partition);
         return mav;
     }
 }
