@@ -17,7 +17,7 @@
                 </ul>
                 <ul class="nav navbar-nav" style="margin-left: 50px;">
                     <li><a href="#"><strong>上行</strong></a></li>
-                    <li><a href="${contextPath}/luju/sdPlan.action">上到</a></li>
+                    <li><a href="#">上到</a></li>
                     <li><a href="${contextPath}/luju/szPlan.action">上直</a></li>
                     <li><a href="#">上发</a></li>
                 </ul>
@@ -44,7 +44,7 @@
         <section class="content">
             <div class="row">
                 <%-- 需要审验的命令数据 --%>
-                <div class="col-md-8">
+                <div class="">
                     <%-- 设定作业计划box背景色--%>
                     <div class="box box-success" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
@@ -68,48 +68,15 @@
                                 </tr>
                                 </thead>
                                 <tbody id="showDataTbody">
-                                <c:forEach items="${sdList}" var="record" varStatus="status">
-                                    <c:set value="${record.selectList}" var="selectList"/>
+                                <c:forEach items="${sxList}" var="record" varStatus="status">
                                     <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                         <td>${status.index + 1}</td>
                                         <td>${record.dcNumber}</td>
                                         <td>${record.dcType}</td>
                                         <td>${record.dcStartTime}</td>
                                         <td>${record.dcEndTime}</td>
-                                        <td><c:if test="${record.dcSource == null}">
-                                            <select class="sourceUpdate form-control" style = "width:150px;">
-                                                <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                    <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </c:if>
-                                            <c:if test="${record.dcSource != null && record.isUpdate == 1}">
-                                                <select class="sourceUpdate form-control" style = "width:150px;">
-                                                    <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                        <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </c:if>
-                                            <c:if test="${record.dcSource != null && record.isUpdate !=1}">
-                                                ${record.dcSource}
-                                            </c:if></td>
-                                        <td><c:if test="${record.dcDestination == null}">
-                                            <select class="destinationUpdate form-control" style = "width:150px; text-align: right;">
-                                                <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                    <option value ="${recordSelect}">${recordSelect}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </c:if>
-                                            <c:if test="${record.dcDestination != null && record.isUpdate == 2}">
-                                                <select class="destinationUpdate form-control" style = "width:150px;">
-                                                    <c:forEach items="${selectList}" var="recordSelect" varStatus="status">
-                                                        <option id = "${recordSelect}" value ="${recordSelect}">${recordSelect}</option>
-                                                    </c:forEach>
-                                                </select>
-                                            </c:if>
-                                            <c:if test="${record.dcDestination != null && record.isUpdate !=2}">
-                                                ${record.dcDestination}
-                                            </c:if></td>
+                                        <td>${record.dcSource}</td>
+                                        <td>${record.dcDestination}</td>
                                         <td>${record.dcDj}</td>
                                         <td></td>
                                     </tr>
@@ -119,160 +86,47 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="box box-danger" style="background-color: #F5F5F5;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">错办进路</h3>
-                        </div>
-                        <div class="box-body">
-                            <table class="table" id="conflict4CCXTable">
-                                <c:forEach items="${cxList}" var="entry4CX" varStatus="status">
-                                    <tr dcId1="${entry4CX.dcId}">
-                                        <td>
-                                                ${entry4CX.dcNumber} 超限列车必须接入SD05道或SD10道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <c:forEach items="${sixList}" var="six" varStatus="status">
-                                    <tr dcId1="${six.dcId}">
-                                        <td>
-                                                ${six.dcNumber} 小部调列车必须接入SD02道或SD10道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="box box-warning" style="background-color: #F5F5F5;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">优先进路</h3>
-                        </div>
-                        <div class="box-body">
-                            <table class="table" id="conflict4TwoTable">
-                                <c:forEach items="${sdList}" var="entry" varStatus="status">
-                                    <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !(entry.dcDH.equals('05')) && !(entry.dcDH.equals('06')) ) }">
-                                        <tr dcId1="${entry.dcId}">
-                                            <td>
-                                                    ${entry.dcNumber} ${entry.dcType} 超长列车优先接入SD05道或XD06道
-                                            </td>
-                                            <td>
-                                                <div style="text-align:right;">
-                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                    <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </c:if>
-                                </c:forEach>
-                                <c:forEach items="${tzList}" var="tzList" varStatus="status">
-                                    <tr dcId1="${tzList.dcId}">
-                                        <td>
-                                                ${tzList.dcNumber} 挂有特种车辆的列车优先接入SD02道，（SD03道，SD04道，SD05道）
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <c:forEach items="${partition}" var="entry" varStatus="status">
-                                    <tr dcId1="${entry.dcId}">
-                                        <td>
-                                                ${entry.partition} 分区交叉
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="box box-warning" style="background-color: #F5F5F5;">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">交叉进路</h3>
-                        </div>
-                        <div class="box-body">
-                            <table class="table" id="conflictTable">
-                                <c:forEach items="${mapList}" var="map" varStatus="status">
-                                    <c:forEach items="${map.value}" var="entry" varStatus="status">
-                                        <c:set var = "k" value="${map.key}" />
-                                        <c:set var = "length" value="${fn:length(k)}"/>
-                                        <c:set var = "firstDcId" value="${fn:substring(k, 1, 37)}" />
-                                        <c:set var = "firstDcNumber" value="${fn:substring(k, 38, length)}" />
-                                        <tr dcId1="${firstDcId}" dcId2="${entry.dcId}" >
-                                            <td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 进路交叉</td>
-                                            <td>
-                                                <div style="text-align:right;">
-                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                    <button type="button" info1="${firstDcNumber}" info2="${entry.dcNumber}" info3="${entry.dcType}" class="btn btn-danger" value="cd">调整</button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </c:forEach>
-                                </c:forEach>
-                            </table>
+                <%-- 弹出modal --%>
+                <div class="modal fade" id="noteModal">
+                    <div class="modal-dialog" role="dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title">修改意见</h4>
+                            </div>
+                            <form action="${contextPath}/luju/textarea.action" method="post">
+                                <div class="modal-body" id="noteModalContent">
+                                    <div class="form-group">
+                                        <label>请输入意见：</label>
+                                        <textarea id="areaValue" class="form-control" rows="3" name="areaValue"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <div class="form-group">
+                                        <%--<div class="checkbox">--%>
+                                        <%--<label>--%>
+                                        <%--<h5>--%>
+                                        <%--<input type="checkbox">--%>
+                                        <%--提交至站调--%>
+                                        <%--</h5>--%>
+                                        <%--</label>--%>
+                                        <%--<label>--%>
+                                        <%--<h5>--%>
+                                        <%--<input type="checkbox">--%>
+                                        <%--提交至站调--%>
+                                        <%--</h5>--%>
+                                        <%--</label>--%>
+                                        <%--</div>--%>
+                                        <div class="box-footer">
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
-                    <%-- 弹出modal --%>
-                    <div class="modal fade" id="noteModal">
-                        <div class="modal-dialog" role="dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title">修改意见</h4>
-                                </div>
-                                <form action="${contextPath}/luju/textarea.action" method="post">
-                                    <div class="modal-body" id="noteModalContent">
-                                        <div class="form-group">
-                                            <label>请输入意见：</label>
-                                            <textarea id="areaValue" class="form-control" rows="3" name="areaValue"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <div class="form-group">
-                                            <%--<div class="checkbox">--%>
-                                            <%--<label>--%>
-                                            <%--<h5>--%>
-                                            <%--<input type="checkbox">--%>
-                                            <%--提交至站调--%>
-                                            <%--</h5>--%>
-                                            <%--</label>--%>
-                                            <%--<label>--%>
-                                            <%--<h5>--%>
-                                            <%--<input type="checkbox">--%>
-                                            <%--提交至站调--%>
-                                            <%--</h5>--%>
-                                            <%--</label>--%>
-                                            <%--</div>--%>
-                                            <div class="box-footer">
-                                                <button type="submit" class="btn btn-primary">提交</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
         </section>
     </div>
 
@@ -305,7 +159,7 @@
                     contentType:'application/x-www-form-urlencoded',
                     data:postData,
                     dataType:'json',
-                    url:'${contextPath}/luju/updatesSource.action',
+                    url:'${contextPath}/luju/updateSource.action',
                     success:function (result) {
                         //console.log(result);
                         // result == Map<String,List<DcPlanInfo>>
@@ -367,7 +221,7 @@
                     contentType:'application/x-www-form-urlencoded',
                     data:postData,
                     dataType:'json',
-                    url:'${contextPath}/luju/updatesDestination.action',
+                    url:'${contextPath}/luju/updateDestination.action',
                     success:function (result) {
                         console.log(result);
                         // result == list<Map<String,List<DcPlanInfo>>>
@@ -413,7 +267,7 @@
                     contentType:'application/x-www-form-urlencoded',
                     data:condition,
                     dataType:'json',
-                    url:'${contextPath}/luju/sdPlan.action',
+                    url:'${contextPath}/luju/szPlan.action',
                     success:function (result) {
                         loadData(result)
                     }
@@ -422,7 +276,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/ygz/luju/sdPlan.action";
+                window.location="http://localhost:8080/ygz/luju/xxPlan.action";
             }
 
 
@@ -550,3 +404,4 @@
 <![endif]-->
 </body>
 </html>
+

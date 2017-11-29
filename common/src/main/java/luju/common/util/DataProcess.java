@@ -919,6 +919,9 @@ public class DataProcess {
 
         jtSelectList.add(ConstantFields.TYPE_QCX);
         jtSelectList.add(ConstantFields.TYPE_JDX);
+        jtSelectList.add(ConstantFields.TYPE_ZX);
+        jtSelectList.add(ConstantFields.TYPE_DX);
+        jtSelectList.add(ConstantFields.TYPE_YX);
 
         return jtSelectList;
     }
@@ -926,8 +929,8 @@ public class DataProcess {
     public List<String> zmSelectList() {
         List<String> zmSelectList = new ArrayList<String>();
 
-        zmSelectList.add(ConstantFields.XT1);
-        zmSelectList.add(ConstantFields.XT2);
+        zmSelectList.add(ConstantFields.T404);
+        zmSelectList.add(ConstantFields.T402);
 
         return zmSelectList;
     }
@@ -935,8 +938,8 @@ public class DataProcess {
     public List<String> tcSelectList() {
         List<String> tcSelectList = new ArrayList<String>();
 
-        tcSelectList.add(ConstantFields.XT1);
-        tcSelectList.add(ConstantFields.XT2);
+        tcSelectList.add(ConstantFields.T404);
+        tcSelectList.add(ConstantFields.T402);
 
         return tcSelectList;
     }
@@ -965,9 +968,33 @@ public class DataProcess {
         if (s.equals(ConstantFields.TYPE_QCX)) {
             jtSelectList.add(ConstantFields.TYPE_QCX);
             jtSelectList.add(ConstantFields.TYPE_JDX);
-        } else {
+            jtSelectList.add(ConstantFields.TYPE_ZX);
+            jtSelectList.add(ConstantFields.TYPE_DX);
+            jtSelectList.add(ConstantFields.TYPE_YX);
+        }else if(s.equals(ConstantFields.TYPE_JDX)) {
             jtSelectList.add(ConstantFields.TYPE_JDX);
             jtSelectList.add(ConstantFields.TYPE_QCX);
+            jtSelectList.add(ConstantFields.TYPE_ZX);
+            jtSelectList.add(ConstantFields.TYPE_DX);
+            jtSelectList.add(ConstantFields.TYPE_YX);
+        }else if(s.equals(ConstantFields.TYPE_ZX)) {
+            jtSelectList.add(ConstantFields.TYPE_ZX);
+            jtSelectList.add(ConstantFields.TYPE_QCX);
+            jtSelectList.add(ConstantFields.TYPE_JDX);
+            jtSelectList.add(ConstantFields.TYPE_DX);
+            jtSelectList.add(ConstantFields.TYPE_YX);
+        }else if(s.equals(ConstantFields.TYPE_DX)) {
+            jtSelectList.add(ConstantFields.TYPE_DX);
+            jtSelectList.add(ConstantFields.TYPE_QCX);
+            jtSelectList.add(ConstantFields.TYPE_JDX);
+            jtSelectList.add(ConstantFields.TYPE_ZX);
+            jtSelectList.add(ConstantFields.TYPE_YX);
+        }else {
+            jtSelectList.add(ConstantFields.TYPE_YX);
+            jtSelectList.add(ConstantFields.TYPE_QCX);
+            jtSelectList.add(ConstantFields.TYPE_JDX);
+            jtSelectList.add(ConstantFields.TYPE_ZX);
+            jtSelectList.add(ConstantFields.TYPE_DX);
         }
         return jtSelectList;
     }
@@ -975,12 +1002,12 @@ public class DataProcess {
     public List<String> zmtcSelectListUpdate(String s) {
         List<String> zmSelectList = new ArrayList<String>();
 
-        if (s.equals(ConstantFields.XT1)){
-            zmSelectList.add(ConstantFields.XT1);
-            zmSelectList.add(ConstantFields.XT2);
+        if (s.equals(ConstantFields.T402)){
+            zmSelectList.add(ConstantFields.T402);
+            zmSelectList.add(ConstantFields.T404);
         } else {
-            zmSelectList.add(ConstantFields.XT2);
-            zmSelectList.add(ConstantFields.XT1);
+            zmSelectList.add(ConstantFields.T404);
+            zmSelectList.add(ConstantFields.T402);
         }
         return zmSelectList;
     }
