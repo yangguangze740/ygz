@@ -78,5 +78,9 @@ public interface DcRepositoryI {
 
     List<DcPlanInfo> select4Partition();
 
+    List<DcPlanInfo> selectXxJtPlan();
 
+    List<DcPlanInfo> selectXxZmPlan();
+
+    List<DcPlanInfo> selectXxZcPlan();
 }

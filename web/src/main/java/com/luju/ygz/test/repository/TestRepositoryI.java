@@ -30,7 +30,11 @@ public interface TestRepositoryI {
 
     List<DcPlanInfo> selectJcPlanNew();
 
+    List<DcPlanInfo> selectZwqJcPlanNew();
 
+    List<DcPlanInfo> selectDcJcPlanNew();
 
+    List<DcPlanInfo> selectYhJcPlanNew();
 
+    List<DcPlanInfo> selectXxBwjPlanNew();
 }

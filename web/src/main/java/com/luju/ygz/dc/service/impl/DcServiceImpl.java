@@ -97,17 +97,17 @@ public class DcServiceImpl implements DcServiceI {
         List<DcPlanInfo> list = new ArrayList<>();
         List<DcPlanInfo> list4Bwj = new ArrayList<>();
 
-        list.addAll(dataProcess.jtDataList1(dcRepository.selectJtPlan()));
-        list.addAll(dataProcess.jtDataList2(dcRepository.selectJtPlan()));
-        list.addAll(dataProcess.zmDataList1(dcRepository.selectZmPlan()));
-        list.addAll(dataProcess.zmDataList2(dcRepository.selectZmPlan()));
-        list.addAll(dataProcess.zcTimeList(dcRepository.selectZcPlan()));
+        list.addAll(dataProcess.jtDataList1(dcRepository.selectXxJtPlan()));
+        list.addAll(dataProcess.jtDataList2(dcRepository.selectXxJtPlan()));
+        list.addAll(dataProcess.zmDataList1(dcRepository.selectXxZmPlan()));
+        list.addAll(dataProcess.zmDataList2(dcRepository.selectXxZmPlan()));
+        list.addAll(dataProcess.zcTimeList(dcRepository.selectXxZcPlan()));
         list.addAll(dcRepository.selectTcPlanNew());
         list.addAll(dataProcess.jcDataList(jcRepository.selectJcPlanNew()));
 
         boolean dataWithoutBwj = dcRepository.insertDcData(list);
 
-        list4Bwj.addAll(dataProcess.bwjTimeListNew(jcRepository.selectBwjPlanNew()));
+        list4Bwj.addAll(dataProcess.bwjTimeListNew(jcRepository.selectXxBwjPlanNew()));
 
         boolean dataWithBwj = dcRepository.insertDcData(list4Bwj);
 
@@ -119,9 +119,9 @@ public class DcServiceImpl implements DcServiceI {
         List<DcPlanInfo> list = new ArrayList<>();
         List<DcPlanInfo> bwjList = new ArrayList<>();
 
-        list.addAll(dataProcess.jcZwqList(jcRepository.selectJcPlanNew()));
-        list.addAll(dataProcess.jcDcList(jcRepository.selectJcPlanNew()));
-        list.addAll(dataProcess.yhDataList(jcRepository.selectJcPlanNew()));
+        list.addAll(dataProcess.jcZwqList(jcRepository.selectZwqJcPlanNew()));
+        list.addAll(dataProcess.jcDcList(jcRepository.selectDcJcPlanNew()));
+        list.addAll(dataProcess.yhDataList(jcRepository.selectYhJcPlanNew()));
         list.addAll(dataProcess.jtQcDataList1(dcRepository.selectJtPlan()));
         list.addAll(dataProcess.jtQcDataList2(dcRepository.selectJtPlan()));
         list.addAll(dataProcess.zmT2DataList1(dcRepository.selectZmPlan()));

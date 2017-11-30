@@ -155,7 +155,21 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectBwjPlanNew() {
-        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcDestination,dcXD,dcDH FROM ygz_show.dc_show_data where dcType='接车' order by dcStartTime;";
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcDestination,dcXD,dcDH FROM ygz_show.dc_show_data where dcType='本务机' AND dcSource LIKE 'S%'order by dcStartTime;";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new BwjPlanNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectXxBwjPlanNew() {
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcDestination,dcXD,dcDH FROM ygz_show.dc_show_data where dcType='本务机' AND dcSource LIKE 'X%'order by dcStartTime;";
         Object[] args = {};
 
         try {
@@ -169,7 +183,48 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectJcPlanNew() {
-        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM jc_plan_copy group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
+        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM jc_plan_copy WHERE dcSource = 'MSJ' group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+    @Override
+    public List<DcPlanInfo> selectZwqJcPlanNew() {
+        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM jc_plan_copy WHERE jcSource = 'ZWQ' group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectDcJcPlanNew() {
+        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM jc_plan_copy WHERE jcSource = 'DC' group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new JcPlanNewRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> selectYhJcPlanNew() {
+        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM jc_plan_copy WHERE jcSource = 'YH' group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
         Object[] args = {};
 
         try {
