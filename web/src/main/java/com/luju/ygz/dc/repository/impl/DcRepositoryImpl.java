@@ -506,7 +506,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> select4Partition() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcDestination,dcDH FROM ygz_show.dc_show_data where dcXD = 'XD' and dcTypeE = 'JC' and dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) order by dcStartTime ";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcDestination,dcDH FROM ygz_show.dc_show_data where dcXD = 'XD' and dcTypeE = 'JC' AND dcStartTime > now() and dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) order by dcStartTime ";
         Object[] args = {};
 
         try {
@@ -824,14 +824,14 @@ public class DcRepositoryImpl implements DcRepositoryI {
             }
 
             if (des != null && resultset.getInt("dcIsUpdate") == 2) {
-                if (resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
-                    if (des.equals(ConstantFields.S)){
-                        dcPlanInfo.setDcDestination(ConstantFields.BWJDS);
-                    } else {
-                        dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
+                    if (resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
+                        if (des.equals(ConstantFields.S)){
+                            dcPlanInfo.setDcDestination(ConstantFields.BWJDS);
+                        } else {
+                            dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
+                        }
+                        dcPlanInfo.setSelectList(dataProcess.bwjSelectListUpdate(dcPlanInfo.getDcDestination()));
                     }
-                    dcPlanInfo.setSelectList(dataProcess.bwjSelectListUpdate(dcPlanInfo.getDcDestination()));
-                }
             }
 
             return dcPlanInfo;

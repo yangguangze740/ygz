@@ -747,6 +747,41 @@ public class DataProcess {
 
     }
 
+    public List<DcPlanInfo> bwjDataList(List<DcPlanInfo> list) {
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcEndTime")){
+                        fields[j].get(oi).toString();
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        long time = date.getMillis()+ConstantFields.BWJ1_TIME;
+                        long time1 = date.getMillis()+ConstantFields.BWJ2_TIME;
+                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        ts1 = Timestamp.valueOf(simpleDateFormat1.format(time));
+                        ts2 = Timestamp.valueOf(simpleDateFormat1.format(time1));
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcStartTime(ts1);
+            list.get(k).setDcEndTime(ts2);
+            list.get(k).setDcType(ConstantFields.TYPE_BWJ);
+            list.get(k).setDcTypeE(ConstantFields.BWJ);
+        }
+        return list;
+
+    }
+
     public List<DcPlanInfo> jcDataList(List<DcPlanInfo> list) {
         String des = null;
 
@@ -779,6 +814,7 @@ public class DataProcess {
         }
         return list;
     }
+
     public List<DcPlanInfo> jcZwqList(List<DcPlanInfo> list) {
         String des = null;
 

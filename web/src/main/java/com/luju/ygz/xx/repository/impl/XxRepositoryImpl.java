@@ -4,6 +4,7 @@ package com.luju.ygz.xx.repository.impl;
 import com.luju.pojo.DcPlanInfo;
 import com.luju.ygz.dc.repository.impl.DcRepositoryImpl;
 import com.luju.ygz.xx.repository.XxRepositoryI;
+import luju.common.util.ConstantFields;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,7 +22,7 @@ public class XxRepositoryImpl implements XxRepositoryI {
     @Override
     public List<DcPlanInfo> select4AllList() {
 
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'XD' AND dcXD = 'XZ' AND dcStartTime > now() AND dcStartTime > now() AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where  dcXD = 'XD' OR dcXD = 'XZ' AND dcStartTime > now()  AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new XxDataRowMapper());
@@ -33,25 +34,24 @@ public class XxRepositoryImpl implements XxRepositoryI {
     }
 
     private class XxDataRowMapper implements RowMapper<DcPlanInfo> {
-        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
-            DcPlanInfo userInfo = new DcPlanInfo();
+        public DcPlanInfo mapRow(ResultSet resultset, int i) throws SQLException {
 
-            userInfo.setDcNumber(resultSet.getString("CC"));
-            userInfo.setDcStartTimeS(resultSet.getString("JHKSSJ"));
-            userInfo.setDcEndTimeS(resultSet.getString("JHJSSJ"));
-            userInfo.setDcType(resultSet.getString("ZYXM"));
-            userInfo.setDcSource(resultSet.getString("ZYGD"));
-            userInfo.setDcTFX(resultSet.getString("TFX"));
-            userInfo.setDcDj(resultSet.getInt("DJ"));
-            userInfo.setDcGJHID(resultSet.getString("GJHID"));
-            userInfo.setDcSWH(resultSet.getInt("SWH"));
-            userInfo.setDcZGBZ(resultSet.getString("ZGBZ"));
-            userInfo.setDcCS(resultSet.getInt("CS"));
-            userInfo.setDcJSL(resultSet.getString("JSL"));
-            userInfo.setJLSJ(resultSet.getTimestamp("JLSJ"));
-            userInfo.setDcGDM(resultSet.getString("GDM"));
+            DcPlanInfo dcPlanInfo = new DcPlanInfo();
+            dcPlanInfo.setDcId(resultset.getString("dcId"));
+            dcPlanInfo.setDcNumber(resultset.getString("dcNumber"));
+            dcPlanInfo.setDcStartTime(resultset.getTimestamp("dcStartTime"));
+            dcPlanInfo.setDcEndTime(resultset.getTimestamp("dcEndTime"));
+            dcPlanInfo.setDcType(resultset.getString("dcType"));
+            dcPlanInfo.setDcTypeE(resultset.getString("dcTypeE"));
+            dcPlanInfo.setDcDestination(resultset.getString("dcDestination"));
+            dcPlanInfo.setDcDj(resultset.getInt("dcDj"));
+            dcPlanInfo.setDcPath(resultset.getString("dcPath"));
+            dcPlanInfo.setIsUpdate(resultset.getInt("dcIsUpdate"));
+            dcPlanInfo.setSumHc(resultset.getFloat("jcSumHc"));
+            dcPlanInfo.setDcDH(resultset.getString("dcDH"));
+            dcPlanInfo.setDcSource("马三家");
 
-            return userInfo;
+            return dcPlanInfo;
         }
     }
 }

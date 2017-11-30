@@ -9,7 +9,6 @@ import luju.common.util.DataProcess;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
@@ -116,7 +115,7 @@ public class DcServiceImpl implements DcServiceI {
     }
 
     @Override
-    public void processSdData(DataProcess dataProcess) {
+    public boolean processSdData(DataProcess dataProcess) {
         List<DcPlanInfo> list = new ArrayList<>();
         List<DcPlanInfo> bwjList = new ArrayList<>();
 
@@ -128,6 +127,14 @@ public class DcServiceImpl implements DcServiceI {
         list.addAll(dataProcess.zmT2DataList1(dcRepository.selectZmPlan()));
         list.addAll(dataProcess.zmT2DataList2(dcRepository.selectZmPlan()));
         list.addAll(dataProcess.zcTimeList(dcRepository.selectZcPlan()));
+
+        boolean dataWithOutBwj = dcRepository.insertDcData(list);
+
+        bwjList.addAll(dataProcess.bwjDataList(jcRepository.selectBwjPlanNew()));
+
+        boolean dataWithBwj = dcRepository.insertDcData(bwjList);
+
+        return (dataWithOutBwj && dataWithBwj);
 
     }
 

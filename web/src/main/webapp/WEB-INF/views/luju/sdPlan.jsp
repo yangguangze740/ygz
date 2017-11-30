@@ -10,7 +10,7 @@
         <nav class="navbar" style="margin-left: 0px;">
             <div class="navbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="${contextPath}/luju/xxPlan.action"><strong>下行</strong></a></li>
+                    <li><a href="${contextPath}/luju/xxPlan.action">下行</a></li>
                     <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
                     <li><a href="${contextPath}/luju/xzPlan.action">下直</a></li>
                     <li><a href="#">下发</a></li>
@@ -68,7 +68,7 @@
                                 </tr>
                                 </thead>
                                 <tbody id="showDataTbody">
-                                <c:forEach items="${list}" var="record" varStatus="status">
+                                <c:forEach items="${sdList}" var="record" varStatus="status">
                                     <tr style="text-align: center;" id="${record.dcId}" dcId ="${record.dcId}" dcTypeE = "${record.dcTypeE}" dcNumber = "${record.dcNumber}" dcType = "${record.dcType}" dcSource = "${record.dcSource}"  dcDestination = "${record.dcDestination}">
                                         <td>${status.index + 1}</td>
                                         <td>${record.dcNumber}</td>
@@ -93,10 +93,10 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4CCXTable">
-                                <c:forEach items="${jlList}" var="entry4Jl" varStatus="status">
-                                    <tr dcId1="${entry4Jl.dcId}">
+                                <c:forEach items="${cxList}" var="entry4CX" varStatus="status">
+                                    <tr dcId1="${entry4CX.dcId}">
                                         <td>
-                                                ${entry4Jl.dcNumber} 整列军用列车必须接入SZ06道
+                                                ${entry4CX.dcNumber} 超限列车必须接入SD05道或SD10道
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -106,49 +106,10 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
-                                <c:forEach items="${jcList}" var="entry4Jc" varStatus="status">
-                                    <tr dcId1="${entry4Jc.dcId}">
+                                <c:forEach items="${sixList}" var="six" varStatus="status">
+                                    <tr dcId1="${six.dcId}">
                                         <td>
-                                                ${entry4Jc.dcNumber} 军用超限列车必须接入SZ06道
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                                <c:forEach items="${cxList}" var="entry4Cx" varStatus="status">
-                                <tr dcId1="${entry4Cx.dcId}">
-                                    <td>
-                                            ${entry4Cx.dcNumber} 超限列车必须接入SZ06道
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                                <c:forEach items="${jlsList}" var="entry4Jls" varStatus="status">
-                                <tr dcId1="${entry4Jls.dcId}">
-                                    <td>
-                                            ${entry4Jls.dcNumber} 整列军用列车临线不得办理接发列车及调车作业
-                                    </td>
-                                    <td>
-                                        <div style="text-align:right;">
-                                            <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                            <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                                <c:forEach items="${yhList}" var="entry4YH" varStatus="status">
-                                    <tr dcId1="${entry4YH.dcId}">
-                                        <td>
-                                                ${entry4YH.dcNumber} 于洪方向接车必须接入SZ02道或SZ04道。
+                                                ${six.dcNumber} 小部调列车必须接入SD02道或SD10道
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -167,10 +128,25 @@
                         </div>
                         <div class="box-body">
                             <table class="table" id="conflict4TwoTable">
-                                <c:forEach items="${fiveList}" var="entry" varStatus="status">
-                                    <tr dcId1="${entry.dcId}">
+                                <c:forEach items="${sdList}" var="entry" varStatus="status">
+                                    <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !(entry.dcDH.equals('05')) && !(entry.dcDH.equals('06')) ) }">
+                                        <tr dcId1="${entry.dcId}">
+                                            <td>
+                                                    ${entry.dcNumber} ${entry.dcType} 超长列车优先接入SD05道或XD06道
+                                            </td>
+                                            <td>
+                                                <div style="text-align:right;">
+                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                    <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:if>
+                                </c:forEach>
+                                <c:forEach items="${tzList}" var="tzList" varStatus="status">
+                                    <tr dcId1="${tzList.dcId}">
                                         <td>
-                                                ${entry.dcNumber}无列检作业列车优先接入SZ02道
+                                                ${tzList.dcNumber} 挂有特种车辆的列车优先接入SD02道，（SD03道，SD04道，SD05道）
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -180,10 +156,10 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
-                                <c:forEach items="${xbList}" var="xbEntry" varStatus="status">
-                                    <tr dcId1="${xbEntry.dcId}">
+                                <c:forEach items="${partition}" var="entry" varStatus="status">
+                                    <tr dcId1="${entry.dcId}">
                                         <td>
-                                                ${xbEntry.dcNumber}行包列车优先接入SZ06道或SZ04道
+                                                ${entry.partition} 分区交叉
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
@@ -377,7 +353,7 @@
                     contentType:'application/x-www-form-urlencoded',
                     data:condition,
                     dataType:'json',
-                    url:'${contextPath}/luju/szPlan.action',
+                    url:'${contextPath}/luju/xzPlan.action',
                     success:function (result) {
                         loadData(result)
                     }
@@ -386,7 +362,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://10.39.3.120:8080/ygz/luju/szPlan.action";
+                window.location="http://localhost:8080/ygz/luju/sdPlan.action";
             }
 
 
