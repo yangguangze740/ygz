@@ -20,7 +20,7 @@ public class SxRepositoryImpl implements SxRepositoryI{
 
     @Override
     public List<DcPlanInfo> select4SdList() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where  dcXD = 'SD' OR dcXD = 'SZ' AND dcStartTime > now()  AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where  (dcXD = 'SD' OR dcXD = 'SZ') AND dcStartTime > now()  AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new XxDataRowMapper());
@@ -65,9 +65,10 @@ public class SxRepositoryImpl implements SxRepositoryI{
                 dcPlanInfo.setDcSource(ConstantFields.TYPE_DX);
             } else if (source != null && source.equals(ConstantFields.JTY)){
                 dcPlanInfo.setDcSource(ConstantFields.TYPE_YX);
-            }
+            }else if (source != null && source.equals(ConstantFields.ZC2SOURCE)){
+                dcPlanInfo.setDcSource(ConstantFields.ZC2SOURCEC);}
             else{
-                dcPlanInfo.setDcSource(null);
+                dcPlanInfo.setDcSource(source);
             }
             String des = resultset.getString("dcDestination");
 
@@ -78,7 +79,7 @@ public class SxRepositoryImpl implements SxRepositoryI{
                 dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
             }
             else {
-                dcPlanInfo.setDcDestination(null);
+                dcPlanInfo.setDcDestination(des);
             }
             return dcPlanInfo;
         }

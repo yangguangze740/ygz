@@ -100,7 +100,6 @@
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
                                                 <button type="button" class="btn btn-danger" value="cd" >调整</button>
                                             </div>
                                         </td>
@@ -113,7 +112,6 @@
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
                                                 <button type="button" class="btn btn-danger" value="cd" >调整</button>
                                             </div>
                                         </td>
@@ -126,7 +124,6 @@
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
                                                 <button type="button" class="btn btn-danger" value="cd" >调整</button>
                                             </div>
                                         </td>
@@ -139,7 +136,6 @@
                                         </td>
                                         <td>
                                             <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
                                                 <button type="button" class="btn btn-danger" value="cd" >调整</button>
                                             </div>
                                         </td>

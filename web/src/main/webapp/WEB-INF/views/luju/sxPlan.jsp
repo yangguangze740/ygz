@@ -86,6 +86,108 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="box box-danger" style="background-color: #F5F5F5;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">错办进路</h3>
+                        </div>
+                        <div class="box-body">
+                            <%--<table class="table" id="conflict4CCCXTable">--%>
+                            <%--<c:forEach items="${allList}" var="entry" varStatus="status">--%>
+                            <%--<c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !(entry.dcDH.equals('04')) && !(entry.dcDH.equals('05')) ) }">--%>
+                            <%--<tr dcId1="${entry.dcId}">--%>
+                            <%--<td>--%>
+                            <%--${entry.dcNumber} ${entry.dcType} 超长列车必须接入XD04道或XD05道--%>
+                            <%--</td>--%>
+                            <%--<td>--%>
+                            <%--<div style="text-align:right;">--%>
+                            <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
+                            <%--<button type="button" class="btn btn-danger" value="cd" >调整</button>--%>
+                            <%--</div>--%>
+                            <%--</td>--%>
+                            <%--</tr>--%>
+                            <%--</c:if>--%>
+                            <%--</c:forEach>--%>
+                            <%--<c:forEach items="${CXList}" var="entry4CX" varStatus="status">--%>
+                            <%--<tr dcId1="${entry4CX.dcId}">--%>
+                            <%--<td>--%>
+                            <%--${entry4CX.dcNumber} ${entry4CX.dcType} ${entry4CX.dcJSL} ${entry4CX.dcImportant}--%>
+                            <%--</td>--%>
+                            <%--<td>--%>
+                            <%--<div style="text-align:right;">--%>
+                            <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
+                            <%--<button type="button" class="btn btn-danger" value="cd" >调整</button>--%>
+                            <%--</div>--%>
+                            <%--</td>--%>
+                            <%--</tr>--%>
+                            <%--</c:forEach>--%>
+                            <%--</table>--%>
+                        </div>
+                    </div>
+
+                    <div class="box box-warning" style="background-color: #F5F5F5;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">优选进路</h3>
+                        </div>
+                        <div class="box-body">
+                            <%--<table class="table" id="conflict4JFTable">--%>
+                            <%--<c:forEach items="${JFList}" var="entry" varStatus="status">--%>
+                            <%--<tr dcId1="${entry.dcId}">--%>
+                            <%--<td>--%>
+                            <%--${entry.dcNumber} ${entry.dcType} ${entry.dcJSL} ${entry.dcImportant}--%>
+                            <%--</td>--%>
+                            <%--<td>--%>
+                            <%--<div style="text-align:right;">--%>
+                            <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
+                            <%--<button type="button" class="btn btn-danger" value="cd" >调整</button>--%>
+                            <%--</div>--%>
+                            <%--</td>--%>
+                            <%--</tr>--%>
+                            <%--</c:forEach>--%>
+                            <%--<c:forEach items="${partitionList}" var="entry" varStatus="status">--%>
+                            <%--<tr dcId1="${entry.dcId}">--%>
+                            <%--<td>--%>
+                            <%--${entry.partition} 分区交叉--%>
+                            <%--</td>--%>
+                            <%--<td>--%>
+                            <%--<div style="text-align:right;">--%>
+                            <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
+                            <%--<button type="button" class="btn btn-danger" value="cd" >调整</button>--%>
+                            <%--</div>--%>
+                            <%--</td>--%>
+                            <%--</tr>--%>
+                            <%--</c:forEach>--%>
+                            <%--</table>--%>
+                        </div>
+                    </div>
+
+                    <div class="box box-warning" style="background-color: #F5F5F5;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">交叉进路</h3>
+                        </div>
+                        <div class="box-body">
+                            <%--<table class="table" id="conflictTable">--%>
+                            <%--<c:forEach items="${mapList}" var="map" varStatus="status">--%>
+                            <%--<c:forEach items="${map.value}" var="entry" varStatus="status">--%>
+                            <%--<c:set var = "k" value="${map.key}" />--%>
+                            <%--<c:set var = "length" value="${fn:length(k)}"/>--%>
+                            <%--<c:set var = "firstDcId" value="${fn:substring(k, 1, 37)}" />--%>
+                            <%--<c:set var = "firstDcNumber" value="${fn:substring(k, 38, length)}" />--%>
+                            <%--<tr dcId1="${firstDcId}" dcId2="${entry.dcId}" >--%>
+                            <%--<td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 进路交叉</td>--%>
+                            <%--<td>--%>
+                            <%--<div style="text-align:right;">--%>
+                            <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
+                            <%--<button type="button" info1="${firstDcNumber}" info2="${entry.dcNumber}" info3="${entry.dcType}" class="btn btn-danger" value="cd">调整</button>--%>
+                            <%--</div>--%>
+                            <%--</td>--%>
+                            <%--</tr>--%>
+                            <%--</c:forEach>--%>
+                            <%--</c:forEach>--%>
+                            <%--</table>--%>
+                        </div>
+                    </div>
+                </div>
                 <%-- 弹出modal --%>
                 <div class="modal fade" id="noteModal">
                     <div class="modal-dialog" role="dialog">
@@ -131,9 +233,6 @@
     </div>
 
     <%@ include file="/WEB-INF/include/javascript.jsp"%>
-
-
-
 
     <script type="text/javascript">
         $(function () {
@@ -276,7 +375,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/ygz/luju/xxPlan.action";
+                window.location="http://localhost:8080/ygz/luju/sxPlan.action";
             }
 
 
