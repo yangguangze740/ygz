@@ -866,14 +866,14 @@ public class DcRepositoryImpl implements DcRepositoryI {
             }
 
             if (des != null && resultset.getInt("dcIsUpdate") == 2) {
-                if (resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
-                    if (des.equals(ConstantFields.S)){
-                        dcPlanInfo.setDcDestination(ConstantFields.BWJDS);
-                    } else {
-                        dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
+                    if (resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
+                        if (des.equals(ConstantFields.S)){
+                            dcPlanInfo.setDcDestination(ConstantFields.BWJDS);
+                        } else {
+                            dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
+                        }
+                        dcPlanInfo.setSelectList(dataProcess.bwjSelectListUpdate(dcPlanInfo.getDcDestination()));
                     }
-                    dcPlanInfo.setSelectList(dataProcess.bwjSelectListUpdate(dcPlanInfo.getDcDestination()));
-                }
             }
 
             return dcPlanInfo;

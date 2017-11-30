@@ -54,7 +54,18 @@ public class DataProcess {
             }
             list.get(k).setJcStartTime(ts1);
             list.get(k).setJcType(ConstantFields.TYPE_JC);
-            list.get(k).setNODE_FOUR_WAY(ConstantFields.JCSOURCE);
+            if (list.get(k).getNODE_FOUR_WAY() == "马三家") {
+                list.get(k).setNODE_FOUR_WAY(ConstantFields.JCSOURCE);
+            }
+            if (list.get(k).getNODE_FOUR_WAY() == "于洪") {
+                list.get(k).setNODE_FOUR_WAY(ConstantFields.YH);
+            }
+            if (list.get(k).getNODE_FOUR_WAY() == "转弯桥") {
+                list.get(k).setNODE_FOUR_WAY(ConstantFields.ZWQ);
+            }
+            if (list.get(k).getNODE_FOUR_WAY() == "大成") {
+                list.get(k).setNODE_FOUR_WAY(ConstantFields.DC);
+            }
         }
         return list;
     }
