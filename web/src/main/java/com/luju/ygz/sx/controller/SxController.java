@@ -18,7 +18,7 @@ public class SxController {
 
     @RequestMapping("/sxPlan")
     public ModelAndView sdPlan(){
-        ModelAndView mav = new ModelAndView("luju/xxPlan");
+        ModelAndView mav = new ModelAndView("luju/sxPlan");
         List<DcPlanInfo> sxList = sxService.selectAllList();
 
         mav.addObject("sxList",sxList);

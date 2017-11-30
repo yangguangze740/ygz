@@ -112,6 +112,8 @@ public class ConstantFields {
     public static final String JCSOURCEC = "马三家";
     public static final String ZCSOURCE = "SXBFC";
     public static final String ZCSOURCEC = "上行编发场";
+    public static final String ZC2SOURCE = "XXBFC";
+    public static final String ZC2SOURCEC = "下行编发场";
 
     /* 上到数据常量*/
     public static final String ZWQSOURCE = "ZWQ";

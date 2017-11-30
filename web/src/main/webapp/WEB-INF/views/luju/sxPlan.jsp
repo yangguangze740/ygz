@@ -132,9 +132,6 @@
 
     <%@ include file="/WEB-INF/include/javascript.jsp"%>
 
-
-
-
     <script type="text/javascript">
         $(function () {
             $("#showDataTbody select.sourceUpdate").change(function() {
@@ -276,7 +273,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/ygz/luju/xxPlan.action";
+                window.location="http://localhost:8080/ygz/luju/sxPlan.action";
             }
 
 
