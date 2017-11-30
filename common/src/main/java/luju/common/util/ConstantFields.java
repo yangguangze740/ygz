@@ -63,6 +63,9 @@ public class ConstantFields {
     public static final String TYPE_BWJ = "本务机";
     public static final String TYPE_QCX = "牵出线";
     public static final String TYPE_JDX = "机待线";
+    public static final String TYPE_ZX = "转西进场线";
+    public static final String TYPE_DX = "大西进场线";
+    public static final String TYPE_YX = "于西进场线";
     public static final String TYPE_ZC = "上行编发场";
 
     /* 作业类别*/
@@ -87,6 +90,7 @@ public class ConstantFields {
     public static final String S = "S";
     public static final String QC = "QC";
     public static final String JD = "JD";
+    public static final String JTZXC = "转西进场线";
     public static final String XT1 = "XT1";//南
     public static final String XT2 = "XT2";//北
     public static final String JDZ = "Z";
@@ -111,8 +115,11 @@ public class ConstantFields {
 
     /* 上到数据常量*/
     public static final String ZWQSOURCE = "ZWQ";
+    public static final String ZWQSOURCEC = "转弯桥";
     public static final String DCSOURCE = "DC";
+    public static final String DCSOURCEC = "大成";
     public static final String YHSOURCE = "YH";
+    public static final String YHSOURCEC = "于洪";
 
 
 

@@ -16,7 +16,7 @@
                     <li><a href="#">下发</a></li>
                 </ul>
                 <ul class="nav navbar-nav" style="margin-left: 50px;">
-                    <li><a href="#"><strong>上行</strong></a></li>
+                    <li><a href="${contextPath}/luju/sxPlan.action"><strong>上行</strong></a></li>
                     <li><a href="${contextPath}/luju/sdPlan.action">上到</a></li>
                     <li><a href="${contextPath}/luju/szPlan.action">上直</a></li>
                     <li><a href="#">上发</a></li>

@@ -5,9 +5,11 @@ import com.luju.ygz.sd.service.SdServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/luju")
@@ -23,12 +25,34 @@ public class SdController {
         List<DcPlanInfo> sixList = sdService.selectSixList();
         List<DcPlanInfo> tzList = sdService.selectTzList();
         List<DcPlanInfo> partition = sdService.selectPartitionList();
+        Map<String,List<DcPlanInfo>> mapList = sdService.selectDcPath();
 
         mav.addObject("cxList",cxList);
         mav.addObject("sdList",sdList);
         mav.addObject("sixList",sixList);
         mav.addObject("tzList",tzList);
         mav.addObject("partion",partition);
+        mav.addObject("mapList",mapList);
         return mav;
+    }
+
+    @ResponseBody
+    @RequestMapping("/updatesSource")
+    public Map<String,List<DcPlanInfo>> updateSource(DcPlanInfo dcPlanInfo) {
+
+        sdService.updateSource(dcPlanInfo);
+        Map<String,List<DcPlanInfo>> mapList = sdService.selectDcPath();
+
+        return mapList;
+    }
+
+    @ResponseBody
+    @RequestMapping("/updatesDestination")
+    public Map<String,List<DcPlanInfo>> updateDestination(DcPlanInfo dcPlanInfo) {
+
+        sdService.updateDestination(dcPlanInfo);
+        Map<String,List<DcPlanInfo>> mapList = sdService.selectDcPath();
+
+        return mapList;
     }
 }
