@@ -28,14 +28,14 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<JcPlanInfo> selectJcPlanFromOra() {
-        String sql = "SELECT TRAIN_NUM, NODE_FOUR_WAY, TIME, TRACK_NUM ,PK,JSL ,QBID, HC FROM V_CZD_DJH V LEFT JOIN (SELECT CC, MAX(QBID) Q FROM CCH_YSDBML M GROUP BY CC) N ON V.TRAIN_NUM = N.CC LEFT JOIN CCH_YSDBZW Z ON N.Q = Z.QBID WHERE V.TRAIN_NUM IS NOT NULL ";
+        String sql = "SELECT TRAIN_NUM, NODE_FOUR_WAY, TIME, TRACK_NUM ,PK,JSL ,QBID, HC FROM V_CZD_DJH V LEFT JOIN (SELECT CC, MAX(QBID) Q FROM CCH_YSDBML M GROUP BY CC) N ON V.TRAIN_NUM = N.CC LEFT JOIN CCH_YSDBZW Z ON N.Q = Z.QBID WHERE V.TRAIN_NUM IS NOT NULL AND (V.NODE_FOUR_WAY = '马三家' OR V.NODE_FOUR_WAY = '于洪' OR V.NODE_FOUR_WAY = '转湾桥' OR V.NODE_FOUR_WAY = '大成')";
         Object[] args = {};
 
         try {
             return jdbcTemplate.query(sql, args, new JcPlanCopyRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("error");
+            System.out.println("select jc data from ora error");
             return null;
         }
     }
@@ -183,7 +183,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectJcPlanNew() {
-        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM jc_plan_copy WHERE dcSource = 'MSJ' group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
+        String sql = "SELECT jcNumber, sum(jcHc) S,jcSource, jcEndTime, jcStartTime, jcDestination, jcType FROM jc_plan_copy WHERE jcSource = 'MSJ' group by jcNumber,jcSource, jcEndTime, jcStartTime, jcDestination, jcType";
         Object[] args = {};
 
         try {
@@ -240,7 +240,19 @@ public class TestRepositoryImpl implements TestRepositoryI {
         public JcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             JcPlanInfo userInfo = new JcPlanInfo();
 
-            userInfo.setNODE_FOUR_WAY(resultSet.getString("NODE_FOUR_WAY"));
+            String source = resultSet.getString("NODE_FOUR_WAY");
+            if (source.equals("马三家")) {
+                userInfo.setNODE_FOUR_WAY(ConstantFields.JCSOURCE);
+            }
+            if (source.equals("大成")) {
+                userInfo.setNODE_FOUR_WAY(ConstantFields.DC);
+            }
+            if (source.equals("于洪")) {
+                userInfo.setNODE_FOUR_WAY(ConstantFields.YH);
+            }
+            if (source.equals("转湾桥")) {
+                userInfo.setNODE_FOUR_WAY(ConstantFields.ZWQ);
+            }
             userInfo.setTRACK_NUM(resultSet.getString("TRACK_NUM"));
             userInfo.setTRAIN_NUM(resultSet.getString("TRAIN_NUM"));
             userInfo.setTIME(resultSet.getTimestamp("TIME"));

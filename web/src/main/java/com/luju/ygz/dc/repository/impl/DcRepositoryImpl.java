@@ -37,7 +37,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             return jdbcTemplate.query(sql, args, new DcPlanCopyRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("select from ora error");
+            System.out.println("select dc data from ora error");
         return null;
         }
     }
@@ -251,7 +251,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 DcPlanInfo dcPlanInfo = dcPlanInfos.get(i);
 
                 ps.setString(1, uuid.uuidPrimaryKey());
-                ps.setString(2, dcPlanInfo.getDcNumber());
+                ps.setString(2, ConstantFields.TYPE_TC);
                 ps.setTimestamp(3, dcPlanInfo.getDcStartTime());
                 ps.setTimestamp(4, dcPlanInfo.getDcEndTime());
                 ps.setString(5, dcPlanInfo.getDcType());
@@ -670,7 +670,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
 
-            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcNumber(ConstantFields.TYPE_TC);
             userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
             userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));

@@ -312,13 +312,13 @@ public class SzRepositoryImpl implements SzRepositoryI {
             dcPlanInfo.setDcDH(resultset.getString("dcDH"));
 
             if(resultset.getString("dcSource").equals(ConstantFields.ZWQ) ){
-                dcPlanInfo.setDcSource("转弯桥");
+                dcPlanInfo.setDcSource(ConstantFields.ZWQSOURCEC);
             }
             if(resultset.getString("dcSource").equals(ConstantFields.YH)){
-                dcPlanInfo.setDcSource("于洪");
+                dcPlanInfo.setDcSource(ConstantFields.YHSOURCEC);
             }
             if (resultset.getString("dcSource").equals(ConstantFields.DC)){
-                dcPlanInfo.setDcSource("大成");
+                dcPlanInfo.setDcSource(ConstantFields.DCSOURCEC);
             }
 
             return dcPlanInfo;

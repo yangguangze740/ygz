@@ -402,14 +402,14 @@ public class SdRepositoryImpl implements SdRepositoryI {
             dcPlanInfo.setDcDH(resultset.getString("dcDH"));
 
             if(resultset.getString("dcSource").equals(ConstantFields.ZWQ) ){
-                dcPlanInfo.setDcSource("转弯桥");
+                dcPlanInfo.setDcSource(ConstantFields.ZWQSOURCEC);
             }
             else if(resultset.getString("dcSource").equals(ConstantFields.YH)){
-                dcPlanInfo.setDcSource("于洪");
+                dcPlanInfo.setDcSource(ConstantFields.YHSOURCEC);
             }
 
             else if (resultset.getString("dcSource").equals(ConstantFields.DC)){
-                dcPlanInfo.setDcSource("大成");
+                dcPlanInfo.setDcSource(ConstantFields.DCSOURCEC);
             }
             else {
                 dcPlanInfo.setDcSource(resultset.getString("dcSource"));

@@ -48,7 +48,7 @@
                     <%-- 设定作业计划box背景色--%>
                     <div class="box box-success" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
-                            <h3 class="box-title">裕国站下行到达场作业计划推演</h3>
+                            <h3 class="box-title">裕国站上行到达场作业计划推演</h3>
                         </div>
                         <div class="box-body no-padding">
                             <table class="table" id="zuoyejihuaTable">
@@ -164,7 +164,7 @@
                                     <c:if test="${(entry.sumHc > 84.5 && entry.sumHc <100) && ( !(entry.dcDH.equals('05')) && !(entry.dcDH.equals('06')) ) }">
                                         <tr dcId1="${entry.dcId}">
                                             <td>
-                                                    ${entry.dcNumber} ${entry.dcType} 超长列车优先接入SD05道或XD06道
+                                                    ${entry.dcNumber} ${entry.dcType} 超长列车优先接入SD05道或SD06道
                                             </td>
                                             <td>
                                                 <div style="text-align:right;">
@@ -421,7 +421,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/ygz/luju/sdPlan.action";
+                window.location="http://10.39.3.120:8080/ygz/luju/sdPlan.action";
             }
 
 

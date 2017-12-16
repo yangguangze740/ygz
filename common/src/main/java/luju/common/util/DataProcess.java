@@ -21,6 +21,7 @@ public class DataProcess {
     String end = "";
     String destination;
     String dcd; // use for tc > 6
+    String source;
 
     int cs;
     int cs1;
@@ -54,18 +55,6 @@ public class DataProcess {
             }
             list.get(k).setJcStartTime(ts1);
             list.get(k).setJcType(ConstantFields.TYPE_JC);
-            if (list.get(k).getNODE_FOUR_WAY() == "马三家") {
-                list.get(k).setNODE_FOUR_WAY(ConstantFields.JCSOURCE);
-            }
-            if (list.get(k).getNODE_FOUR_WAY() == "于洪") {
-                list.get(k).setNODE_FOUR_WAY(ConstantFields.YH);
-            }
-            if (list.get(k).getNODE_FOUR_WAY() == "转弯桥") {
-                list.get(k).setNODE_FOUR_WAY(ConstantFields.ZWQ);
-            }
-            if (list.get(k).getNODE_FOUR_WAY() == "大成") {
-                list.get(k).setNODE_FOUR_WAY(ConstantFields.DC);
-            }
         }
         return list;
     }
@@ -166,9 +155,6 @@ public class DataProcess {
                     fields[j].setAccessible(true);
                 }
                 try {
-                    if (fields[j].getName().equals("dcNumber")) {
-                        TC = ConstantFields.TYPE_TC;
-                    }
                     if (fields[j].getName().equals("dcStartTime")) {
 
                         Timestamp timestamp = (Timestamp)fields[j].get(oi);
@@ -207,7 +193,6 @@ public class DataProcess {
                     e.printStackTrace();
                 }
             }
-            list.get(k).setDcNumber(TC);
             list.get(k).setDcStartTime(ts1);
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
@@ -305,7 +290,7 @@ public class DataProcess {
             list.get(k).setDcDH(DH);
             list.get(k).setDcTF(TF);
             list.get(k).setDcSource(ConstantFields.ZCSOURCE);
-            list.get(k).setDcTypeE(ConstantFields.XXBFC);
+            list.get(k).setDcTypeE(ConstantFields.ZC);
             list.get(k).setDcPath(ConstantFields.XXBFC+des);
         }
         return list;
@@ -522,8 +507,10 @@ public class DataProcess {
                         Timestamp timestamp = (Timestamp)fields[j].get(oi);
                         DateTime date = new DateTime(timestamp.getTime());
                         if (list.get(k).getDcDj() == 1 || list.get(k).getDcDj() == 3) {
+                            long yt = date.getMillis();
                             long t = date.getMillis()+ConstantFields.ZM1_TIME;
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                            ts1 = Timestamp.valueOf(simpleDateFormat.format(yt));
                             ts2 = Timestamp.valueOf(simpleDateFormat.format(t));
                         } else {
                             long t = date.getMillis()+ConstantFields.ZM3_TIME;
@@ -630,8 +617,10 @@ public class DataProcess {
                         Timestamp timestamp = (Timestamp)fields[j].get(oi);
                         DateTime date = new DateTime(timestamp.getTime());
                         if (list.get(k).getDcDj() == 2 || list.get(k).getDcDj() == 4) {
+                            long yt = date.getMillis();
                             long t = date.getMillis()+ConstantFields.ZM1_TIME;
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                            ts1 = Timestamp.valueOf(simpleDateFormat.format(yt));
                             ts2 = Timestamp.valueOf(simpleDateFormat.format(t));
                         } else {
                             long t = date.getMillis()+ConstantFields.ZM3_TIME;
@@ -682,7 +671,7 @@ public class DataProcess {
                     if (fields[j].getName().equals("dcStartTime")) {
                         Timestamp timestamp = (Timestamp)fields[j].get(oi);
                         DateTime date = new DateTime(timestamp.getTime());
-                        if (list.get(k).getDcDj() == 3 || list.get(k).getDcDj() == 4) {
+                        if (list.get(k).getDcDj() == 2 || list.get(k).getDcDj() == 4) {
                             long t = date.getMillis()+ConstantFields.ZM2_TIME;
                             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
                             ts1 = Timestamp.valueOf(simpleDateFormat.format(t));
@@ -839,7 +828,7 @@ public class DataProcess {
                 try {
                     if(fields[j].getName().equals("dcDestination") ){
                         des = fields[j].get(oi).toString();
-                        if (des.length() ==4) {
+                        if (des.length() == 4) {
                             XD = des.substring(0,2);
                             DH = des.substring(2,4);
                         }

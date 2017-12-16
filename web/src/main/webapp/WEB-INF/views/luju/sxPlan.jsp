@@ -44,11 +44,11 @@
         <section class="content">
             <div class="row">
                 <%-- 需要审验的命令数据 --%>
-                <div class="">
+                <div class="col-md-8">
                     <%-- 设定作业计划box背景色--%>
                     <div class="box box-success" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
-                            <h3 class="box-title">裕国站下行到达场作业计划推演</h3>
+                            <h3 class="box-title">裕国站上行作业计划推演</h3>
                         </div>
                         <div class="box-body no-padding">
                             <table class="table" id="zuoyejihuaTable">
@@ -375,7 +375,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://localhost:8080/ygz/luju/sxPlan.action";
+                window.location="http://10.39.3.120:8080/ygz/luju/sxPlan.action";
             }
 
 

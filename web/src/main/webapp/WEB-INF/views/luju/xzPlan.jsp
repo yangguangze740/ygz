@@ -48,7 +48,7 @@
                     <%-- 设定作业计划box背景色--%>
                     <div class="box box-success" style="background-color: #F5F5F5;">
                         <div class="box-header with-border">
-                            <h3 class="box-title">裕国站下行到达场作业计划推演</h3>
+                            <h3 class="box-title">裕国站下行直通场作业计划推演</h3>
                         </div>
                         <div class="box-body no-padding">
                             <table class="table" id="zuoyejihuaTable">
