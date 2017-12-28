@@ -1,28 +1,36 @@
 package com.luju.ygz;
 
-import com.luju.pojo.DcPlanInfo;
-
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TestString {
 
     public static void main(String[] args) {
 
-        String a = "12 ab";
-        String b = "34 de";
+        String a[] = {"a","b"};
+        String b[] = {"b","a"};
+        Arrays.sort(a);
+        Arrays.sort(b);
 
-        String c = "ab 12";
-        String d = "de 34";
+        System.out.println( Arrays.equals(a, b));
 
-        System.out.println(a.equals(c));
-        System.out.println(a.equals(d));
-        System.out.println(b.equals(c));
-        System.out.println(b.equals(d));
 
-        if(!a.equals(c) && !a.equals(d) && !b.equals(c) && !b.equals(d)) {
-            System.out.println("insert");
-        }
+
+
+
+//        String a = "12 ab";
+//        String b = "34 de";
+//
+//        String c = "ab 12";
+//        String d = "de 34";
+//
+//        System.out.println(a.equals(c));
+//        System.out.println(a.equals(d));
+//        System.out.println(b.equals(c));
+//        System.out.println(b.equals(d));
+//
+//        if(!a.equals(c) && !a.equals(d) && !b.equals(c) && !b.equals(d)) {
+//            System.out.println("insert");
+//        }
 
 //        String a = "abc";
 //        String b = "bc";

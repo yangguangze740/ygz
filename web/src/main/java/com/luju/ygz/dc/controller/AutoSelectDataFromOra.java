@@ -1,6 +1,7 @@
 package com.luju.ygz.dc.controller;
 
 import com.luju.ygz.dc.service.DcServiceI;
+import com.luju.ygz.fc.service.FcServiceI;
 import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.DataProcess;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class AutoSelectDataFromOra {
     @Autowired
     private TestServiceI jcService;
 
+    @Autowired
+    private FcServiceI fcServiceI;
+
     DataProcess dataProcess = new DataProcess();
 
     @Scheduled(cron = "0 0/4 * * * ?")
@@ -23,6 +27,9 @@ public class AutoSelectDataFromOra {
 
         jcService.selectPlanDataFromOra(dataProcess);
         System.out.println("jc select ora");
+
+//        fcServiceI.selectPlanDataFromOra(dataProcess);
+//        System.out.println("fc select ora");
 
         dcService.selectPlanDataFromOraWithDelete(dataProcess);
         System.out.println("dc select ora");

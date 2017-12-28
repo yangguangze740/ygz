@@ -156,6 +156,8 @@ public class DcServiceImpl implements DcServiceI {
 
         List<DcPlanInfo> list = dcRepository.selectDcData();
 
+//        String array[];
+
         for (DcPlanInfo bean : list) {
             String uuid = bean.getDcId();
 
@@ -167,7 +169,7 @@ public class DcServiceImpl implements DcServiceI {
                     strings1.add(entry.getDcId());
 
                     listString1.add(strings1);
-                    boolean b = listString1.removeAll(listString2);
+                    boolean b = listString1.removeAll(listString2);//删除1中 与2 重复的元素
 
                     if (b == false) {
                         listString2.addAll(listString1);
@@ -175,8 +177,12 @@ public class DcServiceImpl implements DcServiceI {
 
                     }
                     String key = " "+bean.getDcId()+" "+bean.getDcNumber()+" "+bean.getDcType();
+
+//                    array = new String[]{bean.getDcId(),entry.getDcId()};
+
                     map.put(key,pathList);
                 }
+
                 for (Map.Entry<String,List<DcPlanInfo>> entry : map.entrySet()) {
                     String key  = entry.getKey();
                     key = key.substring(38);
@@ -203,8 +209,6 @@ public class DcServiceImpl implements DcServiceI {
                 }
             }
         }
-
-
 
         return map;
     }

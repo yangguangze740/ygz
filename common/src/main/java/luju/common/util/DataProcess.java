@@ -1,6 +1,7 @@
 package luju.common.util;
 
 import com.luju.pojo.DcPlanInfo;
+import com.luju.pojo.FcPlanInfo;
 import com.luju.pojo.JcPlanInfo;
 import org.joda.time.DateTime;
 
@@ -58,6 +59,7 @@ public class DataProcess {
         }
         return list;
     }
+
     public List<DcPlanInfo> xzTimeList(List<DcPlanInfo> list) {
 
         for (int k = 0; k < list.size(); k++) {
@@ -1043,5 +1045,85 @@ public class DataProcess {
         return ts;
     }
 
+    public List<FcPlanInfo> fcTimeList(List<FcPlanInfo> list) {
+        Timestamp end = null;
+        Timestamp start = null;
+
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if (fields[j].getName().equals("fcEndTime")) {
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        long t = date.getMillis()-ConstantFields.FC_TIME;
+                        long t1 = date.getMillis()+ConstantFields.FC_TIME;
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+                        start = Timestamp.valueOf(simpleDateFormat.format(t));
+                        end = Timestamp.valueOf(simpleDateFormat.format(t1));
+                    }
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setFcStartTime(start);
+            list.get(k).setFcEndTime(end);
+            list.get(k).setFcType(ConstantFields.TYPE_FC);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> calValue(List<DcPlanInfo> list, int swh,int i) {
+        long tStart = 0;
+        long tEnd = 0;
+        String des = null;
+
+        for (int k = 0; k < list.size(); k++) {
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if (!fields[j].isAccessible()) {
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if (fields[j].getName().equals("fcStartTime")) {
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        tStart = date.getMillis();
+                    }
+                    if (fields[j].getName().equals("fcEndTime")) {
+                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+                        DateTime date = new DateTime(timestamp.getTime());
+                        tEnd = date.getMillis();
+                    }
+                    if(fields[j].getName().equals("dcDestination") ){
+                        des = fields[j].get(oi).toString();
+                        if (des.length() == 4) {
+                            XD = des.substring(0,2);
+                            DH = des.substring(2,4);
+                        }
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            long value = (tEnd - tStart)/3;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+            list.get(k).setDcStartTime(Timestamp.valueOf(simpleDateFormat.format(tStart+(i-1)*value)));
+            list.get(k).setDcEndTime(Timestamp.valueOf(simpleDateFormat.format(tStart+i*value)));
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcXD(DH);
+        }
+        return list;
+    }
 
 }

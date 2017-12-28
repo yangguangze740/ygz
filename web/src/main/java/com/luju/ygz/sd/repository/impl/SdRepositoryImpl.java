@@ -60,7 +60,7 @@ public class SdRepositoryImpl implements SdRepositoryI {
     public List<DcPlanInfo> select4SixList() {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
-        sql.append(" FROM dc_show_data WHERE  dcDestination != 'SD02' AND dcDestination != 'SD10' AND dcXD = 'SD' AND LENGTH(dcNumber) = 6 AND dcStartTime > NOW()");
+        sql.append(" FROM dc_show_data WHERE (dcDH != '02' OR dcDH != '10') AND dcXD = 'SD' AND LENGTH(dcNumber) = 6 AND dcStartTime > NOW()");
         sql.append(" AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
 
         Object[] args = {};

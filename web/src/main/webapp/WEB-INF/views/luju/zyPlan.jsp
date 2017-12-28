@@ -168,17 +168,19 @@
                         <div class="box-body">
                             <table class="table" id="conflict4JFTable">
                                 <c:forEach items="${JFList}" var="entry" varStatus="status">
-                                    <tr dcId1="${entry.dcId}">
-                                        <td>
-                                            ${entry.dcNumber} ${entry.dcType} ${entry.dcJSL} ${entry.dcImportant}
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                    <c:if test="${!(entry.dcDH.equals('02')) && !(entry.dcDH.equals('03')) && !(entry.dcDH.equals('04'))}">
+                                        <tr dcId1="${entry.dcId}">
+                                            <td>
+                                                ${entry.dcNumber} ${entry.dcType} ${entry.dcJSL} ${entry.dcImportant}
+                                            </td>
+                                            <td>
+                                                <div style="text-align:right;">
+                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                    <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:if>
                                 </c:forEach>
                                 <c:forEach items="${partitionList}" var="entry" varStatus="status">
                                     <tr dcId1="${entry.dcId}">

@@ -29,6 +29,8 @@ public class ConstantFields {
 
     /* 接车推演时间*/
     public static long JC_TIME = 480000;
+    /* 发车推演时间*/
+    public static long FC_TIME = 300000;
     /* 时间差*/
     public static long TIME = 600000;
 
@@ -59,6 +61,7 @@ public class ConstantFields {
 
     /* 作业类别*/
     public static final String TYPE_JC = "接车";
+    public static final String TYPE_FC = "发车";
     public static final String TYPE_TC = "TC";
     public static final String TYPE_BWJ = "本务机";
     public static final String TYPE_QCX = "牵出线";

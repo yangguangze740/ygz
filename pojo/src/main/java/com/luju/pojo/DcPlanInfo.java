@@ -6,6 +6,7 @@ import java.util.List;
 public class DcPlanInfo {
 
     private String dcNumber;
+    private int dcSWH;
     private String dcStartTimeS;
     private String dcEndTimeS;
     private Timestamp dcStartTime;
@@ -26,7 +27,6 @@ public class DcPlanInfo {
     private String dcTF;
     private String dcXD;
     private String dcDH;
-    private int dcSWH;
     private int dcCS6;
     private String dcId;
     private String dcPath;

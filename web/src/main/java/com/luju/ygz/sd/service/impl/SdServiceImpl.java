@@ -155,8 +155,6 @@ public class SdServiceImpl implements SdServiceI {
             }
         }
 
-
-
         return map;
     }
 

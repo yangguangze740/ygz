@@ -186,7 +186,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectJF() {
-        String sql = "SELECT distinct dcId, dcNumber, dcType, dcStartTime, jcJSL, jcImportant FROM jc_plan_detals D LEFT JOIN dc_show_data S ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL = '禁峰列车' AND dcXD = 'XD' ORDER BY dcStartTime";
+        String sql = "SELECT distinct dcId, dcNumber, dcType, dcStartTime, dcDH, jcJSL, jcImportant FROM jc_plan_detals D LEFT JOIN dc_show_data S ON D.jcNumber = S.dcNumber WHERE dcType = '接车' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND jcJSL = '禁峰列车' AND dcXD = 'XD' ORDER BY dcStartTime";
         Object[] args = {};
 
         try {
@@ -903,6 +903,7 @@ public class DcRepositoryImpl implements DcRepositoryI {
             userInfo.setDcId(resultSet.getString("dcId"));
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
             userInfo.setDcType(resultSet.getString("dcType"));
+            userInfo.setDcDH(resultSet.getString("dcDH"));
             userInfo.setDcJSL(resultSet.getString("jcJSL"));
             userInfo.setDcImportant(resultSet.getString("jcImportant"));
 
