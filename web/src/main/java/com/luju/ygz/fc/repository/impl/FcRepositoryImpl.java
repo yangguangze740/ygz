@@ -87,13 +87,12 @@ public class FcRepositoryImpl implements FcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> sfbzList() {
-
-        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj,max(dcSWH) M FROM dc_plan_copy where dcType = '编组' and dcSource like 'S%' group by dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj order by dcNumber";
+    public List<DcPlanInfo> sfbzNumberList() {
+        String sql = "SELECT distinct dcNumber FROM ygz_show.dc_plan_copy where dcType='编组' and dcSource like '%F%'";
         Object[] args = {};
 
         try {
-            return mysqlJdbcTemplate.query(sql, args, new sfbzDataRowMapper());
+            return mysqlJdbcTemplate.query(sql, args, new sfbzNumberRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select bian zu error");
@@ -102,22 +101,54 @@ public class FcRepositoryImpl implements FcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> sftcList() {
-        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj,max(dcSWH) M FROM dc_plan_copy where dcType = '挑车' and dcSource like 'S%' group by dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj order by dcNumber";
+    public List<DcPlanInfo> sfbz(String number) {
+        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcNumber = ?";
+        Object[] args = {
+            number
+        };
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new sfbzRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select bz error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> sftcNumberList() {
+        String sql = "SELECT distinct dcSource FROM ygz_show.dc_plan_copy where dcType = '挑车' and dcSource like '%F%';";
         Object[] args = {};
 
         try {
-            return mysqlJdbcTemplate.query(sql, args, new sftcDataRowMapper());
+            return mysqlJdbcTemplate.query(sql, args, new sftcNumberRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("select tiao che error");
+            System.out.println("select bian zu error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> sftc(String source) {
+        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '挑车' and dcSource = ?";
+        Object[] args = {
+                source
+        };
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new sftcRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select tc error");
             return null;
         }
     }
 
     @Override
     public List<DcPlanInfo> sfzcList() {
-        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '转场' and dcSource like 'S%' order by dcNumber;";
+        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '转场' and dcSource like '%F%' order by dcNumber;";
         Object[] args = {};
 
         try {
@@ -131,7 +162,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
     @Override
     public List<DcPlanInfo> sfzmList() {
-        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '摘帽' and dcSource like 'S%' order by dcNumber;";
+        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '摘帽' and dcSource like '%F%' order by dcNumber;";
         Object[] args = {};
 
         try {
@@ -141,6 +172,36 @@ public class FcRepositoryImpl implements FcRepositoryI {
             System.out.println("select zhai mao error");
             return null;
         }
+    }
+
+    @Override
+    public boolean insertDcData(final List<DcPlanInfo> dcPlanInfos) {
+        String sql ="insert dc_show_data(dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcSource,dcDestination,dcDj,dcPath) VALUES(?,?,?,?,?,?,?,?,?)";
+        int[] result = mysqlJdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement ps, int i) throws SQLException {
+                DcPlanInfo dcPlanInfo = dcPlanInfos.get(i);
+
+                ps.setString(1, uuid.uuidPrimaryKey());
+                ps.setString(2, dcPlanInfo.getDcNumber());
+                ps.setTimestamp(3, dcPlanInfo.getDcStartTime());
+                ps.setTimestamp(4, dcPlanInfo.getDcEndTime());
+                ps.setString(5, dcPlanInfo.getDcType());
+                ps.setString(6,dcPlanInfo.getDcSource());
+                ps.setString(7,ConstantFields.S);
+                ps.setInt(8,dcPlanInfo.getDcDj());
+                ps.setString(9,dcPlanInfo.getDcPath());
+
+            }
+
+            @Override
+            public int getBatchSize() {
+                return dcPlanInfos.size();
+            }
+        });
+
+        return result.length == dcPlanInfos.size();
+
     }
 
     private class FcPlanCopyRowMapper implements RowMapper<FcPlanInfo> {
@@ -172,7 +233,17 @@ public class FcRepositoryImpl implements FcRepositoryI {
         }
     }
 
-    private class sfbzDataRowMapper implements RowMapper<DcPlanInfo> {
+    private class sfbzNumberRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+
+            return userInfo;
+        }
+    }
+
+    private class sfbzRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
 
@@ -182,13 +253,22 @@ public class FcRepositoryImpl implements FcRepositoryI {
             userInfo.setJLSJ(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
-            userInfo.setDcSWH(resultSet.getInt("M"));
 
             return userInfo;
         }
     }
 
-    private class sftcDataRowMapper implements RowMapper<DcPlanInfo> {
+    private class sftcNumberRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcSource(resultSet.getString("dcSource"));
+
+            return userInfo;
+        }
+    }
+
+    private class sftcRowMapper implements RowMapper<DcPlanInfo> {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
 
@@ -198,7 +278,6 @@ public class FcRepositoryImpl implements FcRepositoryI {
             userInfo.setJLSJ(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
-            userInfo.setDcSWH(resultSet.getInt("M"));
 
             return userInfo;
         }

@@ -6,5 +6,5 @@ public interface FcServiceI {
 
     void selectPlanDataFromOra(DataProcess dataProcess);
 
-    boolean processSFData(DataProcess dataProcess);
+    boolean processBFData(DataProcess dataProcess);
 }

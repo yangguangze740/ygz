@@ -13,12 +13,18 @@ public interface FcRepositoryI {
 
     boolean insertFcData(final List<FcPlanInfo> fcPlanInfos);
 
-    List<DcPlanInfo> sfbzList();
+    List<DcPlanInfo> sfbzNumberList();
 
-    List<DcPlanInfo> sftcList();
+    List<DcPlanInfo> sfbz(String number);
+
+    List<DcPlanInfo> sftcNumberList();
+
+    List<DcPlanInfo> sftc(String source);
+
+    List<DcPlanInfo> sfzmList();
 
     List<DcPlanInfo> sfzcList();
 
-    List<DcPlanInfo> sfzmList();
+    boolean insertDcData(final List<DcPlanInfo> dcPlanInfos);
 
 }

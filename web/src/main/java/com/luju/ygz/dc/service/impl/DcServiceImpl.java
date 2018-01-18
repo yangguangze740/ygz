@@ -156,7 +156,7 @@ public class DcServiceImpl implements DcServiceI {
 
         List<DcPlanInfo> list = dcRepository.selectDcData();
 
-//        String array[];
+        String key2;
 
         for (DcPlanInfo bean : list) {
             String uuid = bean.getDcId();
@@ -178,9 +178,14 @@ public class DcServiceImpl implements DcServiceI {
                     }
                     String key = " "+bean.getDcId()+" "+bean.getDcNumber()+" "+bean.getDcType();
 
-//                    array = new String[]{bean.getDcId(),entry.getDcId()};
+                    key2 = " "+entry.getDcId()+" "+entry.getDcNumber()+" "+entry.getDcType();
 
-                    map.put(key,pathList);
+                    if (!key2.equals(key) && key2 != null) {
+                        map.put(key,pathList);
+                    }else {
+                        break;
+                    }
+
                 }
 
                 for (Map.Entry<String,List<DcPlanInfo>> entry : map.entrySet()) {

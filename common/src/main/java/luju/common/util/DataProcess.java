@@ -1045,6 +1045,8 @@ public class DataProcess {
         return ts;
     }
 
+    // fc
+
     public List<FcPlanInfo> fcTimeList(List<FcPlanInfo> list) {
         Timestamp end = null;
         Timestamp start = null;
@@ -1079,7 +1081,7 @@ public class DataProcess {
         return list;
     }
 
-    public List<DcPlanInfo> calValue(List<DcPlanInfo> list, int swh,int i) {
+    public List<DcPlanInfo> calValue(List<DcPlanInfo> list,int i, int size) {
         long tStart = 0;
         long tEnd = 0;
         String des = null;
@@ -1116,7 +1118,7 @@ public class DataProcess {
                     e.printStackTrace();
                 }
             }
-            long value = (tEnd - tStart)/3;
+            long value = (tEnd - tStart)/size;
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
             list.get(k).setDcStartTime(Timestamp.valueOf(simpleDateFormat.format(tStart+(i-1)*value)));
             list.get(k).setDcEndTime(Timestamp.valueOf(simpleDateFormat.format(tStart+i*value)));
@@ -1125,5 +1127,4 @@ public class DataProcess {
         }
         return list;
     }
-
 }

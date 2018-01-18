@@ -31,23 +31,26 @@ public class FcServiceImpl implements FcServiceI {
     }
 
     @Override
-    public boolean processSFData(DataProcess dataProcess) {
+    public boolean processBFData(DataProcess dataProcess) {
 
         List<DcPlanInfo> listAll = new ArrayList<>();
-        List<DcPlanInfo> list4bz = repository.sfbzList();
-        List<DcPlanInfo> list4tc = repository.sftcList();
-        for (DcPlanInfo entry : list4bz) {
-            int swh = entry.getDcSWH();
-            for (int i = 1; i<=swh; i++) {
-                listAll.addAll(dataProcess.calValue(list4bz,swh,i));
+
+        List<DcPlanInfo> list4bzNumber = repository.sfbzNumberList();
+        for (DcPlanInfo entry : list4bzNumber) {
+            List<DcPlanInfo> list = repository.sfbz(entry.getDcNumber());
+            for (int i = 0; i<list.size(); i++) {
+                listAll.addAll(dataProcess.calValue(list,i,list.size()));
             }
         }
-        for (DcPlanInfo entry : list4tc) {
-            int swh = entry.getDcSWH();
-            for (int i = 1; i<=swh; i++) {
-                listAll.addAll(dataProcess.calValue(list4tc,swh,i));
+
+        List<DcPlanInfo> list4tcNumber = repository.sftcNumberList();
+        for (DcPlanInfo entry : list4tcNumber) {
+            List<DcPlanInfo> list = repository.sftc(entry.getDcSource());
+            for (int i = 0; i<list.size(); i++) {
+                listAll.addAll(dataProcess.calValue(list,i,list.size()));
             }
         }
+
         listAll.addAll(repository.sfzmList());
         listAll.addAll(repository.sfzcList());
 
@@ -55,6 +58,4 @@ public class FcServiceImpl implements FcServiceI {
 
         return dataWithAdd;
     }
-
-
 }
