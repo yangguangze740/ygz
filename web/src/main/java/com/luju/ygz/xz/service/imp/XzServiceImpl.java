@@ -16,7 +16,6 @@ public class XzServiceImpl implements XzServiceI {
     @Autowired
     private XzRepositoryI xzRepository;
 
-
     private DataProcess dataProcess;
 
     @Override
@@ -28,7 +27,6 @@ public class XzServiceImpl implements XzServiceI {
             return dataProcess.xzTimeList(list);
 
         }
-
         return null;
     }
 

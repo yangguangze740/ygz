@@ -1081,50 +1081,89 @@ public class DataProcess {
         return list;
     }
 
-    public List<DcPlanInfo> calValue(List<DcPlanInfo> list,int i, int size) {
-        long tStart = 0;
-        long tEnd = 0;
-        String des = null;
+    public DcPlanInfo calSub(DcPlanInfo dcPlanInfo, int i, int size) {
+        Timestamp startTime = dcPlanInfo.getDcStartTime();
+        Timestamp endTime = dcPlanInfo.getDcEndTime();
+        DateTime start = new DateTime(startTime.getTime());
+        DateTime end = new DateTime(endTime.getTime());
+        long startL = start.getMillis();
+        long endL = end.getMillis();
+        long sub = (endL - startL)/size;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+        dcPlanInfo.setDcStartTime(Timestamp.valueOf(simpleDateFormat.format(startL+(i)*sub)));
+        dcPlanInfo.setDcEndTime(Timestamp.valueOf(simpleDateFormat.format(startL+(i+1)*sub)));
 
-        for (int k = 0; k < list.size(); k++) {
-            Field[] fields = list.get(k).getClass().getDeclaredFields();
-            Object oi = list.get(k);
-            for (int j = 1; j < fields.length; j++) {
-                if (!fields[j].isAccessible()) {
-                    fields[j].setAccessible(true);
-                }
-                try {
-                    if (fields[j].getName().equals("fcStartTime")) {
-                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
-                        DateTime date = new DateTime(timestamp.getTime());
-                        tStart = date.getMillis();
-                    }
-                    if (fields[j].getName().equals("fcEndTime")) {
-                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
-                        DateTime date = new DateTime(timestamp.getTime());
-                        tEnd = date.getMillis();
-                    }
-                    if(fields[j].getName().equals("dcDestination") ){
-                        des = fields[j].get(oi).toString();
-                        if (des.length() == 4) {
-                            XD = des.substring(0,2);
-                            DH = des.substring(2,4);
-                        }
-                    }
-
-                } catch (IllegalArgumentException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-            }
-            long value = (tEnd - tStart)/size;
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
-            list.get(k).setDcStartTime(Timestamp.valueOf(simpleDateFormat.format(tStart+(i-1)*value)));
-            list.get(k).setDcEndTime(Timestamp.valueOf(simpleDateFormat.format(tStart+i*value)));
-            list.get(k).setDcXD(XD);
-            list.get(k).setDcXD(DH);
+        if (dcPlanInfo.getDcType().equals("编组")) {
+            dcPlanInfo.setDcTypeE(ConstantFields.BZ);
         }
-        return list;
+        if (dcPlanInfo.getDcType().equals("挑车")) {
+            dcPlanInfo.setDcTypeE(ConstantFields.TYPE_TC);
+        }
+        if (dcPlanInfo.getDcSource().length() == 4) {
+            dcPlanInfo.setDcXD((dcPlanInfo.getDcSource().substring(0,2)));
+            dcPlanInfo.setDcDH((dcPlanInfo.getDcSource().substring(2,4)));
+        }
+        dcPlanInfo.setDcDestination(ConstantFields.S);
+
+        return dcPlanInfo;
     }
+
+//    public List<DcPlanInfo> calValue(List<DcPlanInfo> list,int i, int size) {
+//        long tStart = 0;
+//        long tEnd = 0;
+//        String des = null;
+//        String typeE = null;
+//
+//        for (int k = 0; k < list.size(); k++) {
+//            Field[] fields = list.get(k).getClass().getDeclaredFields();
+//            Object oi = list.get(k);
+//            for (int j = 1; j < fields.length; j++) {
+//                if (!fields[j].isAccessible()) {
+//                    fields[j].setAccessible(true);
+//                }
+//                try {
+//                    if (fields[j].getName().equals("dcStartTime")) {
+//                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+//                        DateTime date = new DateTime(timestamp.getTime());
+//                        tStart = date.getMillis();
+//                    }
+//                    if (fields[j].getName().equals("dcEndTime")) {
+//                        Timestamp timestamp = (Timestamp)fields[j].get(oi);
+//                        DateTime date = new DateTime(timestamp.getTime());
+//                        tEnd = date.getMillis();
+//                    }
+//                    if (fields[j].getName().equals("dcType")) {
+//                        String type = fields[j].get(oi).toString();
+//                        if (type.equals("编组")) {
+//                            typeE = ConstantFields.BZ;
+//                        }
+//                        if (type.equals("挑车")) {
+//                            typeE = ConstantFields.TYPE_TC;
+//                        }
+//                    }
+//                    if(fields[j].getName().equals("dcSource") ){
+//                        des = fields[j].get(oi).toString();
+//                        if (des.length() == 4) {
+//                            XD = des.substring(0,2);
+//                            DH = des.substring(2,4);
+//                        }
+//                    }
+//
+//                } catch (IllegalArgumentException e) {
+//                    e.printStackTrace();
+//                } catch (IllegalAccessException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            long value = (tEnd - tStart)/size;
+//            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+//            list.get(k).setDcStartTime(Timestamp.valueOf(simpleDateFormat.format(tStart+(i)*value)));
+//            list.get(k).setDcEndTime(Timestamp.valueOf(simpleDateFormat.format(tStart+(i+1)*value)));
+//            list.get(k).setDcXD(XD);
+//            list.get(k).setDcDH(DH);
+//            list.get(k).setDcTypeE(typeE);
+//            list.get(k).setDcDestination(ConstantFields.S);
+//        }
+//        return list;
+//    }
 }

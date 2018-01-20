@@ -23,9 +23,8 @@ public class SdRepositoryImpl implements SdRepositoryI {
 
     DataProcess dataProcess = new DataProcess();
 
-
-
     PrimaryKeyUtil uuid = new PrimaryKeyUtil();
+
     @Override
     public List<DcPlanInfo> select4SdList() {
         String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where dcXD = 'SD' AND dcStartTime > now() AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";

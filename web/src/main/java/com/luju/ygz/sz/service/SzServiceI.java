@@ -4,7 +4,6 @@ import com.luju.pojo.DcPlanInfo;
 
 import java.util.List;
 
-
 public interface SzServiceI {
     List<DcPlanInfo> selectAllSzData();
 

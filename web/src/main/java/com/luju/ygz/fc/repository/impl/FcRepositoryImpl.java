@@ -88,7 +88,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
     @Override
     public List<DcPlanInfo> sfbzNumberList() {
-        String sql = "SELECT distinct dcNumber FROM ygz_show.dc_plan_copy where dcType='编组' and dcSource like '%F%'";
+        String sql = "SELECT distinct dcSource FROM ygz_show.dc_plan_copy where dcType='编组' and dcSource like '%F%'";
         Object[] args = {};
 
         try {
@@ -102,7 +102,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
     @Override
     public List<DcPlanInfo> sfbz(String number) {
-        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcNumber = ?";
+        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '编组' and dcSource = ?";
         Object[] args = {
             number
         };
@@ -148,7 +148,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
     @Override
     public List<DcPlanInfo> sfzcList() {
-        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '转场' and dcSource like '%F%' order by dcNumber;";
+        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '转场' and dcSource like 'SB%' order by dcNumber;";
         Object[] args = {};
 
         try {
@@ -162,7 +162,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
     @Override
     public List<DcPlanInfo> sfzmList() {
-        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '摘帽' and dcSource like '%F%' order by dcNumber;";
+    String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '摘帽' and dcSource like '%F%' order by dcNumber;";
         Object[] args = {};
 
         try {
@@ -237,7 +237,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
 
-            userInfo.setDcNumber(resultSet.getString("dcNumber"));
+            userInfo.setDcSource(resultSet.getString("dcSource"));
 
             return userInfo;
         }
@@ -249,8 +249,8 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
             userInfo.setDcSource(resultSet.getString("dcSource"));
-            userInfo.setJLSJ(resultSet.getTimestamp("dcStartTime"));
-            userInfo.setJLSJ(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
 
@@ -274,8 +274,8 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
             userInfo.setDcNumber("挑车");
             userInfo.setDcSource(resultSet.getString("dcSource"));
-            userInfo.setJLSJ(resultSet.getTimestamp("dcStartTime"));
-            userInfo.setJLSJ(resultSet.getTimestamp("dcEndTime"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("dcStartTime"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
 
@@ -289,7 +289,6 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
             userInfo.setDcNumber(resultSet.getString("dcNumber"));
             userInfo.setDcSource(resultSet.getString("dcSource"));
-            userInfo.setDcDestination(resultSet.getString("S"));
             userInfo.setJLSJ(resultSet.getTimestamp("dcStartTime"));
             userInfo.setJLSJ(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));

@@ -18,18 +18,18 @@ public class AutoSelectDataFromOra {
     private TestServiceI jcService;
 
     @Autowired
-    private FcServiceI fcServiceI;
+    private FcServiceI fcService;
 
     DataProcess dataProcess = new DataProcess();
 
-    @Scheduled(cron = "0 0/44 * * * ?")
+    @Scheduled(cron = "0 0/4 * * * ?")
     public void AutoSelectDataFromOra() {
 
         jcService.selectPlanDataFromOra(dataProcess);
         System.out.println("jc select ora");
 
-//        fcServiceI.selectPlanDataFromOra(dataProcess);
-//        System.out.println("fc select ora");
+        fcService.selectPlanDataFromOra(dataProcess);
+        System.out.println("fc select ora");
 
         dcService.selectPlanDataFromOraWithDelete(dataProcess);
         System.out.println("dc select ora");
@@ -43,6 +43,7 @@ public class AutoSelectDataFromOra {
         dcService.processDcData(dataProcess);
         dcService.processSdData(dataProcess);
         dcService.processJFCX();
+        fcService.processBFData(dataProcess);
 
     }
 
