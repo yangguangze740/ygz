@@ -88,7 +88,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
     @Override
     public List<DcPlanInfo> sfbzNumberList() {
-        String sql = "SELECT distinct dcSource FROM ygz_show.dc_plan_copy where dcType='编组' and dcSource like '%F%'";
+        String sql = "SELECT distinct dcNumber,dcSource FROM ygz_show.dc_plan_copy where dcType='编组' and dcSource like '%F%' order by dcNumber";
         Object[] args = {};
 
         try {
@@ -101,10 +101,11 @@ public class FcRepositoryImpl implements FcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> sfbz(String number) {
-        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '编组' and dcSource = ?";
+    public List<DcPlanInfo> sfbz(String number, String source) {
+        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '编组' and dcNumber= ? and dcSource = ?";
         Object[] args = {
-            number
+                number,
+                source
         };
 
         try {
@@ -131,9 +132,10 @@ public class FcRepositoryImpl implements FcRepositoryI {
     }
 
     @Override
-    public List<DcPlanInfo> sftc(String source) {
-        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '挑车' and dcSource = ?";
+    public List<DcPlanInfo> sftc(String number, String source) {
+        String sql = "SELECT dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '挑车' and dcNumber =? and dcSource = ?";
         Object[] args = {
+                number,
                 source
         };
 
@@ -153,6 +155,62 @@ public class FcRepositoryImpl implements FcRepositoryI {
 
         try {
             return mysqlJdbcTemplate.query(sql, args, new sfzcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zhuan chang error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> fcMsjList() {
+        String sql = "SELECT fcNumber, sum(fcHc) S,fcSource, fcEndTime, fcStartTime, fcDestination, fcType FROM fc_plan_copy WHERE fcSource = 'MSJ' group by fcNumber,fcSource, fcEndTime, fcStartTime, fcDestination, fcType";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new fcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zhuan chang error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> fcDcList() {
+        String sql = "SELECT fcNumber, sum(fcHc) S,fcSource, fcEndTime, fcStartTime, fcDestination, fcType FROM fc_plan_copy WHERE fcSource = 'DC' group by fcNumber,fcSource, fcEndTime, fcStartTime, fcDestination, fcType";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new fcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zhuan chang error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> fcYhList() {
+        String sql = "SELECT fcNumber, sum(fcHc) S,fcSource, fcEndTime, fcStartTime, fcDestination, fcType FROM fc_plan_copy WHERE fcSource = 'YH' group by fcNumber,fcSource, fcEndTime, fcStartTime, fcDestination, fcType";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new fcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zhuan chang error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> fcZwqList() {
+        String sql = "SELECT fcNumber, sum(fcHc) S,fcSource, fcEndTime, fcStartTime, fcDestination, fcType FROM fc_plan_copy WHERE fcSource = 'ZWQ' group by fcNumber,fcSource, fcEndTime, fcStartTime, fcDestination, fcType";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new fcDataRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("select zhuan chang error");
@@ -237,6 +295,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
 
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
             userInfo.setDcSource(resultSet.getString("dcSource"));
 
             return userInfo;
@@ -262,6 +321,7 @@ public class FcRepositoryImpl implements FcRepositoryI {
         public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             DcPlanInfo userInfo = new DcPlanInfo();
 
+            userInfo.setDcNumber(resultSet.getString("dcNumber"));
             userInfo.setDcSource(resultSet.getString("dcSource"));
 
             return userInfo;
@@ -308,6 +368,22 @@ public class FcRepositoryImpl implements FcRepositoryI {
             userInfo.setJLSJ(resultSet.getTimestamp("dcEndTime"));
             userInfo.setDcType(resultSet.getString("dcType"));
             userInfo.setDcDj(resultSet.getInt("dcDj"));
+
+            return userInfo;
+        }
+    }
+
+    private class fcDataRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo userInfo = new DcPlanInfo();
+
+            userInfo.setDcNumber(resultSet.getString("fcNumber"));
+            userInfo.setDcSource(resultSet.getString("fcSource"));
+            userInfo.setDcEndTime(resultSet.getTimestamp("fcEndTime"));
+            userInfo.setDcStartTime(resultSet.getTimestamp("fcStartTime"));
+            userInfo.setDcDestination(resultSet.getString("fcDestination"));
+            userInfo.setDcType(resultSet.getString("fcType"));
+            userInfo.setJcSumHc(resultSet.getFloat("S"));
 
             return userInfo;
         }

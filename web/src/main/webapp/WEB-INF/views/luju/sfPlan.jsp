@@ -356,7 +356,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://10.39.3.120:8080/ygz/luju/xzPlan.action";
+                window.location="http://10.39.3.120:8080/ygz/luju/sfPlan.action";
             }
 
 

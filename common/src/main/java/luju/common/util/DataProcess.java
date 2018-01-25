@@ -1108,6 +1108,138 @@ public class DataProcess {
         return dcPlanInfo;
     }
 
+    public List<DcPlanInfo> fcMsjDataList(List<DcPlanInfo> list) {
+        String des = null;
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcDestination") ){
+                        des = fields[j].get(oi).toString();
+                        if (des.length() ==4) {
+                            XD = des.substring(0,2);
+                            DH = des.substring(2,4);
+                        }
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcTypeE(ConstantFields.FC);
+            list.get(k).setDcPath(ConstantFields.FC+ConstantFields.JCSOURCE+des);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> fcDcDataList(List<DcPlanInfo> list) {
+        String des = null;
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcDestination") ){
+                        des = fields[j].get(oi).toString();
+                        if (des.length() ==4) {
+                            XD = des.substring(0,2);
+                            DH = des.substring(2,4);
+                        }
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcTypeE(ConstantFields.FC);
+            list.get(k).setDcPath(ConstantFields.FC+ConstantFields.DC+des);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> fcYhDataList(List<DcPlanInfo> list) {
+        String des = null;
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcDestination") ){
+                        des = fields[j].get(oi).toString();
+                        if (des.length() ==4) {
+                            XD = des.substring(0,2);
+                            DH = des.substring(2,4);
+                        }
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcTypeE(ConstantFields.FC);
+            list.get(k).setDcPath(ConstantFields.FC+ConstantFields.YH+des);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> fcZwqDataList(List<DcPlanInfo> list) {
+        String des = null;
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcDestination") ){
+                        des = fields[j].get(oi).toString();
+                        if (des.length() ==4) {
+                            XD = des.substring(0,2);
+                            DH = des.substring(2,4);
+                        }
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcTypeE(ConstantFields.FC);
+            list.get(k).setDcPath(ConstantFields.FC+ConstantFields.ZWQ+des);
+        }
+        return list;
+    }
+
 //    public List<DcPlanInfo> calValue(List<DcPlanInfo> list,int i, int size) {
 //        long tStart = 0;
 //        long tEnd = 0;

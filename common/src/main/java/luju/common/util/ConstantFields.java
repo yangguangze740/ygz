@@ -106,6 +106,7 @@ public class ConstantFields {
     /* 8.17 new data type */
 
     public static final String JC = "JC";
+    public static final String FC = "FC";
     public static final String BWJ = "BWJ";
     public static final String JT = "JT";
     public static final String XXBFC = "XXBFC";

@@ -15,15 +15,23 @@ public interface FcRepositoryI {
 
     List<DcPlanInfo> sfbzNumberList();
 
-    List<DcPlanInfo> sfbz(String number);
+    List<DcPlanInfo> sfbz(String number,String source);
 
     List<DcPlanInfo> sftcNumberList();
 
-    List<DcPlanInfo> sftc(String source);
+    List<DcPlanInfo> sftc(String number,String source);
 
     List<DcPlanInfo> sfzmList();
 
     List<DcPlanInfo> sfzcList();
+
+    List<DcPlanInfo> fcMsjList();
+
+    List<DcPlanInfo> fcDcList();
+
+    List<DcPlanInfo> fcYhList();
+
+    List<DcPlanInfo> fcZwqList();
 
     boolean insertDcData(final List<DcPlanInfo> dcPlanInfos);
 

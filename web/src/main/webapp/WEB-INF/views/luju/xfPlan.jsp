@@ -19,7 +19,7 @@
                     <li><a href="${contextPath}/luju/sxPlan.action"><strong>上行</strong></a></li>
                     <li><a href="${contextPath}/luju/sdPlan.action">上到</a></li>
                     <li><a href="${contextPath}/luju/szPlan.action">上直</a></li>
-                    <li><a href="#">上发</a></li>
+                    <li><a href="${contextPath}/luju/sfPlan.action">上发</a></li>
                 </ul>
                 <ul class="nav navbar-nav" style="margin-left: 50px;">
                     <li><a href="#"><strong>全站</strong></a></li>
@@ -356,7 +356,7 @@
             }
             // 页面自动刷新
             function webReFlash(){
-                window.location="http://10.39.3.120:8080/ygz/luju/xzPlan.action";
+                window.location="http://10.39.3.120:8080/ygz/luju/xfPlan.action";
             }
 
 
