@@ -846,8 +846,6 @@ public class DcRepositoryImpl implements DcRepositoryI {
                 }
 
             }
-
-
             String des = resultset.getString("dcDestination");
             if (des == null && resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
                 if (Integer.parseInt(resultset.getString("dcDH")) == 2 ||
@@ -866,14 +864,14 @@ public class DcRepositoryImpl implements DcRepositoryI {
             }
 
             if (des != null && resultset.getInt("dcIsUpdate") == 2) {
-                    if (resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
-                        if (des.equals(ConstantFields.S)){
-                            dcPlanInfo.setDcDestination(ConstantFields.BWJDS);
-                        } else {
-                            dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
-                        }
-                        dcPlanInfo.setSelectList(dataProcess.bwjSelectListUpdate(dcPlanInfo.getDcDestination()));
+                if (resultset.getString("dcTypeE").equals(ConstantFields.BWJ)) {
+                    if (des.equals(ConstantFields.S)){
+                        dcPlanInfo.setDcDestination(ConstantFields.BWJDS);
+                    } else {
+                        dcPlanInfo.setDcDestination(ConstantFields.BWJDN);
                     }
+                    dcPlanInfo.setSelectList(dataProcess.bwjSelectListUpdate(dcPlanInfo.getDcDestination()));
+                }
             }
 
             return dcPlanInfo;

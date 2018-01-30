@@ -155,7 +155,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectBwjPlanNew() {
-        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcDestination,dcXD,dcDH FROM ygz_show.dc_show_data where dcType='本务机' AND dcSource LIKE 'S%'order by dcStartTime;";
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcDestination,dcXD,dcDH FROM ygz_show.dc_show_data where dcType='接车' AND dcDestination LIKE 'S%'order by dcStartTime;";
         Object[] args = {};
 
         try {
@@ -169,7 +169,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
 
     @Override
     public List<DcPlanInfo> selectXxBwjPlanNew() {
-        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcDestination,dcXD,dcDH FROM ygz_show.dc_show_data where dcType='本务机' AND dcSource LIKE 'X%'order by dcStartTime;";
+        String sql = "SELECT dcNumber,dcStartTime,dcEndTime,dcDestination,dcXD,dcDH FROM ygz_show.dc_show_data where dcType='接车' AND dcDestination LIKE 'X%'order by dcStartTime;";
         Object[] args = {};
 
         try {
@@ -305,7 +305,6 @@ public class TestRepositoryImpl implements TestRepositoryI {
             DcPlanInfo userInfo = new DcPlanInfo();
 
             userInfo.setDcNumber(resultSet.getString("jcNumber"));
-            userInfo.setDcSource(resultSet.getString("jcSource"));
             userInfo.setDcEndTime(resultSet.getTimestamp("jcEndTime"));
             userInfo.setDcStartTime(resultSet.getTimestamp("jcStartTime"));
             userInfo.setDcDestination(resultSet.getString("jcDestination"));

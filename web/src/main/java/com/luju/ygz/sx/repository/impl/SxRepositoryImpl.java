@@ -49,6 +49,8 @@ public class SxRepositoryImpl implements SxRepositoryI{
             String source = resultset.getString("dcSource");
             if (source != null && source.equals(ConstantFields.DCSOURCE)) {
                 dcPlanInfo.setDcSource(ConstantFields.DCSOURCEC);
+            }else if (source != null && source.equals(ConstantFields.JCSOURCE)){
+                dcPlanInfo.setDcSource(ConstantFields.JCSOURCEC);
             } else if (source != null && source.equals(ConstantFields.ZWQSOURCE)){
                 dcPlanInfo.setDcSource(ConstantFields.ZWQSOURCEC);
             } else if (source != null && source.equals(ConstantFields.YHSOURCE)){

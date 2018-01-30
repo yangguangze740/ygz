@@ -54,7 +54,13 @@ public class XxRepositoryImpl implements XxRepositoryI {
                 dcPlanInfo.setDcSource(ConstantFields.JCSOURCEC);
             } else if (source != null && source.equals(ConstantFields.ZCSOURCE)){
                 dcPlanInfo.setDcSource(ConstantFields.ZCSOURCEC);
-            } else if (source != null && source.equals(ConstantFields.QC)){
+            } else if (source != null && source.equals(ConstantFields.ZWQSOURCE)){
+                dcPlanInfo.setDcSource(ConstantFields.ZWQSOURCEC);
+            }else if (source != null && source.equals(ConstantFields.DCSOURCE)){
+                dcPlanInfo.setDcSource(ConstantFields.DCSOURCEC);
+            }else if (source != null && source.equals(ConstantFields.YHSOURCE)){
+                dcPlanInfo.setDcSource(ConstantFields.YHSOURCEC);
+            }else if (source != null && source.equals(ConstantFields.QC)){
                 dcPlanInfo.setDcSource(ConstantFields.TYPE_QCX);
             } else if (source != null && source.equals(ConstantFields.JD)){
                 dcPlanInfo.setDcSource(ConstantFields.TYPE_JDX);
