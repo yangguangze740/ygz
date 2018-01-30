@@ -270,6 +270,17 @@ public class SdRepositoryImpl implements SdRepositoryI {
             }
             else {
                 dcPlanInfo.setDcSource(source);
+                if(resultset.getString("dcTypeE").equals(ConstantFields.JT)) {
+                    dcPlanInfo.setSelectList(dataProcess.jtSelectList());
+                }
+
+                if(resultset.getString("dcTypeE").equals(ConstantFields.ZM)) {
+                    dcPlanInfo.setSelectList(dataProcess.zmSelectList());
+                }
+
+                if(resultset.getString("dcTypeE").equals(ConstantFields.TYPE_TC)) {
+                    dcPlanInfo.setSelectList(dataProcess.tcSelectList());
+                }
             }
 
             if (source != null && resultset.getInt("dcIsUpdate") == 1) {

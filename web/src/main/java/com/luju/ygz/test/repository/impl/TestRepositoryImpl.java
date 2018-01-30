@@ -305,6 +305,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
             DcPlanInfo userInfo = new DcPlanInfo();
 
             userInfo.setDcNumber(resultSet.getString("jcNumber"));
+            userInfo.setDcSource(resultSet.getString("jcSource"));
             userInfo.setDcEndTime(resultSet.getTimestamp("jcEndTime"));
             userInfo.setDcStartTime(resultSet.getTimestamp("jcStartTime"));
             userInfo.setDcDestination(resultSet.getString("jcDestination"));
