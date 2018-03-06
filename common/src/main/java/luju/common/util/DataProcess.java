@@ -1095,6 +1095,7 @@ public class DataProcess {
 
         if (dcPlanInfo.getDcType().equals("编组")) {
             dcPlanInfo.setDcTypeE(ConstantFields.BZ);
+            dcPlanInfo.setDcPath(ConstantFields.BZ+dcPlanInfo.getDcSource()+ConstantFields.S);
         }
         if (dcPlanInfo.getDcType().equals("挑车")) {
             dcPlanInfo.setDcTypeE(ConstantFields.TYPE_TC);
@@ -1103,9 +1104,78 @@ public class DataProcess {
             dcPlanInfo.setDcXD((dcPlanInfo.getDcSource().substring(0,2)));
             dcPlanInfo.setDcDH((dcPlanInfo.getDcSource().substring(2,4)));
         }
-        dcPlanInfo.setDcDestination(ConstantFields.S);
+        dcPlanInfo.setDcDestination(dcPlanInfo.getDcSource());
+        dcPlanInfo.setDcSource(ConstantFields.S);
 
         return dcPlanInfo;
+    }
+
+    public List<DcPlanInfo> fczmDataList(List<DcPlanInfo> list) {
+        String des = null;
+        DcPlanInfo dcPlanInfo = new DcPlanInfo();
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcDestination") ){
+                        des = fields[j].get(oi).toString();
+                        if (des.length() ==4) {
+                            XD = des.substring(0,2);
+                            DH = des.substring(2,4);
+                        }
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcTypeE(ConstantFields.FC);
+            list.get(k).setDcPath(ConstantFields.ZM+dcPlanInfo.getDcSource()+des);
+        }
+        return list;
+    }
+
+    public List<DcPlanInfo> fczcDataList(List<DcPlanInfo> list) {
+        String des = null;
+        DcPlanInfo dcPlanInfo = new DcPlanInfo();
+
+        for(int k=0;k<list.size();k++){
+            Field[] fields = list.get(k).getClass().getDeclaredFields();
+            Object oi = list.get(k);
+            for (int j = 1; j < fields.length; j++) {
+                if(!fields[j].isAccessible()){
+                    fields[j].setAccessible(true);
+                }
+                try {
+                    if(fields[j].getName().equals("dcDestination") ){
+                        des = fields[j].get(oi).toString();
+                        if (des.length() ==4) {
+                            XD = des.substring(0,2);
+                            DH = des.substring(2,4);
+                        }
+                    }
+
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+            list.get(k).setDcXD(XD);
+            list.get(k).setDcDH(DH);
+            list.get(k).setDcTypeE(ConstantFields.FC);
+            list.get(k).setDcPath(ConstantFields.ZC+dcPlanInfo.getDcSource()+des);
+        }
+        return list;
     }
 
     public List<DcPlanInfo> fcMsjDataList(List<DcPlanInfo> list) {

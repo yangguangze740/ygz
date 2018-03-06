@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/luju")
@@ -21,8 +22,10 @@ public class SfController {
         ModelAndView mav = new ModelAndView("luju/sfPlan");
 
         List<DcPlanInfo> sfList = service.sfList();
+        Map<String,List<DcPlanInfo>> mapList = service.selectDcPath();
 
         mav.addObject("sfList",sfList);
+        mav.addObject("mapList",mapList);
 
         return mav;
     }

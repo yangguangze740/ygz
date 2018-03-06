@@ -163,6 +163,34 @@ public class FcRepositoryImpl implements FcRepositoryI {
     }
 
     @Override
+    public List<DcPlanInfo> sfqcList() {
+        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '取车' order by dcNumber;";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new sfzcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zhuan chang error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> sfscList() {
+        String sql = "SELECT distinct dcNumber,dcSource,dcStartTime,dcEndTime,dcType,dcDj FROM dc_plan_copy where dcType = '送车' order by dcNumber;";
+        Object[] args = {};
+
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new sfzcDataRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select zhuan chang error");
+            return null;
+        }
+    }
+
+    @Override
     public List<DcPlanInfo> fcMsjList() {
         String sql = "SELECT fcNumber, sum(fcHc) S,fcSource, fcEndTime, fcStartTime, fcDestination, fcType FROM fc_plan_copy WHERE fcSource = 'MSJ' group by fcNumber,fcSource, fcEndTime, fcStartTime, fcDestination, fcType";
         Object[] args = {};

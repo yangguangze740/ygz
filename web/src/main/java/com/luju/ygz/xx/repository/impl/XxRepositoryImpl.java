@@ -22,7 +22,7 @@ public class XxRepositoryImpl implements XxRepositoryI {
     @Override
     public List<DcPlanInfo> select4AllList() {
 
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where  (dcXD = 'XD' OR dcXD = 'XZ' OR dcXD = 'XB') AND dcStartTime > now()  AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where  (dcXD = 'XD' OR dcXD = 'XZ' OR dcXD = 'XB' OR dcXD = 'XF') AND dcStartTime > now()  AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new XxDataRowMapper());

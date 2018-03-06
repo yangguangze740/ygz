@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/luju")
@@ -21,6 +22,7 @@ public class XfController {
         ModelAndView mav = new ModelAndView("luju/xfPlan");
 
         List<DcPlanInfo> xfList = service.xfList();
+        Map<String,List<DcPlanInfo>> mapList = service.selectDcPath();
 
         mav.addObject("xfList",xfList);
 

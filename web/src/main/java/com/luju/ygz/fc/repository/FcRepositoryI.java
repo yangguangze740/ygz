@@ -3,6 +3,7 @@ package com.luju.ygz.fc.repository;
 import com.luju.pojo.DcPlanInfo;
 import com.luju.pojo.FcPlanInfo;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface FcRepositoryI {
@@ -35,4 +36,7 @@ public interface FcRepositoryI {
 
     boolean insertDcData(final List<DcPlanInfo> dcPlanInfos);
 
+    List<DcPlanInfo> sfqcList();
+
+    List<DcPlanInfo> sfscList();
 }

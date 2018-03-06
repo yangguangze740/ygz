@@ -36,6 +36,7 @@ public class FcServiceImpl implements FcServiceI {
         List<DcPlanInfo> listAll = new ArrayList<>();
 
         List<DcPlanInfo> list4bzNumber = repository.sfbzNumberList();
+
         for (DcPlanInfo entry : list4bzNumber) {
             List<DcPlanInfo> list = repository.sfbz(entry.getDcNumber(),entry.getDcSource());
             for (int i = 0; i<list.size(); i++) {
@@ -51,10 +52,14 @@ public class FcServiceImpl implements FcServiceI {
             }
         }
         if (repository.sfzmList()!= null){
-            listAll.addAll(repository.sfzmList());
+            listAll.addAll(dataProcess.fczmDataList(repository.sfzmList()));
         }
         if (repository.sfzcList()!= null) {
-            listAll.addAll(repository.sfzcList());
+            listAll.addAll(dataProcess.fczcDataList(repository.sfzcList()));
+        }if (repository.sfqcList()!= null) {
+            listAll.addAll(repository.sfqcList());
+        }if(repository.sfscList()!=null){
+            listAll.addAll(repository.sfscList());
         }
         if (repository.fcMsjList()!= null) {
             listAll.addAll(dataProcess.fcMsjDataList(repository.fcMsjList()));

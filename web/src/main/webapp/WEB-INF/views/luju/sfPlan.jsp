@@ -166,6 +166,33 @@
                             </table>
                         </div>
                     </div>
+                    <div class="box box-warning" style="background-color: #F5F5F5;">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">交叉进路</h3>
+                        </div>
+                        <div class="box-body">
+                            <table class="table" id="conflictTable">
+                                <c:forEach items="${mapList}" var="map" varStatus="status">
+                                    <c:forEach items="${map.value}" var="entry" varStatus="status">
+                                        <c:set var = "k" value="${map.key}" />
+                                        <c:set var = "length" value="${fn:length(k)}"/>
+                                        <c:set var = "firstDcId" value="${fn:substring(k, 1, 37)}" />
+                                        <c:set var = "firstDcNumber" value="${fn:substring(k, 38, length)}" />
+                                        <tr dcId1="${firstDcId}" dcId2="${entry.dcId}" >
+                                            <td> ${firstDcNumber} 与 ${entry.dcNumber} ${entry.dcType} 进路交叉</td>
+                                            <td>
+                                                <div style="text-align:right;">
+                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                    <button type="button" info1="${firstDcNumber}" info2="${entry.dcNumber}" info3="${entry.dcType}" class="btn btn-danger" value="cd">调整</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </c:forEach>
+                            </table>
+                        </div>
+                    </div>
+                </div>
                     <%-- 弹出modal --%>
                     <div class="modal fade" id="noteModal">
                         <div class="modal-dialog" role="dialog">

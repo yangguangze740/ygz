@@ -20,7 +20,7 @@ public class SxRepositoryImpl implements SxRepositoryI{
 
     @Override
     public List<DcPlanInfo> select4SdList() {
-        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where  (dcXD = 'SD' OR dcXD = 'SZ') AND dcStartTime > now()  AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
+        String sql = "SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc FROM dc_show_data where  (dcXD = 'SD' OR dcXD = 'SZ' OR dcXD = 'SF') AND dcStartTime > now()  AND dcStartTime < ADDDATE(now(),interval 10800 second) order by dcStartTime";
         Object[] args = {};
         try {
             return mysqlJdbcTemplate.query(sql, args, new XxDataRowMapper());
