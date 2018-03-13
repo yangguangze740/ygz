@@ -113,7 +113,7 @@ public class SzRepositoryImpl implements SzRepositoryI {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT dcId,dcNumber,dcStartTime,dcEndTime,dcType,dcTypeE,dcSource,dcDestination,dcDj,dcPath,dcIsUpdate,dcDH,jcSumHc");
         sql.append(" FROM dc_show_data WHERE dcNumber LIKE '5%' AND LENGTH(dcNumber) = 5 AND dcStartTime > NOW()");
-        sql.append(" AND dcXD = 'SZ' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) ORDER BY dcStartTime");
+        sql.append(" AND dcXD = 'SZ' AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND) AND dcTypeE = 'JC' ORDER BY dcStartTime");
 
         Object[] args = {};
         try {

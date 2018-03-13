@@ -56,9 +56,11 @@ public class FcServiceImpl implements FcServiceI {
         }
         if (repository.sfzcList()!= null) {
             listAll.addAll(dataProcess.fczcDataList(repository.sfzcList()));
-        }if (repository.sfqcList()!= null) {
+        }
+        if (repository.sfqcList()!= null) {
             listAll.addAll(repository.sfqcList());
-        }if(repository.sfscList()!=null){
+        }
+        if(repository.sfscList()!=null){
             listAll.addAll(repository.sfscList());
         }
         if (repository.fcMsjList()!= null) {

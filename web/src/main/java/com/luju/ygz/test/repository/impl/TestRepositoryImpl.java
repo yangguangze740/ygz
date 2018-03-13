@@ -35,6 +35,7 @@ public class TestRepositoryImpl implements TestRepositoryI {
             return jdbcTemplate.query(sql, args, new JcPlanCopyRowMapper());
         } catch (Exception e) {
             e.printStackTrace();
+
             System.out.println("select jc data from ora error");
             return null;
         }
@@ -308,7 +309,9 @@ public class TestRepositoryImpl implements TestRepositoryI {
             userInfo.setDcSource(resultSet.getString("jcSource"));
             userInfo.setDcEndTime(resultSet.getTimestamp("jcEndTime"));
             userInfo.setDcStartTime(resultSet.getTimestamp("jcStartTime"));
-            userInfo.setDcDestination(resultSet.getString("jcDestination"));
+            if (resultSet.getString("jcDestination")!= null){
+                userInfo.setDcDestination(resultSet.getString("jcDestination"));
+            }
             userInfo.setDcType(resultSet.getString("jcType"));
             userInfo.setJcSumHc(resultSet.getFloat("S"));
 
