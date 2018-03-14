@@ -22,13 +22,10 @@
                     <li><a href="${contextPath}/luju/sfPlan.action">上发</a></li>
                 </ul>
                 <ul class="nav navbar-nav" style="margin-left: 50px;">
-                    <li><a href="${contextPath}/luju/statistics/index.action"><strong>统计</strong></a></li>
-                </ul>
-                <ul class="nav navbar-nav" style="margin-left: 50px;">
                     <li><a href="#"><strong>全站</strong></a></li>
                 </ul>
                 <ul class="nav navbar-nav" style="float: right;">
-                    <li><a href="${contextPath}/luju/statistics.action">查询</a></li>
+                    <li><a href="${contextPath}/luju/statistics/index.action">统计</a></li>
                     <li style="float: right;">
 
                         <a href="#" class="dropdown-toggle" id="nowDay">日期：

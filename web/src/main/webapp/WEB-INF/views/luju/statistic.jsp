@@ -6,42 +6,39 @@
 <div class="wrapper" style="height: auto;">
 
 <script src="${contextPath}/static/plugins/echarts/echarts.min.js"></script>
-<header class="main-header">
-    <!-- 头部内容 -->
-    <nav class="navbar" style="margin-left: 0px;">
-        <div class="navbar">
-            <ul class="nav navbar-nav">
-                <li><a href="${contextPath}/luju/xxPlan.action"><strong>下行</strong></a></li>
-                <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
-                <li><a href="${contextPath}/luju/xzPlan.action">下直</a></li>
-                <li><a href="${contextPath}/luju/xfPlan.action">下发</a></li>
-            </ul>
-            <ul class="nav navbar-nav" style="margin-left: 50px;">
-                <li><a href="${contextPath}/luju/sxPlan.action"><strong>上行</strong></a></li>
-                <li><a href="${contextPath}/luju/sdPlan.action">上到</a></li>
-                <li><a href="${contextPath}/luju/szPlan.action">上直</a></li>
-                <li><a href="${contextPath}/luju/sfPlan.action">上发</a></li>
-            </ul>
-            <ul class="nav navbar-nav" style="margin-left: 50px;">
-                <li><a href="${contextPath}/luju/statistics/index.action"><strong>统计</strong></a></li>
-            </ul>
-            <ul class="nav navbar-nav" style="margin-left: 50px;">
-                <li><a href="#"><strong>全站</strong></a></li>
-            </ul>
-            <ul class="nav navbar-nav" style="float: right;">
-                <li><a href="${contextPath}/luju/statistics.action">查询</a></li>
-                <li style="float: right;">
+    <header class="main-header">
+        <!-- 头部内容 -->
+        <nav class="navbar" style="margin-left: 0px;">
+            <div class="navbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="${contextPath}/luju/xxPlan.action"><strong>下行</strong></a></li>
+                    <li><a href="${contextPath}/luju/zyPlan.action">下到</a></li>
+                    <li><a href="${contextPath}/luju/xzPlan.action">下直</a></li>
+                    <li><a href="${contextPath}/luju/xfPlan.action">下发</a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="margin-left: 50px;">
+                    <li><a href="${contextPath}/luju/sxPlan.action"><strong>上行</strong></a></li>
+                    <li><a href="${contextPath}/luju/sdPlan.action">上到</a></li>
+                    <li><a href="${contextPath}/luju/szPlan.action">上直</a></li>
+                    <li><a href="${contextPath}/luju/sfPlan.action">上发</a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="margin-left: 50px;">
+                    <li><a href="#"><strong>全站</strong></a></li>
+                </ul>
+                <ul class="nav navbar-nav" style="float: right;">
+                    <li><a href="${contextPath}/luju/statistics/index.action">统计</a></li>
+                    <li style="float: right;">
 
-                    <a href="#" class="dropdown-toggle" id="nowDay">日期：
-                    </a>
-                </li>
-                <script>
-                    document.getElementById("nowDay").innerHTML = new Date().toLocaleDateString();
-                </script>
-            </ul>
-        </div>
-    </nav>
-</header>
+                        <a href="#" class="dropdown-toggle" id="nowDay">日期：
+                        </a>
+                    </li>
+                    <script>
+                        document.getElementById("nowDay").innerHTML = new Date().toLocaleDateString();
+                    </script>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
 <!-- 内容主体 -->
 
