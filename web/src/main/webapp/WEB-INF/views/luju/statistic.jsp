@@ -84,7 +84,7 @@
                     </div>
                 </div>
                 <div class="col-md-12" >
-                    <h3>一个月内的报修量与维修量统计折线图</h3>
+                    <h3>一个月内的交叉进路统计折线图</h3>
                     <div class="box box-primary">
                         <div class="box-body">
                             <div class="chart">
@@ -108,7 +108,7 @@
                         </thead>
                         <tbody id="showDataTbody">
                         <c:forEach items="${allList}" var="record" varStatus="status">
-                            <tr>
+                            <tr style="text-align: center;">
                                 <td>${status.index + 1}</td>
                                 <td>${record.logTime}</td>
                                 <td>${record.data1}</td>
@@ -134,13 +134,13 @@
 
     var optionMonthConflict = {
         title: {
-            text: '进路冲突统计面板'
+            text: '交叉进路面板'
         },
         tooltip: {
             trigger: 'axis'
         },
         legend: {
-            data:['冲突数量']
+            data:['交叉进路数量']
         },
         toolbox: {
             show: true,
@@ -169,7 +169,7 @@
         },
         series: [
             {
-                name:'冲突数量',
+                name:'交叉进路数量',
                 type:'line',
                 data:[],
                 markPoint: {

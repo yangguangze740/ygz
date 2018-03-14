@@ -22,6 +22,9 @@
                         <li><a href="${contextPath}/luju/sfPlan.action">上发</a></li>
                     </ul>
                     <ul class="nav navbar-nav" style="margin-left: 50px;">
+                        <li><a href="${contextPath}/luju/statistics/index.action"><strong>统计</strong></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav" style="margin-left: 50px;">
                         <li><a href="#"><strong>全站</strong></a></li>
                     </ul>
                     <ul class="nav navbar-nav" style="float: right;">
@@ -309,19 +312,13 @@
                                 var oneTrValue = value2.dcNumber;
                                 var twoTrValue = value2.dcType;
                                 var threeTrValue = value2.dcId;
-                                console.log(key);
-                                console.log(threeTrValue);
-                                console.log(oneTrValue);
-                                console.log(twoTrValue);
                                 var strs= new Array(); //定义一数组
                                 strs= key.split(" ");
                                 var firstDcId = strs[1];
                                 var firstDcNumber = strs[2];
                                 var firstDcType = strs[3];
                                 var processFirstDcid = strs[1].substring(1);
-                                console.log(processFirstDcid);
-                                console.log(firstDcNumber);
-                                console.log(firstDcType);
+
                                 $("#conflictTable").append(
                                     "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 进路交叉<td>\n" +
                                     "<div style=\"text-align:right;\">\n" +
@@ -371,19 +368,12 @@
                                 var oneTrValue = value2.dcNumber;
                                 var twoTrValue = value2.dcType;
                                 var threeTrValue = value2.dcId;
-                                console.log(key);
-                                console.log(threeTrValue);
-                                console.log(oneTrValue);
-                                console.log(twoTrValue);
                                 var strs= new Array(); //定义一数组
                                 strs= key.split(" ");
                                 var firstDcId = strs[1];
                                 var firstDcNumber = strs[2];
                                 var firstDcType = strs[3];
                                 var processFirstDcid = strs[1].substring(1);
-                                console.log(processFirstDcid);
-                                console.log(firstDcNumber);
-                                console.log(firstDcType);
                                 $("#conflictTable").append(
                                     "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 进路交叉<td>\n" +
                                     "<div style=\"text-align:right;\">\n" +
