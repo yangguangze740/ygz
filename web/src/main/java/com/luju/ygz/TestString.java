@@ -6,13 +6,12 @@ public class TestString {
 
     public static void main(String[] args) {
 
-        String a[] = {"a","b"};
-        String b[] = {"b","a"};
-        Arrays.sort(a);
-        Arrays.sort(b);
-
-        System.out.println( Arrays.equals(a, b));
-
+        String a = null;
+        if (a==null) {
+            System.out.println("null");
+        } else {
+            System.out.println("not null");
+        }
 
 
 

@@ -261,47 +261,6 @@
                     dcNumber: dcNumber,
                     dcType: dcType
                 }
-
-                $.ajax({
-                    type:'post',
-                    contentType:'application/x-www-form-urlencoded',
-                    data:postData,
-                    dataType:'json',
-                    url:'${contextPath}/luju/updateSource.action',
-                    success:function (result) {
-                        //console.log(result);
-                        // result == Map<String,List<DcPlanInfo>>
-                        $("#conflictTable").empty();
-                        for (var key in result) {
-                            $.each(result[key], function(i1, value2) {
-                                var oneTrValue = value2.dcNumber;
-                                var twoTrValue = value2.dcType;
-                                var threeTrValue = value2.dcId;
-                                console.log(key);
-                                console.log(threeTrValue);
-                                console.log(oneTrValue);
-                                console.log(twoTrValue);
-                                var strs= new Array(); //定义一数组
-                                strs= key.split(" ");
-                                var firstDcId = strs[1];
-                                var firstDcNumber = strs[2];
-                                var firstDcType = strs[3];
-                                var processFirstDcid = strs[1].substring(1);
-                                console.log(processFirstDcid);
-                                console.log(firstDcNumber);
-                                console.log(firstDcType);
-                                $("#conflictTable").append(
-                                        "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
-                                        "<div style=\"text-align:right;\">\n" +
-                                        "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
-                                        "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
-                                        "</div></td></tr>"
-                                );
-                            })
-                        }
-                        afterAppend();
-                    }
-                })
             })
 
             $("#showDataTbody select.destinationUpdate").change(function() {
@@ -323,47 +282,6 @@
                     dcNumber: dcNumber,
                     dcType: dcType
                 }
-
-                $.ajax({
-                    type:'post',
-                    contentType:'application/x-www-form-urlencoded',
-                    data:postData,
-                    dataType:'json',
-                    url:'${contextPath}/luju/updateDestination.action',
-                    success:function (result) {
-                        console.log(result);
-                        // result == list<Map<String,List<DcPlanInfo>>>
-                        $("#conflictTable").empty();
-                        for (var key in result) {
-                            $.each(result[key], function(i1, value2) {
-                                var oneTrValue = value2.dcNumber;
-                                var twoTrValue = value2.dcType;
-                                var threeTrValue = value2.dcId;
-                                console.log(key);
-                                console.log(threeTrValue);
-                                console.log(oneTrValue);
-                                console.log(twoTrValue);
-                                var strs= new Array(); //定义一数组
-                                strs= key.split(" ");
-                                var firstDcId = strs[1];
-                                var firstDcNumber = strs[2];
-                                var firstDcType = strs[3];
-                                var processFirstDcid = strs[1].substring(1);
-                                console.log(processFirstDcid);
-                                console.log(firstDcNumber);
-                                console.log(firstDcType);
-                                $("#conflictTable").append(
-                                        "<tr dcId1 = "+ processFirstDcid +" dcId2= "+threeTrValue +"><td>" + firstDcNumber +" "+ firstDcType + " 与 " +oneTrValue +" "+ twoTrValue+ " 冲突<td>\n" +
-                                        "<div style=\"text-align:right;\">\n" +
-                                        "<button type=\"button\" class=\"btn btn-warning\">撤销</button>\n" +
-                                        "<button type=\"button\" class=\"btn btn-danger\" value=\"cd\">调整</button>\n" +
-                                        "</div></td></tr>"
-                                );
-                            })
-                        }
-                        afterAppend();
-                    }
-                })
             })
 
             function zyPlan(condition) {

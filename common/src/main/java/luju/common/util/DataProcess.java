@@ -861,7 +861,7 @@ public class DataProcess {
                     fields[j].setAccessible(true);
                 }
                 try {
-                    if(fields[j].getName().equals("dcDestination") ){
+                    if(fields[j].getName().equals("jcDestination")){
                         des = fields[j].get(oi).toString();
                         if (des.length() ==4) {
                             XD = des.substring(0,2);
@@ -1156,7 +1156,7 @@ public class DataProcess {
                     fields[j].setAccessible(true);
                 }
                 try {
-                    if(fields[j].getName().equals("dcDestination") ){
+                    if(fields[j].getName().equals("dcSource")){
                         des = fields[j].get(oi).toString();
                         if (des.length() ==4) {
                             XD = des.substring(0,2);
@@ -1173,7 +1173,7 @@ public class DataProcess {
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
             list.get(k).setDcTypeE(ConstantFields.FC);
-            list.get(k).setDcPath(ConstantFields.ZC+dcPlanInfo.getDcSource()+des);
+            list.get(k).setDcPath(ConstantFields.ZC+dcPlanInfo.getDcSource()+ConstantFields.S);
         }
         return list;
     }
