@@ -198,8 +198,8 @@ public class DcServiceImpl implements DcServiceI {
                         if (statisticsInfos.size() != 0) {
                             int index = 0;
                             for (StatisticsInfo entry2 :statisticsInfos) {
-                                if (!entry2.getData1().equals(info.getData2()) && !entry2.getData2().equals(info.getData1())
-                                        && !entry2.getData1().equals(info.getData1()) && !entry2.getData2().equals(info.getData2())
+                                if ((!entry2.getData1().equals(info.getData2())) && (!entry2.getData2().equals(info.getData1()))
+                                        && (!entry2.getData1().equals(info.getData1())) && (!entry2.getData2().equals(info.getData2()))
                                         ){
                                     index++;
                                 }

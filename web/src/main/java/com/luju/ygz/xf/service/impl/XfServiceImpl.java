@@ -96,5 +96,5 @@ public class XfServiceImpl implements XfServiceI{
 
         return map;
     }
-    }
+}
 
