@@ -533,9 +533,10 @@
     </script>
 
     <!-- 底部栏 -->
+
     <footer class="main-footer" style="margin-left: 0px !important;">
         <div class="pull-right hidden-xs">
-            <b>版本</b> 0.3.5
+            <b>版本</b> 0.4.1
         </div>
         <strong><a href="${contextPath}/about/index.action">版本历史</a></strong>
     </footer>

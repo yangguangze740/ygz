@@ -99,11 +99,14 @@ public class XfRepositoryImpl implements XfRepositoryI {
 
     @Override
     public int insertStatisticsInfo(StatisticsInfo info) {
-        String sql = "insert into dc_statistics (statisticsId,logTime,data1,data2) value (?,CURDATE(),?,?)";
+        String sql = "insert into dc_statistics (statisticsId,logTime,data1,data2,type,user,details) value (?,CURDATE(),?,?,?,?,?)";
         Object[] args = {
                 uuid.uuidPrimaryKey(),
                 info.getData1(),
-                info.getData2()
+                info.getData2(),
+                "交叉进路",
+                "管理员",
+                "交叉进路"
         };
         try {
             return mysqlJdbcTemplate.update(sql,args);
