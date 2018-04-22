@@ -31,7 +31,7 @@ public class SdController {
         mav.addObject("sdList",sdList);
         mav.addObject("sixList",sixList);
         mav.addObject("tzList",tzList);
-        mav.addObject("partion",partition);
+        mav.addObject("partition",partition);
         mav.addObject("mapList",mapList);
         return mav;
     }
