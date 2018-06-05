@@ -185,7 +185,6 @@ public class DcServiceImpl implements DcServiceI {
                     }else {
                         break;
                     }
-
                 }
 
                 for (Map.Entry<String,List<DcPlanInfo>> entry : map.entrySet()) {

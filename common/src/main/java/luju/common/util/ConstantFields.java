@@ -122,10 +122,13 @@ public class ConstantFields {
 
     /* 上到数据常量*/
     public static final String ZWQSOURCE = "ZWQ";
+    public static final String ZWQSOURCE1 = "ZWQ1";
     public static final String ZWQSOURCEC = "转湾桥";
     public static final String DCSOURCE = "DC";
+    public static final String DCSOURCE1 = "DC1";
     public static final String DCSOURCEC = "大成";
     public static final String YHSOURCE = "YH";
+    public static final String YHSOURCE1 = "YH1";
     public static final String YHSOURCEC = "于洪";
 
 

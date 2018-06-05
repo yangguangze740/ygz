@@ -2,6 +2,7 @@ package com.luju.ygz;
 
 import com.luju.pojo.*;
 import com.luju.ygz.dc.service.DcServiceI;
+import com.luju.ygz.fc.service.FcServiceI;
 import com.luju.ygz.test.service.TestServiceI;
 import luju.common.util.ConstantFields;
 import luju.common.util.DataProcess;
@@ -24,10 +25,15 @@ import java.util.Map;
 public class ShowController {
 
     @Autowired
-    private TestServiceI service;
+    private TestServiceI jcService;
 
     @Autowired
     private DcServiceI dcService;
+
+    @Autowired
+    private FcServiceI fcService;
+
+    DataProcess dataProcess = new DataProcess();
 
     @RequestMapping("/route")
     public String routeLogin() {
@@ -143,4 +149,31 @@ public class ShowController {
         List<StatisticsInfo> list4Time = dcService.selectStatisticsInfoWithTime(dateWithChange);
         return list4Time;
     }
+
+//    @RequestMapping(value = "/refresh", method = RequestMethod.POST)
+//    public String refresh() {
+//        jcService.selectPlanDataFromOra(dataProcess);
+//        System.out.println("jc select ora");
+//
+//        fcService.selectPlanDataFromOra(dataProcess);
+//        System.out.println("fc select ora");
+//
+//        dcService.selectPlanDataFromOraWithDelete(dataProcess);
+//        System.out.println("dc select ora");
+//
+//        dcService.deleteShowData();
+//        dcService.deleteTcData();
+//        dcService.deleteTcDataSix();
+//        dcService.deleteJFCX();
+//
+//        dcService.processTcDataNew(dataProcess);
+//        dcService.processDcData(dataProcess);
+//        dcService.processSdData(dataProcess);
+//        dcService.processJFCX();
+//        fcService.processBFData(dataProcess);
+//
+//        return "redirect:/luju/sdPlan.action";
+//    }
+
+
 }

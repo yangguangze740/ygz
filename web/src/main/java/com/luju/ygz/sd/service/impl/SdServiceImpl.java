@@ -48,6 +48,52 @@ public class SdServiceImpl implements SdServiceI {
         String partitionNumber = null;
         int partition = 0;
         List<DcPlanInfo> list4Partition = sdRepository.select4Partition();
+
+//        for(int i =0 ;i<list4Partition.size()-1;i++) {
+//            if (dcDH == null) {
+//                dcDH = list4Partition.get(i).getDcDH();
+//                if (list4Partition.get(i).getDcDH().equals("02") || list4Partition.get(i).getDcDH().equals("03") || list4Partition.get(i).getDcDH().equals("04") || list4Partition.get(i).getDcDH().equals("05")) {
+//                    partition = 1;
+//                    partitionId = list4Partition.get(i).getDcId();
+//                    partitionNumber = list4Partition.get(i).getDcNumber();
+//                }
+//                if (list4Partition.get(i).getDcDH().equals("06") || list4Partition.get(i).getDcDH().equals("07") || list4Partition.get(i).getDcDH().equals("08") || list4Partition.get(i).getDcDH().equals("09") || list4Partition.get(i).getDcDH().equals("10")) {
+//                    partition = 2;
+//                    partitionId = list4Partition.get(i).getDcId();
+//                    partitionNumber = list4Partition.get(i).getDcNumber();
+//                }
+//            }
+//
+//            else {
+//                switch (partition){
+//                    case 1 :
+//                        if (list4Partition.get(i).getDcDH().equals("02") || list4Partition.get(i).getDcDH().equals("03") || list4Partition.get(i).getDcDH().equals("04") || list4Partition.get(i).getDcDH().equals("05")) {
+//                            dcPlanInfo.setDcId(partitionId);
+//                            dcPlanInfo.setPartition(partitionNumber + " " +list4Partition.get(i).getDcNumber());
+//                            list4Return.add(dcPlanInfo);
+//                        } else {
+//                            partition = 2;
+//                        }
+//                        dcDH = list4Partition.get(i).getDcDH();
+//                        partitionId = list4Partition.get(i).getDcId();
+//                        partitionNumber = list4Partition.get(i).getDcNumber();
+//                        break;
+//                    case 2 :
+//                        if (list4Partition.get(i).getDcDH().equals("06") || list4Partition.get(i).getDcDH().equals("07") || list4Partition.get(i).getDcDH().equals("08")|| list4Partition.get(i).getDcDH().equals("09")|| list4Partition.get(i).getDcDH().equals("10")) {
+//                            dcPlanInfo.setDcId(partitionId);
+//                            dcPlanInfo.setPartition(partitionNumber + " " +list4Partition.get(i).getDcNumber());
+//                            list4Return.add(dcPlanInfo);
+//                        } else {
+//                            partition = 1;
+//                        }
+//                        dcDH = list4Partition.get(i).getDcDH();
+//                        partitionId = list4Partition.get(i).getDcId();
+//                        partitionNumber = list4Partition.get(i).getDcNumber();
+//                        break;
+//                }
+//            }
+//        }
+
         for (DcPlanInfo entry: list4Partition) {
 
             if (dcDH == null) {
@@ -91,8 +137,10 @@ public class SdServiceImpl implements SdServiceI {
                         partitionNumber = entry.getDcNumber();
                         break;
                 }
+//                listList.add(list4Return);
             }
         }
+
         return list4Return;
     }
 
@@ -123,7 +171,7 @@ public class SdServiceImpl implements SdServiceI {
                     listString1.add(strings1);
                     boolean b = listString1.removeAll(listString2);
 
-                    if (b == false) {
+                    if (!b) {
                         listString2.addAll(listString1);
                         listString1.removeAll(listString2);
 
@@ -199,5 +247,43 @@ public class SdServiceImpl implements SdServiceI {
             dcPlanInfo.setDcDestination(ConstantFields.N);
         }
         return sdRepository.updateDestination(dcPlanInfo);
+    }
+
+    @Override
+    public String select4chunjian() {
+        int n = 0;
+        List<DcPlanInfo> dcPlanInfo = sdRepository.select4chunjian();
+        StringBuffer valuebuffer = new StringBuffer();
+        for (DcPlanInfo entry : dcPlanInfo) {
+            valuebuffer.append(entry.getDcNumber()+" "+entry.getDcType());
+            if(n == 0) {
+                valuebuffer.append(" 与 ");
+            }
+            n++;
+        }
+        if (n > 0) {
+            valuebuffer.append(" 进路冲突");
+        }
+        String value = valuebuffer.toString();
+        return value;
+    }
+
+    @Override
+    public String select4chunjian2() {
+        int n = 0;
+        List<DcPlanInfo> dcPlanInfo = sdRepository.select4chunjian2();
+        StringBuffer valuebuffer = new StringBuffer();
+        for (DcPlanInfo entry : dcPlanInfo) {
+            valuebuffer.append(entry.getDcNumber()+" "+entry.getDcType());
+            if(n == 0) {
+                valuebuffer.append(" 与 ");
+            }
+            n++;
+        }
+        if (n > 0) {
+            valuebuffer.append(" 进路冲突");
+        }
+        String value = valuebuffer.toString();
+        return value;
     }
 }

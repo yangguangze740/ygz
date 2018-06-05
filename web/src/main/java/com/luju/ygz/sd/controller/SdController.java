@@ -27,12 +27,23 @@ public class SdController {
         List<DcPlanInfo> partition = sdService.selectPartitionList();
         Map<String,List<DcPlanInfo>> mapList = sdService.selectDcPath();
 
+//        String chunjian = sdService.select4chunjian();
+//        String chunjian2 = sdService.select4chunjian2();
+//        if (!chunjian.equals("")) {
+//            mav.addObject("chunjian",chunjian);
+//        }
+//
+//        if (!chunjian2.equals("")) {
+//            mav.addObject("chunjian2",chunjian2);
+//        }
+
         mav.addObject("cxList",cxList);
         mav.addObject("sdList",sdList);
         mav.addObject("sixList",sixList);
         mav.addObject("tzList",tzList);
         mav.addObject("partition",partition);
         mav.addObject("mapList",mapList);
+
         return mav;
     }
 

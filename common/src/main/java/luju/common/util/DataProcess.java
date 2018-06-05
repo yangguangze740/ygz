@@ -845,7 +845,7 @@ public class DataProcess {
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
             list.get(k).setDcTypeE(ConstantFields.JC);
-            list.get(k).setDcPath(ConstantFields.JC+ConstantFields.ZWQSOURCE+des);
+            list.get(k).setDcPath(ConstantFields.JC+ConstantFields.ZWQSOURCE1+des);
         }
         return list;
     }
@@ -878,7 +878,7 @@ public class DataProcess {
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
             list.get(k).setDcTypeE(ConstantFields.JC);
-            list.get(k).setDcPath(ConstantFields.JC+ConstantFields.DCSOURCE+des);
+            list.get(k).setDcPath(ConstantFields.JC+ConstantFields.DCSOURCE1+des);
         }
         return list;
     }
@@ -911,7 +911,7 @@ public class DataProcess {
             list.get(k).setDcXD(XD);
             list.get(k).setDcDH(DH);
             list.get(k).setDcTypeE(ConstantFields.JC);
-            list.get(k).setDcPath(ConstantFields.JC+ConstantFields.YHSOURCE+des);
+            list.get(k).setDcPath(ConstantFields.JC+ConstantFields.YHSOURCE1+des);
         }
         return list;
     }

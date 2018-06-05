@@ -28,4 +28,8 @@ public interface SdRepositoryI {
     int updateSource(DcPlanInfo info);
 
     int updateDestination(DcPlanInfo dcPlanInfo);
+
+    List<DcPlanInfo> select4chunjian();
+
+    List<DcPlanInfo> select4chunjian2();
 }

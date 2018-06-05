@@ -22,4 +22,8 @@ public interface SdServiceI {
     int updateSource(DcPlanInfo dcPlanInfo);
 
     int updateDestination(DcPlanInfo dcPlanInfo);
+
+    String select4chunjian();
+
+    String select4chunjian2();
 }

@@ -188,18 +188,20 @@
                                         </td>
                                     </tr>
                                 </c:forEach>
-                                <c:forEach items="${partition}" var="entry" varStatus="status">
-                                    <tr dcId1="${entry.dcId}">
-                                        <td>
-                                                ${entry.partition} 分区交叉
-                                        </td>
-                                        <td>
-                                            <div style="text-align:right;">
-                                                <button type="button" class="btn btn-warning" value="cx">撤销</button>
-                                                <button type="button" class="btn btn-danger" value="cd" >调整</button>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                <c:forEach items="${partition}" var="partition1" varStatus="status">
+                                    <%--<c:forEach items="${partition1}" var = "entry1" varStatus="status">--%>
+                                        <tr dcId1="${partition1.dcId}">
+                                            <td>
+                                                    ${partition1.partition} 分区交叉
+                                            </td>
+                                            <td>
+                                                <div style="text-align:right;">
+                                                    <button type="button" class="btn btn-warning" value="cx">撤销</button>
+                                                    <button type="button" class="btn btn-danger" value="cd" >调整</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <%--</c:forEach>--%>
                                 </c:forEach>
                             </table>
                         </div>
@@ -227,6 +229,28 @@
                                         </tr>
                                     </c:forEach>
                                 </c:forEach>
+                                <%--<c:forEach items="${chunjian2}" var="entry" varStatus="status">--%>
+                                    <%--<tr>--%>
+                                        <%--<td> ${chunjian2} </td>--%>
+                                        <%--<td>--%>
+                                            <%--<div style="text-align:right;">--%>
+                                                <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
+                                                <%--<button type="button" class="btn btn-danger" value="cd">调整</button>--%>
+                                            <%--</div>--%>
+                                        <%--</td>--%>
+                                    <%--</tr>--%>
+                                <%--</c:forEach>--%>
+                                <%--<c:forEach items="${chunjian}" var="entry" varStatus="status">--%>
+                                    <%--<tr>--%>
+                                        <%--<td> ${chunjian} </td>--%>
+                                        <%--<td>--%>
+                                            <%--<div style="text-align:right;">--%>
+                                                <%--<button type="button" class="btn btn-warning" value="cx">撤销</button>--%>
+                                                <%--<button type="button" class="btn btn-danger" value="cd">调整</button>--%>
+                                            <%--</div>--%>
+                                        <%--</td>--%>
+                                    <%--</tr>--%>
+                                <%--</c:forEach>--%>
                             </table>
                         </div>
                     </div>
@@ -533,10 +557,9 @@
     </script>
 
     <!-- 底部栏 -->
-
     <footer class="main-footer" style="margin-left: 0px !important;">
         <div class="pull-right hidden-xs">
-            <b>版本</b> 0.4.1
+            <b>版本</b> 0.3.5
         </div>
         <strong><a href="${contextPath}/about/index.action">版本历史</a></strong>
     </footer>

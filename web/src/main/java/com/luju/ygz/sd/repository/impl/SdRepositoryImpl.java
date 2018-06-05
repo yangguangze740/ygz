@@ -203,6 +203,44 @@ public class SdRepositoryImpl implements SdRepositoryI {
         }
     }
 
+    @Override
+    public List<DcPlanInfo> select4chunjian() {
+        String sql = "SELECT dcNumber,dcType,dcDH FROM ygz_show.dc_show_data WHERE ((dcNumber = '49024' and dcTypeE = 'JC' and dcDH = '08') or (dcNumber = '31606' and dcTypeE = 'JC' and dcDH = '04')) AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)";
+        Object[] args = {};
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new chunjianRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select chunjian data error");
+            return null;
+        }
+    }
+
+    @Override
+    public List<DcPlanInfo> select4chunjian2() {
+        String sql = "SELECT dcNumber,dcType,dcDH FROM ygz_show.dc_show_data WHERE ((dcNumber = '31606' and dcTypeE = 'JT' and dcDH = '07') or (dcNumber = '43194' and dcTypeE = 'ZM' and dcDH = '06')) AND dcStartTime > NOW() AND dcStartTime < ADDDATE(NOW(), INTERVAL 10800 SECOND)";
+        Object[] args = {};
+        try {
+            return mysqlJdbcTemplate.query(sql, args, new chunjianRowMapper());
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("select chunjian data error");
+            return null;
+        }
+    }
+
+    private class chunjianRowMapper implements RowMapper<DcPlanInfo> {
+        public DcPlanInfo mapRow(ResultSet resultSet, int i) throws SQLException {
+            DcPlanInfo dcPlanInfo = new DcPlanInfo();
+
+            dcPlanInfo.setDcNumber(resultSet.getString("dcNumber"));
+            dcPlanInfo.setDcType(resultSet.getString("dcType"));
+            dcPlanInfo.setDcDH(resultSet.getString("dcDH"));
+
+            return dcPlanInfo;
+        }
+    }
+
     private class selectStatisticsInfoRowMapper implements RowMapper<StatisticsInfo> {
         public StatisticsInfo mapRow(ResultSet resultSet, int i) throws SQLException {
             StatisticsInfo userInfo = new StatisticsInfo();

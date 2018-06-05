@@ -62,7 +62,7 @@
                     <div class="small-box bg-aqua">
                         <div class="inner">
                             <h3>${better}</h3>
-                            <p>优先进路</p>
+                            <p>优选进路</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-file-text-o"></i>

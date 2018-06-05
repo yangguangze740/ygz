@@ -244,20 +244,6 @@
                             </div>
                             <div class="modal-footer">
                                 <div class="form-group">
-                                    <%--<div class="checkbox">--%>
-                                        <%--<label>--%>
-                                            <%--<h5>--%>
-                                                <%--<input type="checkbox">--%>
-                                                <%--提交至站调--%>
-                                            <%--</h5>--%>
-                                        <%--</label>--%>
-                                        <%--<label>--%>
-                                            <%--<h5>--%>
-                                                <%--<input type="checkbox">--%>
-                                                <%--提交至站调--%>
-                                            <%--</h5>--%>
-                                        <%--</label>--%>
-                                    <%--</div>--%>
                                     <div class="box-footer">
                                         <button type="submit" class="btn btn-primary">提交</button>
                                     </div>
